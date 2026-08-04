@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Saleem</string>
+    <string name="app_tagline">Bridging Cultures</string>
+    
+    <!-- Supported Languages -->
+    <string-array name="supported_languages">
+        <item>English</item>
+        <item>Arabic (Egyptian / Sudanese)</item>
+        <item>Amharic (አማርኛ)</item>
+        <item>Somali (Soomaali)</item>
+        <item>French (Français)</item>
+        <item>Tigrinya (ትግርኛ)</item>
+        <item>Swahili (Kiswahili)</item>
+        <item>Hausa</item>
+        <item>Oromo (Afaan Oromoo)</item>
+    </string-array>
+</resources>

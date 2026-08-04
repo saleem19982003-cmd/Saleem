@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saleem App - Live Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-layout">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="brand">
+                <a href="index.html" class="brand-link" style="display:flex; align-items:center; gap:14px; text-decoration:none; color:inherit;">
+                    <div class="brand-logo">
+                        <i class="fa-solid fa-hands-holding-child"></i>
+                    </div>
+                    <div class="brand-info">
+                        <h1>Saleem</h1>
+                        <span>Bridging Cultures</span>
+                    </div>
+                </a>
+            </div>
+
+            <nav class="nav-menu">
+                <button class="nav-item active" data-tab="tab-translator" data-i18n="nav-translator">
+                    <i class="fa-solid fa-language"></i> <span>Translator</span>
+                </button>
+                <button class="nav-item" data-tab="tab-assistant" data-i18n="nav-assistant">
+                    <i class="fa-solid fa-robot"></i> <span>AI Assistant</span>
+                </button>
+                <button class="nav-item" data-tab="tab-culture" data-i18n="nav-culture">
+                    <i class="fa-solid fa-book-open"></i> <span>Culture Guide</span>
+                </button>
+                <button class="nav-item" data-tab="tab-legal" data-i18n="nav-legal">
+                    <i class="fa-solid fa-scale-balanced"></i> <span>Legal Rights</span>
+                </button>
+                <button class="nav-item" data-tab="tab-services" data-i18n="nav-services">
+                    <i class="fa-solid fa-map-location-dot"></i> <span>Services Directory</span>
+                </button>
+                <button class="nav-item" data-tab="tab-community" data-i18n="nav-community">
+                    <i class="fa-solid fa-users"></i> <span>Community Hub</span>
+                </button>
+                <button class="nav-item" data-tab="tab-learning" data-i18n="nav-learning">
+                    <i class="fa-solid fa-graduation-cap"></i> <span>Learning Hub</span>
+                </button>
+                <button class="nav-item" data-tab="tab-awareness" data-i18n="nav-awareness">
+                    <i class="fa-solid fa-bullhorn"></i> <span>Awareness</span>
+                </button>
+                <button class="nav-item" data-tab="tab-profile" data-i18n="nav-profile">
+                    <i class="fa-solid fa-user-gear"></i> <span>Profile & Settings</span>
+                </button>
+            </nav>
+
+            <div class="user-card">
+                <div class="avatar"><i class="fa-solid fa-user-astronaut"></i></div>
+                <div class="user-details">
+                    <span class="user-name">Amina Hassan</span>
+                    <span class="user-status"><i class="fa-solid fa-circle-check"></i> Verified Refugee (<span id="user-profile-nat">Sudan</span>)</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Viewport -->
+        <main class="main-content">
+            <!-- Header Bar -->
+            <header class="top-header">
+                <div class="search-bar">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Search resources, services, guides & dialect terms..." data-i18n-ph="search-ph">
+                </div>
+                <div class="header-actions">
+                    <!-- Global African Language Selector -->
+                    <div style="display:flex; align-items:center; gap:6px; background:var(--surface-dark); padding:6px 12px; border-radius:12px; border:1px solid var(--glass-border);">
+                        <i class="fa-solid fa-earth-africa text-gold"></i>
+                        <select id="ui-lang-switcher" style="background:transparent; border:none; color:#fff; outline:none; font-size:13px; font-weight:600; cursor:pointer;">
+                            <option value="en">🌐 English</option>
+                            <option value="ar">🇪🇬 العربية (Egyptian/Sudanese)</option>
+                            <option value="am">🇪🇹 አማርኛ (Amharic)</option>
+                            <option value="so">🇸🇴 Soomaali (Somali)</option>
+                            <option value="fr">🇫🇷 Français</option>
+                            <option value="ti">🇪🇷 ትግርኛ (Tigrinya)</option>
+                            <option value="sw">🇰🇪 Kiswahili (Swahili)</option>
+                            <option value="ha">🇳🇬 Hausa</option>
+                            <option value="om">🇪🇹 Afaan Oromoo (Oromo)</option>
+                        </select>
+                    </div>
+
+                    <a href="https://www.instagram.com/saleem19982003/" target="_blank" class="icon-btn" title="Instagram @saleem19982003" style="display:inline-flex; align-items:center; justify-content:center; text-decoration:none;">
+                        <i class="fa-brands fa-instagram" style="color: #E1306C;"></i>
+                    </a>
+                    <a href="mailto:saleem19982003@gmail.com" class="icon-btn" title="Contact Email" style="display:inline-flex; align-items:center; justify-content:center; text-decoration:none;">
+                        <i class="fa-solid fa-envelope" style="color: #10B981;"></i>
+                    </a>
+                    <a href="index.html#download" class="btn btn-outline" style="text-decoration:none;"><i class="fa-solid fa-download"></i> Get APK</a>
+                    <button class="btn btn-primary" id="btn-emergency-hotlines"><i class="fa-solid fa-shield-halved"></i> Hotlines</button>
+                </div>
+            </header>
+
+            <div class="content-container">
+                <!-- Module 2: Dialect Translator -->
+                <section id="tab-translator" class="tab-pane active">
+                    <div class="card header-card">
+                        <h2><i class="fa-solid fa-language text-gold"></i> African & Egyptian Dialect Translator</h2>
+                        <p>Translate spoken or written text into Egyptian Colloquial Arabic, Amharic, Somali, Tigrinya, Swahili, Hausa, Oromo, French & English with dialect guidance.</p>
+                    </div>
+
+                    <div class="translator-grid">
+                        <div class="card translate-box">
+                            <div class="lang-selector">
+                                <select id="source-lang">
+                                    <option value="en">English</option>
+                                    <option value="ar">Arabic (Egyptian / Sudanese)</option>
+                                    <option value="am">Amharic (አማርኛ)</option>
+                                    <option value="so">Somali (Soomaali)</option>
+                                    <option value="fr">French (Français)</option>
+                                    <option value="ti">Tigrinya (ትግርኛ)</option>
+                                    <option value="sw">Swahili (Kiswahili)</option>
+                                    <option value="ha">Hausa</option>
+                                    <option value="om">Oromo (Afaan Oromoo)</option>
+                                    <option value="yo">Yoruba</option>
+                                    <option value="ig">Igbo</option>
+                                    <option value="wo">Wolof</option>
+                                    <option value="ln">Lingala</option>
+                                    <option value="zu">Zulu (isiZulu)</option>
+                                </select>
+                                <button class="swap-btn"><i class="fa-solid fa-right-left"></i></button>
+                                <select id="target-lang">
+                                    <option value="ar_eg" selected>Arabic (Egyptian Dialect)</option>
+                                    <option value="en">English</option>
+                                    <option value="am">Amharic (አማርኛ)</option>
+                                    <option value="so">Somali (Soomaali)</option>
+                                    <option value="fr">French (Français)</option>
+                                    <option value="ti">Tigrinya (ትግርኛ)</option>
+                                    <option value="sw">Swahili (Kiswahili)</option>
+                                    <option value="ha">Hausa</option>
+                                </select>
+                            </div>
+
+                            <textarea id="translate-input" placeholder="Type text or click microphone to speak... (Supports accents from Egypt, Sudan, Ethiopia, Somalia, Kenya, Nigeria)"></textarea>
+
+                            <div class="waveform-container" id="waveform">
+                                <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                                <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                            </div>
+
+                            <div class="translate-actions">
+                                <button class="btn btn-outline" id="btn-mic"><i class="fa-solid fa-microphone"></i> Voice Input</button>
+                                <button class="btn btn-primary" id="btn-translate"><i class="fa-solid fa-arrows-rotate"></i> Translate Now</button>
+                            </div>
+                        </div>
+
+                        <div class="card result-box">
+                            <h3>Translation Output</h3>
+                            <div class="output-text" id="translate-output">
+                                <p class="placeholder-text">Translation will appear here with cultural nuance & dialect notes...</p>
+                            </div>
+
+                            <div class="slang-dictionary-widget">
+                                <h4><i class="fa-solid fa-book-bookmark text-gold"></i> Popular African & Egyptian Expressions</h4>
+                                <div class="slang-list">
+                                    <div class="slang-item">
+                                        <div class="slang-word">Malish (معليش) - Arabic</div>
+                                        <div class="slang-meaning">It's okay / Don't worry about it</div>
+                                    </div>
+                                    <div class="slang-item">
+                                        <div class="slang-word">Khalaas (خلاص) - Arabic</div>
+                                        <div class="slang-meaning">Finished / Done / Enough</div>
+                                    </div>
+                                    <div class="slang-item">
+                                        <div class="slang-word">Selam (ሰላም) - Amharic / Tigrinya</div>
+                                        <div class="slang-meaning">Peace / Hello / Greetings</div>
+                                    </div>
+                                    <div class="slang-item">
+                                        <div class="slang-word">Habari (Swahili) / Sannu (Hausa)</div>
+                                        <div class="slang-meaning">How are you? / Greetings</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Module 3: AI Assistant -->
+                <section id="tab-assistant" class="tab-pane">
+                    <div class="card header-card">
+                        <h2><i class="fa-solid fa-robot text-gold"></i> Multilingual AI Integration Assistant</h2>
+                        <p>Ask questions in any African language on housing, public transit, legal rights, and everyday Egyptian life.</p>
+                    </div>
+
+                    <div class="chat-container card">
+                        <div class="chat-history" id="chat-history">
+                            <div class="chat-message assistant">
+                                <div class="msg-avatar"><i class="fa-solid fa-robot"></i></div>
+                                <div class="msg-content">
+                                    <strong>Saleem AI:</strong> Ahlan! I am your AI guide. Ask me questions in English, Arabic, Amharic, Somali, French, Tigrinya, Swahili, or Hausa!
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="quick-questions">
+                            <button class="chip-btn" onclick="sendQuickQuestion('How do I use the Cairo metro?')">🚆 Cairo Metro</button>
+                            <button class="chip-btn" onclick="sendQuickQuestion('How do I rent an apartment in Cairo?')">🏠 Apartment Rental</button>
+                            <button class="chip-btn" onclick="sendQuickQuestion('Where is the UNHCR office?')">🏛️ UNHCR Office</button>
+                            <button class="chip-btn" onclick="sendQuickQuestion('How do I open a bank account?')">💳 Bank Account</button>
+                        </div>
+
+                        <div class="chat-input-bar">
+                            <input type="text" id="chat-input" placeholder="Ask Saleem AI a question in your native language...">
+                            <button class="btn btn-primary" id="btn-send-chat"><i class="fa-solid fa-paper-plane"></i></button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Module 4: Culture Guide -->
+                <section id="tab-culture" class="tab-pane">
+                    <div class="card header-card">
+                        <h2><i class="fa-solid fa-book-open text-gold"></i> Interactive Culture & Etiquette Guide</h2>
+                        <p>Master local customs, transportation etiquettes, and market negotiation rules.</p>
+                    </div>
+
+                    <div class="grid-3">
+                        <div class="card guide-card">
+                            <div class="card-badge">Customs</div>
+                            <h3>Egyptian Greeting Customs & Hospitality</h3>
+                            <p>Learn how to greet neighbors, host guests, and handle social invitations gracefully.</p>
+                            <button class="btn btn-outline" onclick="openQuiz('Greetings')">Start Lesson & Quiz</button>
+                        </div>
+
+                        <div class="card guide-card">
+                            <div class="card-badge">Transport</div>
+                            <h3>Navigating Metro, Microbuses & Taxis</h3>
+                            <p>Guide to Cairo Metro women's cars, microbus hand gestures, and meter taxi rates.</p>
+                            <button class="btn btn-outline" onclick="openQuiz('Transport')">Start Lesson & Quiz</button>
+                        </div>
+
+                        <div class="card guide-card">
+                            <div class="card-badge">Markets</div>
+                            <h3>Bargaining Etiquette in Souks</h3>
+                            <p>Polite rules for market haggling in Khan el-Khalili and local vegetable markets.</p>
+                            <button class="btn btn-outline" onclick="openQuiz('Bargaining')">Start Lesson & Quiz</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Module 5: Legal Support -->
+                <section id="tab-legal" class="tab-pane">
+                    <div class="card header-card">
+                        <h2><i class="fa-solid fa-scale-balanced text-gold"></i> Legal Support & Refugee Rights</h2>
+                        <p>Access documented legal rights, UNHCR procedures, checklists & document tools.</p>
+                    </div>
+
+                    <div class="grid-2">
+                        <div class="card">
+                            <h3><i class="fa-solid fa-list-check text-gold"></i> Residency Document Checklist</h3>
+                            <div class="checklist">
+                                <label class="check-item"><input type="checkbox" checked> Valid Passport / Travel Document</label>
+                                <label class="check-item"><input type="checkbox" checked> UNHCR Yellow Registration Card</label>
+                                <label class="check-item"><input type="checkbox"> Stamped Rental Lease Agreement (Aqd Igar)</label>
+                                <label class="check-item"><input type="checkbox"> Proof of Address / Utility Bill</label>
+                                <label class="check-item"><input type="checkbox"> 4 Recent Passport Photos</label>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <h3><i class="fa-solid fa-phone-volume text-gold"></i> Emergency Legal Hotlines</h3>
+                            <ul class="hotline-list">
+                                <li><strong>UNHCR Legal Helpline:</strong> 02 2728 4300</li>
+                                <li><strong>StARS Legal Aid Desk:</strong> 02 2575 9451</li>
+                                <li><strong>Egyptian Red Crescent:</strong> 19963</li>
+                                <li><strong>Ambulance Emergency:</strong> 123</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Module 6: Services Directory -->
+                <section id="tab-services" class="tab-pane">
+                    <div class="card header-card">
+                        <h2><i class="fa-solid fa-map-location-dot text-gold"></i> Essential Services Directory</h2>
+                        <p>Locate nearby healthcare clinics, language schools, legal aid centers & NGO offices.</p>
+                    </div>
+
+                    <div class="services-list grid-2">
+                        <div class="card service-card">
+                            <div class="service-header">
+                                <h3>UNHCR Main Office</h3>
+                                <span class="tag tag-ngo">NGO / Govt</span>
+                            </div>
+                            <p>56 Central Spine, 6th of October City, Giza</p>
+                            <span class="phone">📞 02 2728 4300</span>
+                        </div>
+
+                        <div class="card service-card">
+                            <div class="service-header">
+                                <h3>Red Crescent Health Clinic</h3>
+                                <span class="tag tag-health">Healthcare</span>
+                            </div>
+                            <p>Zahraa El Maadi, Cairo</p>
+                            <span class="phone">📞 02 2519 2831</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Module 7: Community Hub -->
+                <section id="tab-community" class="tab-pane">
+                    <div class="card header-card">
+                        <h2><i class="fa-solid fa-users text-gold"></i> Community Hub & Volunteer Mentors</h2>
+                        <p>Ask peer questions, find verified volunteers speaking your language, and attend cultural meetups.</p>
+                    </div>
+
+                    <div class="card">
+                        <h3>Ask a Question to the Community</h3>
+                        <div class="ask-box">
+                            <input type="text" id="qa-title" placeholder="Question Title (e.g. Where to find Arabic classes?)">
+                            <textarea id="qa-desc" placeholder="Details..."></textarea>
+                            <button class="btn btn-primary" id="btn-post-qa"><i class="fa-solid fa-plus"></i> Post Question</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Module 8: Learning Hub -->
+                <section id="tab-learning" class="tab-pane">
+                    <div class="card header-card">
+                        <h2><i class="fa-solid fa-graduation-cap text-gold"></i> Learning Hub - Programming & Digital Skills</h2>
+                        <p>Free programming education, career paths, and remote job board.</p>
+                    </div>
+
+                    <div class="grid-3">
+                        <div class="card course-card">
+                            <span class="tag">Web Dev</span>
+                            <h3>Web Development Fundamentals</h3>
+                            <p>Master HTML, CSS & JS to build responsive websites.</p>
+                            <div class="progress-bar"><div class="fill" style="width: 45%;"></div></div>
+                            <span>45% Completed</span>
+                        </div>
+                        <div class="card course-card">
+                            <span class="tag">Mobile</span>
+                            <h3>Android App Dev with Kotlin</h3>
+                            <p>Learn MVVM, Jetpack Compose, and REST APIs.</p>
+                            <button class="btn btn-outline" style="margin-top: 10px;">Enroll Now</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Module 9: Awareness & Inclusion -->
+                <section id="tab-awareness" class="tab-pane">
+                    <div class="card header-card">
+                        <h2><i class="fa-solid fa-bullhorn text-gold"></i> Awareness Campaigns & Incident Reporting</h2>
+                        <p>Confidential discrimination reporting and inclusion campaigns.</p>
+                    </div>
+
+                    <div class="card">
+                        <h3>Confidential Incident Report Form</h3>
+                        <input type="text" placeholder="Incident Location" class="form-control">
+                        <textarea placeholder="Describe the incident confidentially..." class="form-control"></textarea>
+                        <button class="btn btn-danger"><i class="fa-solid fa-shield-cat"></i> Submit Anonymous Report</button>
+                    </div>
+                </section>
+
+                <!-- Module 10: Profile & Settings -->
+                <section id="tab-profile" class="tab-pane">
+                    <div class="card header-card">
+                        <h2><i class="fa-solid fa-user-gear text-gold"></i> User Profile & Settings</h2>
+                        <p>Manage security preferences, biometric login, and preferred language.</p>
+                    </div>
+
+                    <div class="card">
+                        <h3>Account Details & Official Contact</h3>
+                        <p><strong>Name:</strong> Amina Hassan</p>
+                        <p><strong>Country of Origin:</strong> <span id="user-profile-nat" style="color: #E8AB63; font-weight: 700;">Sudan</span></p>
+                        <p><strong>Official Contact Email:</strong> <a href="mailto:saleem19982003@gmail.com" style="color: #10B981;">saleem19982003@gmail.com</a></p>
+                        <p><strong>Instagram:</strong> <a href="https://www.instagram.com/saleem19982003/" target="_blank" style="color: #E8AB63;">@saleem19982003</a></p>
+                        <p><strong>Preferred Language:</strong> Egyptian Colloquial Arabic / English / Amharic / Somali</p>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

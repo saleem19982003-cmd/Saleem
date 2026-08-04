@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saleem: Bridging Cultures - Official Website & App Download</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            overflow-y: auto;
+            background: #0B132B;
+        }
+
+        .landing-navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 80px;
+            background: rgba(11, 19, 43, 0.85);
+            backdrop-filter: blur(16px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .landing-hero {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            align-items: center;
+            padding: 80px 80px 60px 80px;
+            gap: 40px;
+            background: radial-gradient(circle at top right, #1E293B, #0B132B);
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(232, 171, 99, 0.15);
+            color: #E8AB63;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            border: 1px solid rgba(232, 171, 99, 0.3);
+        }
+
+        .hero-title {
+            font-size: 52px;
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #FFFFFF, #E8AB63);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            color: #94A3B8;
+            line-height: 1.6;
+            margin-bottom: 36px;
+        }
+
+        .hero-cta {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn-large {
+            padding: 16px 32px;
+            font-size: 16px;
+            border-radius: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .mockup-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+
+        .phone-frame {
+            width: 320px;
+            height: 620px;
+            background: #1C2541;
+            border: 12px solid #334155;
+            border-radius: 44px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .phone-screen {
+            padding: 20px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            background: #0F172A;
+        }
+
+        .section-padding {
+            padding: 80px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #94A3B8;
+            font-size: 16px;
+            margin-bottom: 60px;
+        }
+
+        .download-box {
+            background: linear-gradient(135deg, rgba(15, 76, 129, 0.4), rgba(30, 41, 59, 0.8));
+            border: 1px solid rgba(232, 171, 99, 0.3);
+            border-radius: 28px;
+            padding: 50px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .qr-placeholder {
+            width: 160px;
+            height: 160px;
+            background: #FFFFFF;
+            border-radius: 16px;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .qr-placeholder img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .stats-strip {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            background: #1E293B;
+            padding: 40px 80px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-card {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 40px;
+            font-weight: 800;
+            color: #E8AB63;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #94A3B8;
+        }
+
+        .social-link-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #F8FAFC;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.2s ease;
+        }
+
+        .social-link-btn:hover {
+            background: #E1306C;
+            border-color: #E1306C;
+            color: #FFFFFF;
+        }
+
+        .contact-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: #10B981;
+            text-decoration: none;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Landing Navbar -->
+    <header class="landing-navbar">
+        <div class="brand">
+            <div class="brand-logo">
+                <i class="fa-solid fa-hands-holding-child"></i>
+            </div>
+            <div class="brand-info">
+                <h1>Saleem</h1>
+                <span>Bridging Cultures</span>
+            </div>
+        </div>
+
+        <nav style="display: flex; align-items: center; gap: 20px;">
+            <a href="#features" style="color: #F8FAFC; text-decoration: none; font-weight: 500;">Features</a>
+            <a href="#download" style="color: #F8FAFC; text-decoration: none; font-weight: 500;">Download APK</a>
+            <a href="#contact" style="color: #F8FAFC; text-decoration: none; font-weight: 500;">Contact</a>
+
+            <!-- Global African Language Selector on Landing Page -->
+            <div style="display:flex; align-items:center; gap:6px; background:rgba(255,255,255,0.05); padding:6px 12px; border-radius:12px; border:1px solid rgba(255,255,255,0.15);">
+                <i class="fa-solid fa-earth-africa text-gold"></i>
+                <select id="ui-lang-switcher" style="background:transparent; border:none; color:#fff; outline:none; font-size:13px; font-weight:600; cursor:pointer;">
+                    <option value="en">🌐 English</option>
+                    <option value="ar">🇪🇬 العربية (Egyptian/Sudanese)</option>
+                    <option value="am">🇪🇹 አማርኛ (Amharic)</option>
+                    <option value="so">🇸🇴 Soomaali (Somali)</option>
+                    <option value="fr">🇫🇷 Français</option>
+                    <option value="ti">🇪🇷 ትግርኛ (Tigrinya)</option>
+                    <option value="sw">🇰🇪 Kiswahili (Swahili)</option>
+                    <option value="ha">🇳🇬 Hausa</option>
+                    <option value="om">🇪🇹 Afaan Oromoo (Oromo)</option>
+                </select>
+            </div>
+
+            <a href="https://www.instagram.com/saleem19982003/" target="_blank" class="social-link-btn">
+                <i class="fa-brands fa-instagram" style="color: #E1306C;"></i> Instagram
+            </a>
+            <a href="app.html" style="color: #E8AB63; text-decoration: none; font-weight: 600;"><i class="fa-solid fa-desktop"></i> Web App Portal</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="landing-hero">
+        <div>
+            <div class="hero-badge">
+                <i class="fa-solid fa-heart"></i> Social Impact Platform for Refugees in Egypt
+            </div>
+            <h1 class="hero-title" data-i18n="hero-title">Empowering Every Refugee to Build a Safe, Independent Life</h1>
+            <p class="hero-subtitle" data-i18n="hero-sub">
+                Saleem bridges language barriers with real-time Egyptian colloquial translation, AI-driven legal & rights guidance, essential service directories, verified volunteers, and free programming education.
+            </p>
+
+            <div class="hero-cta">
+                <a href="#download" class="btn btn-primary btn-large">
+                    <i class="fa-brands fa-android"></i> Download Android APK (v1.0.0)
+                </a>
+                <a href="app.html" class="btn btn-outline btn-large">
+                    <i class="fa-solid fa-globe"></i> Launch Web App Demo
+                </a>
+            </div>
+
+            <div style="margin-top: 24px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+                <a href="https://www.instagram.com/saleem19982003/" target="_blank" class="social-link-btn">
+                    <i class="fa-brands fa-instagram" style="color: #E1306C; font-size: 18px;"></i> Follow @saleem19982003
+                </a>
+                <a href="mailto:saleem19982003@gmail.com" class="contact-chip">
+                    <i class="fa-solid fa-envelope"></i> saleem19982003@gmail.com
+                </a>
+            </div>
+        </div>
+
+        <div class="mockup-container">
+            <div class="phone-frame">
+                <div class="phone-screen">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                        <strong style="color:#E8AB63; font-size:16px;">Saleem Mobile</strong>
+                        <span style="font-size:10px; background:#10B981; padding:2px 6px; border-radius:4px; color:#fff;">LIVE</span>
+                    </div>
+
+                    <div class="card" style="padding:14px; margin-bottom:8px;">
+                        <h4 style="font-size:13px; color:#E8AB63;">Egyptian Dialect Translator</h4>
+                        <p style="font-size:12px; color:#94A3B8;">Malish (معليش) ➔ "It's okay / Don't worry about it"</p>
+                    </div>
+
+                    <div class="card" style="padding:14px; margin-bottom:8px;">
+                        <h4 style="font-size:13px; color:#10B981;">AI Assistant Chat</h4>
+                        <p style="font-size:12px; color:#94A3B8;">"How do I use the Cairo Metro ladies-only car?"</p>
+                    </div>
+
+                    <div class="card" style="padding:14px;">
+                        <h4 style="font-size:13px; color:#E8AB63;">Legal Checklist</h4>
+                        <p style="font-size:12px; color:#94A3B8;">✓ UNHCR Yellow Card Registration</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Strip -->
+    <div class="stats-strip">
+        <div class="stat-card">
+            <div class="stat-number">10,000+</div>
+            <div class="stat-label">Translations Completed</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">50,000+</div>
+            <div class="stat-label">Refugees Empowered</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">5,000+</div>
+            <div class="stat-label">Services Directories</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">2,000+</div>
+            <div class="stat-label">Coding Courses Completed</div>
+        </div>
+    </div>
+
+    <!-- Download Section -->
+    <section class="section-padding" id="download">
+        <h2 class="section-title">Get Saleem for Your Android Device</h2>
+        <p class="section-subtitle">Download the official Android APK directly or use the live web app edition.</p>
+
+        <div class="download-box">
+            <div>
+                <h3 style="font-size: 28px; margin-bottom: 14px; color: #E8AB63;">Download Saleem APK v1.0.0</h3>
+                <p style="color: #94A3B8; margin-bottom: 24px; line-height: 1.6;">
+                    Compatible with all Android smartphones running Android 9.0 (API 28) and above. Includes full offline Egyptian dialect slang dictionary and secure document tools.
+                </p>
+
+                <div style="display: flex; gap: 14px; flex-wrap: wrap;">
+                    <a href="downloads/saleem-v1.0.0.apk" download class="btn btn-primary btn-large">
+                        <i class="fa-solid fa-download"></i> Direct APK Download (24.5 MB)
+                    </a>
+                    <a href="app.html" class="btn btn-outline btn-large">
+                        <i class="fa-solid fa-laptop-code"></i> Open Web Browser Edition
+                    </a>
+                </div>
+
+                <div style="margin-top: 24px; font-size: 13px; color: #94A3B8;">
+                    <span><i class="fa-solid fa-shield-check text-gold"></i> Verified 100% Virus & Malware Free</span> • 
+                    <span>Version 1.0.0 (Build 34)</span>
+                </div>
+            </div>
+
+            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+                <div class="qr-placeholder">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://saleem-app.org/downloads/saleem-v1.0.0.apk" alt="Scan to Download APK">
+                </div>
+                <span style="font-size: 13px; color: #94A3B8; margin-top: 12px;">Scan QR Code with your phone camera to download APK directly</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Features Section -->
+    <section class="section-padding" id="features" style="background: #0F172A;">
+        <h2 class="section-title">10 Comprehensive Modules Built for You</h2>
+        <p class="section-subtitle">Everything you need for seamless cultural, legal, and social integration in Egypt.</p>
+
+        <div class="grid-3">
+            <div class="card">
+                <i class="fa-solid fa-language text-gold" style="font-size: 32px; margin-bottom: 16px;"></i>
+                <h3>Egyptian Dialect Translator</h3>
+                <p style="color: #94A3B8; font-size: 14px; margin-top: 8px;">Real-time text & voice translation with context explanations for Egyptian colloquial terms like *Malish*, *Khalaas*, and *Yalla*.</p>
+            </div>
+
+            <div class="card">
+                <i class="fa-solid fa-robot text-gold" style="font-size: 32px; margin-bottom: 16px;"></i>
+                <h3>Multilingual AI Assistant</h3>
+                <p style="color: #94A3B8; font-size: 14px; margin-top: 8px;">Claude AI-powered assistant answering questions on housing rentals, Cairo metro transit, legal rights, and emergency clinics.</p>
+            </div>
+
+            <div class="card">
+                <i class="fa-solid fa-scale-balanced text-gold" style="font-size: 32px; margin-bottom: 16px;"></i>
+                <h3>Legal Support & Rights</h3>
+                <p style="color: #94A3B8; font-size: 14px; margin-top: 8px;">Step-by-step UNHCR registration guides, residency checklists, and instant-dial emergency legal hotlines.</p>
+            </div>
+
+            <div class="card">
+                <i class="fa-solid fa-map-location-dot text-gold" style="font-size: 32px; margin-bottom: 16px;"></i>
+                <h3>Services Directory & Maps</h3>
+                <p style="color: #94A3B8; font-size: 14px; margin-top: 8px;">Geolocated directory of clinics, language centers, government offices, and NGOs across Greater Cairo & Alexandria.</p>
+            </div>
+
+            <div class="card">
+                <i class="fa-solid fa-graduation-cap text-gold" style="font-size: 32px; margin-bottom: 16px;"></i>
+                <h3>Learning Hub - Programming Education</h3>
+                <p style="color: #94A3B8; font-size: 14px; margin-top: 8px;">Free coding courses in Web & Android development, digital literacy, portfolio certificates, and remote tech job opportunities.</p>
+            </div>
+
+            <div class="card">
+                <i class="fa-solid fa-users text-gold" style="font-size: 32px; margin-bottom: 16px;"></i>
+                <h3>Community Hub & Mentors</h3>
+                <p style="color: #94A3B8; font-size: 14px; margin-top: 8px;">Connect with verified local volunteers, participate in peer Q&A forums, and join cultural exchange meetups.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Connect Section -->
+    <section class="section-padding" id="contact" style="background: #0B132B;">
+        <h2 class="section-title">Connect & Get in Touch</h2>
+        <p class="section-subtitle">Reach out for community partnerships, support inquiries, or follow our social channels.</p>
+
+        <div style="max-width: 700px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+            <a href="https://www.instagram.com/saleem19982003/" target="_blank" class="card" style="display: flex; align-items: center; gap: 16px; text-decoration: none; color: inherit; transition: transform 0.2s ease;">
+                <div style="width: 50px; height: 50px; border-radius: 14px; background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); display: flex; align-items: center; justify-content: center; font-size: 24px; color: #fff;">
+                    <i class="fa-brands fa-instagram"></i>
+                </div>
+                <div>
+                    <h4 style="font-size: 18px; margin-bottom: 4px;">Instagram</h4>
+                    <span style="font-size: 14px; color: #E8AB63;">@saleem19982003</span>
+                </div>
+            </a>
+
+            <a href="mailto:saleem19982003@gmail.com" class="card" style="display: flex; align-items: center; gap: 16px; text-decoration: none; color: inherit; transition: transform 0.2s ease;">
+                <div style="width: 50px; height: 50px; border-radius: 14px; background: #10B981; display: flex; align-items: center; justify-content: center; font-size: 22px; color: #fff;">
+                    <i class="fa-solid fa-envelope"></i>
+                </div>
+                <div>
+                    <h4 style="font-size: 18px; margin-bottom: 4px;">Official Email</h4>
+                    <span style="font-size: 13px; color: #10B981;">saleem19982003@gmail.com</span>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="padding: 40px 80px; background: #070D1B; border-top: 1px solid rgba(255, 255, 255, 0.1); text-align: center; color: #94A3B8; font-size: 14px;">
+        <p>Saleem: Bridging Cultures — Empowering Displaced Communities & Refugees in Egyptian Society.</p>
+        <div style="margin: 16px 0; display: flex; justify-content: center; gap: 20px;">
+            <a href="https://www.instagram.com/saleem19982003/" target="_blank" style="color: #E8AB63; text-decoration: none;"><i class="fa-brands fa-instagram"></i> @saleem19982003</a>
+            <span>•</span>
+            <a href="mailto:saleem19982003@gmail.com" style="color: #10B981; text-decoration: none;"><i class="fa-solid fa-envelope"></i> saleem19982003@gmail.com</a>
+        </div>
+        <p style="margin-top: 10px;">&copy; 2026 Saleem Platform. Built with Kotlin, Jetpack Compose, and Open Web Standards.</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
