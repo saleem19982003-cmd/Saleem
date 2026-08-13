@@ -3,27 +3,8 @@
 // =============================================================
 const express = require('express');
 const router = express.Router();
-const path = require('path');
 const { v4: uuidv4 } = require('uuid');
 const { authenticateToken, optionalAuth } = require('../middleware/auth');
-
-const learningDatasets = new Map([
-    ['dialect_lessons_600.json', 'dialect_lessons_600.json'],
-    ['culture_lessons_100.json', 'culture_lessons_100.json']
-]);
-
-// Serve the existing checked-in lesson datasets through the API so Vercel's
-// serverless bundle can include them reliably alongside the frontend.
-router.get('/datasets/:name', (req, res) => {
-    const filename = learningDatasets.get(req.params.name);
-    if (!filename) return res.status(404).json({ error: 'Learning dataset not found.' });
-
-    res.sendFile(path.resolve(__dirname, '..', '..', 'data', filename), {
-        headers: { 'Cache-Control': 'public, max-age=3600' }
-    }, (err) => {
-        if (err && !res.headersSent) res.status(err.statusCode || 500).json({ error: 'Failed to load learning dataset.' });
-    });
-});
 
 // GET /api/lessons/categories - Get all lesson categories
 router.get('/categories', (req, res) => {

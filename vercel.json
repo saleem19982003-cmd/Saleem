@@ -1,11 +1,6 @@
 {
   "version": 2,
   "name": "saleem",
-  "functions": {
-    "server/index.js": {
-      "includeFiles": ["data/**"]
-    }
-  },
   "builds": [
     {
       "src": "server/index.js",
@@ -28,7 +23,11 @@
       "use": "@vercel/static"
     },
     {
-      "src": "data/**",
+      "src": "data/dialect_lessons_600.json",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "data/culture_lessons_100.json",
       "use": "@vercel/static"
     },
     {
@@ -52,10 +51,6 @@
         "Content-Type": "application/vnd.android.package-archive",
         "Content-Disposition": "attachment"
       }
-    },
-    {
-      "src": "/data/(.*)",
-      "dest": "/data/$1"
     },
     {
       "src": "/(.*)",

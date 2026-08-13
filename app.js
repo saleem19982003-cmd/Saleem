@@ -2181,8 +2181,8 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
         }
     }
 
-    loadLearningDataset('/api/lessons/datasets/dialect_lessons_600.json', 'dialect');
-    loadLearningDataset('/api/lessons/datasets/culture_lessons_100.json', 'culture');
+    loadLearningDataset('/data/dialect_lessons_600.json', 'dialect');
+    loadLearningDataset('/data/culture_lessons_100.json', 'culture');
 
     // Jump to Lesson Listener
     const btnJump = document.getElementById('btn-jump-lesson');
