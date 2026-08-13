@@ -1,6 +1,11 @@
 {
   "version": 2,
   "name": "saleem",
+  "functions": {
+    "server/index.js": {
+      "includeFiles": ["data/**"]
+    }
+  },
   "builds": [
     {
       "src": "server/index.js",
