@@ -23,7 +23,7 @@
       "use": "@vercel/static"
     },
     {
-      "src": "downloads/(.*)",
+      "src": "downloads/**",
       "use": "@vercel/static"
     }
   ],
