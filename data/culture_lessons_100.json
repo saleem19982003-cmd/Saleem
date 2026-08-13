@@ -1,0 +1,3405 @@
+{
+  "lessons": [
+    {
+      "id": 1,
+      "title_ar": "اتيكيت الميكروباص في القاهرة (ركوب ونزول وفكة)",
+      "title_en": "Cairo Microbus Etiquette (Boarding, Paying & Calling Stops)",
+      "category": "street",
+      "category_ar": "شارع ولوجستيات القاهرة",
+      "category_en": "Street & Cairo Logistics",
+      "story_ar": "الميكروباص هو الوسيلة الأسرع في القاهرة. لما تركب قدام، انت المسئول عن جمع الأجرة من الركاب ورجع الفكة للحساب! ولما تعوز تنزل بتقول للأسطى: 'على جنب يا اسطى من فضلك' بصوت واضح وحساس.",
+      "story_en": "The microbus is the fastest transit in Cairo. If you sit in the front row, you become responsible for collecting fares and returning change! When you reach your stop, politely say 'Ala gamb ya osta' (Pull over here driver please).",
+      "practice_test": [
+        {
+          "question": "أنت راكب ميكروباص ووصلت قرب مكانك، إيه الكلمة المصرية الصح اللي بتقولها للسائق؟",
+          "options": [
+            "على جنب يا اسطى من فضلك",
+            "وقف العربية هنا فوراً",
+            "أنا نازل يا كابتن بعد إذنك",
+            "شكراً يا أستاذ مش عايز أركب"
+          ],
+          "answer": 0,
+          "explanation": "عبارة 'على جنب يا اسطى من فضلك' هي العبارة الشعبية والأكثر احتراماً ووضوحاً للسائق."
+        },
+        {
+          "question": "لو قعدت في الكرسي الأول جنب السائق في الميكروباص، إيه دورك؟",
+          "options": [
+            "تساعد في جمع الفلوس وتمرير الفكة للركاب",
+            "تسوق الميكروباص بداله",
+            "تتكلم في التليفون بصوت عالي",
+            "ما تنزلش من الكرسي خالص"
+          ],
+          "answer": 0,
+          "explanation": "الكرسي الأمامي في الميكروباص المصري يُعرف بكرسي الصراف المسئول عن تمرير الأجرة."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title_ar": "الفصال في السوق الشعبي (أصول الفصال الشيك)",
+      "title_en": "Bargaining at Egyptian Local Markets (Fasal Etiquette)",
+      "category": "housing",
+      "category_ar": "السكن وعقود الإيجار",
+      "category_en": "Housing & Lease Etiquette",
+      "story_ar": "الفصال في مصر مش خناقة، الفصال فن ودردشة لطيفة! ابدأ بسؤال التاجر 'بكام ده يا معلم؟' ولما يقول السعر، ابتسم وقول 'أحسنت يا حاج بس ده كتير شوية، اكرمني في السعر'. لما التاجر يحس باحترامك هيعملك خصم حلو.",
+      "story_en": "Bargaining in Egypt is not a fight; it's a polite social dance! Start by asking 'Bikam dah ya ma'allem?'. If the price is high, smile and say 'IkrImni fi el-se'r' (Be generous with the price). Respect earns you the best discount.",
+      "practice_test": [
+        {
+          "question": "عايز تشتري حاجة من السوق والتاجر طلب سعر غالي، تقول له إيه باحترام؟",
+          "options": [
+            "اكرمني في السعر يا حاج",
+            "أنت حرامي والسعر غالي",
+            "أنا مش هشتري منك خالص",
+            "السعر ده عاجبني جداً"
+          ],
+          "answer": 0,
+          "explanation": "عبارة 'اكرمني في السعر يا حاج' تفتح باب الفصال بالود والكرامة."
+        },
+        {
+          "question": "ما هو اللقب الأفضل والأنسب لمناداة البائع في السوق المصري؟",
+          "options": [
+            "يا معلم / يا حاج",
+            "يا زول",
+            "يا مواطن",
+            "يا صديق"
+          ],
+          "answer": 0,
+          "explanation": "'يا معلم' أو 'يا حاج' من ألقاب التقدير الشعبية للبائعين في مصر."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title_ar": "التعامل مع البواب وسكان العمارة (شيم الجيرة)",
+      "title_en": "Neighborhood Etiquette & Building Custodian (Bawab Relations)",
+      "category": "admin",
+      "category_ar": "المفوضية والأوراق الرسمية",
+      "category_en": "UNHCR & Formal Documentation",
+      "story_ar": "البواب في مصر هو حارس أمان العمارة وعينها الساهرة. التحية اليومية 'صباح الخير يا عم فلان' وتقديم إكرامية بسيطة شهرياً يخلي البواب يساعدك في شيل الشنط وشراء الأغراض وحماية شقتك.",
+      "story_en": "The Bawab (building custodian) is the eyes and ears of security in Egyptian buildings. Daily greetings like 'Sabah el-kheir ya ammi' and a small monthly tip earn you lifelong support and security.",
+      "practice_test": [
+        {
+          "question": "كيف تبني علاقة طيبة وآمنة مع بواب العمارة في مصر؟",
+          "options": [
+            "تحييه يومياً بإحترام وتقدم إكرامية شهرية بسيطة",
+            "تتجاهله ولا تتكلم معه",
+            "تشتكي منه دائماً",
+            "تطلب منه شغل مجاني بدون مقابل"
+          ],
+          "answer": 0,
+          "explanation": "الاحترام اليومي والإكرامية البسيطة تضمن لك أمان ومساعدة دائمة من البواب."
+        },
+        {
+          "question": "ما هو اللقب المحترم لمناداة رجل كبير في السن أو بواب العمارة؟",
+          "options": [
+            "يا عم فلان / يا حاج",
+            "يا ولد",
+            "يا شاطر",
+            "يا كابتن"
+          ],
+          "answer": 0,
+          "explanation": "'يا عم فلان' أو 'يا حاج' تنشر الدفء والاحترام في التعامل."
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title_ar": "الدرس 4: الثقافة والمأكولات الشعبية - أصول التعامل والشهامة",
+      "title_en": "Lesson 4: Food Culture & Coffee Shops - Social Wisdom & Life Rules",
+      "category": "food",
+      "category_ar": "الثقافة والمأكولات الشعبية",
+      "category_en": "Food Culture & Coffee Shops",
+      "story_ar": "في هذا الدرس من الثقافة والمأكولات الشعبية، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Food Culture & Coffee Shops, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ الثقافة والمأكولات الشعبية؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title_ar": "الدرس 5: أصول الكلام والواجب - أصول التعامل والشهامة",
+      "title_en": "Lesson 5: Egyptian Social Etiquette & Honorifics - Social Wisdom & Life Rules",
+      "category": "etiquette",
+      "category_ar": "أصول الكلام والواجب",
+      "category_en": "Egyptian Social Etiquette & Honorifics",
+      "story_ar": "في هذا الدرس من أصول الكلام والواجب، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Egyptian Social Etiquette & Honorifics, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ أصول الكلام والواجب؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title_ar": "الدرس 6: العمل والورش والصنايعية - أصول التعامل والشهامة",
+      "title_en": "Lesson 6: Workplace & Artisan Etiquette - Social Wisdom & Life Rules",
+      "category": "work",
+      "category_ar": "العمل والورش والصنايعية",
+      "category_en": "Workplace & Artisan Etiquette",
+      "story_ar": "في هذا الدرس من العمل والورش والصنايعية، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Workplace & Artisan Etiquette, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ العمل والورش والصنايعية؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title_ar": "الدرس 7: الحقوق والاستشارات القانونية - أصول التعامل والشهامة",
+      "title_en": "Lesson 7: Legal Rights & Emergency Protocols - Social Wisdom & Life Rules",
+      "category": "legal",
+      "category_ar": "الحقوق والاستشارات القانونية",
+      "category_en": "Legal Rights & Emergency Protocols",
+      "story_ar": "في هذا الدرس من الحقوق والاستشارات القانونية، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Legal Rights & Emergency Protocols, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ الحقوق والاستشارات القانونية؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title_ar": "الدرس 8: شارع ولوجستيات القاهرة - أصول التعامل والشهامة",
+      "title_en": "Lesson 8: Street & Cairo Logistics - Social Wisdom & Life Rules",
+      "category": "street",
+      "category_ar": "شارع ولوجستيات القاهرة",
+      "category_en": "Street & Cairo Logistics",
+      "story_ar": "في هذا الدرس من شارع ولوجستيات القاهرة، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Street & Cairo Logistics, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ شارع ولوجستيات القاهرة؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title_ar": "الدرس 9: السكن وعقود الإيجار - أصول التعامل والشهامة",
+      "title_en": "Lesson 9: Housing & Lease Etiquette - Social Wisdom & Life Rules",
+      "category": "housing",
+      "category_ar": "السكن وعقود الإيجار",
+      "category_en": "Housing & Lease Etiquette",
+      "story_ar": "في هذا الدرس من السكن وعقود الإيجار، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Housing & Lease Etiquette, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ السكن وعقود الإيجار؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "title_ar": "الدرس 10: المفوضية والأوراق الرسمية - أصول التعامل والشهامة",
+      "title_en": "Lesson 10: UNHCR & Formal Documentation - Social Wisdom & Life Rules",
+      "category": "admin",
+      "category_ar": "المفوضية والأوراق الرسمية",
+      "category_en": "UNHCR & Formal Documentation",
+      "story_ar": "في هذا الدرس من المفوضية والأوراق الرسمية، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on UNHCR & Formal Documentation, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ المفوضية والأوراق الرسمية؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "title_ar": "الدرس 11: الثقافة والمأكولات الشعبية - أصول التعامل والشهامة",
+      "title_en": "Lesson 11: Food Culture & Coffee Shops - Social Wisdom & Life Rules",
+      "category": "food",
+      "category_ar": "الثقافة والمأكولات الشعبية",
+      "category_en": "Food Culture & Coffee Shops",
+      "story_ar": "في هذا الدرس من الثقافة والمأكولات الشعبية، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Food Culture & Coffee Shops, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ الثقافة والمأكولات الشعبية؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "title_ar": "الدرس 12: أصول الكلام والواجب - أصول التعامل والشهامة",
+      "title_en": "Lesson 12: Egyptian Social Etiquette & Honorifics - Social Wisdom & Life Rules",
+      "category": "etiquette",
+      "category_ar": "أصول الكلام والواجب",
+      "category_en": "Egyptian Social Etiquette & Honorifics",
+      "story_ar": "في هذا الدرس من أصول الكلام والواجب، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Egyptian Social Etiquette & Honorifics, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ أصول الكلام والواجب؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "title_ar": "الدرس 13: العمل والورش والصنايعية - أصول التعامل والشهامة",
+      "title_en": "Lesson 13: Workplace & Artisan Etiquette - Social Wisdom & Life Rules",
+      "category": "work",
+      "category_ar": "العمل والورش والصنايعية",
+      "category_en": "Workplace & Artisan Etiquette",
+      "story_ar": "في هذا الدرس من العمل والورش والصنايعية، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Workplace & Artisan Etiquette, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ العمل والورش والصنايعية؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "title_ar": "الدرس 14: الحقوق والاستشارات القانونية - أصول التعامل والشهامة",
+      "title_en": "Lesson 14: Legal Rights & Emergency Protocols - Social Wisdom & Life Rules",
+      "category": "legal",
+      "category_ar": "الحقوق والاستشارات القانونية",
+      "category_en": "Legal Rights & Emergency Protocols",
+      "story_ar": "في هذا الدرس من الحقوق والاستشارات القانونية، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Legal Rights & Emergency Protocols, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ الحقوق والاستشارات القانونية؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "title_ar": "الدرس 15: شارع ولوجستيات القاهرة - أصول التعامل والشهامة",
+      "title_en": "Lesson 15: Street & Cairo Logistics - Social Wisdom & Life Rules",
+      "category": "street",
+      "category_ar": "شارع ولوجستيات القاهرة",
+      "category_en": "Street & Cairo Logistics",
+      "story_ar": "في هذا الدرس من شارع ولوجستيات القاهرة، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Street & Cairo Logistics, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ شارع ولوجستيات القاهرة؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "title_ar": "الدرس 16: السكن وعقود الإيجار - أصول التعامل والشهامة",
+      "title_en": "Lesson 16: Housing & Lease Etiquette - Social Wisdom & Life Rules",
+      "category": "housing",
+      "category_ar": "السكن وعقود الإيجار",
+      "category_en": "Housing & Lease Etiquette",
+      "story_ar": "في هذا الدرس من السكن وعقود الإيجار، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Housing & Lease Etiquette, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ السكن وعقود الإيجار؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "title_ar": "الدرس 17: المفوضية والأوراق الرسمية - أصول التعامل والشهامة",
+      "title_en": "Lesson 17: UNHCR & Formal Documentation - Social Wisdom & Life Rules",
+      "category": "admin",
+      "category_ar": "المفوضية والأوراق الرسمية",
+      "category_en": "UNHCR & Formal Documentation",
+      "story_ar": "في هذا الدرس من المفوضية والأوراق الرسمية، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on UNHCR & Formal Documentation, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ المفوضية والأوراق الرسمية؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "title_ar": "الدرس 18: الثقافة والمأكولات الشعبية - أصول التعامل والشهامة",
+      "title_en": "Lesson 18: Food Culture & Coffee Shops - Social Wisdom & Life Rules",
+      "category": "food",
+      "category_ar": "الثقافة والمأكولات الشعبية",
+      "category_en": "Food Culture & Coffee Shops",
+      "story_ar": "في هذا الدرس من الثقافة والمأكولات الشعبية، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Food Culture & Coffee Shops, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ الثقافة والمأكولات الشعبية؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "title_ar": "الدرس 19: أصول الكلام والواجب - أصول التعامل والشهامة",
+      "title_en": "Lesson 19: Egyptian Social Etiquette & Honorifics - Social Wisdom & Life Rules",
+      "category": "etiquette",
+      "category_ar": "أصول الكلام والواجب",
+      "category_en": "Egyptian Social Etiquette & Honorifics",
+      "story_ar": "في هذا الدرس من أصول الكلام والواجب، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Egyptian Social Etiquette & Honorifics, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ أصول الكلام والواجب؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "title_ar": "الدرس 20: العمل والورش والصنايعية - أصول التعامل والشهامة",
+      "title_en": "Lesson 20: Workplace & Artisan Etiquette - Social Wisdom & Life Rules",
+      "category": "work",
+      "category_ar": "العمل والورش والصنايعية",
+      "category_en": "Workplace & Artisan Etiquette",
+      "story_ar": "في هذا الدرس من العمل والورش والصنايعية، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Workplace & Artisan Etiquette, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ العمل والورش والصنايعية؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "title_ar": "الدرس 21: الحقوق والاستشارات القانونية - أصول التعامل والشهامة",
+      "title_en": "Lesson 21: Legal Rights & Emergency Protocols - Social Wisdom & Life Rules",
+      "category": "legal",
+      "category_ar": "الحقوق والاستشارات القانونية",
+      "category_en": "Legal Rights & Emergency Protocols",
+      "story_ar": "في هذا الدرس من الحقوق والاستشارات القانونية، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Legal Rights & Emergency Protocols, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ الحقوق والاستشارات القانونية؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "title_ar": "الدرس 22: شارع ولوجستيات القاهرة - أصول التعامل والشهامة",
+      "title_en": "Lesson 22: Street & Cairo Logistics - Social Wisdom & Life Rules",
+      "category": "street",
+      "category_ar": "شارع ولوجستيات القاهرة",
+      "category_en": "Street & Cairo Logistics",
+      "story_ar": "في هذا الدرس من شارع ولوجستيات القاهرة، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Street & Cairo Logistics, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ شارع ولوجستيات القاهرة؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "title_ar": "الدرس 23: السكن وعقود الإيجار - أصول التعامل والشهامة",
+      "title_en": "Lesson 23: Housing & Lease Etiquette - Social Wisdom & Life Rules",
+      "category": "housing",
+      "category_ar": "السكن وعقود الإيجار",
+      "category_en": "Housing & Lease Etiquette",
+      "story_ar": "في هذا الدرس من السكن وعقود الإيجار، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Housing & Lease Etiquette, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ السكن وعقود الإيجار؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "title_ar": "الدرس 24: المفوضية والأوراق الرسمية - أصول التعامل والشهامة",
+      "title_en": "Lesson 24: UNHCR & Formal Documentation - Social Wisdom & Life Rules",
+      "category": "admin",
+      "category_ar": "المفوضية والأوراق الرسمية",
+      "category_en": "UNHCR & Formal Documentation",
+      "story_ar": "في هذا الدرس من المفوضية والأوراق الرسمية، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on UNHCR & Formal Documentation, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ المفوضية والأوراق الرسمية؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "title_ar": "الدرس 25: الثقافة والمأكولات الشعبية - أصول التعامل والشهامة",
+      "title_en": "Lesson 25: Food Culture & Coffee Shops - Social Wisdom & Life Rules",
+      "category": "food",
+      "category_ar": "الثقافة والمأكولات الشعبية",
+      "category_en": "Food Culture & Coffee Shops",
+      "story_ar": "في هذا الدرس من الثقافة والمأكولات الشعبية، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Food Culture & Coffee Shops, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ الثقافة والمأكولات الشعبية؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "title_ar": "الدرس 26: أصول الكلام والواجب - أصول التعامل والشهامة",
+      "title_en": "Lesson 26: Egyptian Social Etiquette & Honorifics - Social Wisdom & Life Rules",
+      "category": "etiquette",
+      "category_ar": "أصول الكلام والواجب",
+      "category_en": "Egyptian Social Etiquette & Honorifics",
+      "story_ar": "في هذا الدرس من أصول الكلام والواجب، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Egyptian Social Etiquette & Honorifics, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ أصول الكلام والواجب؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "title_ar": "الدرس 27: العمل والورش والصنايعية - أصول التعامل والشهامة",
+      "title_en": "Lesson 27: Workplace & Artisan Etiquette - Social Wisdom & Life Rules",
+      "category": "work",
+      "category_ar": "العمل والورش والصنايعية",
+      "category_en": "Workplace & Artisan Etiquette",
+      "story_ar": "في هذا الدرس من العمل والورش والصنايعية، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Workplace & Artisan Etiquette, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ العمل والورش والصنايعية؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "title_ar": "الدرس 28: الحقوق والاستشارات القانونية - أصول التعامل والشهامة",
+      "title_en": "Lesson 28: Legal Rights & Emergency Protocols - Social Wisdom & Life Rules",
+      "category": "legal",
+      "category_ar": "الحقوق والاستشارات القانونية",
+      "category_en": "Legal Rights & Emergency Protocols",
+      "story_ar": "في هذا الدرس من الحقوق والاستشارات القانونية، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Legal Rights & Emergency Protocols, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ الحقوق والاستشارات القانونية؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "title_ar": "الدرس 29: شارع ولوجستيات القاهرة - أصول التعامل والشهامة",
+      "title_en": "Lesson 29: Street & Cairo Logistics - Social Wisdom & Life Rules",
+      "category": "street",
+      "category_ar": "شارع ولوجستيات القاهرة",
+      "category_en": "Street & Cairo Logistics",
+      "story_ar": "في هذا الدرس من شارع ولوجستيات القاهرة، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Street & Cairo Logistics, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ شارع ولوجستيات القاهرة؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "title_ar": "الدرس 30: السكن وعقود الإيجار - أصول التعامل والشهامة",
+      "title_en": "Lesson 30: Housing & Lease Etiquette - Social Wisdom & Life Rules",
+      "category": "housing",
+      "category_ar": "السكن وعقود الإيجار",
+      "category_en": "Housing & Lease Etiquette",
+      "story_ar": "في هذا الدرس من السكن وعقود الإيجار، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Housing & Lease Etiquette, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ السكن وعقود الإيجار؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 31,
+      "title_ar": "الدرس 31: المفوضية والأوراق الرسمية - أصول التعامل والشهامة",
+      "title_en": "Lesson 31: UNHCR & Formal Documentation - Social Wisdom & Life Rules",
+      "category": "admin",
+      "category_ar": "المفوضية والأوراق الرسمية",
+      "category_en": "UNHCR & Formal Documentation",
+      "story_ar": "في هذا الدرس من المفوضية والأوراق الرسمية، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on UNHCR & Formal Documentation, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ المفوضية والأوراق الرسمية؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 32,
+      "title_ar": "الدرس 32: الثقافة والمأكولات الشعبية - أصول التعامل والشهامة",
+      "title_en": "Lesson 32: Food Culture & Coffee Shops - Social Wisdom & Life Rules",
+      "category": "food",
+      "category_ar": "الثقافة والمأكولات الشعبية",
+      "category_en": "Food Culture & Coffee Shops",
+      "story_ar": "في هذا الدرس من الثقافة والمأكولات الشعبية، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Food Culture & Coffee Shops, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ الثقافة والمأكولات الشعبية؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 33,
+      "title_ar": "الدرس 33: أصول الكلام والواجب - أصول التعامل والشهامة",
+      "title_en": "Lesson 33: Egyptian Social Etiquette & Honorifics - Social Wisdom & Life Rules",
+      "category": "etiquette",
+      "category_ar": "أصول الكلام والواجب",
+      "category_en": "Egyptian Social Etiquette & Honorifics",
+      "story_ar": "في هذا الدرس من أصول الكلام والواجب، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Egyptian Social Etiquette & Honorifics, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ أصول الكلام والواجب؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 34,
+      "title_ar": "الدرس 34: العمل والورش والصنايعية - أصول التعامل والشهامة",
+      "title_en": "Lesson 34: Workplace & Artisan Etiquette - Social Wisdom & Life Rules",
+      "category": "work",
+      "category_ar": "العمل والورش والصنايعية",
+      "category_en": "Workplace & Artisan Etiquette",
+      "story_ar": "في هذا الدرس من العمل والورش والصنايعية، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Workplace & Artisan Etiquette, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ العمل والورش والصنايعية؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 35,
+      "title_ar": "الدرس 35: الحقوق والاستشارات القانونية - أصول التعامل والشهامة",
+      "title_en": "Lesson 35: Legal Rights & Emergency Protocols - Social Wisdom & Life Rules",
+      "category": "legal",
+      "category_ar": "الحقوق والاستشارات القانونية",
+      "category_en": "Legal Rights & Emergency Protocols",
+      "story_ar": "في هذا الدرس من الحقوق والاستشارات القانونية، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Legal Rights & Emergency Protocols, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ الحقوق والاستشارات القانونية؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 36,
+      "title_ar": "الدرس 36: شارع ولوجستيات القاهرة - أصول التعامل والشهامة",
+      "title_en": "Lesson 36: Street & Cairo Logistics - Social Wisdom & Life Rules",
+      "category": "street",
+      "category_ar": "شارع ولوجستيات القاهرة",
+      "category_en": "Street & Cairo Logistics",
+      "story_ar": "في هذا الدرس من شارع ولوجستيات القاهرة، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Street & Cairo Logistics, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ شارع ولوجستيات القاهرة؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 37,
+      "title_ar": "الدرس 37: السكن وعقود الإيجار - أصول التعامل والشهامة",
+      "title_en": "Lesson 37: Housing & Lease Etiquette - Social Wisdom & Life Rules",
+      "category": "housing",
+      "category_ar": "السكن وعقود الإيجار",
+      "category_en": "Housing & Lease Etiquette",
+      "story_ar": "في هذا الدرس من السكن وعقود الإيجار، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Housing & Lease Etiquette, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ السكن وعقود الإيجار؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 38,
+      "title_ar": "الدرس 38: المفوضية والأوراق الرسمية - أصول التعامل والشهامة",
+      "title_en": "Lesson 38: UNHCR & Formal Documentation - Social Wisdom & Life Rules",
+      "category": "admin",
+      "category_ar": "المفوضية والأوراق الرسمية",
+      "category_en": "UNHCR & Formal Documentation",
+      "story_ar": "في هذا الدرس من المفوضية والأوراق الرسمية، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on UNHCR & Formal Documentation, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ المفوضية والأوراق الرسمية؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 39,
+      "title_ar": "الدرس 39: الثقافة والمأكولات الشعبية - أصول التعامل والشهامة",
+      "title_en": "Lesson 39: Food Culture & Coffee Shops - Social Wisdom & Life Rules",
+      "category": "food",
+      "category_ar": "الثقافة والمأكولات الشعبية",
+      "category_en": "Food Culture & Coffee Shops",
+      "story_ar": "في هذا الدرس من الثقافة والمأكولات الشعبية، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Food Culture & Coffee Shops, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ الثقافة والمأكولات الشعبية؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 40,
+      "title_ar": "الدرس 40: أصول الكلام والواجب - أصول التعامل والشهامة",
+      "title_en": "Lesson 40: Egyptian Social Etiquette & Honorifics - Social Wisdom & Life Rules",
+      "category": "etiquette",
+      "category_ar": "أصول الكلام والواجب",
+      "category_en": "Egyptian Social Etiquette & Honorifics",
+      "story_ar": "في هذا الدرس من أصول الكلام والواجب، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Egyptian Social Etiquette & Honorifics, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ أصول الكلام والواجب؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 41,
+      "title_ar": "الدرس 41: العمل والورش والصنايعية - أصول التعامل والشهامة",
+      "title_en": "Lesson 41: Workplace & Artisan Etiquette - Social Wisdom & Life Rules",
+      "category": "work",
+      "category_ar": "العمل والورش والصنايعية",
+      "category_en": "Workplace & Artisan Etiquette",
+      "story_ar": "في هذا الدرس من العمل والورش والصنايعية، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Workplace & Artisan Etiquette, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ العمل والورش والصنايعية؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 42,
+      "title_ar": "الدرس 42: الحقوق والاستشارات القانونية - أصول التعامل والشهامة",
+      "title_en": "Lesson 42: Legal Rights & Emergency Protocols - Social Wisdom & Life Rules",
+      "category": "legal",
+      "category_ar": "الحقوق والاستشارات القانونية",
+      "category_en": "Legal Rights & Emergency Protocols",
+      "story_ar": "في هذا الدرس من الحقوق والاستشارات القانونية، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Legal Rights & Emergency Protocols, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ الحقوق والاستشارات القانونية؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 43,
+      "title_ar": "الدرس 43: شارع ولوجستيات القاهرة - أصول التعامل والشهامة",
+      "title_en": "Lesson 43: Street & Cairo Logistics - Social Wisdom & Life Rules",
+      "category": "street",
+      "category_ar": "شارع ولوجستيات القاهرة",
+      "category_en": "Street & Cairo Logistics",
+      "story_ar": "في هذا الدرس من شارع ولوجستيات القاهرة، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Street & Cairo Logistics, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ شارع ولوجستيات القاهرة؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 44,
+      "title_ar": "الدرس 44: السكن وعقود الإيجار - أصول التعامل والشهامة",
+      "title_en": "Lesson 44: Housing & Lease Etiquette - Social Wisdom & Life Rules",
+      "category": "housing",
+      "category_ar": "السكن وعقود الإيجار",
+      "category_en": "Housing & Lease Etiquette",
+      "story_ar": "في هذا الدرس من السكن وعقود الإيجار، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Housing & Lease Etiquette, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ السكن وعقود الإيجار؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 45,
+      "title_ar": "الدرس 45: المفوضية والأوراق الرسمية - أصول التعامل والشهامة",
+      "title_en": "Lesson 45: UNHCR & Formal Documentation - Social Wisdom & Life Rules",
+      "category": "admin",
+      "category_ar": "المفوضية والأوراق الرسمية",
+      "category_en": "UNHCR & Formal Documentation",
+      "story_ar": "في هذا الدرس من المفوضية والأوراق الرسمية، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on UNHCR & Formal Documentation, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ المفوضية والأوراق الرسمية؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 46,
+      "title_ar": "الدرس 46: الثقافة والمأكولات الشعبية - أصول التعامل والشهامة",
+      "title_en": "Lesson 46: Food Culture & Coffee Shops - Social Wisdom & Life Rules",
+      "category": "food",
+      "category_ar": "الثقافة والمأكولات الشعبية",
+      "category_en": "Food Culture & Coffee Shops",
+      "story_ar": "في هذا الدرس من الثقافة والمأكولات الشعبية، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Food Culture & Coffee Shops, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ الثقافة والمأكولات الشعبية؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 47,
+      "title_ar": "الدرس 47: أصول الكلام والواجب - أصول التعامل والشهامة",
+      "title_en": "Lesson 47: Egyptian Social Etiquette & Honorifics - Social Wisdom & Life Rules",
+      "category": "etiquette",
+      "category_ar": "أصول الكلام والواجب",
+      "category_en": "Egyptian Social Etiquette & Honorifics",
+      "story_ar": "في هذا الدرس من أصول الكلام والواجب، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Egyptian Social Etiquette & Honorifics, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ أصول الكلام والواجب؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 48,
+      "title_ar": "الدرس 48: العمل والورش والصنايعية - أصول التعامل والشهامة",
+      "title_en": "Lesson 48: Workplace & Artisan Etiquette - Social Wisdom & Life Rules",
+      "category": "work",
+      "category_ar": "العمل والورش والصنايعية",
+      "category_en": "Workplace & Artisan Etiquette",
+      "story_ar": "في هذا الدرس من العمل والورش والصنايعية، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Workplace & Artisan Etiquette, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ العمل والورش والصنايعية؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 49,
+      "title_ar": "الدرس 49: الحقوق والاستشارات القانونية - أصول التعامل والشهامة",
+      "title_en": "Lesson 49: Legal Rights & Emergency Protocols - Social Wisdom & Life Rules",
+      "category": "legal",
+      "category_ar": "الحقوق والاستشارات القانونية",
+      "category_en": "Legal Rights & Emergency Protocols",
+      "story_ar": "في هذا الدرس من الحقوق والاستشارات القانونية، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Legal Rights & Emergency Protocols, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ الحقوق والاستشارات القانونية؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 50,
+      "title_ar": "الدرس 50: شارع ولوجستيات القاهرة - أصول التعامل والشهامة",
+      "title_en": "Lesson 50: Street & Cairo Logistics - Social Wisdom & Life Rules",
+      "category": "street",
+      "category_ar": "شارع ولوجستيات القاهرة",
+      "category_en": "Street & Cairo Logistics",
+      "story_ar": "في هذا الدرس من شارع ولوجستيات القاهرة، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Street & Cairo Logistics, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ شارع ولوجستيات القاهرة؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 51,
+      "title_ar": "الدرس 51: السكن وعقود الإيجار - أصول التعامل والشهامة",
+      "title_en": "Lesson 51: Housing & Lease Etiquette - Social Wisdom & Life Rules",
+      "category": "housing",
+      "category_ar": "السكن وعقود الإيجار",
+      "category_en": "Housing & Lease Etiquette",
+      "story_ar": "في هذا الدرس من السكن وعقود الإيجار، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Housing & Lease Etiquette, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ السكن وعقود الإيجار؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 52,
+      "title_ar": "الدرس 52: المفوضية والأوراق الرسمية - أصول التعامل والشهامة",
+      "title_en": "Lesson 52: UNHCR & Formal Documentation - Social Wisdom & Life Rules",
+      "category": "admin",
+      "category_ar": "المفوضية والأوراق الرسمية",
+      "category_en": "UNHCR & Formal Documentation",
+      "story_ar": "في هذا الدرس من المفوضية والأوراق الرسمية، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on UNHCR & Formal Documentation, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ المفوضية والأوراق الرسمية؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 53,
+      "title_ar": "الدرس 53: الثقافة والمأكولات الشعبية - أصول التعامل والشهامة",
+      "title_en": "Lesson 53: Food Culture & Coffee Shops - Social Wisdom & Life Rules",
+      "category": "food",
+      "category_ar": "الثقافة والمأكولات الشعبية",
+      "category_en": "Food Culture & Coffee Shops",
+      "story_ar": "في هذا الدرس من الثقافة والمأكولات الشعبية، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Food Culture & Coffee Shops, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ الثقافة والمأكولات الشعبية؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 54,
+      "title_ar": "الدرس 54: أصول الكلام والواجب - أصول التعامل والشهامة",
+      "title_en": "Lesson 54: Egyptian Social Etiquette & Honorifics - Social Wisdom & Life Rules",
+      "category": "etiquette",
+      "category_ar": "أصول الكلام والواجب",
+      "category_en": "Egyptian Social Etiquette & Honorifics",
+      "story_ar": "في هذا الدرس من أصول الكلام والواجب، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Egyptian Social Etiquette & Honorifics, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ أصول الكلام والواجب؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 55,
+      "title_ar": "الدرس 55: العمل والورش والصنايعية - أصول التعامل والشهامة",
+      "title_en": "Lesson 55: Workplace & Artisan Etiquette - Social Wisdom & Life Rules",
+      "category": "work",
+      "category_ar": "العمل والورش والصنايعية",
+      "category_en": "Workplace & Artisan Etiquette",
+      "story_ar": "في هذا الدرس من العمل والورش والصنايعية، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Workplace & Artisan Etiquette, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ العمل والورش والصنايعية؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 56,
+      "title_ar": "الدرس 56: الحقوق والاستشارات القانونية - أصول التعامل والشهامة",
+      "title_en": "Lesson 56: Legal Rights & Emergency Protocols - Social Wisdom & Life Rules",
+      "category": "legal",
+      "category_ar": "الحقوق والاستشارات القانونية",
+      "category_en": "Legal Rights & Emergency Protocols",
+      "story_ar": "في هذا الدرس من الحقوق والاستشارات القانونية، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Legal Rights & Emergency Protocols, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ الحقوق والاستشارات القانونية؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 57,
+      "title_ar": "الدرس 57: شارع ولوجستيات القاهرة - أصول التعامل والشهامة",
+      "title_en": "Lesson 57: Street & Cairo Logistics - Social Wisdom & Life Rules",
+      "category": "street",
+      "category_ar": "شارع ولوجستيات القاهرة",
+      "category_en": "Street & Cairo Logistics",
+      "story_ar": "في هذا الدرس من شارع ولوجستيات القاهرة، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Street & Cairo Logistics, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ شارع ولوجستيات القاهرة؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 58,
+      "title_ar": "الدرس 58: السكن وعقود الإيجار - أصول التعامل والشهامة",
+      "title_en": "Lesson 58: Housing & Lease Etiquette - Social Wisdom & Life Rules",
+      "category": "housing",
+      "category_ar": "السكن وعقود الإيجار",
+      "category_en": "Housing & Lease Etiquette",
+      "story_ar": "في هذا الدرس من السكن وعقود الإيجار، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Housing & Lease Etiquette, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ السكن وعقود الإيجار؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 59,
+      "title_ar": "الدرس 59: المفوضية والأوراق الرسمية - أصول التعامل والشهامة",
+      "title_en": "Lesson 59: UNHCR & Formal Documentation - Social Wisdom & Life Rules",
+      "category": "admin",
+      "category_ar": "المفوضية والأوراق الرسمية",
+      "category_en": "UNHCR & Formal Documentation",
+      "story_ar": "في هذا الدرس من المفوضية والأوراق الرسمية، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on UNHCR & Formal Documentation, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ المفوضية والأوراق الرسمية؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 60,
+      "title_ar": "الدرس 60: الثقافة والمأكولات الشعبية - أصول التعامل والشهامة",
+      "title_en": "Lesson 60: Food Culture & Coffee Shops - Social Wisdom & Life Rules",
+      "category": "food",
+      "category_ar": "الثقافة والمأكولات الشعبية",
+      "category_en": "Food Culture & Coffee Shops",
+      "story_ar": "في هذا الدرس من الثقافة والمأكولات الشعبية، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Food Culture & Coffee Shops, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ الثقافة والمأكولات الشعبية؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 61,
+      "title_ar": "الدرس 61: أصول الكلام والواجب - أصول التعامل والشهامة",
+      "title_en": "Lesson 61: Egyptian Social Etiquette & Honorifics - Social Wisdom & Life Rules",
+      "category": "etiquette",
+      "category_ar": "أصول الكلام والواجب",
+      "category_en": "Egyptian Social Etiquette & Honorifics",
+      "story_ar": "في هذا الدرس من أصول الكلام والواجب، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Egyptian Social Etiquette & Honorifics, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ أصول الكلام والواجب؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 62,
+      "title_ar": "الدرس 62: العمل والورش والصنايعية - أصول التعامل والشهامة",
+      "title_en": "Lesson 62: Workplace & Artisan Etiquette - Social Wisdom & Life Rules",
+      "category": "work",
+      "category_ar": "العمل والورش والصنايعية",
+      "category_en": "Workplace & Artisan Etiquette",
+      "story_ar": "في هذا الدرس من العمل والورش والصنايعية، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Workplace & Artisan Etiquette, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ العمل والورش والصنايعية؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 63,
+      "title_ar": "الدرس 63: الحقوق والاستشارات القانونية - أصول التعامل والشهامة",
+      "title_en": "Lesson 63: Legal Rights & Emergency Protocols - Social Wisdom & Life Rules",
+      "category": "legal",
+      "category_ar": "الحقوق والاستشارات القانونية",
+      "category_en": "Legal Rights & Emergency Protocols",
+      "story_ar": "في هذا الدرس من الحقوق والاستشارات القانونية، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Legal Rights & Emergency Protocols, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ الحقوق والاستشارات القانونية؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 64,
+      "title_ar": "الدرس 64: شارع ولوجستيات القاهرة - أصول التعامل والشهامة",
+      "title_en": "Lesson 64: Street & Cairo Logistics - Social Wisdom & Life Rules",
+      "category": "street",
+      "category_ar": "شارع ولوجستيات القاهرة",
+      "category_en": "Street & Cairo Logistics",
+      "story_ar": "في هذا الدرس من شارع ولوجستيات القاهرة، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Street & Cairo Logistics, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ شارع ولوجستيات القاهرة؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 65,
+      "title_ar": "الدرس 65: السكن وعقود الإيجار - أصول التعامل والشهامة",
+      "title_en": "Lesson 65: Housing & Lease Etiquette - Social Wisdom & Life Rules",
+      "category": "housing",
+      "category_ar": "السكن وعقود الإيجار",
+      "category_en": "Housing & Lease Etiquette",
+      "story_ar": "في هذا الدرس من السكن وعقود الإيجار، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Housing & Lease Etiquette, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ السكن وعقود الإيجار؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 66,
+      "title_ar": "الدرس 66: المفوضية والأوراق الرسمية - أصول التعامل والشهامة",
+      "title_en": "Lesson 66: UNHCR & Formal Documentation - Social Wisdom & Life Rules",
+      "category": "admin",
+      "category_ar": "المفوضية والأوراق الرسمية",
+      "category_en": "UNHCR & Formal Documentation",
+      "story_ar": "في هذا الدرس من المفوضية والأوراق الرسمية، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on UNHCR & Formal Documentation, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ المفوضية والأوراق الرسمية؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 67,
+      "title_ar": "الدرس 67: الثقافة والمأكولات الشعبية - أصول التعامل والشهامة",
+      "title_en": "Lesson 67: Food Culture & Coffee Shops - Social Wisdom & Life Rules",
+      "category": "food",
+      "category_ar": "الثقافة والمأكولات الشعبية",
+      "category_en": "Food Culture & Coffee Shops",
+      "story_ar": "في هذا الدرس من الثقافة والمأكولات الشعبية، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Food Culture & Coffee Shops, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ الثقافة والمأكولات الشعبية؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 68,
+      "title_ar": "الدرس 68: أصول الكلام والواجب - أصول التعامل والشهامة",
+      "title_en": "Lesson 68: Egyptian Social Etiquette & Honorifics - Social Wisdom & Life Rules",
+      "category": "etiquette",
+      "category_ar": "أصول الكلام والواجب",
+      "category_en": "Egyptian Social Etiquette & Honorifics",
+      "story_ar": "في هذا الدرس من أصول الكلام والواجب، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Egyptian Social Etiquette & Honorifics, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ أصول الكلام والواجب؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 69,
+      "title_ar": "الدرس 69: العمل والورش والصنايعية - أصول التعامل والشهامة",
+      "title_en": "Lesson 69: Workplace & Artisan Etiquette - Social Wisdom & Life Rules",
+      "category": "work",
+      "category_ar": "العمل والورش والصنايعية",
+      "category_en": "Workplace & Artisan Etiquette",
+      "story_ar": "في هذا الدرس من العمل والورش والصنايعية، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Workplace & Artisan Etiquette, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ العمل والورش والصنايعية؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 70,
+      "title_ar": "الدرس 70: الحقوق والاستشارات القانونية - أصول التعامل والشهامة",
+      "title_en": "Lesson 70: Legal Rights & Emergency Protocols - Social Wisdom & Life Rules",
+      "category": "legal",
+      "category_ar": "الحقوق والاستشارات القانونية",
+      "category_en": "Legal Rights & Emergency Protocols",
+      "story_ar": "في هذا الدرس من الحقوق والاستشارات القانونية، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Legal Rights & Emergency Protocols, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ الحقوق والاستشارات القانونية؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 71,
+      "title_ar": "الدرس 71: شارع ولوجستيات القاهرة - أصول التعامل والشهامة",
+      "title_en": "Lesson 71: Street & Cairo Logistics - Social Wisdom & Life Rules",
+      "category": "street",
+      "category_ar": "شارع ولوجستيات القاهرة",
+      "category_en": "Street & Cairo Logistics",
+      "story_ar": "في هذا الدرس من شارع ولوجستيات القاهرة، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Street & Cairo Logistics, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ شارع ولوجستيات القاهرة؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 72,
+      "title_ar": "الدرس 72: السكن وعقود الإيجار - أصول التعامل والشهامة",
+      "title_en": "Lesson 72: Housing & Lease Etiquette - Social Wisdom & Life Rules",
+      "category": "housing",
+      "category_ar": "السكن وعقود الإيجار",
+      "category_en": "Housing & Lease Etiquette",
+      "story_ar": "في هذا الدرس من السكن وعقود الإيجار، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Housing & Lease Etiquette, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ السكن وعقود الإيجار؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 73,
+      "title_ar": "الدرس 73: المفوضية والأوراق الرسمية - أصول التعامل والشهامة",
+      "title_en": "Lesson 73: UNHCR & Formal Documentation - Social Wisdom & Life Rules",
+      "category": "admin",
+      "category_ar": "المفوضية والأوراق الرسمية",
+      "category_en": "UNHCR & Formal Documentation",
+      "story_ar": "في هذا الدرس من المفوضية والأوراق الرسمية، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on UNHCR & Formal Documentation, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ المفوضية والأوراق الرسمية؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 74,
+      "title_ar": "الدرس 74: الثقافة والمأكولات الشعبية - أصول التعامل والشهامة",
+      "title_en": "Lesson 74: Food Culture & Coffee Shops - Social Wisdom & Life Rules",
+      "category": "food",
+      "category_ar": "الثقافة والمأكولات الشعبية",
+      "category_en": "Food Culture & Coffee Shops",
+      "story_ar": "في هذا الدرس من الثقافة والمأكولات الشعبية، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Food Culture & Coffee Shops, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ الثقافة والمأكولات الشعبية؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 75,
+      "title_ar": "الدرس 75: أصول الكلام والواجب - أصول التعامل والشهامة",
+      "title_en": "Lesson 75: Egyptian Social Etiquette & Honorifics - Social Wisdom & Life Rules",
+      "category": "etiquette",
+      "category_ar": "أصول الكلام والواجب",
+      "category_en": "Egyptian Social Etiquette & Honorifics",
+      "story_ar": "في هذا الدرس من أصول الكلام والواجب، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Egyptian Social Etiquette & Honorifics, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ أصول الكلام والواجب؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 76,
+      "title_ar": "الدرس 76: العمل والورش والصنايعية - أصول التعامل والشهامة",
+      "title_en": "Lesson 76: Workplace & Artisan Etiquette - Social Wisdom & Life Rules",
+      "category": "work",
+      "category_ar": "العمل والورش والصنايعية",
+      "category_en": "Workplace & Artisan Etiquette",
+      "story_ar": "في هذا الدرس من العمل والورش والصنايعية، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Workplace & Artisan Etiquette, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ العمل والورش والصنايعية؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 77,
+      "title_ar": "الدرس 77: الحقوق والاستشارات القانونية - أصول التعامل والشهامة",
+      "title_en": "Lesson 77: Legal Rights & Emergency Protocols - Social Wisdom & Life Rules",
+      "category": "legal",
+      "category_ar": "الحقوق والاستشارات القانونية",
+      "category_en": "Legal Rights & Emergency Protocols",
+      "story_ar": "في هذا الدرس من الحقوق والاستشارات القانونية، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Legal Rights & Emergency Protocols, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ الحقوق والاستشارات القانونية؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 78,
+      "title_ar": "الدرس 78: شارع ولوجستيات القاهرة - أصول التعامل والشهامة",
+      "title_en": "Lesson 78: Street & Cairo Logistics - Social Wisdom & Life Rules",
+      "category": "street",
+      "category_ar": "شارع ولوجستيات القاهرة",
+      "category_en": "Street & Cairo Logistics",
+      "story_ar": "في هذا الدرس من شارع ولوجستيات القاهرة، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Street & Cairo Logistics, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ شارع ولوجستيات القاهرة؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 79,
+      "title_ar": "الدرس 79: السكن وعقود الإيجار - أصول التعامل والشهامة",
+      "title_en": "Lesson 79: Housing & Lease Etiquette - Social Wisdom & Life Rules",
+      "category": "housing",
+      "category_ar": "السكن وعقود الإيجار",
+      "category_en": "Housing & Lease Etiquette",
+      "story_ar": "في هذا الدرس من السكن وعقود الإيجار، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Housing & Lease Etiquette, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ السكن وعقود الإيجار؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 80,
+      "title_ar": "الدرس 80: المفوضية والأوراق الرسمية - أصول التعامل والشهامة",
+      "title_en": "Lesson 80: UNHCR & Formal Documentation - Social Wisdom & Life Rules",
+      "category": "admin",
+      "category_ar": "المفوضية والأوراق الرسمية",
+      "category_en": "UNHCR & Formal Documentation",
+      "story_ar": "في هذا الدرس من المفوضية والأوراق الرسمية، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on UNHCR & Formal Documentation, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ المفوضية والأوراق الرسمية؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 81,
+      "title_ar": "الدرس 81: الثقافة والمأكولات الشعبية - أصول التعامل والشهامة",
+      "title_en": "Lesson 81: Food Culture & Coffee Shops - Social Wisdom & Life Rules",
+      "category": "food",
+      "category_ar": "الثقافة والمأكولات الشعبية",
+      "category_en": "Food Culture & Coffee Shops",
+      "story_ar": "في هذا الدرس من الثقافة والمأكولات الشعبية، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Food Culture & Coffee Shops, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ الثقافة والمأكولات الشعبية؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 82,
+      "title_ar": "الدرس 82: أصول الكلام والواجب - أصول التعامل والشهامة",
+      "title_en": "Lesson 82: Egyptian Social Etiquette & Honorifics - Social Wisdom & Life Rules",
+      "category": "etiquette",
+      "category_ar": "أصول الكلام والواجب",
+      "category_en": "Egyptian Social Etiquette & Honorifics",
+      "story_ar": "في هذا الدرس من أصول الكلام والواجب، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Egyptian Social Etiquette & Honorifics, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ أصول الكلام والواجب؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 83,
+      "title_ar": "الدرس 83: العمل والورش والصنايعية - أصول التعامل والشهامة",
+      "title_en": "Lesson 83: Workplace & Artisan Etiquette - Social Wisdom & Life Rules",
+      "category": "work",
+      "category_ar": "العمل والورش والصنايعية",
+      "category_en": "Workplace & Artisan Etiquette",
+      "story_ar": "في هذا الدرس من العمل والورش والصنايعية، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Workplace & Artisan Etiquette, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ العمل والورش والصنايعية؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 84,
+      "title_ar": "الدرس 84: الحقوق والاستشارات القانونية - أصول التعامل والشهامة",
+      "title_en": "Lesson 84: Legal Rights & Emergency Protocols - Social Wisdom & Life Rules",
+      "category": "legal",
+      "category_ar": "الحقوق والاستشارات القانونية",
+      "category_en": "Legal Rights & Emergency Protocols",
+      "story_ar": "في هذا الدرس من الحقوق والاستشارات القانونية، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Legal Rights & Emergency Protocols, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ الحقوق والاستشارات القانونية؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 85,
+      "title_ar": "الدرس 85: شارع ولوجستيات القاهرة - أصول التعامل والشهامة",
+      "title_en": "Lesson 85: Street & Cairo Logistics - Social Wisdom & Life Rules",
+      "category": "street",
+      "category_ar": "شارع ولوجستيات القاهرة",
+      "category_en": "Street & Cairo Logistics",
+      "story_ar": "في هذا الدرس من شارع ولوجستيات القاهرة، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Street & Cairo Logistics, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ شارع ولوجستيات القاهرة؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 86,
+      "title_ar": "الدرس 86: السكن وعقود الإيجار - أصول التعامل والشهامة",
+      "title_en": "Lesson 86: Housing & Lease Etiquette - Social Wisdom & Life Rules",
+      "category": "housing",
+      "category_ar": "السكن وعقود الإيجار",
+      "category_en": "Housing & Lease Etiquette",
+      "story_ar": "في هذا الدرس من السكن وعقود الإيجار، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Housing & Lease Etiquette, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ السكن وعقود الإيجار؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 87,
+      "title_ar": "الدرس 87: المفوضية والأوراق الرسمية - أصول التعامل والشهامة",
+      "title_en": "Lesson 87: UNHCR & Formal Documentation - Social Wisdom & Life Rules",
+      "category": "admin",
+      "category_ar": "المفوضية والأوراق الرسمية",
+      "category_en": "UNHCR & Formal Documentation",
+      "story_ar": "في هذا الدرس من المفوضية والأوراق الرسمية، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on UNHCR & Formal Documentation, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ المفوضية والأوراق الرسمية؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 88,
+      "title_ar": "الدرس 88: الثقافة والمأكولات الشعبية - أصول التعامل والشهامة",
+      "title_en": "Lesson 88: Food Culture & Coffee Shops - Social Wisdom & Life Rules",
+      "category": "food",
+      "category_ar": "الثقافة والمأكولات الشعبية",
+      "category_en": "Food Culture & Coffee Shops",
+      "story_ar": "في هذا الدرس من الثقافة والمأكولات الشعبية، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Food Culture & Coffee Shops, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ الثقافة والمأكولات الشعبية؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 89,
+      "title_ar": "الدرس 89: أصول الكلام والواجب - أصول التعامل والشهامة",
+      "title_en": "Lesson 89: Egyptian Social Etiquette & Honorifics - Social Wisdom & Life Rules",
+      "category": "etiquette",
+      "category_ar": "أصول الكلام والواجب",
+      "category_en": "Egyptian Social Etiquette & Honorifics",
+      "story_ar": "في هذا الدرس من أصول الكلام والواجب، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Egyptian Social Etiquette & Honorifics, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ أصول الكلام والواجب؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 90,
+      "title_ar": "الدرس 90: العمل والورش والصنايعية - أصول التعامل والشهامة",
+      "title_en": "Lesson 90: Workplace & Artisan Etiquette - Social Wisdom & Life Rules",
+      "category": "work",
+      "category_ar": "العمل والورش والصنايعية",
+      "category_en": "Workplace & Artisan Etiquette",
+      "story_ar": "في هذا الدرس من العمل والورش والصنايعية، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Workplace & Artisan Etiquette, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ العمل والورش والصنايعية؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 91,
+      "title_ar": "الدرس 91: الحقوق والاستشارات القانونية - أصول التعامل والشهامة",
+      "title_en": "Lesson 91: Legal Rights & Emergency Protocols - Social Wisdom & Life Rules",
+      "category": "legal",
+      "category_ar": "الحقوق والاستشارات القانونية",
+      "category_en": "Legal Rights & Emergency Protocols",
+      "story_ar": "في هذا الدرس من الحقوق والاستشارات القانونية، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Legal Rights & Emergency Protocols, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ الحقوق والاستشارات القانونية؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 92,
+      "title_ar": "الدرس 92: شارع ولوجستيات القاهرة - أصول التعامل والشهامة",
+      "title_en": "Lesson 92: Street & Cairo Logistics - Social Wisdom & Life Rules",
+      "category": "street",
+      "category_ar": "شارع ولوجستيات القاهرة",
+      "category_en": "Street & Cairo Logistics",
+      "story_ar": "في هذا الدرس من شارع ولوجستيات القاهرة، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Street & Cairo Logistics, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ شارع ولوجستيات القاهرة؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 93,
+      "title_ar": "الدرس 93: السكن وعقود الإيجار - أصول التعامل والشهامة",
+      "title_en": "Lesson 93: Housing & Lease Etiquette - Social Wisdom & Life Rules",
+      "category": "housing",
+      "category_ar": "السكن وعقود الإيجار",
+      "category_en": "Housing & Lease Etiquette",
+      "story_ar": "في هذا الدرس من السكن وعقود الإيجار، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Housing & Lease Etiquette, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ السكن وعقود الإيجار؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 94,
+      "title_ar": "الدرس 94: المفوضية والأوراق الرسمية - أصول التعامل والشهامة",
+      "title_en": "Lesson 94: UNHCR & Formal Documentation - Social Wisdom & Life Rules",
+      "category": "admin",
+      "category_ar": "المفوضية والأوراق الرسمية",
+      "category_en": "UNHCR & Formal Documentation",
+      "story_ar": "في هذا الدرس من المفوضية والأوراق الرسمية، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on UNHCR & Formal Documentation, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ المفوضية والأوراق الرسمية؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 95,
+      "title_ar": "الدرس 95: الثقافة والمأكولات الشعبية - أصول التعامل والشهامة",
+      "title_en": "Lesson 95: Food Culture & Coffee Shops - Social Wisdom & Life Rules",
+      "category": "food",
+      "category_ar": "الثقافة والمأكولات الشعبية",
+      "category_en": "Food Culture & Coffee Shops",
+      "story_ar": "في هذا الدرس من الثقافة والمأكولات الشعبية، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Food Culture & Coffee Shops, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ الثقافة والمأكولات الشعبية؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 96,
+      "title_ar": "الدرس 96: أصول الكلام والواجب - أصول التعامل والشهامة",
+      "title_en": "Lesson 96: Egyptian Social Etiquette & Honorifics - Social Wisdom & Life Rules",
+      "category": "etiquette",
+      "category_ar": "أصول الكلام والواجب",
+      "category_en": "Egyptian Social Etiquette & Honorifics",
+      "story_ar": "في هذا الدرس من أصول الكلام والواجب، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Egyptian Social Etiquette & Honorifics, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ أصول الكلام والواجب؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 97,
+      "title_ar": "الدرس 97: العمل والورش والصنايعية - أصول التعامل والشهامة",
+      "title_en": "Lesson 97: Workplace & Artisan Etiquette - Social Wisdom & Life Rules",
+      "category": "work",
+      "category_ar": "العمل والورش والصنايعية",
+      "category_en": "Workplace & Artisan Etiquette",
+      "story_ar": "في هذا الدرس من العمل والورش والصنايعية، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Workplace & Artisan Etiquette, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ العمل والورش والصنايعية؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 98,
+      "title_ar": "الدرس 98: الحقوق والاستشارات القانونية - أصول التعامل والشهامة",
+      "title_en": "Lesson 98: Legal Rights & Emergency Protocols - Social Wisdom & Life Rules",
+      "category": "legal",
+      "category_ar": "الحقوق والاستشارات القانونية",
+      "category_en": "Legal Rights & Emergency Protocols",
+      "story_ar": "في هذا الدرس من الحقوق والاستشارات القانونية، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Legal Rights & Emergency Protocols, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ الحقوق والاستشارات القانونية؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 99,
+      "title_ar": "الدرس 99: شارع ولوجستيات القاهرة - أصول التعامل والشهامة",
+      "title_en": "Lesson 99: Street & Cairo Logistics - Social Wisdom & Life Rules",
+      "category": "street",
+      "category_ar": "شارع ولوجستيات القاهرة",
+      "category_en": "Street & Cairo Logistics",
+      "story_ar": "في هذا الدرس من شارع ولوجستيات القاهرة، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Street & Cairo Logistics, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ شارع ولوجستيات القاهرة؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    },
+    {
+      "id": 100,
+      "title_ar": "الدرس 100: السكن وعقود الإيجار - أصول التعامل والشهامة",
+      "title_en": "Lesson 100: Housing & Lease Etiquette - Social Wisdom & Life Rules",
+      "category": "housing",
+      "category_ar": "السكن وعقود الإيجار",
+      "category_en": "Housing & Lease Etiquette",
+      "story_ar": "في هذا الدرس من السكن وعقود الإيجار، نتعلم أصول الجدعتة والشياكة في التعامل في مصر. عند التعامل مع الناس في الشارع أو المواقف اليومية، الكلمة الحلوة والابتسامة تفتح لك كل الأبواب المغلقة.",
+      "story_en": "In this lesson on Housing & Lease Etiquette, we explore Egyptian street wisdom and kindness. A warm smile and polite words ('Rabbena yekhalik') open every door in Egypt.",
+      "practice_test": [
+        {
+          "question": "ما هو أفضل سلوك عند التعامل في موقف يومي يتعلق بـ السكن وعقود الإيجار؟",
+          "options": [
+            "الابتسامة والكلمة الطيبة والتعامل بشياكة",
+            "الصراخ والغضب",
+            "الانسحاب والتجاهل",
+            "دفع فلوس زيادة بدون داعي"
+          ],
+          "answer": 0,
+          "explanation": "الكلمة الطيبة والابتسامة هي مفتاح التعامل الناجح في مصر."
+        },
+        {
+          "question": "ما العبارة المصرية الشهيرة للتعبير عن الشكر والدعوة الطيبة؟",
+          "options": [
+            "ربنا يخليك ويحفظك",
+            "ماشي خلاص",
+            "مع السلامة يا عم",
+            "إيه ده يا راجل"
+          ],
+          "answer": 0,
+          "explanation": "'ربنا يخليك ويحفظك' من أجمل دعوات الشكر والامتنان في الثقافة المصرية."
+        }
+      ]
+    }
+  ],
+  "total": 100
+}
