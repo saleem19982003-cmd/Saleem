@@ -23,7 +23,7 @@
       "use": "@vercel/static"
     },
     {
-      "src": "data/*.json",
+      "src": "data/**",
       "use": "@vercel/static"
     },
     {
