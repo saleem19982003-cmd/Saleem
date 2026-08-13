@@ -2139,36 +2139,50 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
     let cultureLessonsData = [];
     let dialectLessons600 = [];
     let currentLessonOffset = 1;
+    const learningDataState = { dialect: 'loading', culture: 'loading' };
 
-    // Load 600 Dialect Lessons Dataset (6,000 Real Words + 20 Questions Per Lesson)
-    async function loadDialectLessons600() {
-        try {
-            const res = await fetch('/data/dialect_lessons_600.json');
-            if (res.ok) {
-                const data = await res.json();
-                dialectLessons600 = data.lessons || [];
-                console.log(`Loaded ${dialectLessons600.length} real dialect lessons.`);
-                renderDuolingoSnakePath();
-            }
-        } catch (e) {
-            console.warn('Failed to load dialect_lessons_600.json:', e);
+    function updateLearningDatasetUI() {
+        const dialectCount = document.getElementById('dialect-lessons-count');
+        const cultureCount = document.getElementById('culture-lessons-count');
+        const cultureStatus = document.getElementById('culture-track-status');
+        const jumpInput = document.getElementById('lesson-jump-input');
+        const dialectTotal = dialectLessons600.length;
+        const cultureTotal = cultureLessonsData.length;
+
+        if (dialectCount) dialectCount.textContent = dialectTotal || 'Unavailable';
+        if (cultureCount) cultureCount.textContent = cultureTotal || 'Unavailable';
+        if (jumpInput) jumpInput.max = currentTrack === 'dialect' ? dialectTotal : cultureTotal;
+        if (cultureStatus) {
+            cultureStatus.innerHTML = cultureTotal
+                ? '<i class="fa-solid fa-database"></i> Dataset available'
+                : '<i class="fa-solid fa-triangle-exclamation"></i> Dataset unavailable';
+            cultureStatus.style.borderColor = cultureTotal ? 'var(--emerald)' : 'var(--coral)';
+            cultureStatus.style.color = cultureTotal ? 'var(--emerald)' : 'var(--coral)';
         }
     }
-    loadDialectLessons600();
 
-    // Fetch 100 Culture Lessons
-    async function loadCultureLessons() {
+    async function loadLearningDataset(path, key) {
         try {
-            const res = await fetch('/data/culture_lessons_100.json');
-            if (res.ok) {
-                const data = await res.json();
-                cultureLessonsData = data.lessons || [];
-            }
+            const res = await fetch(path, { cache: 'no-store' });
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            const data = await res.json();
+            if (!Array.isArray(data.lessons) || data.lessons.length === 0) throw new Error('Dataset contains no lessons');
+            if (key === 'dialect') dialectLessons600 = data.lessons;
+            else cultureLessonsData = data.lessons;
+            learningDataState[key] = 'ready';
+            updateLearningDatasetUI();
+            renderDuolingoSnakePath();
+            console.log(`Loaded ${data.lessons.length} ${key} lessons from ${path}.`);
         } catch (e) {
-            console.warn('Failed to fetch culture_lessons_100.json:', e);
+            learningDataState[key] = 'unavailable';
+            updateLearningDatasetUI();
+            renderDuolingoSnakePath();
+            console.warn(`Failed to load ${path}:`, e);
         }
     }
-    loadCultureLessons();
+
+    loadLearningDataset('/data/dialect_lessons_600.json', 'dialect');
+    loadLearningDataset('/data/culture_lessons_100.json', 'culture');
 
     // Jump to Lesson Listener
     const btnJump = document.getElementById('btn-jump-lesson');
@@ -2176,7 +2190,8 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
     if (btnJump && inputJump) {
         btnJump.addEventListener('click', () => {
             const targetLesson = parseInt(inputJump.value);
-            if (targetLesson >= 1 && targetLesson <= 600) {
+            const maxLesson = currentTrack === 'dialect' ? dialectLessons600.length : cultureLessonsData.length;
+            if (targetLesson >= 1 && targetLesson <= maxLesson) {
                 currentLessonOffset = targetLesson;
                 renderDuolingoSnakePath();
             }
@@ -2193,7 +2208,8 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
             currentTrack = 'dialect';
             btnTrackDialect.classList.add('active');
             btnTrackCulture.classList.remove('active');
-            if (trackTitle) trackTitle.innerHTML = `<i class="fa-solid fa-route text-gold"></i> <span>Track 1: Egyptian Dialect Snake Progression (600 Lessons)</span>`;
+            currentLessonOffset = 1;
+            if (trackTitle) trackTitle.innerHTML = `<i class="fa-solid fa-route text-gold"></i> <span>Egyptian Dialect Progression (${dialectLessons600.length || 'Unavailable'} Lessons)</span>`;
             renderDuolingoSnakePath();
         });
 
@@ -2201,7 +2217,8 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
             currentTrack = 'culture';
             btnTrackCulture.classList.add('active');
             btnTrackDialect.classList.remove('active');
-            if (trackTitle) trackTitle.innerHTML = `<i class="fa-solid fa-route text-gold"></i> <span>Track 2: Egyptian Culture Snake Progression (100 Lessons)</span>`;
+            currentLessonOffset = 1;
+            if (trackTitle) trackTitle.innerHTML = `<i class="fa-solid fa-route text-gold"></i> <span>Egyptian Culture Progression (${cultureLessonsData.length || 'Unavailable'} Lessons)</span>`;
             renderDuolingoSnakePath();
         });
     }
@@ -2223,6 +2240,29 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
         }
     }
 
+    function updateLocalLearningStats() {
+        const dialectCompleted = getCompletedDialectLessons();
+        const cultureCompleted = getCompletedCultureLessons();
+        const wordsLearned = dialectCompleted.reduce((total, id) => {
+            const lesson = dialectLessons600.find(item => Number(item.id) === Number(id));
+            return total + (lesson && Array.isArray(lesson.words) ? lesson.words.length : 0);
+        }, 0);
+        const phrasesMastered = wordsLearned;
+        const xp = parseInt(localStorage.getItem('saleem_user_xp') || '0');
+        const level = xp >= 1000 ? ['Level 3', 'Advanced'] : xp >= 500 ? ['Level 2', 'Intermediate'] : ['Level 1', 'Beginner'];
+        const wordsEl = document.getElementById('stat-words-learned');
+        const phrasesEl = document.getElementById('stat-phrases-mastered');
+        const streakEl = document.getElementById('stat-streak-days');
+        const levelEl = document.getElementById('stat-level');
+        const levelLabelEl = document.getElementById('stat-level-label');
+        if (wordsEl) wordsEl.textContent = String(wordsLearned);
+        if (phrasesEl) phrasesEl.textContent = String(phrasesMastered);
+        if (streakEl) streakEl.textContent = `🔥 ${parseInt(localStorage.getItem('saleem_user_streak') || '0')}`;
+        if (levelEl) levelEl.textContent = level[0];
+        if (levelLabelEl) levelLabelEl.textContent = level[1];
+        return cultureCompleted.length;
+    }
+
     // Render Duolingo Curved Snake Path for 600 Lessons (Zero Initial State)
     function renderDuolingoSnakePath() {
         const container = document.getElementById('duolingo-snake-view');
@@ -2231,21 +2271,29 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
         let html = '';
         const userXP = parseInt(localStorage.getItem('saleem_user_xp') || '0');
         const userStreak = parseInt(localStorage.getItem('saleem_user_streak') || '0');
-        const completedDialect = getCompletedDialectLessons();
-        const completedCulture = getCompletedCultureLessons();
+        const completed = currentTrack === 'dialect' ? getCompletedDialectLessons() : getCompletedCultureLessons();
+        const lessons = currentTrack === 'dialect' ? dialectLessons600 : cultureLessonsData;
+        const totalLessons = lessons.length;
+        const visibleCount = Math.min(15, totalLessons);
 
-        if (currentTrack === 'dialect') {
-            const visibleCount = 15;
-            const startLesson = Math.max(1, Math.min(600 - visibleCount + 1, currentLessonOffset));
-            const endLesson = Math.min(600, startLesson + visibleCount - 1);
+        if (!totalLessons) {
+            const state = learningDataState[currentTrack];
+            container.innerHTML = `<div style="text-align:center; padding:40px 20px; color:var(--text-muted);">${state === 'loading' ? 'Loading the existing learning dataset...' : 'This learning dataset is unavailable. No replacement content was generated.'}</div>`;
+            updateLearningDatasetUI();
+            return;
+        }
+
+        if (totalLessons > 0) {
+            const startLesson = Math.max(1, Math.min(totalLessons - visibleCount + 1, currentLessonOffset));
+            const endLesson = Math.min(totalLessons, startLesson + visibleCount - 1);
 
             for (let i = startLesson; i <= endLesson; i++) {
                 let statusClass = 'locked';
                 let iconClass = 'fa-lock';
                 let isClickable = false;
 
-                const isCompleted = completedDialect.includes(i);
-                const isPrevCompleted = (i === 1) || completedDialect.includes(i - 1);
+                const isCompleted = completed.includes(i);
+                const isPrevCompleted = (i === 1) || completed.includes(i - 1);
 
                 if (isCompleted) {
                     statusClass = 'completed';
@@ -2253,18 +2301,22 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
                     isClickable = true;
                 } else if (isPrevCompleted) {
                     statusClass = 'active';
-                    iconClass = 'fa-comments';
+                    iconClass = currentTrack === 'dialect' ? 'fa-comments' : 'fa-landmark';
                     isClickable = true;
                 }
 
                 const offsets = ['0px', '70px', '120px', '70px', '0px', '-70px', '-120px', '-70px', '0px', '60px'];
                 const offsetLeft = offsets[(i - 1) % offsets.length];
-                const clickHandler = isClickable ? `onclick="openDialectLessonModal(${i})"` : `onclick="alert('Complete Lesson ${i-1} first to unlock this lesson!')"`;
+                const openHandler = currentTrack === 'dialect' ? `openDialectLessonModal(${i})` : `openCultureLessonModal(${i})`;
+                const clickHandler = isClickable ? `onclick="${openHandler}"` : `onclick="alert('Complete the previous lesson first to unlock this lesson.')"`;
+                const lesson = lessons.find(item => Number(item.id) === i);
+                if (!lesson) continue;
+                const title = escapeHtml(lesson.title_en || lesson.title_ar || `Lesson ${i}`);
 
                 html += `
                     <div class="duolingo-snake-node ${statusClass}" style="transform: translateX(${offsetLeft});" ${clickHandler}>
                         <i class="fa-solid ${iconClass}"></i>
-                        <span class="node-label">Lesson ${i}: 10 Words</span>
+                        <span class="node-label">${title}</span>
                     </div>
                 `;
             }
@@ -2288,12 +2340,20 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
 
         container.innerHTML = html;
 
+        const trackTitle = document.getElementById('current-track-title');
+        if (trackTitle) {
+            const label = currentTrack === 'dialect' ? 'Egyptian Dialect' : 'Egyptian Culture';
+            trackTitle.innerHTML = `<i class="fa-solid fa-route text-gold"></i> <span>${label} Progression (${totalLessons} Lessons)</span>`;
+        }
+        updateLearningDatasetUI();
+
         // Update streak & XP displays
         const streakEl = document.getElementById('user-streak-count');
         const xpEl = document.getElementById('user-xp-count');
         if (streakEl) streakEl.innerText = userStreak;
         if (xpEl) xpEl.innerText = userXP.toLocaleString();
 
+        updateLocalLearningStats();
         renderRealLeaderboard();
     }
 
@@ -2336,13 +2396,16 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
         `;
     }
 
-    // Fallback real 10 words & 20 questions generator on-the-fly (Instant 0 Latency)
+    // Resolve only records from the checked-in dataset. Missing content stays missing.
     function getOrGenerateDialectLesson(lessonId) {
         if (dialectLessons600 && dialectLessons600.length > 0) {
-            const found = dialectLessons600.find(l => l.id === lessonId);
+            const found = dialectLessons600.find(l => Number(l.id) === Number(lessonId));
             if (found) return found;
         }
 
+        return null;
+
+        if (false) {
         const defaultWords = [
             { word: "إزيك يا باشا", pronunciation: "Izayyak ya basha", english: "How are you sir?", meaning: "اصطلاح تحية محترم", example: "إزيك يا باشا عامل إيه؟", category: "common" },
             { word: "على جنب يا اسطى", pronunciation: "Ala gamb ya osta", english: "Pull over driver please", meaning: "عبارة مواصلات أساسية", example: "على جنب يا اسطى هنا من فضلك.", category: "transport" },
@@ -2382,6 +2445,7 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
             words: defaultWords,
             questions: questions
         };
+        }
     }
 
     // -------------------------------------------------------------
@@ -2395,13 +2459,19 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
         quizIdx: 0,
         score: 0
     };
+    let activeCultureLessonId = null;
 
     window.openDialectLessonModal = function(lessonId) {
         const modal = document.getElementById('dialect-modal');
         const content = document.getElementById('dialect-modal-content');
         if (!modal || !content) return;
 
-        const lesson = getOrGenerateDialectLesson(lessonId);
+        const lesson = dialectLessons600.find(item => Number(item.id) === Number(lessonId));
+        if (!lesson || !Array.isArray(lesson.words) || !Array.isArray(lesson.questions) || lesson.words.length === 0 || lesson.questions.length === 0) {
+            content.innerHTML = '<div style="text-align:center; padding:32px; color:var(--text-muted);">This lesson has no complete dataset record yet. No replacement content was generated.</div>';
+            modal.style.display = 'flex';
+            return;
+        }
 
         activeLessonState = {
             lessonId: lesson.id,
@@ -2648,6 +2718,24 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
         `;
     }
 
+    window.nextLessonWord = function() {
+        if (activeLessonState.wordIdx < activeLessonState.words.length - 1) {
+            activeLessonState.wordIdx++;
+            renderLessonWordStep();
+            return;
+        }
+
+        activeLessonState.quizIdx = 0;
+        renderLessonQuizStep();
+    };
+
+    window.prevLessonWord = function() {
+        if (activeLessonState.wordIdx > 0) {
+            activeLessonState.wordIdx--;
+            renderLessonWordStep();
+        }
+    };
+
     // Step 2: Render 20-Question Practice Quiz Multilingual
     function renderLessonQuizStep() {
         const content = document.getElementById('dialect-modal-content');
@@ -2732,12 +2820,22 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
         if (!content) return;
 
         const { lessonId, score } = activeLessonState;
-        const totalXP = 200 + (score * 10);
+        const completedLessons = getCompletedDialectLessons();
+        const alreadyCompleted = completedLessons.includes(Number(lessonId));
+        const totalXP = alreadyCompleted ? 0 : 200 + (score * 10);
+
+        if (!alreadyCompleted) {
+            completedLessons.push(Number(lessonId));
+            completedLessons.sort((a, b) => a - b);
+            localStorage.setItem('saleem_completed_dialect_lessons', JSON.stringify(completedLessons));
+            localStorage.setItem('saleem_learning_last_lesson', `dialect:${lessonId}`);
+        }
 
         // Update XP & Streak in localStorage
-        let userXP = parseInt(localStorage.getItem('saleem_user_xp') || '1250');
+        let userXP = parseInt(localStorage.getItem('saleem_user_xp') || '0');
         userXP += totalXP;
         localStorage.setItem('saleem_user_xp', userXP);
+        updateLocalLearningStats();
 
         content.innerHTML = `
             <div style="text-align: center; padding: 20px;">
@@ -2771,6 +2869,29 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
 
     // Culture Lesson Modal (Locked for 72 Days)
     window.openCultureLessonModal = function(lessonId) {
+        const modal = document.getElementById('culture-modal');
+        const content = document.getElementById('culture-modal-content');
+        const lesson = cultureLessonsData.find(item => Number(item.id) === Number(lessonId));
+        if (!modal || !content) return;
+        if (!lesson) {
+            content.innerHTML = '<div style="text-align:center; padding:32px; color:var(--text-muted);">This culture lesson has no dataset record yet. No replacement content was generated.</div>';
+            modal.style.display = 'flex';
+            return;
+        }
+        activeCultureLessonId = Number(lessonId);
+
+        content.innerHTML = `
+            <div style="margin-bottom:18px;">
+                <span class="tag" style="border-color:var(--emerald); color:var(--emerald);">${escapeHtml(lesson.category_en || 'Culture')}</span>
+                <h2 style="font-size:22px; color:var(--warm-sand); margin:10px 0 8px;">${escapeHtml(lesson.title_en || lesson.title_ar || `Lesson ${lessonId}`)}</h2>
+                <p style="font-size:14px; line-height:1.7; color:var(--text-light);">${formatTrustedText(lesson.story_en || lesson.story_ar || '')}</p>
+            </div>
+            <div id="practice-test-container">
+                <button class="btn btn-primary" style="width:100%; justify-content:center;" onclick="startSituationalTest(${Number(lessonId)})">Start practice test</button>
+            </div>
+        `;
+        modal.style.display = 'flex';
+        return;
         alert("🔒 Track 2: Egyptian Culture Track is currently locked. It will unlock in 72 days!\n🔒 مسار الثقافة المصرية مغلق حالياً وسيطرح بعد 72 يوماً.");
         return;
     };
@@ -2779,7 +2900,11 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
         const testContainer = document.getElementById('practice-test-container');
         if (!testContainer) return;
 
-        const lesson = cultureLessonsData.find(l => l.id === lessonId) || cultureLessonsData[0];
+        const lesson = cultureLessonsData.find(l => Number(l.id) === Number(lessonId));
+        if (!lesson || !Array.isArray(lesson.practice_test) || lesson.practice_test.length === 0) {
+            testContainer.innerHTML = '<p style="color:var(--text-muted);">This lesson has no practice test in the existing dataset.</p>';
+            return;
+        }
         const q = (lesson && lesson.practice_test && lesson.practice_test[0]) ? lesson.practice_test[0] : {
             question: "أنت في سوق وسألت عن سعر حاجة وكان غالي، تقول إيه؟",
             options: ["اكرمني في السعر يا حاج من فضلك", "السعر ده مش عاجبني", "أنت غالي جداً", "مش هشتري"],
@@ -2826,9 +2951,18 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
     };
 
     window.claimCultureXP = function(xp) {
-        let currentXP = parseInt(localStorage.getItem('saleem_user_xp') || '1250');
-        currentXP += xp;
+        const completedLessons = getCompletedCultureLessons();
+        const alreadyCompleted = activeCultureLessonId !== null && completedLessons.includes(activeCultureLessonId);
+        if (!alreadyCompleted && activeCultureLessonId !== null) {
+            completedLessons.push(activeCultureLessonId);
+            completedLessons.sort((a, b) => a - b);
+            localStorage.setItem('saleem_completed_culture_lessons', JSON.stringify(completedLessons));
+            localStorage.setItem('saleem_learning_last_lesson', `culture:${activeCultureLessonId}`);
+        }
+        let currentXP = parseInt(localStorage.getItem('saleem_user_xp') || '0');
+        if (!alreadyCompleted) currentXP += xp;
         localStorage.setItem('saleem_user_xp', currentXP);
+        updateLocalLearningStats();
 
         document.getElementById('culture-modal').style.display = 'none';
         renderDuolingoSnakePath();
@@ -3182,10 +3316,19 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
                 const streakEl = document.getElementById('stat-streak-days');
                 const wordsEl = document.getElementById('stat-words-learned');
                 const phrasesEl = document.getElementById('stat-phrases-mastered');
+                const localCompleted = getCompletedDialectLessons();
+                const localWords = localCompleted.reduce((total, id) => {
+                    const lesson = dialectLessons600.find(item => Number(item.id) === Number(id));
+                    return total + (lesson && Array.isArray(lesson.words) ? lesson.words.length : 0);
+                }, 0);
+                const localStreak = parseInt(localStorage.getItem('saleem_user_streak') || '0');
 
                 if (streakEl) streakEl.textContent = `🔥 ${data.streak.current_streak || 0}`;
                 if (wordsEl) wordsEl.textContent = `${data.streak.total_words_learned || 0}+`;
                 if (phrasesEl) phrasesEl.textContent = `${data.streak.total_phrases_mastered || 0}`;
+                if (streakEl) streakEl.textContent = `Streak ${Math.max(data.streak.current_streak || 0, localStreak)}`;
+                if (wordsEl) wordsEl.textContent = `${Math.max(data.streak.total_words_learned || 0, localWords)}`;
+                if (phrasesEl) phrasesEl.textContent = `${Math.max(data.streak.total_phrases_mastered || 0, localWords)}`;
             }
         } catch (e) {
             console.warn('Stats sync offline:', e);

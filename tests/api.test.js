@@ -18,6 +18,9 @@ process.env.ADMIN_PASSWORD = 'TestAdminPass123!';
 if (fs.existsSync(testDbPath)) {
     try { fs.unlinkSync(testDbPath); } catch (e) {}
 }
+for (const suffix of ['-shm', '-wal']) {
+    try { fs.unlinkSync(`${testDbPath}${suffix}`); } catch (e) {}
+}
 
 const { initializeDatabase, seedDatabase } = require('../server/database');
 const db = initializeDatabase(testDbPath);
@@ -123,5 +126,7 @@ test('6. Community Forum & Replies', (t) => {
 
 test('7. Cleanup', (t) => {
     db.close();
-    try { fs.unlinkSync(testDbPath); } catch (e) {}
+    for (const file of [testDbPath, `${testDbPath}-shm`, `${testDbPath}-wal`]) {
+        try { fs.unlinkSync(file); } catch (e) {}
+    }
 });

@@ -4,18 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
     <title>Saleem App - Refugee Learning & Services Platform</title>
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="shortcut icon" href="favicon.svg">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="shortcut icon" href="/favicon.svg">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
     <div class="app-layout">
         <!-- Sidebar Navigation (4 CORE SECTIONS ONLY) -->
         <aside class="sidebar">
             <div class="brand">
-                <a href="index.html" class="brand-link" style="display:flex; align-items:center; gap:14px; text-decoration:none; color:inherit;">
+                <a href="/index.html" class="brand-link" style="display:flex; align-items:center; gap:14px; text-decoration:none; color:inherit;">
                     <div class="brand-logo">
                         <i class="fa-solid fa-hands-holding-child"></i>
                     </div>
@@ -81,7 +81,7 @@
                     <a href="mailto:saleem19982003@gmail.com" class="icon-btn" title="Contact Support" style="display:inline-flex; align-items:center; justify-content:center; text-decoration:none;">
                         <i class="fa-solid fa-envelope" style="color: #10B981;"></i>
                     </a>
-                    <a href="index.html#download" class="btn btn-outline desktop-only-btn" style="text-decoration:none;" data-i18n="btn-get-apk"><i class="fa-solid fa-download"></i> Get APK</a>
+                    <a href="/index.html#download" class="btn btn-outline desktop-only-btn" style="text-decoration:none;" data-i18n="btn-get-apk"><i class="fa-solid fa-download"></i> Get APK</a>
                     <button class="btn btn-primary" id="btn-emergency-hotlines" data-i18n="btn-hotlines"><i class="fa-solid fa-shield-halved"></i> Hotlines</button>
                 </div>
             </header>
@@ -114,19 +114,19 @@
                     <!-- Dual Track Switcher -->
                     <div class="track-switch-container">
                         <button class="track-btn active" id="btn-track-dialect">
-                            <i class="fa-solid fa-comments"></i> <span>Track 1: Learn Egyptian Dialect (600 Lessons)</span>
+                            <i class="fa-solid fa-comments"></i> <span>Track 1: Learn Egyptian Dialect (<span id="dialect-lessons-count">Loading...</span> Lessons)</span>
                         </button>
                         <button class="track-btn" id="btn-track-culture">
-                            <i class="fa-solid fa-landmark"></i> <span>Track 2: Learn Egyptian Culture</span> <span class="tag" style="background: rgba(244, 63, 94, 0.2); border-color: var(--coral); color: var(--coral); font-size: 10px; margin-left: 6px;"><i class="fa-solid fa-lock"></i> Unlocks in 72 Days</span>
+                            <i class="fa-solid fa-landmark"></i> <span>Track 2: Learn Egyptian Culture (<span id="culture-lessons-count">Loading...</span> Lessons)</span> <span id="culture-track-status" class="tag" style="background: rgba(16, 185, 129, 0.15); border-color: var(--emerald); color: var(--emerald); font-size: 10px; margin-left: 6px;"><i class="fa-solid fa-database"></i> Loading dataset</span>
                         </button>
                     </div>
 
                     <!-- Duolingo Curved Snake Path Container -->
                     <div class="card" style="position: relative; overflow: hidden; padding: 30px 20px;">
                         <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 20px;">
-                            <h3 id="current-track-title"><i class="fa-solid fa-route text-gold"></i> <span>Track 1: Egyptian Dialect Snake Progression (600 Lessons)</span></h3>
+                            <h3 id="current-track-title"><i class="fa-solid fa-route text-gold"></i> <span>Loading learning dataset...</span></h3>
                             <div style="display: flex; align-items: center; gap: 10px;">
-                                <input type="number" id="lesson-jump-input" placeholder="Jump to Lesson (1-600)..." min="1" max="600" class="form-control" style="width: 180px; font-size: 12px;">
+                                <input type="number" id="lesson-jump-input" placeholder="Jump to Lesson..." min="1" class="form-control" style="width: 180px; font-size: 12px;">
                                 <button class="btn btn-outline" id="btn-jump-lesson" style="padding: 8px 12px; font-size: 12px;"><i class="fa-solid fa-plane-departure"></i> Jump</button>
                             </div>
                         </div>
@@ -253,7 +253,7 @@
 
                             <div style="padding: 12px; background: rgba(0,0,0,0.3); border-radius: 10px; margin-bottom: 14px;">
                                 <strong style="font-size: 13px; color: var(--emerald); display: block;"><i class="fa-solid fa-award"></i> Weekly Community Challenge</strong>
-                                <span style="font-size: 12px; color: #fff;">Learn 20 Egyptian Phrases this week and earn the "Cairo Pioneer" badge!</span>
+                                <span style="font-size: 12px; color: #fff;">Complete this week's Egyptian learning challenge and earn the "Cairo Pioneer" badge!</span>
                             </div>
 
                             <button class="btn btn-outline" id="btn-request-mentor" style="width: 100%; justify-content: center;">
@@ -296,7 +296,7 @@
 
                         <!-- Average Rating Card -->
                         <div class="card" style="text-align: center; display: flex; flex-direction: column; justify-content: center; background: linear-gradient(135deg, rgba(15, 76, 129, 0.3), rgba(31, 41, 59, 0.95)); border: 1px solid var(--warm-sand);">
-                            <div style="font-size: 44px; font-weight: 800; color: #FBBF24; line-height: 1;" id="avg-rating-score">4.9</div>
+                            <div style="font-size: 44px; font-weight: 800; color: #FBBF24; line-height: 1;" id="avg-rating-score">0.0</div>
                             <div style="font-size: 18px; color: #FBBF24; margin: 6px 0;">⭐⭐⭐⭐⭐</div>
                             <h4 style="font-size: 15px; color: #fff; margin-bottom: 4px;">Community Average Rating</h4>
                             <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;" id="total-reviews-count">No public reviews yet</p>
@@ -358,20 +358,20 @@
                             <h3><i class="fa-solid fa-chart-line text-gold"></i> Personal Learning Metrics</h3>
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px;">
                                 <div style="padding: 12px; background: var(--surface-dark); border-radius: 10px; text-align: center;">
-                                    <span style="font-size: 24px; font-weight: 700; color: var(--warm-sand); display: block;" id="stat-words-learned">120+</span>
+                                    <span style="font-size: 24px; font-weight: 700; color: var(--warm-sand); display: block;" id="stat-words-learned">0</span>
                                     <span style="font-size: 11px; color: var(--text-muted);">Words Learned</span>
                                 </div>
                                 <div style="padding: 12px; background: var(--surface-dark); border-radius: 10px; text-align: center;">
-                                    <span style="font-size: 24px; font-weight: 700; color: var(--emerald); display: block;" id="stat-phrases-mastered">45</span>
+                                    <span style="font-size: 24px; font-weight: 700; color: var(--emerald); display: block;" id="stat-phrases-mastered">0</span>
                                     <span style="font-size: 11px; color: var(--text-muted);">Phrases Mastered</span>
                                 </div>
                                 <div style="padding: 12px; background: var(--surface-dark); border-radius: 10px; text-align: center;">
-                                    <span style="font-size: 24px; font-weight: 700; color: var(--coral); display: block;" id="stat-streak-days">🔥 7</span>
+                                    <span style="font-size: 24px; font-weight: 700; color: var(--coral); display: block;" id="stat-streak-days">🔥 0</span>
                                     <span style="font-size: 11px; color: var(--text-muted);">Days Streak</span>
                                 </div>
                                 <div style="padding: 12px; background: var(--surface-dark); border-radius: 10px; text-align: center;">
-                                    <span style="font-size: 24px; font-weight: 700; color: var(--accent-assistant); display: block;">Level 2</span>
-                                    <span style="font-size: 11px; color: var(--text-muted);">Intermediate</span>
+                                    <span style="font-size: 24px; font-weight: 700; color: var(--accent-assistant); display: block;" id="stat-level">Level 1</span>
+                                    <span style="font-size: 11px; color: var(--text-muted);" id="stat-level-label">Beginner</span>
                                 </div>
                             </div>
 
@@ -485,6 +485,6 @@
         </div>
     </div>
 
-    <script src="app.js"></script>
+    <script src="/app.js"></script>
 </body>
 </html>
