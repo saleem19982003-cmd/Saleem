@@ -21,6 +21,10 @@
     {
       "src": "styles.css",
       "use": "@vercel/static"
+    },
+    {
+      "src": "downloads/(.*)",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
