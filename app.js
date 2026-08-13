@@ -2009,7 +2009,7 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
     };
 
     // -------------------------------------------------------------
-    // 6. 500+ CURATED EGYPTIAN PHRASES LIBRARY ENGINE
+    // 6. CURATED EGYPTIAN PHRASES LIBRARY ENGINE (45 checked-in entries)
     // -------------------------------------------------------------
     const phrasesLibraryData = [
         // 🚨 EMERGENCY & SAFETY (50+)
