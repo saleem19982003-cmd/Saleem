@@ -1,0 +1,34 @@
+# Dependencies
+node_modules/
+
+# Environment
+.env
+.env.local
+.env.production
+
+# Database
+data/
+*.db
+
+# Build
+.vercel
+app/build/
+*.apk
+.gradle/
+build/
+
+# System
+local.properties
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Keep .env.example
+!.env.example

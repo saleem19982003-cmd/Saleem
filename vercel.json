@@ -1,0 +1,48 @@
+{
+  "version": 2,
+  "name": "saleem",
+  "builds": [
+    {
+      "src": "server/index.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "app.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "index.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "app.js",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "styles.css",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/server/index.js"
+    },
+    {
+      "src": "/app",
+      "dest": "/app.html"
+    },
+    {
+      "src": "/downloads/(.*)",
+      "dest": "/downloads/$1",
+      "headers": {
+        "Content-Type": "application/vnd.android.package-archive",
+        "Content-Disposition": "attachment"
+      }
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ]
+}

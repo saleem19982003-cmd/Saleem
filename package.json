@@ -1,0 +1,36 @@
+{
+  "name": "saleem",
+  "version": "1.0.0",
+  "description": "> **A comprehensive social impact platform empowering refugees and displaced communities in Egyptian society through real-time dialect translation, AI legal guidance, essential service maps, verified community mentors, and free programming education.**",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node --watch server/index.js",
+    "test": "node --test tests/api.test.js",
+    "seed": "node scripts/seed_data.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saleem19982003-cmd/Saleem.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/saleem19982003-cmd/Saleem/issues"
+  },
+  "homepage": "https://github.com/saleem19982003-cmd/Saleem#readme",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "better-sqlite3": "^13.0.3",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.6.2",
+    "helmet": "^8.3.0",
+    "jsonwebtoken": "^9.0.3",
+    "multer": "^2.2.0",
+    "uuid": "^14.0.1"
+  }
+}

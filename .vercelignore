@@ -1,0 +1,6 @@
+app/
+.gradle/
+.git/
+gradle-8.5-bin.zip
+build/
+android/build/

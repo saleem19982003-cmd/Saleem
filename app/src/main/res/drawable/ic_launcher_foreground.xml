@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Golden "S" letter for Saleem brand -->
+    <path
+        android:fillColor="#D4AF37"
+        android:pathData="M54,28 C46,28 40,32 40,38 C40,44 46,47 54,49 C62,51 68,54 68,60 C68,66 62,70 54,70 C48,70 43,68 40,64 L44,60 C46,63 50,65 54,65 C59,65 63,63 63,60 C63,56 58,54 50,52 C42,50 35,46 35,38 C35,30 42,24 54,24 C60,24 65,26 68,30 L64,34 C62,31 58,28 54,28Z"/>
+</vector>

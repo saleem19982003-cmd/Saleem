@@ -2,15 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Saleem App - Live Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+    <title>Saleem App - Refugee Learning & Services Platform</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="shortcut icon" href="favicon.svg">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="app-layout">
-        <!-- Sidebar Navigation -->
+        <!-- Sidebar Navigation (4 CORE SECTIONS ONLY) -->
         <aside class="sidebar">
             <div class="brand">
                 <a href="index.html" class="brand-link" style="display:flex; align-items:center; gap:14px; text-decoration:none; color:inherit;">
@@ -19,38 +21,23 @@
                     </div>
                     <div class="brand-info">
                         <h1>Saleem</h1>
-                        <span>Bridging Cultures</span>
+                        <span>Refugee Support</span>
                     </div>
                 </a>
             </div>
 
             <nav class="nav-menu">
-                <button class="nav-item active" data-tab="tab-translator" data-i18n="nav-translator">
-                    <i class="fa-solid fa-language"></i> <span>Translator</span>
+                <button class="nav-item active" data-tab="tab-learn-translate" data-i18n="nav-learn-translate">
+                    <i class="fa-solid fa-graduation-cap"></i> <span>Learn & Translate</span>
                 </button>
-                <button class="nav-item" data-tab="tab-assistant" data-i18n="nav-assistant">
-                    <i class="fa-solid fa-robot"></i> <span>AI Assistant</span>
+                <button class="nav-item" data-tab="tab-saleem-ai" data-i18n="nav-saleem-ai">
+                    <i class="fa-solid fa-robot"></i> <span>Saleem AI (Tutor)</span>
                 </button>
-                <button class="nav-item" data-tab="tab-culture" data-i18n="nav-culture">
-                    <i class="fa-solid fa-book-open"></i> <span>Culture Guide</span>
-                </button>
-                <button class="nav-item" data-tab="tab-legal" data-i18n="nav-legal">
-                    <i class="fa-solid fa-scale-balanced"></i> <span>Legal Rights</span>
-                </button>
-                <button class="nav-item" data-tab="tab-services" data-i18n="nav-services">
-                    <i class="fa-solid fa-map-location-dot"></i> <span>Services Directory</span>
-                </button>
-                <button class="nav-item" data-tab="tab-community" data-i18n="nav-community">
+                <button class="nav-item" data-tab="tab-community-hub" data-i18n="nav-community-hub">
                     <i class="fa-solid fa-users"></i> <span>Community Hub</span>
                 </button>
-                <button class="nav-item" data-tab="tab-learning" data-i18n="nav-learning">
-                    <i class="fa-solid fa-graduation-cap"></i> <span>Learning Hub</span>
-                </button>
-                <button class="nav-item" data-tab="tab-awareness" data-i18n="nav-awareness">
-                    <i class="fa-solid fa-bullhorn"></i> <span>Awareness</span>
-                </button>
-                <button class="nav-item" data-tab="tab-profile" data-i18n="nav-profile">
-                    <i class="fa-solid fa-user-gear"></i> <span>Profile & Settings</span>
+                <button class="nav-item" data-tab="tab-profile-dashboard" data-i18n="nav-profile-dashboard">
+                    <i class="fa-solid fa-user-gear"></i> <span>Profile & Map</span>
                 </button>
             </nav>
 
@@ -58,21 +45,21 @@
                 <div class="avatar"><i class="fa-solid fa-user-astronaut"></i></div>
                 <div class="user-details">
                     <span class="user-name">Amina Hassan</span>
-                    <span class="user-status"><i class="fa-solid fa-circle-check"></i> Verified Refugee (<span id="user-profile-nat">Sudan</span>)</span>
+                    <span class="user-status"><i class="fa-solid fa-circle-check"></i> Local Saleem profile (<span id="user-profile-nat-sidebar">Sudan</span>)</span>
                 </div>
             </div>
         </aside>
 
         <!-- Main Content Viewport -->
         <main class="main-content">
-            <!-- Header Bar -->
+            <!-- Top Header Bar -->
             <header class="top-header">
                 <div class="search-bar">
                     <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="text" placeholder="Search resources, services, guides & dialect terms..." data-i18n-ph="search-ph">
+                    <input type="text" id="global-search-input" placeholder="Search phrases, verified services, emergency tips & guides..." data-i18n-ph="search-ph">
                 </div>
                 <div class="header-actions">
-                    <!-- Global African Language Selector -->
+                    <!-- Global Language Selector -->
                     <div style="display:flex; align-items:center; gap:6px; background:var(--surface-dark); padding:6px 12px; border-radius:12px; border:1px solid var(--glass-border);">
                         <i class="fa-solid fa-earth-africa text-gold"></i>
                         <select id="ui-lang-switcher" style="background:transparent; border:none; color:#fff; outline:none; font-size:13px; font-weight:600; cursor:pointer;">
@@ -88,296 +75,414 @@
                         </select>
                     </div>
 
-                    <a href="https://www.instagram.com/saleem19982003/" target="_blank" class="icon-btn" title="Instagram @saleem19982003" style="display:inline-flex; align-items:center; justify-content:center; text-decoration:none;">
+                    <a href="https://www.instagram.com/saleem19982003/" target="_blank" class="icon-btn" title="Instagram Support" style="display:inline-flex; align-items:center; justify-content:center; text-decoration:none;">
                         <i class="fa-brands fa-instagram" style="color: #E1306C;"></i>
                     </a>
-                    <a href="mailto:saleem19982003@gmail.com" class="icon-btn" title="Contact Email" style="display:inline-flex; align-items:center; justify-content:center; text-decoration:none;">
+                    <a href="mailto:saleem19982003@gmail.com" class="icon-btn" title="Contact Support" style="display:inline-flex; align-items:center; justify-content:center; text-decoration:none;">
                         <i class="fa-solid fa-envelope" style="color: #10B981;"></i>
                     </a>
-                    <a href="index.html#download" class="btn btn-outline" style="text-decoration:none;"><i class="fa-solid fa-download"></i> Get APK</a>
-                    <button class="btn btn-primary" id="btn-emergency-hotlines"><i class="fa-solid fa-shield-halved"></i> Hotlines</button>
+                    <a href="index.html#download" class="btn btn-outline desktop-only-btn" style="text-decoration:none;" data-i18n="btn-get-apk"><i class="fa-solid fa-download"></i> Get APK</a>
+                    <button class="btn btn-primary" id="btn-emergency-hotlines" data-i18n="btn-hotlines"><i class="fa-solid fa-shield-halved"></i> Hotlines</button>
                 </div>
             </header>
 
             <div class="content-container">
-                <!-- Module 2: Dialect Translator -->
-                <section id="tab-translator" class="tab-pane active">
-                    <div class="card header-card">
-                        <h2><i class="fa-solid fa-language text-gold"></i> African & Egyptian Dialect Translator</h2>
-                        <p>Translate spoken or written text into Egyptian Colloquial Arabic, Amharic, Somali, Tigrinya, Swahili, Hausa, Oromo, French & English with dialect guidance.</p>
-                    </div>
 
-                    <div class="translator-grid">
-                        <div class="card translate-box">
-                            <div class="lang-selector">
-                                <select id="source-lang">
-                                    <option value="en">English</option>
-                                    <option value="ar">Arabic (Egyptian / Sudanese)</option>
-                                    <option value="am">Amharic (አማርኛ)</option>
-                                    <option value="so">Somali (Soomaali)</option>
-                                    <option value="fr">French (Français)</option>
-                                    <option value="ti">Tigrinya (ትግርኛ)</option>
-                                    <option value="sw">Swahili (Kiswahili)</option>
-                                    <option value="ha">Hausa</option>
-                                    <option value="om">Oromo (Afaan Oromoo)</option>
-                                    <option value="yo">Yoruba</option>
-                                    <option value="ig">Igbo</option>
-                                    <option value="wo">Wolof</option>
-                                    <option value="ln">Lingala</option>
-                                    <option value="zu">Zulu (isiZulu)</option>
-                                </select>
-                                <button class="swap-btn"><i class="fa-solid fa-right-left"></i></button>
-                                <select id="target-lang">
-                                    <option value="ar_eg" selected>Arabic (Egyptian Dialect)</option>
-                                    <option value="en">English</option>
-                                    <option value="am">Amharic (አማርኛ)</option>
-                                    <option value="so">Somali (Soomaali)</option>
-                                    <option value="fr">French (Français)</option>
-                                    <option value="ti">Tigrinya (ትግርኛ)</option>
-                                    <option value="sw">Swahili (Kiswahili)</option>
-                                    <option value="ha">Hausa</option>
-                                </select>
+                <!-- ============================================================
+                     SECTION A: LEARN EGYPTIAN & CULTURE (DUOLINGO STYLE)
+                     ============================================================ -->
+                <section id="tab-learn-translate" class="tab-pane active">
+                    <div class="card header-card" style="margin-bottom: 20px;">
+                        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                            <div>
+                                <h2><i class="fa-solid fa-graduation-cap text-gold"></i> <span>Section A: Learn Egyptian & Culture Path</span></h2>
+                                <p>Interactive Egyptian dialect path with situational practice, verified service context, and clearly labeled sample learning exercises.</p>
                             </div>
-
-                            <textarea id="translate-input" placeholder="Type text or click microphone to speak... (Supports accents from Egypt, Sudan, Ethiopia, Somalia, Kenya, Nigeria)"></textarea>
-
-                            <div class="waveform-container" id="waveform">
-                                <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
-                                <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
-                            </div>
-
-                            <div class="translate-actions">
-                                <button class="btn btn-outline" id="btn-mic"><i class="fa-solid fa-microphone"></i> Voice Input</button>
-                                <button class="btn btn-primary" id="btn-translate"><i class="fa-solid fa-arrows-rotate"></i> Translate Now</button>
-                            </div>
-                        </div>
-
-                        <div class="card result-box">
-                            <h3>Translation Output</h3>
-                            <div class="output-text" id="translate-output">
-                                <p class="placeholder-text">Translation will appear here with cultural nuance & dialect notes...</p>
-                            </div>
-
-                            <div class="slang-dictionary-widget">
-                                <h4><i class="fa-solid fa-book-bookmark text-gold"></i> Popular African & Egyptian Expressions</h4>
-                                <div class="slang-list">
-                                    <div class="slang-item">
-                                        <div class="slang-word">Malish (معليش) - Arabic</div>
-                                        <div class="slang-meaning">It's okay / Don't worry about it</div>
-                                    </div>
-                                    <div class="slang-item">
-                                        <div class="slang-word">Khalaas (خلاص) - Arabic</div>
-                                        <div class="slang-meaning">Finished / Done / Enough</div>
-                                    </div>
-                                    <div class="slang-item">
-                                        <div class="slang-word">Selam (ሰላም) - Amharic / Tigrinya</div>
-                                        <div class="slang-meaning">Peace / Hello / Greetings</div>
-                                    </div>
-                                    <div class="slang-item">
-                                        <div class="slang-word">Habari (Swahili) / Sannu (Hausa)</div>
-                                        <div class="slang-meaning">How are you? / Greetings</div>
-                                    </div>
+                            <div style="display: flex; align-items: center; gap: 16px;">
+                                <div style="text-align: center; background: rgba(232, 171, 99, 0.15); padding: 8px 16px; border-radius: 14px; border: 1px solid var(--warm-sand);">
+                                    <span style="font-size: 11px; color: var(--text-muted); display: block;">Daily Streak</span>
+                                    <strong style="font-size: 18px; color: var(--warm-sand);"><i class="fa-solid fa-fire text-gold"></i> <span id="user-streak-count">0</span> Days</strong>
+                                </div>
+                                <div style="text-align: center; background: rgba(16, 185, 129, 0.15); padding: 8px 16px; border-radius: 14px; border: 1px solid var(--emerald);">
+                                    <span style="font-size: 11px; color: var(--text-muted); display: block;">Total XP</span>
+                                    <strong style="font-size: 18px; color: var(--emerald);"><i class="fa-solid fa-bolt text-gold"></i> <span id="user-xp-count">0</span> XP</strong>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </section>
 
-                <!-- Module 3: AI Assistant -->
-                <section id="tab-assistant" class="tab-pane">
-                    <div class="card header-card">
-                        <h2><i class="fa-solid fa-robot text-gold"></i> Multilingual AI Integration Assistant</h2>
-                        <p>Ask questions in any African language on housing, public transit, legal rights, and everyday Egyptian life.</p>
+                    <!-- Dual Track Switcher -->
+                    <div class="track-switch-container">
+                        <button class="track-btn active" id="btn-track-dialect">
+                            <i class="fa-solid fa-comments"></i> <span>Track 1: Learn Egyptian Dialect (600 Lessons)</span>
+                        </button>
+                        <button class="track-btn" id="btn-track-culture">
+                            <i class="fa-solid fa-landmark"></i> <span>Track 2: Learn Egyptian Culture</span> <span class="tag" style="background: rgba(244, 63, 94, 0.2); border-color: var(--coral); color: var(--coral); font-size: 10px; margin-left: 6px;"><i class="fa-solid fa-lock"></i> Unlocks in 72 Days</span>
+                        </button>
                     </div>
 
+                    <!-- Duolingo Curved Snake Path Container -->
+                    <div class="card" style="position: relative; overflow: hidden; padding: 30px 20px;">
+                        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 20px;">
+                            <h3 id="current-track-title"><i class="fa-solid fa-route text-gold"></i> <span>Track 1: Egyptian Dialect Snake Progression (600 Lessons)</span></h3>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <input type="number" id="lesson-jump-input" placeholder="Jump to Lesson (1-600)..." min="1" max="600" class="form-control" style="width: 180px; font-size: 12px;">
+                                <button class="btn btn-outline" id="btn-jump-lesson" style="padding: 8px 12px; font-size: 12px;"><i class="fa-solid fa-plane-departure"></i> Jump</button>
+                            </div>
+                        </div>
+
+                        <!-- Snake Nodes Render Dynamic -->
+                        <div class="duolingo-snake-wrapper" id="duolingo-snake-view">
+                            <!-- Dynamic Snake Path Nodes Rendered Here -->
+                        </div>
+                    </div>
+
+                    <!-- Learner of the Month Leaderboard Card -->
+                    <div class="card" style="margin-top: 24px;">
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+                            <div>
+                                <h3><i class="fa-solid fa-trophy text-gold"></i> Personal Learning Snapshot</h3>
+                                <p style="font-size: 13px; color: var(--text-muted); margin: 0;">Private progress estimates from your activity on this device and synced account.</p>
+                            </div>
+                            <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #F59E0B;">Progress</span>
+                        </div>
+
+                        <table class="leaderboard-table">
+                            <thead>
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>Learner Name</th>
+                                    <th>Country</th>
+                                    <th>XP Points</th>
+                                    <th>Daily Streak</th>
+                                    <th>Badge</th>
+                                </tr>
+                            </thead>
+                            <tbody id="leaderboard-body">
+                                <!-- Dynamic Real Leaderboard Rendered Here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+
+                <!-- ============================================================
+                     SECTION B: SALEEM AI (AI TUTOR)
+                     ============================================================ -->
+                <section id="tab-saleem-ai" class="tab-pane">
+                    <div class="card header-card">
+                        <h2><i class="fa-solid fa-robot text-gold"></i> <span>Section B: Saleem AI (Egyptian Dialect AI Tutor)</span></h2>
+                        <p>Conversational AI companion trained on native Egyptian dialect. Practice real scenarios, receive grammar feedback, and ask any questions.</p>
+                    </div>
+
+                    <!-- Custom Practice Scenarios -->
+                    <div class="card" style="margin-bottom: 20px;">
+                        <h3><i class="fa-solid fa-masks-theater text-gold"></i> Interactive Roleplay Practice Scenarios</h3>
+                        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 14px;">Select a real-world scenario to practice conversation with Saleem AI:</p>
+
+                        <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                            <button class="chip-btn" onclick="startAiScenario('cafe')">☕ Ordering at a Café (Ahwa Saada)</button>
+                            <button class="chip-btn" onclick="startAiScenario('hospital')">🏥 At the Hospital & Pharmacy</button>
+                            <button class="chip-btn" onclick="startAiScenario('police')">👮 Police Station & Legal Protocol</button>
+                            <button class="chip-btn" onclick="startAiScenario('rental')">🏠 Apartment Lease Negotiation</button>
+                            <button class="chip-btn" onclick="startAiScenario('microbus')">🚖 Microbus & Taxi Directions</button>
+                        </div>
+                    </div>
+
+                    <!-- Chatbot Interface -->
                     <div class="chat-container card">
                         <div class="chat-history" id="chat-history">
                             <div class="chat-message assistant">
                                 <div class="msg-avatar"><i class="fa-solid fa-robot"></i></div>
                                 <div class="msg-content">
-                                    <strong>Saleem AI:</strong> Ahlan! I am your AI guide. Ask me questions in English, Arabic, Amharic, Somali, French, Tigrinya, Swahili, or Hausa!
+                                    <strong>Saleem AI Tutor:</strong> Ahlan wa Sahlan! I am your Egyptian Dialect AI Companion. Ask me questions or click a practice scenario above to start chatting!
                                 </div>
                             </div>
                         </div>
 
                         <div class="quick-questions">
-                            <button class="chip-btn" onclick="sendQuickQuestion('How do I use the Cairo metro?')">🚆 Cairo Metro</button>
-                            <button class="chip-btn" onclick="sendQuickQuestion('How do I rent an apartment in Cairo?')">🏠 Apartment Rental</button>
-                            <button class="chip-btn" onclick="sendQuickQuestion('Where is the UNHCR office?')">🏛️ UNHCR Office</button>
-                            <button class="chip-btn" onclick="sendQuickQuestion('How do I open a bank account?')">💳 Bank Account</button>
+                            <button class="chip-btn" onclick="sendQuickQuestion('How do I ask for directions to Cairo Metro?')">🚆 Cairo Metro</button>
+                            <button class="chip-btn" onclick="sendQuickQuestion('How do I negotiate apartment rent with a landlord?')">🏠 Apartment Rent</button>
+                            <button class="chip-btn" onclick="sendQuickQuestion('Where is the UNHCR registration center?')">🏛️ UNHCR Office</button>
+                            <button class="chip-btn" onclick="sendQuickQuestion('What phrases should I use at the pharmacy?')">💊 Pharmacy Phrases</button>
                         </div>
 
                         <div class="chat-input-bar">
-                            <input type="text" id="chat-input" placeholder="Ask Saleem AI a question in your native language...">
+                            <input type="text" id="chat-input" placeholder="Type a message or response in your native language or Egyptian Arabic...">
                             <button class="btn btn-primary" id="btn-send-chat"><i class="fa-solid fa-paper-plane"></i></button>
                         </div>
                     </div>
                 </section>
 
-                <!-- Module 4: Culture Guide -->
-                <section id="tab-culture" class="tab-pane">
+
+                <!-- ============================================================
+                     SECTION C: COMMUNITY HUB
+                     ============================================================ -->
+                <section id="tab-community-hub" class="tab-pane">
                     <div class="card header-card">
-                        <h2><i class="fa-solid fa-book-open text-gold"></i> Interactive Culture & Etiquette Guide</h2>
-                        <p>Master local customs, transportation etiquettes, and market negotiation rules.</p>
+                        <h2><i class="fa-solid fa-users text-gold"></i> <span>Section C: Refugee Community Hub & Peer Forums</span></h2>
+                        <p>Refugee-safe peer learning space, discussion forums, practical resource sharing, weekly challenges, and community feedback.</p>
                     </div>
 
-                    <div class="grid-3">
-                        <div class="card guide-card">
-                            <div class="card-badge">Customs</div>
-                            <h3>Egyptian Greeting Customs & Hospitality</h3>
-                            <p>Learn how to greet neighbors, host guests, and handle social invitations gracefully.</p>
-                            <button class="btn btn-outline" onclick="openQuiz('Greetings')">Start Lesson & Quiz</button>
+                    <!-- Forum Categories -->
+                    <div class="card" style="margin-bottom: 20px;">
+                        <div style="display: flex; flex-wrap: wrap; gap: 8px;" id="forum-category-chips">
+                            <button class="chip-btn active" data-forum="all">All Topics</button>
+                            <button class="chip-btn" data-forum="lang">💬 Language Questions</button>
+                            <button class="chip-btn" data-forum="culture">🏛️ Cultural Discussions</button>
+                            <button class="chip-btn" data-forum="tips">📍 Local Area Tips</button>
+                            <button class="chip-btn" data-forum="stories">🎉 Success Stories</button>
                         </div>
-
-                        <div class="card guide-card">
-                            <div class="card-badge">Transport</div>
-                            <h3>Navigating Metro, Microbuses & Taxis</h3>
-                            <p>Guide to Cairo Metro women's cars, microbus hand gestures, and meter taxi rates.</p>
-                            <button class="btn btn-outline" onclick="openQuiz('Transport')">Start Lesson & Quiz</button>
-                        </div>
-
-                        <div class="card guide-card">
-                            <div class="card-badge">Markets</div>
-                            <h3>Bargaining Etiquette in Souks</h3>
-                            <p>Polite rules for market haggling in Khan el-Khalili and local vegetable markets.</p>
-                            <button class="btn btn-outline" onclick="openQuiz('Bargaining')">Start Lesson & Quiz</button>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Module 5: Legal Support -->
-                <section id="tab-legal" class="tab-pane">
-                    <div class="card header-card">
-                        <h2><i class="fa-solid fa-scale-balanced text-gold"></i> Legal Support & Refugee Rights</h2>
-                        <p>Access documented legal rights, UNHCR procedures, checklists & document tools.</p>
                     </div>
 
                     <div class="grid-2">
+                        <!-- Post Question Box -->
                         <div class="card">
-                            <h3><i class="fa-solid fa-list-check text-gold"></i> Residency Document Checklist</h3>
-                            <div class="checklist">
-                                <label class="check-item"><input type="checkbox" checked> Valid Passport / Travel Document</label>
-                                <label class="check-item"><input type="checkbox" checked> UNHCR Yellow Registration Card</label>
-                                <label class="check-item"><input type="checkbox"> Stamped Rental Lease Agreement (Aqd Igar)</label>
-                                <label class="check-item"><input type="checkbox"> Proof of Address / Utility Bill</label>
-                                <label class="check-item"><input type="checkbox"> 4 Recent Passport Photos</label>
+                            <h3><i class="fa-solid fa-pen-to-square text-gold"></i> Post a Question or Tip</h3>
+                            <div class="ask-box">
+                                <input type="text" id="qa-title" placeholder="Topic Title (e.g. Best Arabic language courses in Nasr City?)">
+                                <textarea id="qa-desc" placeholder="Share details or tips with fellow refugees..."></textarea>
+                                <button class="btn btn-primary" id="btn-post-qa"><i class="fa-solid fa-plus"></i> Submit Post</button>
                             </div>
                         </div>
 
+                        <!-- Mentor Matching & Resource Sharing -->
+                        <div class="card action-card" style="background: linear-gradient(135deg, rgba(15, 76, 129, 0.3), rgba(31, 41, 59, 0.95)); border: 1px solid var(--warm-sand);">
+                            <h3><i class="fa-solid fa-handshake-simple text-gold"></i> Mentor Matching & Volunteer Support</h3>
+                            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">Connect with advanced learners and verified local volunteers speaking your native language.</p>
+
+                            <div style="padding: 12px; background: rgba(0,0,0,0.3); border-radius: 10px; margin-bottom: 14px;">
+                                <strong style="font-size: 13px; color: var(--emerald); display: block;"><i class="fa-solid fa-award"></i> Weekly Community Challenge</strong>
+                                <span style="font-size: 12px; color: #fff;">Learn 20 Egyptian Phrases this week and earn the "Cairo Pioneer" badge!</span>
+                            </div>
+
+                            <button class="btn btn-outline" id="btn-request-mentor" style="width: 100%; justify-content: center;">
+                                <i class="fa-solid fa-user-plus"></i> Request Peer Mentor
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Discussion Feed -->
+                    <div class="card" style="margin-top: 20px;">
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+                            <h3><i class="fa-solid fa-comments text-gold"></i> Community Discussion Feed</h3>
+                            <span class="tag tag-ngo"><i class="fa-solid fa-earth-africa"></i> Moderated & Safe</span>
+                        </div>
+                        <div id="community-posts-list" style="display: flex; flex-direction: column; gap: 14px;">
+                            <!-- Community posts render dynamically -->
+                        </div>
+                    </div>
+
+                    <!-- Live User Reviews & Impact -->
+                    <div style="margin-top: 24px;" class="grid-2">
+                        <!-- Submit Review Card -->
+                        <div class="card action-card">
+                            <h3><i class="fa-solid fa-star text-gold"></i> Rate Saleem & Recommend Improvements</h3>
+                            <div style="margin-bottom: 12px;">
+                                <label style="font-size: 12px; color: var(--warm-sand); font-weight: 600; display: block; margin-bottom: 6px;">Rating Score:</label>
+                                <div id="star-rating-selector" style="display: flex; gap: 8px; font-size: 22px; color: #FBBF24; cursor: pointer;">
+                                    <i class="fa-solid fa-star star-btn active" data-rating="1"></i>
+                                    <i class="fa-solid fa-star star-btn active" data-rating="2"></i>
+                                    <i class="fa-solid fa-star star-btn active" data-rating="3"></i>
+                                    <i class="fa-solid fa-star star-btn active" data-rating="4"></i>
+                                    <i class="fa-solid fa-star star-btn active" data-rating="5"></i>
+                                </div>
+                            </div>
+
+                            <textarea id="review-help-text" placeholder="Share how Saleem helped you in Egypt..." class="form-control" style="height: 80px; margin-bottom: 10px;"></textarea>
+                            <input type="text" id="review-improvement-text" placeholder="Recommended improvement (optional)..." class="form-control" style="margin-bottom: 12px;">
+                            <button class="btn btn-primary" id="btn-submit-review" style="width: 100%; justify-content: center;"><i class="fa-solid fa-paper-plane"></i> Submit Feedback</button>
+                        </div>
+
+                        <!-- Average Rating Card -->
+                        <div class="card" style="text-align: center; display: flex; flex-direction: column; justify-content: center; background: linear-gradient(135deg, rgba(15, 76, 129, 0.3), rgba(31, 41, 59, 0.95)); border: 1px solid var(--warm-sand);">
+                            <div style="font-size: 44px; font-weight: 800; color: #FBBF24; line-height: 1;" id="avg-rating-score">4.9</div>
+                            <div style="font-size: 18px; color: #FBBF24; margin: 6px 0;">⭐⭐⭐⭐⭐</div>
+                            <h4 style="font-size: 15px; color: #fff; margin-bottom: 4px;">Community Average Rating</h4>
+                            <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;" id="total-reviews-count">No public reviews yet</p>
+                        </div>
+                    </div>
+
+                    <div class="card" style="margin-top: 16px;">
+                        <h4 style="font-size: 14px; margin-bottom: 12px;"><i class="fa-solid fa-comments"></i> Community Feedback Feed</h4>
+                        <div id="reviews-feed-container" style="display: flex; flex-direction: column; gap: 12px;">
+                            <!-- Reviews render dynamically -->
+                        </div>
+                    </div>
+                </section>
+
+
+                <!-- ============================================================
+                     SECTION D: PROFILE & LEGAL INSTITUTIONS ACCESS
+                     ============================================================ -->
+                <section id="tab-profile-dashboard" class="tab-pane">
+                    <div class="card header-card">
+                        <h2><i class="fa-solid fa-user-gear text-gold"></i> <span>Section D: Profile & Legal Institutions Access</span></h2>
+                        <p>Personal learning dashboard, local Saleem profile, and verified-service access finder.</p>
+                    </div>
+
+                    <!-- 1. Learning Dashboard & Refugee Digital Pass -->
+                    <div class="grid-2">
+                        <!-- Digital Refugee ID Card -->
+                        <div class="card action-card" style="background: linear-gradient(135deg, rgba(15, 76, 129, 0.4), rgba(30, 41, 59, 0.95)); border: 1px solid var(--warm-sand);">
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="avatar" style="width: 48px; height: 48px; font-size: 22px;"><i class="fa-solid fa-user-astronaut"></i></div>
+                                    <div>
+                                        <h3 class="user-name" style="font-size: 18px; margin: 0; color: #fff;">Amina Hassan</h3>
+                                        <span class="user-status" style="font-size: 12px; color: var(--emerald);"><i class="fa-solid fa-circle-check"></i> Local app profile</span>
+                                    </div>
+                                </div>
+                                <span class="tag" style="border-color: var(--warm-sand); color: var(--warm-sand);">Saleem Pass</span>
+                            </div>
+
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 14px; background: rgba(0, 0, 0, 0.3); border-radius: 12px; margin-bottom: 16px;">
+                                <div>
+                                    <span style="font-size: 11px; color: var(--text-muted); text-transform: uppercase; display: block;">Country of Origin</span>
+                                    <strong id="user-profile-nat" style="font-size: 15px; color: var(--warm-sand);">Sudan</strong>
+                                </div>
+                                <div>
+                                    <span style="font-size: 11px; color: var(--text-muted); text-transform: uppercase; display: block;">Saleem User ID</span>
+                                    <strong id="user-profile-id" style="font-size: 15px; color: #fff; font-family: monospace;">SLM-849201</strong>
+                                </div>
+                            </div>
+
+                            <div style="display: flex; align-items: center; justify-content: space-between;">
+                                <span style="font-size: 12px; color: var(--emerald);"><i class="fa-solid fa-cloud-check"></i> Offline & Cloud Synchronized</span>
+                                <button class="btn btn-outline" id="btn-edit-profile" style="padding: 6px 14px; font-size: 12px;"><i class="fa-solid fa-pen-to-square"></i> Edit Profile</button>
+                            </div>
+                        </div>
+
+                        <!-- Progress Metrics Card -->
                         <div class="card">
-                            <h3><i class="fa-solid fa-phone-volume text-gold"></i> Emergency Legal Hotlines</h3>
-                            <ul class="hotline-list">
-                                <li><strong>UNHCR Legal Helpline:</strong> 02 2728 4300</li>
-                                <li><strong>StARS Legal Aid Desk:</strong> 02 2575 9451</li>
-                                <li><strong>Egyptian Red Crescent:</strong> 19963</li>
-                                <li><strong>Ambulance Emergency:</strong> 123</li>
-                            </ul>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Module 6: Services Directory -->
-                <section id="tab-services" class="tab-pane">
-                    <div class="card header-card">
-                        <h2><i class="fa-solid fa-map-location-dot text-gold"></i> Essential Services Directory</h2>
-                        <p>Locate nearby healthcare clinics, language schools, legal aid centers & NGO offices.</p>
-                    </div>
-
-                    <div class="services-list grid-2">
-                        <div class="card service-card">
-                            <div class="service-header">
-                                <h3>UNHCR Main Office</h3>
-                                <span class="tag tag-ngo">NGO / Govt</span>
+                            <h3><i class="fa-solid fa-chart-line text-gold"></i> Personal Learning Metrics</h3>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px;">
+                                <div style="padding: 12px; background: var(--surface-dark); border-radius: 10px; text-align: center;">
+                                    <span style="font-size: 24px; font-weight: 700; color: var(--warm-sand); display: block;" id="stat-words-learned">120+</span>
+                                    <span style="font-size: 11px; color: var(--text-muted);">Words Learned</span>
+                                </div>
+                                <div style="padding: 12px; background: var(--surface-dark); border-radius: 10px; text-align: center;">
+                                    <span style="font-size: 24px; font-weight: 700; color: var(--emerald); display: block;" id="stat-phrases-mastered">45</span>
+                                    <span style="font-size: 11px; color: var(--text-muted);">Phrases Mastered</span>
+                                </div>
+                                <div style="padding: 12px; background: var(--surface-dark); border-radius: 10px; text-align: center;">
+                                    <span style="font-size: 24px; font-weight: 700; color: var(--coral); display: block;" id="stat-streak-days">🔥 7</span>
+                                    <span style="font-size: 11px; color: var(--text-muted);">Days Streak</span>
+                                </div>
+                                <div style="padding: 12px; background: var(--surface-dark); border-radius: 10px; text-align: center;">
+                                    <span style="font-size: 24px; font-weight: 700; color: var(--accent-assistant); display: block;">Level 2</span>
+                                    <span style="font-size: 11px; color: var(--text-muted);">Intermediate</span>
+                                </div>
                             </div>
-                            <p>56 Central Spine, 6th of October City, Giza</p>
-                            <span class="phone">📞 02 2728 4300</span>
-                        </div>
 
-                        <div class="card service-card">
-                            <div class="service-header">
-                                <h3>Red Crescent Health Clinic</h3>
-                                <span class="tag tag-health">Healthcare</span>
+                            <button class="btn btn-outline" id="btn-download-offline" style="width: 100%; margin-top: 16px; justify-content: center;">
+                                <i class="fa-solid fa-download"></i> Download Content for Offline Use
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 2. Google Maps API Legal Institution Access System -->
+                    <div class="card" style="margin-top: 24px;">
+                        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 16px;">
+                            <div>
+                                <h3><i class="fa-solid fa-map-location-dot text-gold"></i> Verified Services & Refugee Access Finder</h3>
+                                <p style="font-size: 13px; color: var(--text-muted); margin: 0;">Source-backed directory for UNHCR, legal aid, healthcare, and emergency contacts. Always verify hours before visiting.</p>
                             </div>
-                            <p>Zahraa El Maadi, Cairo</p>
-                            <span class="phone">📞 02 2519 2831</span>
+                            <input type="text" id="institution-search-input" placeholder="Search institution by name or location..." class="form-control" style="max-width: 280px; font-size: 12px;">
+                        </div>
+
+                        <!-- Category Filter Chips -->
+                        <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px;" id="institution-category-chips">
+                            <button class="chip-btn active" data-inst-cat="all">All Institutions</button>
+                            <button class="chip-btn" data-inst-cat="unhcr">🏛️ UNHCR & UN</button>
+                            <button class="chip-btn" data-inst-cat="immigration">🛂 Immigration & Passports</button>
+                            <button class="chip-btn" data-inst-cat="health">🏥 Health & Emergency Clinics</button>
+                            <button class="chip-btn" data-inst-cat="legal">⚖️ Legal Aid NGOs</button>
+                            <button class="chip-btn" data-inst-cat="police">👮 Police Stations</button>
+                        </div>
+
+                        <!-- Google Maps Interactive Container -->
+                        <div id="institution-map" style="width: 100%; height: 320px; border-radius: 14px; background: var(--surface-dark); border: 1px solid var(--glass-border); margin-bottom: 20px; overflow: hidden; position: relative;">
+                            <div id="map-fallback-notice" style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px; background: linear-gradient(135deg, rgba(15, 76, 129, 0.7), rgba(31, 41, 59, 0.95)); color: #fff;">
+                                <i class="fa-solid fa-map-location-dot" style="font-size: 40px; color: var(--warm-sand); margin-bottom: 10px;"></i>
+                                <h4 style="font-size: 18px; margin-bottom: 4px;">Cairo & Giza Verified-Service Directory</h4>
+                                <p style="font-size: 13px; color: var(--text-muted); max-width: 480px;">Use the cards below for source links, direct calls, and map directions. Embedded maps stay disabled until a real Maps key is configured outside source control.</p>
+                            </div>
+                        </div>
+
+                        <!-- Institutions Directory Cards Grid -->
+                        <div id="institutions-directory-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px;">
+                            <!-- Institution cards render dynamically -->
                         </div>
                     </div>
                 </section>
 
-                <!-- Module 7: Community Hub -->
-                <section id="tab-community" class="tab-pane">
-                    <div class="card header-card">
-                        <h2><i class="fa-solid fa-users text-gold"></i> Community Hub & Volunteer Mentors</h2>
-                        <p>Ask peer questions, find verified volunteers speaking your language, and attend cultural meetups.</p>
-                    </div>
-
-                    <div class="card">
-                        <h3>Ask a Question to the Community</h3>
-                        <div class="ask-box">
-                            <input type="text" id="qa-title" placeholder="Question Title (e.g. Where to find Arabic classes?)">
-                            <textarea id="qa-desc" placeholder="Details..."></textarea>
-                            <button class="btn btn-primary" id="btn-post-qa"><i class="fa-solid fa-plus"></i> Post Question</button>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Module 8: Learning Hub -->
-                <section id="tab-learning" class="tab-pane">
-                    <div class="card header-card">
-                        <h2><i class="fa-solid fa-graduation-cap text-gold"></i> Learning Hub - Programming & Digital Skills</h2>
-                        <p>Free programming education, career paths, and remote job board.</p>
-                    </div>
-
-                    <div class="grid-3">
-                        <div class="card course-card">
-                            <span class="tag">Web Dev</span>
-                            <h3>Web Development Fundamentals</h3>
-                            <p>Master HTML, CSS & JS to build responsive websites.</p>
-                            <div class="progress-bar"><div class="fill" style="width: 45%;"></div></div>
-                            <span>45% Completed</span>
-                        </div>
-                        <div class="card course-card">
-                            <span class="tag">Mobile</span>
-                            <h3>Android App Dev with Kotlin</h3>
-                            <p>Learn MVVM, Jetpack Compose, and REST APIs.</p>
-                            <button class="btn btn-outline" style="margin-top: 10px;">Enroll Now</button>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Module 9: Awareness & Inclusion -->
-                <section id="tab-awareness" class="tab-pane">
-                    <div class="card header-card">
-                        <h2><i class="fa-solid fa-bullhorn text-gold"></i> Awareness Campaigns & Incident Reporting</h2>
-                        <p>Confidential discrimination reporting and inclusion campaigns.</p>
-                    </div>
-
-                    <div class="card">
-                        <h3>Confidential Incident Report Form</h3>
-                        <input type="text" placeholder="Incident Location" class="form-control">
-                        <textarea placeholder="Describe the incident confidentially..." class="form-control"></textarea>
-                        <button class="btn btn-danger"><i class="fa-solid fa-shield-cat"></i> Submit Anonymous Report</button>
-                    </div>
-                </section>
-
-                <!-- Module 10: Profile & Settings -->
-                <section id="tab-profile" class="tab-pane">
-                    <div class="card header-card">
-                        <h2><i class="fa-solid fa-user-gear text-gold"></i> User Profile & Settings</h2>
-                        <p>Manage security preferences, biometric login, and preferred language.</p>
-                    </div>
-
-                    <div class="card">
-                        <h3>Account Details & Official Contact</h3>
-                        <p><strong>Name:</strong> Amina Hassan</p>
-                        <p><strong>Country of Origin:</strong> <span id="user-profile-nat" style="color: #E8AB63; font-weight: 700;">Sudan</span></p>
-                        <p><strong>Official Contact Email:</strong> <a href="mailto:saleem19982003@gmail.com" style="color: #10B981;">saleem19982003@gmail.com</a></p>
-                        <p><strong>Instagram:</strong> <a href="https://www.instagram.com/saleem19982003/" target="_blank" style="color: #E8AB63;">@saleem19982003</a></p>
-                        <p><strong>Preferred Language:</strong> Egyptian Colloquial Arabic / English / Amharic / Somali</p>
-                    </div>
-                </section>
             </div>
         </main>
+    </div>
+
+    <!-- Mobile Bottom Navigation (4 CORE SECTIONS ONLY) -->
+    <nav class="bottom-nav" id="bottom-nav">
+        <div class="bottom-nav-inner" style="display: grid; grid-template-columns: repeat(4, 1fr);">
+            <button class="bottom-nav-btn active" data-tab="tab-learn-translate" aria-label="Learn & Translate">
+                <i class="fa-solid fa-graduation-cap"></i>
+                <span>Learn</span>
+            </button>
+            <button class="bottom-nav-btn" data-tab="tab-saleem-ai" aria-label="Saleem AI">
+                <i class="fa-solid fa-robot"></i>
+                <span>Saleem AI</span>
+            </button>
+            <button class="bottom-nav-btn" data-tab="tab-community-hub" aria-label="Community">
+                <i class="fa-solid fa-users"></i>
+                <span>Community</span>
+            </button>
+            <button class="bottom-nav-btn" data-tab="tab-profile-dashboard" aria-label="Profile & Map">
+                <i class="fa-solid fa-user-gear"></i>
+                <span>Profile & Map</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- More Drawer Backdrop & Drawer (Legacy fallback) -->
+    <div class="more-backdrop" id="more-backdrop"></div>
+    <div class="more-drawer" id="more-drawer">
+        <div class="more-drawer-handle"></div>
+        <button class="more-drawer-item" data-tab="tab-learn-translate">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <span>Learn & Translate</span>
+        </button>
+        <button class="more-drawer-item" data-tab="tab-saleem-ai">
+            <i class="fa-solid fa-robot"></i>
+            <span>Saleem AI (Tutor)</span>
+        </button>
+        <button class="more-drawer-item" data-tab="tab-community-hub">
+            <i class="fa-solid fa-users"></i>
+            <span>Community Hub</span>
+        </button>
+        <button class="more-drawer-item" data-tab="tab-profile-dashboard">
+            <i class="fa-solid fa-user-gear"></i>
+            <span>Profile & Map</span>
+        </button>
+    </div>
+
+    <!-- Culture Story Cheat Sheet & Situational Practice Test Modal -->
+    <div id="culture-modal" class="modal-overlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:9999; align-items:center; justify-content:center; padding:20px;">
+        <div style="background:var(--bg-card); border:1px solid var(--warm-sand); border-radius:20px; max-width:650px; width:100%; max-height:90vh; overflow-y:auto; padding:24px; position:relative; box-shadow:0 10px 30px rgba(0,0,0,0.5);">
+            <button id="close-culture-modal" style="position:absolute; top:16px; right:16px; background:transparent; border:none; color:var(--text-muted); font-size:20px; cursor:pointer;"><i class="fa-solid fa-xmark"></i></button>
+            <div id="culture-modal-content">
+                <!-- Dynamic Cheat Sheet & Practice Test content -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Dialect 10-Phrase Quest Modal -->
+    <div id="dialect-modal" class="modal-overlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:9999; align-items:center; justify-content:center; padding:20px;">
+        <div style="background:var(--bg-card); border:1px solid var(--emerald); border-radius:20px; max-width:650px; width:100%; max-height:90vh; overflow-y:auto; padding:24px; position:relative; box-shadow:0 10px 30px rgba(0,0,0,0.5);">
+            <button id="close-dialect-modal" style="position:absolute; top:16px; right:16px; background:transparent; border:none; color:var(--text-muted); font-size:20px; cursor:pointer;"><i class="fa-solid fa-xmark"></i></button>
+            <div id="dialect-modal-content">
+                <!-- Dynamic Dialect 10 Phrases content -->
+            </div>
+        </div>
     </div>
 
     <script src="app.js"></script>
