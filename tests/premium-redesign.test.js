@@ -5,8 +5,19 @@ const path = require('node:path');
 
 const root = path.join(__dirname, '..');
 const html = fs.readFileSync(path.join(root, 'app.html'), 'utf8');
+const landingHtml = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 const css = fs.readFileSync(path.join(root, 'styles.css'), 'utf8');
 const js = fs.readFileSync(path.join(root, 'app.js'), 'utf8');
+const favicon = fs.readFileSync(path.join(root, 'favicon.svg'), 'utf8');
+
+test('Saleem brand mark is wired into the favicon and visible headers', () => {
+    assert.match(html, /rel="icon"[^>]+favicon\.svg/);
+    assert.match(html, /class="saleem-brand-mark"[^>]+src="\/favicon\.svg"/);
+    assert.match(landingHtml, /class="saleem-brand-mark"[^>]+src="favicon\.svg"/);
+    assert.match(css, /\.saleem-brand-mark\s*\{/);
+    assert.match(favicon, /speech bubble above a bridge/);
+    assert.match(favicon, /#0f766e/);
+});
 
 test('premium shell keeps localized controls wired to the existing runtime', () => {
     for (const key of [

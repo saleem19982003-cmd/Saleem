@@ -1,6 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="64" height="64">
-  <rect width="100" height="100" rx="28" fill="#0A3358"/>
-  <path d="M50 20C44 20 38 24 38 31C38 42 50 54 50 54C50 54 62 42 62 31C62 24 56 20 50 20Z" fill="#E8AB63"/>
-  <path d="M28 58C28 58 35 52 46 56C50 57.5 54 57.5 58 56C69 52 76 58 76 58C76 58 68 76 50 76C32 76 28 58 28 58Z" fill="#E8AB63"/>
-  <circle cx="50" cy="31" r="5" fill="#0A3358"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-labelledby="title desc">
+  <title id="title">Saleem</title>
+  <desc id="desc">A speech bubble above a bridge, representing language and connection.</desc>
+  <rect x="2" y="2" width="60" height="60" rx="17" fill="#0f766e"/>
+  <path d="M15 17.5c0-4.7 3.8-8.5 8.5-8.5h17c4.7 0 8.5 3.8 8.5 8.5v9c0 4.7-3.8 8.5-8.5 8.5H29l-8.5 7v-7.5c-3.2-1.2-5.5-4.3-5.5-8z" fill="#fbf7ef"/>
+  <circle cx="27" cy="22" r="2.1" fill="#0f766e"/>
+  <circle cx="32" cy="22" r="2.1" fill="#0f766e"/>
+  <circle cx="37" cy="22" r="2.1" fill="#0f766e"/>
+  <path d="M13 49c5.8-5.3 11.8-7.9 19-7.9S45.2 43.7 51 49" fill="none" stroke="#d6a13b" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M18 49v-5M46 49v-5" fill="none" stroke="#d6a13b" stroke-width="3.5" stroke-linecap="round"/>
 </svg>
