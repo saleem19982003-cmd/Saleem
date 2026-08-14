@@ -50,6 +50,7 @@ function parsePagination(query) {
 function parseResourceJsonFields(resource) {
     try { resource.required_documents = JSON.parse(resource.required_documents || '[]'); } catch(e) { resource.required_documents = []; }
     resource.is_demo_data = Boolean(resource.is_demo_data);
+    resource.governorate = resource.governorate || resource.city || '';
     return resource;
 }
 
@@ -155,8 +156,7 @@ router.get('/nearby', optionalAuth, (req, res) => {
         const params = [];
         if (category) { query += ' AND category = ?'; params.push(category); }
         if (city) { query += ' AND city = ?'; params.push(city); }
-        if (governorate) { query += ' AND governorate = ?'; params.push(governorate); }
-        const resources = db.prepare(query).all(...params).map(parseResourceJsonFields).map(resource => ({
+        const resources = db.prepare(query).all(...params).map(parseResourceJsonFields).filter(resource => !governorate || resource.governorate.toLowerCase() === governorate.toLowerCase()).map(resource => ({
             ...resource,
             distance_km: resourceDistance(resource, latitude, longitude),
             distance_source: resourceDistance(resource, latitude, longitude) === null ? null : 'straight_line',
@@ -276,7 +276,7 @@ router.post('/:id/save', authenticateToken, (req, res) => {
 router.post('/', authenticateToken, requireAdmin, (req, res) => {
     try {
         const db = req.app.locals.db;
-        const { name, description, category, address, city, governorate, phone, email, website, hours, languages, latitude, longitude, services, required_documents, useful_phrase, wait_time, source_name, source_url, trust_note } = req.body;
+        const { name, description, category, address, city, phone, email, website, hours, languages, latitude, longitude, services, required_documents, useful_phrase, wait_time, source_name, source_url, trust_note } = req.body;
 
         if (!name || !category) {
             return res.status(400).json({ error: 'Name and category are required.' });
@@ -284,9 +284,9 @@ router.post('/', authenticateToken, requireAdmin, (req, res) => {
 
         const id = uuidv4();
         db.prepare(`
-            INSERT INTO resources (id, name, description, category, address, city, governorate, phone, email, website, hours, languages, latitude, longitude, verification_status, services, required_documents, useful_phrase, wait_time, verified_by, last_verified_at, source_name, source_url, source_checked_at, trust_note)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'pending', ?, ?, ?, ?, ?, datetime("now"), ?, ?, datetime("now"), ?)
-        `).run(id, sanitizeHtml(name), sanitizeHtml(description), normalizeCategory(category), sanitizeHtml(address), sanitizeHtml(city || 'Cairo'), sanitizeHtml(governorate || ''), phone, email, website, hours, languages, latitude, longitude, services, JSON.stringify(required_documents || []), useful_phrase, wait_time, req.user.id, sanitizeHtml(source_name || ''), sanitizeHtml(source_url || ''), sanitizeHtml(trust_note || ''));
+            INSERT INTO resources (id, name, description, category, address, city, phone, email, website, hours, languages, latitude, longitude, verification_status, services, required_documents, useful_phrase, wait_time, verified_by, last_verified_at, source_name, source_url, source_checked_at, trust_note)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'pending', ?, ?, ?, ?, ?, datetime("now"), ?, ?, datetime("now"), ?)
+        `).run(id, sanitizeHtml(name), sanitizeHtml(description), normalizeCategory(category), sanitizeHtml(address), sanitizeHtml(city || 'Cairo'), phone, email, website, hours, languages, latitude, longitude, services, JSON.stringify(required_documents || []), useful_phrase, wait_time, req.user.id, sanitizeHtml(source_name || ''), sanitizeHtml(source_url || ''), sanitizeHtml(trust_note || ''));
 
         const resource = db.prepare('SELECT * FROM resources WHERE id = ?').get(id);
         res.status(201).json({ resource });

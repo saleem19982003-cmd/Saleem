@@ -331,7 +331,6 @@ function initializeDatabase(dbPath) {
     ensureColumn(db, 'resources', 'source_url', 'TEXT');
     ensureColumn(db, 'resources', 'source_checked_at', 'TEXT');
     ensureColumn(db, 'resources', 'trust_note', 'TEXT');
-    ensureColumn(db, 'resources', 'governorate', 'TEXT');
     ensureColumn(db, 'community_posts', 'is_demo_data', 'INTEGER DEFAULT 0');
     ensureColumn(db, 'reviews', 'is_demo_data', 'INTEGER DEFAULT 0');
 
@@ -642,13 +641,13 @@ function refreshVerifiedResourceData(db) {
 
     const upsert = db.prepare(`
         INSERT INTO resources (
-            id, name, description, category, address, city, governorate, phone, hours, languages,
+            id, name, description, category, address, city, phone, hours, languages,
             latitude, longitude, verification_status, required_documents, useful_phrase,
             wait_time, services, is_demo_data, source_name, source_url, source_checked_at, last_verified_at,
             trust_note, updated_at
         )
         VALUES (
-            @id, @name, @description, @category, @address, @city, @governorate, @phone, @hours, @languages,
+            @id, @name, @description, @category, @address, @city, @phone, @hours, @languages,
             @latitude, @longitude, 'verified', @required_documents, @useful_phrase,
             @wait_time, @services, 0, @source_name, @source_url, @source_checked_at, @source_checked_at,
             @trust_note, datetime('now')
@@ -659,7 +658,6 @@ function refreshVerifiedResourceData(db) {
             category = excluded.category,
             address = excluded.address,
             city = excluded.city,
-            governorate = excluded.governorate,
             phone = excluded.phone,
             hours = excluded.hours,
             languages = excluded.languages,
