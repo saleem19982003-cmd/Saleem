@@ -8,13 +8,17 @@ const cors = require('cors');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const path = require('path');
+const os = require('os');
 const { initializeDatabase, seedDatabase } = require('./database');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Initialize database
-const dbPath = process.env.DATABASE_PATH || './data/saleem.db';
+const isVercelRuntime = process.env.VERCEL === '1' || process.env.VERCEL === 'true';
+// Vercel's deployed bundle is immutable. Keep the existing local path for
+// development, but use its writable ephemeral directory in serverless runs.
+const dbPath = isVercelRuntime ? path.join(os.tmpdir(), 'saleem.db') : (process.env.DATABASE_PATH || './data/saleem.db');
 const db = initializeDatabase(path.resolve(__dirname, '..', dbPath));
 seedDatabase(db);
 
@@ -83,6 +87,16 @@ app.use('/api/admin', require('./routes/admin'));
 app.use('/api/analytics', require('./routes/analytics'));
 app.use('/api/tts', require('./routes/tts'));
 
+app.get('/api/health', (req, res) => {
+    res.json({
+        status: 'ok',
+        database: 'ready',
+        database_mode: isVercelRuntime ? 'ephemeral-serverless' : 'local',
+        jwt_secret_configured: Boolean(process.env.JWT_SECRET),
+        ai_key_configured: Boolean(process.env.GROQ_API_KEY || process.env.DEEPSEEK_API_KEY || process.env.OPENROUTER_API_KEY)
+    });
+});
+
 // =============================================================
 // STATIC FILES - Serve the frontend
 // =============================================================
@@ -124,7 +138,7 @@ app.use((req, res) => {
 // =============================================================
 // START SERVER
 // =============================================================
-app.listen(PORT, () => {
+if (require.main === module) app.listen(PORT, () => {
     console.log(`
 ╔══════════════════════════════════════════════════╗
 ║        🌍 SALEEM Server Running                  ║

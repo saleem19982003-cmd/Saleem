@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "> **A comprehensive social impact platform empowering refugees and displaced communities in Egyptian society through real-time dialect translation, AI legal guidance, essential service maps, verified community mentors, and free programming education.**",
   "main": "server/index.js",
+  "engines": {
+    "node": "24.x"
+  },
   "scripts": {
     "start": "node server/index.js",
     "dev": "node --watch server/index.js",

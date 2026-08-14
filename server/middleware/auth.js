@@ -3,13 +3,14 @@
 // =============================================================
 const jwt = require('jsonwebtoken');
 
-const JWT_SECRET = process.env.JWT_SECRET || 'dev-saleem-jwt-secret-change-in-production-2026';
+const JWT_SECRET = process.env.JWT_SECRET || '';
 
 if (process.env.NODE_ENV === 'production' && !process.env.JWT_SECRET) {
-    throw new Error('JWT_SECRET must be configured in production.');
+    console.error('JWT_SECRET is not configured; public read routes remain available, authentication is disabled.');
 }
 
 function generateToken(user) {
+    if (!JWT_SECRET) throw new Error('JWT_SECRET is not configured.');
     return jwt.sign(
         { id: user.id, email: user.email, role: user.role, name: user.name },
         JWT_SECRET,
@@ -18,6 +19,9 @@ function generateToken(user) {
 }
 
 function authenticateToken(req, res, next) {
+    if (!JWT_SECRET) {
+        return res.status(503).json({ error: 'Authentication is temporarily unavailable until JWT_SECRET is configured.' });
+    }
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
 
@@ -39,7 +43,7 @@ function optionalAuth(req, res, next) {
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
 
-    if (token) {
+    if (token && JWT_SECRET) {
         try {
             const decoded = jwt.verify(token, JWT_SECRET);
             req.user = decoded;
