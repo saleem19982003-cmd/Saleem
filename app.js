@@ -495,6 +495,20 @@ document.addEventListener('DOMContentLoaded', () => {
             sectionAi: 'Section B: Saleem AI (Egyptian Dialect AI Tutor)',
             sectionCommunity: 'Section C: Refugee Community Hub & Peer Forums',
             sectionProfile: 'Section D: Profile & Legal Institutions Access',
+            daysLabel: 'Days',
+            lessonsLabel: 'Lessons',
+            trackDialect: 'Track 1: Learn Egyptian Dialect',
+            trackCulture: 'Track 2: Learn Egyptian Culture',
+            datasetAvailable: 'Dataset available',
+            datasetUnavailable: 'Dataset unavailable',
+            loadingDataset: 'Loading learning dataset...',
+            privateProgress: 'Private progress estimates from your activity on this device and synced account.',
+            rank: 'Rank',
+            learnerName: 'Learner Name',
+            country: 'Country',
+            xpPoints: 'XP Points',
+            badge: 'Badge',
+            noLessons: 'No lessons completed yet! Complete Lesson 1 to earn your first XP and rank on the Hall of Fame.',
             translatorPair: 'Translate between English and Egyptian Arabic.',
             assistantPair: 'Ask Saleem AI in English or Egyptian Arabic.'
         },
@@ -505,7 +519,7 @@ document.addEventListener('DOMContentLoaded', () => {
             languagePair: '\u0632\u0648\u062c \u0627\u0644\u0644\u063a\u0627\u062a',
             startPractice: '\u0627\u0628\u062f\u0623 \u0627\u062e\u062a\u0628\u0627\u0631 \u0627\u0644\u0645\u0645\u0627\u0631\u0633\u0629',
             sectionLearn: '\u0627\u0644\u0642\u0633\u0645 \u0623: \u062a\u0639\u0644\u0645 \u0627\u0644\u0644\u0647\u062c\u0629 \u0627\u0644\u0645\u0635\u0631\u064a\u0629 \u0648\u0627\u0644\u062b\u0642\u0627\u0641\u0629',
-            sectionLearnSub: '\u0645\u0633\u0627\u0631 \u062a\u0641\0627\u0639\u0644\u064a \u0644\u0644\0647\u062c\u0629 \u0627\u0644\u0645\u0635\u0631\u064a\u0629 \u0648\u062f\u0631\u0648\u0633 \u0627\u0644\u062b\u0642\u0627\u0641\u0629.',
+            sectionLearnSub: 'مسار تفاعلي للهجة المصرية ودروس الثقافة.',
             dailyStreak: '\u0627\u0644\u0645\u062a\u0627\u0628\u0639\u0629 \u0627\u0644\u064a\u0648\u0645\u064a\u0629',
             totalXp: '\u0645\u062c\u0645\u0648\u0639 XP',
             jump: '\u0627\u0646\u062a\u0642\u0644',
@@ -513,6 +527,20 @@ document.addEventListener('DOMContentLoaded', () => {
             sectionAi: '\u0627\u0644\u0642\u0633\u0645 \u0628: \u0645\u0633\u0627\u0639\u062f \u0633\u0644\u064a\u0645 \u0627\u0644\u0630\u0643\u064a',
             sectionCommunity: '\u0627\u0644\u0642\u0633\u0645 \u062c: \u0645\u0644\u062a\u0642\u0649 \u0627\u0644\u0645\u062c\u062a\u0645\u0639',
             sectionProfile: '\u0627\u0644\u0642\u0633\u0645 \u062f: \u0627\u0644\u0645\u0644\u0641 \u0627\u0644\u0634\u062e\u0635\u064a \u0648\u0627\u0644\u062e\u062f\u0645\u0627\u062a',
+            daysLabel: '\u064a\u0648\u0645',
+            lessonsLabel: '\u062f\u0631\u0648\u0633',
+            trackDialect: '\u0627\u0644\u0645\u0633\u0627\u0631 1: \u062a\u0639\u0644\u0645 \u0627\u0644\u0644\u0647\u062c\u0629 \u0627\u0644\u0645\u0635\u0631\u064a\u0629',
+            trackCulture: '\u0627\u0644\u0645\u0633\u0627\u0631 2: \u062a\u0639\u0644\u0645 \u0627\u0644\u062b\u0642\u0627\u0641\u0629 \u0627\u0644\u0645\u0635\u0631\u064a\u0629',
+            datasetAvailable: '\u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a \u0645\u062a\u0627\u062d\u0629',
+            datasetUnavailable: '\u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a \u063a\u064a\u0631 \u0645\u062a\u0627\u062d\u0629',
+            loadingDataset: '\u062c\u0627\u0631\u064a \u062a\u062d\u0645\u064a\u0644 \u0628\u064a\u0627\u0646\u0627\u062a \u0627\u0644\u062a\u0639\u0644\u0645...',
+            privateProgress: '\u062a\u0642\u062f\u064a\u0631\u0627\u062a \u0627\u0644\u062a\u0642\u062f\u0645 \u0627\u0644\u062e\u0627\u0635\u0629 \u0628\u0646\u0634\u0627\u0637\u0643 \u0639\u0644\u0649 \u0647\u0630\u0627 \u0627\u0644\u062c\u0647\u0627\u0632 \u0648\u062d\u0633\u0627\u0628\u0643 \u0627\u0644\u0645\u062a\u0632\u0627\u0645\u0646.',
+            rank: '\u0627\u0644\u0645\u0631\u062a\u0628\u0629',
+            learnerName: '\u0627\u0633\u0645 \u0627\u0644\u0645\u062a\u0639\u0644\u0645',
+            country: '\u0627\u0644\u062f\u0648\u0644\u0629',
+            xpPoints: '\u0646\u0642\u0627\u0637 XP',
+            badge: '\u0627\u0644\u0634\u0627\u0631\u0629',
+            noLessons: 'لم تكمل أي درس بعد. أكمل الدرس 1 لكسب أول XP لك.',
             translatorPair: '\u062a\u0631\u062c\u0645 \u0628\u064a\u0646 \u0627\u0644\u0644\u0647\u062c\u0629 \u0627\u0644\u0645\u0635\u0631\u064a\u0629 \u0648\u0627\u0644\u0644\u063a\u0629 \u0627\u0644\u0645\u062e\u062a\u0627\u0631\u0629.',
             assistantPair: '\u0627\u0633\u0623\u0644 \u0645\u0633\u0627\u0639\u062f \u0633\u0644\u064a\u0645 \u0628\u0627\u0644\u0644\u0644\u0647\u062c\u0629 \u0627\u0644\u0645\u0635\u0631\u064a\u0629 \u0623\u0648 \u0627\u0644\u0644\u063a\u0629 \u0627\u0644\u0645\u062e\u062a\u0627\u0631\u0629.'
         },
@@ -2333,16 +2361,22 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
         const cultureCount = document.getElementById('culture-lessons-count');
         const cultureStatus = document.getElementById('culture-track-status');
         const jumpInput = document.getElementById('lesson-jump-input');
+        const dialectLabel = document.getElementById('track-dialect-label');
+        const cultureLabel = document.getElementById('track-culture-label');
+        const streakLabel = document.getElementById('user-streak-label');
         const dialectTotal = dialectLessons600.length;
         const cultureTotal = cultureLessonsData.length;
 
         if (dialectCount) dialectCount.textContent = dialectTotal || 'Unavailable';
         if (cultureCount) cultureCount.textContent = cultureTotal || 'Unavailable';
         if (jumpInput) jumpInput.max = currentTrack === 'dialect' ? dialectTotal : cultureTotal;
+        if (dialectLabel) dialectLabel.innerHTML = `${escapeHtml(getLanguageRuntimeText('trackDialect'))} (${dialectTotal || '—'} ${escapeHtml(getLanguageRuntimeText('lessonsLabel', getSelectedLanguage()))})`;
+        if (cultureLabel) cultureLabel.innerHTML = `${escapeHtml(getLanguageRuntimeText('trackCulture'))} (${cultureTotal || '—'} ${escapeHtml(getLanguageRuntimeText('lessonsLabel', getSelectedLanguage()))})`;
+        if (streakLabel) streakLabel.textContent = getLanguageRuntimeText('daysLabel');
         if (cultureStatus) {
             cultureStatus.innerHTML = cultureTotal
-                ? '<i class="fa-solid fa-database"></i> Dataset available'
-                : '<i class="fa-solid fa-triangle-exclamation"></i> Dataset unavailable';
+                ? `<i class="fa-solid fa-database"></i> ${escapeHtml(getLanguageRuntimeText('datasetAvailable'))}`
+                : `<i class="fa-solid fa-triangle-exclamation"></i> ${escapeHtml(getLanguageRuntimeText('datasetUnavailable'))}`;
             cultureStatus.style.borderColor = cultureTotal ? 'var(--emerald)' : 'var(--coral)';
             cultureStatus.style.color = cultureTotal ? 'var(--emerald)' : 'var(--coral)';
         }
@@ -2438,7 +2472,7 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
         }, 0);
         const phrasesMastered = wordsLearned;
         const xp = parseInt(localStorage.getItem('saleem_user_xp') || '0');
-        const level = xp >= 1000 ? ['Level 3', 'Advanced'] : xp >= 500 ? ['Level 2', 'Intermediate'] : ['Level 1', 'Beginner'];
+        const level = xp >= 1000 ? ['3', 'Advanced'] : xp >= 500 ? ['2', 'Intermediate'] : ['1', 'Beginner'];
         const wordsEl = document.getElementById('stat-words-learned');
         const phrasesEl = document.getElementById('stat-phrases-mastered');
         const streakEl = document.getElementById('stat-streak-days');
@@ -2446,8 +2480,8 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
         const levelLabelEl = document.getElementById('stat-level-label');
         if (wordsEl) wordsEl.textContent = String(wordsLearned);
         if (phrasesEl) phrasesEl.textContent = String(phrasesMastered);
-        if (streakEl) streakEl.textContent = `🔥 ${parseInt(localStorage.getItem('saleem_user_streak') || '0')}`;
-        if (levelEl) levelEl.textContent = level[0];
+        if (streakEl) streakEl.textContent = `🔥 ${parseInt(localStorage.getItem('saleem_user_streak') || '0')} ${getLanguageRuntimeText('daysLabel')}`;
+        if (levelEl) levelEl.textContent = `${getSelectedLanguage() === 'en' ? 'Level' : 'المستوى'} ${level[0]}`;
         if (levelLabelEl) levelLabelEl.textContent = level[1];
         return cultureCompleted.length;
     }
@@ -2479,7 +2513,7 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
 
         if (!totalLessons) {
             const state = learningDataState[currentTrack];
-            container.innerHTML = `<div style="text-align:center; padding:40px 20px; color:var(--text-muted);">${state === 'loading' ? 'Loading the existing learning dataset...' : 'This learning dataset is unavailable. No replacement content was generated.'}</div>`;
+            container.innerHTML = `<div style="text-align:center; padding:40px 20px; color:var(--text-muted);">${state === 'loading' ? escapeHtml(getLanguageRuntimeText('loadingDataset')) : escapeHtml(getLanguageRuntimeText('datasetUnavailable'))}</div>`;
             updateLearningDatasetUI();
             return;
         }
@@ -2573,7 +2607,7 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
                 <tr>
                     <td colspan="6" style="text-align: center; padding: 24px; color: var(--text-muted);">
                         <i class="fa-solid fa-trophy" style="font-size: 24px; color: var(--warm-sand); display: block; margin-bottom: 8px;"></i>
-                        No lessons completed yet! Complete Lesson 1 to earn your first XP and rank on the Hall of Fame.
+                        ${escapeHtml(getLanguageRuntimeText('noLessons'))}
                     </td>
                 </tr>
             `;
@@ -2588,10 +2622,10 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
         body.innerHTML = `
             <tr>
                 <td><span class="rank-badge rank-1">1</span></td>
-                <td><strong>${userName}</strong> (You)</td>
+                <td><strong>${escapeHtml(userName)}</strong> (${getSelectedLanguage() === 'en' ? 'You' : 'أنت'})</td>
                 <td>🇸🇩 ${userNat}</td>
                 <td><strong style="color: var(--warm-sand);">${userXP.toLocaleString()} XP</strong></td>
-                <td>🔥 ${userStreak} Days</td>
+                <td>🔥 ${userStreak} ${escapeHtml(getLanguageRuntimeText('daysLabel'))}</td>
                 <td><span class="tag" style="border-color: var(--warm-sand); color: var(--warm-sand);">${badge}</span></td>
             </tr>
         `;

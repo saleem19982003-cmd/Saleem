@@ -101,7 +101,7 @@
                             <div style="display: flex; align-items: center; gap: 16px;">
                                 <div style="text-align: center; background: rgba(232, 171, 99, 0.15); padding: 8px 16px; border-radius: 14px; border: 1px solid var(--warm-sand);">
                                     <span data-i18n="dailyStreak" style="font-size: 11px; color: var(--text-muted); display: block;">Daily Streak</span>
-                                    <strong style="font-size: 18px; color: var(--warm-sand);"><i class="fa-solid fa-fire text-gold"></i> <span id="user-streak-count">0</span> Days</strong>
+                                    <strong style="font-size: 18px; color: var(--warm-sand);"><i class="fa-solid fa-fire text-gold"></i> <span id="user-streak-count">0</span> <span id="user-streak-label">Days</span></strong>
                                 </div>
                                 <div style="text-align: center; background: rgba(16, 185, 129, 0.15); padding: 8px 16px; border-radius: 14px; border: 1px solid var(--emerald);">
                                     <span data-i18n="totalXp" style="font-size: 11px; color: var(--text-muted); display: block;">Total XP</span>
@@ -114,10 +114,10 @@
                     <!-- Dual Track Switcher -->
                     <div class="track-switch-container">
                         <button class="track-btn active" id="btn-track-dialect">
-                            <i class="fa-solid fa-comments"></i> <span>Track 1: Learn Egyptian Dialect (<span id="dialect-lessons-count">Loading...</span> Lessons)</span>
+                            <i class="fa-solid fa-comments"></i> <span id="track-dialect-label">Track 1: Learn Egyptian Dialect (<span id="dialect-lessons-count">Loading...</span> Lessons)</span>
                         </button>
                         <button class="track-btn" id="btn-track-culture">
-                            <i class="fa-solid fa-landmark"></i> <span>Track 2: Learn Egyptian Culture (<span id="culture-lessons-count">Loading...</span> Lessons)</span> <span id="culture-track-status" class="tag" style="background: rgba(16, 185, 129, 0.15); border-color: var(--emerald); color: var(--emerald); font-size: 10px; margin-left: 6px;"><i class="fa-solid fa-database"></i> Loading dataset</span>
+                            <i class="fa-solid fa-landmark"></i> <span id="track-culture-label">Track 2: Learn Egyptian Culture (<span id="culture-lessons-count">Loading...</span> Lessons)</span> <span id="culture-track-status" class="tag" style="background: rgba(16, 185, 129, 0.15); border-color: var(--emerald); color: var(--emerald); font-size: 10px; margin-left: 6px;"><i class="fa-solid fa-database"></i> Loading dataset</span>
                         </button>
                     </div>
 
@@ -141,8 +141,8 @@
                     <div class="card" style="margin-top: 24px;">
                         <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
                             <div>
-                                <h3><i class="fa-solid fa-trophy text-gold"></i> Personal Learning Snapshot</h3>
-                                <p style="font-size: 13px; color: var(--text-muted); margin: 0;">Private progress estimates from your activity on this device and synced account.</p>
+                        <h3><i class="fa-solid fa-trophy text-gold"></i> Personal Learning Snapshot</h3>
+                                <p data-i18n="privateProgress" style="font-size: 13px; color: var(--text-muted); margin: 0;">Private progress estimates from your activity on this device and synced account.</p>
                             </div>
                             <span class="card-badge" data-i18n="progress" style="background: rgba(245, 158, 11, 0.2); color: #F59E0B;">Progress</span>
                         </div>
@@ -150,12 +150,12 @@
                         <table class="leaderboard-table">
                             <thead>
                                 <tr>
-                                    <th>Rank</th>
-                                    <th>Learner Name</th>
-                                    <th>Country</th>
-                                    <th>XP Points</th>
-                                    <th>Daily Streak</th>
-                                    <th>Badge</th>
+                                    <th data-i18n="rank">Rank</th>
+                                    <th data-i18n="learnerName">Learner Name</th>
+                                    <th data-i18n="country">Country</th>
+                                    <th data-i18n="xpPoints">XP Points</th>
+                                    <th data-i18n="dailyStreak">Daily Streak</th>
+                                    <th data-i18n="badge">Badge</th>
                                 </tr>
                             </thead>
                             <tbody id="leaderboard-body">
