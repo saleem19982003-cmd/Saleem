@@ -2404,3 +2404,508 @@ textarea:focus-visible {
     }
 }
 
+/* ============================================================
+   SALEEM MISSION IDENTITY REFINEMENT
+   Warm belonging, clear progress, trusted services, readable learning.
+   ============================================================ */
+:root {
+    --color-primary: #0f766e;
+    --color-primary-dark: #0b5f5a;
+    --color-primary-soft: #e4f3ef;
+    --color-secondary: #163b4a;
+    --color-background: #fbf7ef;
+    --color-surface: #fffdf9;
+    --color-surface-elevated: #ffffff;
+    --color-success: #257a5d;
+    --color-warning: #8a5a16;
+    --color-danger: #a94442;
+    --color-celebration: #b7791f;
+    --color-culture: #c5683a;
+    --color-ai: #2d6f9f;
+    --color-services: #257a5d;
+    --text-primary: #17333e;
+    --text-secondary: #3f5962;
+    --text-muted: #5c7077;
+    --text-dim: #6f7f84;
+    --border-soft: #d8e5df;
+    --shadow-soft: 0 10px 30px rgba(22, 59, 74, 0.08);
+    --shadow-lift: 0 18px 42px rgba(22, 59, 74, 0.13);
+    --fs-section-title: 26px;
+    --fs-card-title: 20px;
+    --fs-body: 16px;
+    --fs-label: 14px;
+    --fs-overline: 13px;
+    --radius-card: 16px;
+    --radius-control: 12px;
+    --bg-dark: var(--color-background);
+    --surface-dark: var(--color-surface);
+    --surface-elevated: var(--color-surface-elevated);
+    --glass-border: var(--border-soft);
+    --glass-border-strong: #bfd4cc;
+    --text-light: var(--text-primary);
+    --nile-blue: var(--color-primary);
+    --nile-dark: var(--color-secondary);
+    --warm-sand: var(--color-celebration);
+    --emerald: var(--color-success);
+    --coral: var(--color-danger);
+}
+
+body {
+    background: var(--color-background);
+    color: var(--text-primary);
+    font-size: 16px;
+    line-height: 1.62;
+}
+
+.main-content {
+    background: var(--color-background);
+}
+
+.top-header {
+    background: rgba(255, 253, 249, 0.96);
+    border-bottom: 1px solid var(--border-soft);
+    box-shadow: 0 4px 18px rgba(22, 59, 74, 0.05);
+}
+
+.content-container {
+    background: var(--color-background);
+}
+
+.content-container h2,
+.content-container h3,
+.content-container h4,
+.content-container th,
+.content-container label {
+    color: var(--text-primary) !important;
+}
+
+.content-container h2 {
+    font-size: clamp(23px, 2.2vw, 30px);
+    line-height: 1.25;
+}
+
+.content-container h3 {
+    font-size: clamp(19px, 1.8vw, 23px);
+    line-height: 1.3;
+}
+
+.content-container p,
+.content-container li,
+.content-container td {
+    color: var(--text-secondary);
+    font-size: 16px;
+}
+
+.content-container .card {
+    background: var(--color-surface) !important;
+    border: 1px solid var(--border-soft) !important;
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-soft);
+}
+
+.content-container .header-card {
+    background: linear-gradient(135deg, #fffdf9 0%, #eef8f4 100%) !important;
+    border-top: 4px solid var(--color-primary) !important;
+}
+
+#tab-saleem-ai .header-card {
+    border-top-color: var(--color-ai) !important;
+    background: linear-gradient(135deg, #fffdf9 0%, #edf5fa 100%) !important;
+}
+
+#tab-community-hub .header-card {
+    border-top-color: var(--color-culture) !important;
+}
+
+#tab-profile-dashboard .header-card {
+    border-top-color: var(--color-services) !important;
+}
+
+.text-gold,
+.content-container .text-gold {
+    color: #8a5a16 !important;
+}
+
+.sidebar .text-gold,
+.sidebar .brand-logo {
+    color: #f5c76b !important;
+}
+
+.btn,
+button.btn,
+.chip-btn,
+.track-btn {
+    min-height: 46px;
+    font-size: 16px;
+    line-height: 1.25;
+    font-weight: 700;
+}
+
+.btn-primary,
+button.btn-primary {
+    background: var(--color-primary) !important;
+    border-color: var(--color-primary) !important;
+    color: #ffffff !important;
+    box-shadow: 0 6px 14px rgba(15, 118, 110, 0.18);
+}
+
+.btn-primary:hover,
+.btn-primary:focus-visible {
+    background: var(--color-primary-dark) !important;
+    border-color: var(--color-primary-dark) !important;
+}
+
+.btn-outline,
+button.btn-outline {
+    background: #ffffff !important;
+    border: 2px solid var(--color-primary) !important;
+    color: var(--color-primary-dark) !important;
+}
+
+.btn-outline:hover,
+.btn-outline:focus-visible {
+    background: var(--color-primary-soft) !important;
+    border-color: var(--color-primary-dark) !important;
+}
+
+.btn-danger,
+button.btn-danger {
+    background: #f8e7e4 !important;
+    border-color: var(--color-danger) !important;
+    color: #7f2d2a !important;
+}
+
+.track-switch-container {
+    background: #f0f6f3;
+    border: 1px solid var(--border-soft);
+    box-shadow: var(--shadow-soft);
+}
+
+.track-btn {
+    color: var(--text-secondary);
+    background: transparent;
+    padding: 14px 18px;
+}
+
+.track-btn.active {
+    background: var(--color-primary) !important;
+    color: #ffffff !important;
+    box-shadow: 0 6px 16px rgba(15, 118, 110, 0.2);
+}
+
+.duolingo-snake-node {
+    background: #eef4f1;
+    border-color: #b9d2c8;
+    color: var(--text-secondary);
+    box-shadow: 0 8px 20px rgba(22, 59, 74, 0.12);
+}
+
+.duolingo-snake-node.completed {
+    background: var(--color-success);
+    border-color: #1b6249;
+    color: #ffffff;
+    box-shadow: 0 8px 20px rgba(37, 122, 93, 0.22);
+}
+
+.duolingo-snake-node.active {
+    background: var(--color-primary);
+    border-color: var(--color-primary-dark);
+    color: #ffffff;
+    box-shadow: 0 8px 22px rgba(15, 118, 110, 0.24);
+}
+
+.duolingo-snake-node.locked {
+    background: #edf0ee;
+    border-color: #b7c2bf;
+    color: #6c7a7c;
+    opacity: 0.9;
+}
+
+.duolingo-snake-node .node-label {
+    bottom: -34px;
+    color: var(--text-primary);
+    background: #fffdf9;
+    border-color: var(--border-soft);
+    font-size: 14px;
+    line-height: 1.3;
+    padding: 4px 10px;
+}
+
+.card p,
+.card .text-muted,
+.card [style*="color: var(--text-muted)"],
+.card [style*="color: var(--text-dim)"] {
+    color: var(--text-secondary) !important;
+}
+
+.card [style*="color: #fff"],
+.card [style*="color:#fff"],
+.card [style*="color: white"] {
+    color: var(--text-primary) !important;
+}
+
+.tag,
+.card-badge {
+    font-size: 14px;
+    line-height: 1.3;
+    color: var(--color-primary-dark) !important;
+    background: var(--color-primary-soft);
+    border-color: #9bc9bf !important;
+}
+
+.search-bar,
+.form-control,
+.content-container select,
+.content-container textarea,
+.content-container input {
+    background: #ffffff !important;
+    border-color: var(--border-soft) !important;
+    color: var(--text-primary) !important;
+    font-size: 16px;
+}
+
+.form-control::placeholder,
+input::placeholder,
+textarea::placeholder {
+    color: #63757a !important;
+    opacity: 1;
+}
+
+.chat-container,
+.chat-history,
+.chat-input-bar {
+    background: #f4faf7 !important;
+    border-color: var(--border-soft) !important;
+}
+
+.chat-message .msg-content {
+    font-size: 16px;
+    line-height: 1.62;
+}
+
+#dialect-modal-content,
+#culture-modal-content {
+    font-size: 16px;
+    line-height: 1.65;
+}
+
+#dialect-modal-content [style*="rgba(15, 23, 42"],
+#culture-modal-content [style*="rgba(15, 23, 42"] {
+    background: #edf6f2 !important;
+    border-color: var(--color-primary) !important;
+    color: var(--text-primary) !important;
+    box-shadow: 0 10px 24px rgba(15, 118, 110, 0.14) !important;
+}
+
+#dialect-modal-content [style*="rgba(232, 171, 99"],
+#culture-modal-content [style*="rgba(232, 171, 99"] {
+    background: #fff4df !important;
+    border-left-color: var(--color-celebration) !important;
+}
+
+#dialect-modal-content [style*="height: 8px"],
+#culture-modal-content [style*="height: 8px"] {
+    background: #dbe9e4 !important;
+}
+
+#dialect-modal-content [style*="color: var(--warm-sand)"],
+#culture-modal-content [style*="color: var(--warm-sand)"] {
+    color: #8a5a16 !important;
+}
+
+#dialect-modal-content h2 {
+    font-size: clamp(30px, 8vw, 40px) !important;
+    line-height: 1.3 !important;
+    color: var(--color-secondary) !important;
+}
+
+#dialect-modal-content h3,
+#culture-modal-content h3 {
+    font-size: clamp(20px, 5vw, 24px) !important;
+    line-height: 1.45 !important;
+    color: var(--text-primary) !important;
+}
+
+#dialect-modal-content p,
+#culture-modal-content p {
+    font-size: 17px !important;
+    line-height: 1.7 !important;
+    color: var(--text-secondary) !important;
+}
+
+#dialect-modal-content strong,
+#culture-modal-content strong {
+    font-size: 20px !important;
+    line-height: 1.55 !important;
+    color: var(--color-primary-dark) !important;
+}
+
+#dialect-modal-content .btn,
+#culture-modal-content .btn {
+    min-height: 50px;
+    font-size: 17px !important;
+    line-height: 1.35;
+    white-space: normal;
+}
+
+#dialect-modal-content .tag,
+#culture-modal-content .tag {
+    font-size: 14px;
+    white-space: normal;
+}
+
+.modal-overlay > div,
+#user-onboarding-modal > .card {
+    background: var(--color-surface) !important;
+    border-color: var(--border-soft) !important;
+    color: var(--text-primary) !important;
+}
+
+.modal-overlay h2,
+.modal-overlay h3,
+.modal-overlay h4,
+.modal-overlay label,
+.modal-overlay p {
+    color: var(--text-primary) !important;
+}
+
+.modal-overlay p {
+    color: var(--text-secondary) !important;
+    font-size: 16px !important;
+}
+
+.bottom-nav {
+    background: rgba(255, 253, 249, 0.98) !important;
+    border-top: 1px solid var(--border-soft) !important;
+    box-shadow: 0 -6px 20px rgba(22, 59, 74, 0.08);
+}
+
+.bottom-nav-btn {
+    color: var(--text-secondary) !important;
+    min-height: 58px;
+    font-size: 14px !important;
+}
+
+.bottom-nav-btn.active {
+    color: var(--color-primary-dark) !important;
+    background: var(--color-primary-soft) !important;
+}
+
+.empty-state {
+    background: #fffaf1;
+    border: 1px solid #ead9b9;
+    border-radius: 14px;
+    padding: 24px 18px;
+}
+
+.empty-state h4 {
+    font-size: 19px;
+}
+
+.empty-state p {
+    font-size: 16px;
+}
+
+[dir="rtl"] body,
+[dir="rtl"] button,
+[dir="rtl"] input,
+[dir="rtl"] textarea,
+[dir="rtl"] select {
+    font-family: 'Noto Sans Arabic', 'Noto Sans', 'Outfit', sans-serif;
+}
+
+@media (max-width: 767px) {
+    .content-container {
+        padding: 18px 14px calc(92px + env(safe-area-inset-bottom, 0px));
+    }
+
+    .content-container h2 {
+        font-size: 24px;
+    }
+
+    .content-container h3 {
+        font-size: 20px;
+    }
+
+    .content-container p,
+    .content-container li,
+    .content-container td {
+        font-size: 16px;
+    }
+
+    .header-card {
+        padding: 22px 18px !important;
+    }
+
+    .track-switch-container {
+        gap: 8px;
+        padding: 6px;
+    }
+
+    .track-btn {
+        min-height: 66px;
+        padding: 11px 8px;
+        font-size: 15px;
+    }
+
+    .btn,
+    button.btn,
+    .chip-btn {
+        min-height: 48px;
+        font-size: 16px;
+    }
+
+    .bottom-nav-btn span {
+        white-space: normal;
+        line-height: 1.15;
+        overflow: visible;
+        text-overflow: clip;
+    }
+
+    .duolingo-snake-node .node-label {
+        font-size: 13px;
+        max-width: 180px;
+        white-space: normal;
+        text-align: center;
+    }
+}
+
+@media (max-width: 430px) {
+    .top-header {
+        min-height: auto;
+        flex-wrap: wrap;
+        align-items: stretch;
+        padding: 10px 12px 12px;
+    }
+
+    .top-header .search-bar {
+        flex: 1 1 100%;
+        width: 100%;
+        max-width: none;
+        min-height: 46px;
+    }
+
+    .top-header .header-actions {
+        width: 100%;
+        justify-content: space-between;
+        gap: 8px;
+    }
+
+    .track-switch-container {
+        grid-template-columns: 1fr;
+    }
+
+    .track-btn {
+        min-height: 54px;
+    }
+
+    .header-actions .btn {
+        font-size: 14px;
+    }
+
+    #ui-lang-switcher {
+        max-width: 96px;
+        font-size: 13px !important;
+    }
+}
+

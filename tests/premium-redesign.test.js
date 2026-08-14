@@ -35,6 +35,9 @@ test('premium shell keeps localized controls wired to the existing runtime', () 
     }
     assert.match(js, /const APP_SHELL_TEXT = Object\.freeze/);
     assert.match(js, /const APP_ACTION_TEXT = Object\.freeze/);
+    assert.match(js, /const LEARNING_UI_TEXT = Object\.freeze/);
+    assert.match(js, /am:\s*\{[\s\S]*?progressionDialect/);
+    assert.match(html, /data-i18n-ph="jump"/);
     assert.match(js, /getAppActionText\('directions'\)/);
     assert.match(js, /getAppActionText\('call'\)/);
     assert.match(js, /ha:\s*\{[\s\S]*?step1_header/);
@@ -49,4 +52,9 @@ test('premium visual system has responsive and accessible foundations', () => {
     assert.match(css, /\.bottom-nav\s*\{/);
     assert.match(css, /@media\s*\(max-width:\s*767px\)/);
     assert.match(css, /env\(safe-area-inset-bottom(?:,\s*0px)?\)/);
+    for (const token of ['--color-culture:', '--color-ai:', '--text-secondary:', '--fs-body:', '--fs-card-title:']) {
+        assert.match(css, new RegExp(token.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
+    }
+    assert.match(css, /#dialect-modal-content \[style\*="rgba\(15, 23, 42"\]/);
+    assert.match(css, /@media \(max-width: 430px\)/);
 });
