@@ -2241,6 +2241,21 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
     // 6. CURATED EGYPTIAN PHRASES LIBRARY ENGINE (45 checked-in entries)
     // -------------------------------------------------------------
     const LEARNING_DATA_VERSION = '2026-08-14-multilingual';
+    const LEARNING_CACHE_NAME = `saleem-learning-${LEARNING_DATA_VERSION}`;
+
+    async function fetchLearningAsset(path) {
+        const url = `${path}?v=${LEARNING_DATA_VERSION}`;
+        if (typeof window !== 'undefined' && 'caches' in window) {
+            const cache = await window.caches.open(LEARNING_CACHE_NAME);
+            const cached = await cache.match(url);
+            if (cached) return cached;
+            const response = await fetch(url, { cache: 'reload' });
+            if (response.ok) await cache.put(url, response.clone());
+            return response;
+        }
+        return fetch(url, { cache: 'force-cache' });
+    }
+
     const phrasesLibraryData = [
         // 🚨 EMERGENCY & SAFETY (50+)
         { eg: "لحقوني! (Laha'oony!)", en: "Help me!", cat: "emergency", lvl: "Beginner" },
@@ -2306,7 +2321,7 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
 
     async function loadPhrasesLibrary() {
         try {
-            const response = await fetch(`/data/phrases_45.json?v=${LEARNING_DATA_VERSION}`, { cache: 'force-cache' });
+            const response = await fetchLearningAsset('/data/phrases_45.json');
             if (!response.ok) throw new Error(`HTTP ${response.status}`);
             const data = await response.json();
             if (!Array.isArray(data.phrases) || data.phrases.length !== 45) throw new Error('Phrase dataset is incomplete');
@@ -2433,7 +2448,7 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
 
     async function loadLearningDataset(path, key) {
         try {
-            const res = await fetch(`${path}?v=${LEARNING_DATA_VERSION}`, { cache: 'force-cache' });
+            const res = await fetchLearningAsset(path);
             if (!res.ok) throw new Error(`HTTP ${res.status}`);
             const data = await res.json();
             if (!Array.isArray(data.lessons) || data.lessons.length === 0) throw new Error('Dataset contains no lessons');
