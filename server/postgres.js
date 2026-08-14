@@ -22,6 +22,12 @@ const POSTGRES_SOURCE = process.env.DATABASE_URL
                 ? 'POSTGRES_URL_NON_POOLING'
                 : null;
 
+function postgresSslConfig() {
+    if (process.env.NODE_ENV !== 'production') return undefined;
+    const ca = process.env.SUPABASE_CA_CERT || process.env.PGSSLROOTCERT;
+    return ca ? { ca: ca.replace(/\\n/g, '\n'), rejectUnauthorized: true } : true;
+}
+
 const schema = [
     `CREATE TABLE IF NOT EXISTS users (
         id TEXT PRIMARY KEY,
@@ -154,7 +160,7 @@ function createPool(connectionString) {
         idleTimeoutMillis: 10000,
         connectionTimeoutMillis: 7000,
         allowExitOnIdle: true,
-        ssl: process.env.NODE_ENV === 'production' ? true : undefined,
+        ssl: postgresSslConfig(),
     });
 }
 
@@ -248,7 +254,7 @@ async function freshSelectOne(config) {
         connectionTimeoutMillis: 7000,
         query_timeout: 7000,
         statement_timeout: 7000,
-        ssl: true,
+        ssl: postgresSslConfig(),
     });
     try {
         await client.connect();
@@ -291,6 +297,7 @@ async function diagnosePostgresConnection(connectionString = POSTGRES_URL) {
         dns: dnsResult,
         tcp_6543: tcp6543,
         tls: select1.status === 'PASS' ? 'PASS' : (select1.error_class === 'TLS' ? 'FAIL' : 'NOT_PROVEN'),
+        tls_ca_configured: Boolean(process.env.SUPABASE_CA_CERT || process.env.PGSSLROOTCERT),
         postgresql_authentication: select1.status === 'PASS' ? 'PASS' : (select1.error_class === 'AUTH' ? 'FAIL' : 'NOT_PROVEN'),
         select_1: select1.status,
         select_1_error_class: select1.error_class || null,
