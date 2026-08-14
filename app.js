@@ -695,7 +695,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (uiLangSwitcher) uiLangSwitcher.value = normalized;
 
         showLanguageCoverageNotice(normalized);
-        if (typeof updateServiceLocationCopy === 'function') updateServiceLocationCopy();
 
         try {
             if (typeof renderDailyPhrasesUI === 'function') renderDailyPhrasesUI();
@@ -3920,6 +3919,7 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
     });
 
     updateServiceLocationCopy();
+    if (uiLangSwitcher) uiLangSwitcher.addEventListener('change', () => updateServiceLocationCopy());
 
     initGoogleMapsAndDirectory();
 });

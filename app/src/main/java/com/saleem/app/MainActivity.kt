@@ -1,7 +1,9 @@
 package com.saleem.app
 
 import android.annotation.SuppressLint
+import android.Manifest
 import android.app.Activity
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
@@ -17,6 +19,9 @@ class MainActivity : Activity() {
     private lateinit var webView: WebView
     private lateinit var progressBar: ProgressBar
     private val APP_URL = "https://saleem-eight.vercel.app/app"
+    private val LOCATION_PERMISSION_REQUEST = 4101
+    private var pendingGeoOrigin: String? = null
+    private var pendingGeoCallback: GeolocationPermissions.Callback? = null
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,6 +61,7 @@ class MainActivity : Activity() {
                 javaScriptEnabled = true
                 domStorageEnabled = true
                 databaseEnabled = true
+                setGeolocationEnabled(true)
                 allowFileAccess = false
                 allowContentAccess = false
                 useWideViewPort = true
@@ -123,6 +129,25 @@ class MainActivity : Activity() {
                         request.deny()
                     }
                 }
+
+                override fun onGeolocationPermissionsShowPrompt(
+                    origin: String?, callback: GeolocationPermissions.Callback?
+                ) {
+                    if (origin == null || callback == null) return
+                    if (hasLocationPermission()) {
+                        callback.invoke(origin, true, false)
+                    } else {
+                        pendingGeoOrigin = origin
+                        pendingGeoCallback = callback
+                        requestPermissions(
+                            arrayOf(
+                                Manifest.permission.ACCESS_COARSE_LOCATION,
+                                Manifest.permission.ACCESS_FINE_LOCATION
+                            ),
+                            LOCATION_PERMISSION_REQUEST
+                        )
+                    }
+                }
             }
         }
 
@@ -143,6 +168,21 @@ class MainActivity : Activity() {
         val network = cm.activeNetwork ?: return false
         val caps = cm.getNetworkCapabilities(network) ?: return false
         return caps.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+    }
+
+    private fun hasLocationPermission(): Boolean {
+        return checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
+            || checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode != LOCATION_PERMISSION_REQUEST) return
+        val origin = pendingGeoOrigin
+        val callback = pendingGeoCallback
+        pendingGeoOrigin = null
+        pendingGeoCallback = null
+        if (origin != null && callback != null) callback.invoke(origin, hasLocationPermission(), false)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
