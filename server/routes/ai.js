@@ -263,7 +263,7 @@ router.post('/chat', optionalAuth, async (req, res) => {
         res.json({ response: aiResponse, conversation_id: convId, source: 'ai', provider: llmResult.provider });
     } catch (err) {
         console.error('AI chat error:', err);
-        res.status(500).json({ error: 'Saleem AI is temporarily unavailable. Please try again in a moment.' });
+        res.status(err.status || 500).json({ error: err.status === 503 ? 'Persistent database is temporarily unavailable.' : 'Saleem AI is temporarily unavailable. Please try again in a moment.' });
     }
 });
 
@@ -363,7 +363,7 @@ Provide:
         res.json({ translation, source: 'ai', provider: llmResult.provider });
     } catch (err) {
         console.error('Translation error:', err);
-        res.status(500).json({ error: 'Translation service temporarily unavailable. Please try again.' });
+        res.status(err.status || 500).json({ error: err.status === 503 ? 'Persistent database is temporarily unavailable.' : 'Translation service temporarily unavailable. Please try again.' });
     }
 });
 
@@ -376,7 +376,7 @@ router.get('/conversations', authenticateToken, async (req, res) => {
             : db.prepare('SELECT * FROM chat_conversations WHERE user_id = ? ORDER BY updated_at DESC LIMIT 20').all(req.user.id);
         res.json({ conversations });
     } catch (err) {
-        res.status(500).json({ error: 'Failed to load conversations.' });
+        res.status(err.status || 500).json({ error: err.status === 503 ? 'Persistent database is temporarily unavailable.' : 'Failed to load conversations.' });
     }
 });
 
@@ -395,7 +395,7 @@ router.get('/conversations/:id/messages', authenticateToken, async (req, res) =>
             : db.prepare('SELECT * FROM chat_messages WHERE conversation_id = ? ORDER BY created_at').all(req.params.id);
         res.json({ messages });
     } catch (err) {
-        res.status(500).json({ error: 'Failed to load messages.' });
+        res.status(err.status || 500).json({ error: err.status === 503 ? 'Persistent database is temporarily unavailable.' : 'Failed to load messages.' });
     }
 });
 

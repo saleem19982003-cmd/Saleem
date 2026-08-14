@@ -135,7 +135,7 @@ router.get('/', optionalAuth, async (req, res) => {
         res.json({ resources });
     } catch (err) {
         console.error('Resources fetch error:', err);
-        res.status(500).json({ error: 'Failed to load resources.' });
+        res.status(err.status || 500).json({ error: err.status === 503 ? 'Persistent database is temporarily unavailable.' : 'Failed to load resources.' });
     }
 });
 
@@ -177,7 +177,7 @@ router.get('/nearby', optionalAuth, async (req, res) => {
         res.json({ resources: resources.slice(0, limit), location_mode: latitude === null ? 'manual' : 'one-shot-gps', sort });
     } catch (err) {
         console.error('Nearby resources error:', err);
-        res.status(500).json({ error: 'Failed to load nearby resources.' });
+        res.status(err.status || 500).json({ error: err.status === 503 ? 'Persistent database is temporarily unavailable.' : 'Failed to load nearby resources.' });
     }
 });
 
@@ -228,7 +228,7 @@ router.get('/recommendations', optionalAuth, async (req, res) => {
         res.json({ recommendations: scored.slice(0, 5) });
     } catch (err) {
         console.error('Resource recommendations error:', err);
-        res.status(500).json({ error: 'Failed to load recommendations.' });
+        res.status(err.status || 500).json({ error: err.status === 503 ? 'Persistent database is temporarily unavailable.' : 'Failed to load recommendations.' });
     }
 });
 
@@ -253,7 +253,7 @@ router.get('/:id', optionalAuth, async (req, res) => {
 
         res.json({ resource });
     } catch (err) {
-        res.status(500).json({ error: 'Failed to load resource.' });
+        res.status(err.status || 500).json({ error: err.status === 503 ? 'Persistent database is temporarily unavailable.' : 'Failed to load resource.' });
     }
 });
 
@@ -278,7 +278,7 @@ router.post('/:id/save', authenticateToken, async (req, res) => {
 
         res.json({ saved: true, message: 'Resource saved.' });
     } catch (err) {
-        res.status(500).json({ error: 'Failed to save resource.' });
+        res.status(err.status || 500).json({ error: err.status === 503 ? 'Persistent database is temporarily unavailable.' : 'Failed to save resource.' });
     }
 });
 

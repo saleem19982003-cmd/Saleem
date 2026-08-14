@@ -34,7 +34,7 @@ router.get('/', optionalAuth, async (req, res) => {
 
         res.json({ events });
     } catch (err) {
-        res.status(500).json({ error: 'Failed to load events.' });
+        res.status(err.status || 500).json({ error: err.status === 503 ? 'Persistent database is temporarily unavailable.' : 'Failed to load events.' });
     }
 });
 
@@ -58,7 +58,7 @@ router.get('/:id', optionalAuth, async (req, res) => {
 
         res.json({ event });
     } catch (err) {
-        res.status(500).json({ error: 'Failed to load event.' });
+        res.status(err.status || 500).json({ error: err.status === 503 ? 'Persistent database is temporarily unavailable.' : 'Failed to load event.' });
     }
 });
 
@@ -94,7 +94,7 @@ router.post('/:id/register', authenticateToken, async (req, res) => {
 
         res.json({ registered: true, message: 'Registered successfully!' });
     } catch (err) {
-        res.status(500).json({ error: 'Failed to register for event.' });
+        res.status(err.status || 500).json({ error: err.status === 503 ? 'Persistent database is temporarily unavailable.' : 'Failed to register for event.' });
     }
 });
 

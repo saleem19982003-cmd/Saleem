@@ -33,7 +33,7 @@ router.post('/track', optionalAuth, async (req, res) => {
 
         res.json({ tracked: true });
     } catch (err) {
-        res.status(500).json({ error: 'Failed to track event.' });
+        res.status(err.status || 500).json({ error: err.status === 503 ? 'Persistent database is temporarily unavailable.' : 'Failed to track event.' });
     }
 });
 

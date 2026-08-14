@@ -26,7 +26,7 @@ router.get('/progress', authenticateToken, async (req, res) => {
 
         res.json({ progress, streak: streak || {} });
     } catch (err) {
-        res.status(500).json({ error: 'Failed to load progress.' });
+        res.status(err.status || 500).json({ error: err.status === 503 ? 'Persistent database is temporarily unavailable.' : 'Failed to load progress.' });
     }
 });
 
@@ -55,7 +55,7 @@ router.get('/saved-resources', authenticateToken, async (req, res) => {
 
         res.json({ resources: saved });
     } catch (err) {
-        res.status(500).json({ error: 'Failed to load saved resources.' });
+        res.status(err.status || 500).json({ error: err.status === 503 ? 'Persistent database is temporarily unavailable.' : 'Failed to load saved resources.' });
     }
 });
 
@@ -75,7 +75,7 @@ router.get('/registered-events', authenticateToken, async (req, res) => {
 
         res.json({ events });
     } catch (err) {
-        res.status(500).json({ error: 'Failed to load registered events.' });
+        res.status(err.status || 500).json({ error: err.status === 503 ? 'Persistent database is temporarily unavailable.' : 'Failed to load registered events.' });
     }
 });
 
@@ -103,7 +103,7 @@ router.get('/stats', authenticateToken, async (req, res) => {
             ai_messages_sent: chatMessages.count,
         });
     } catch (err) {
-        res.status(500).json({ error: 'Failed to load stats.' });
+        res.status(err.status || 500).json({ error: err.status === 503 ? 'Persistent database is temporarily unavailable.' : 'Failed to load stats.' });
     }
 });
 

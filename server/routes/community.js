@@ -45,7 +45,7 @@ router.get('/posts', optionalAuth, async (req, res) => {
 
         res.json({ posts });
     } catch (err) {
-        res.status(500).json({ error: 'Failed to load community posts.' });
+        res.status(err.status || 500).json({ error: err.status === 503 ? 'Persistent database is temporarily unavailable.' : 'Failed to load community posts.' });
     }
 });
 
@@ -77,7 +77,7 @@ router.post('/posts', authenticateToken, async (req, res) => {
         post.replies = [];
         res.status(201).json({ post });
     } catch (err) {
-        res.status(500).json({ error: 'Failed to create post.' });
+        res.status(err.status || 500).json({ error: err.status === 503 ? 'Persistent database is temporarily unavailable.' : 'Failed to create post.' });
     }
 });
 
@@ -113,7 +113,7 @@ router.post('/posts/:id/reply', authenticateToken, async (req, res) => {
         const reply = db.prepare('SELECT * FROM post_replies WHERE id = ?').get(id);
         res.status(201).json({ reply });
     } catch (err) {
-        res.status(500).json({ error: 'Failed to submit reply.' });
+        res.status(err.status || 500).json({ error: err.status === 503 ? 'Persistent database is temporarily unavailable.' : 'Failed to submit reply.' });
     }
 });
 
@@ -132,7 +132,7 @@ router.get('/reviews', async (req, res) => {
 
         res.json({ reviews, total_count: total.count, average_rating: total.avg_rating ? parseFloat(total.avg_rating.toFixed(1)) : 0 });
     } catch (err) {
-        res.status(500).json({ error: 'Failed to load reviews.' });
+        res.status(err.status || 500).json({ error: err.status === 503 ? 'Persistent database is temporarily unavailable.' : 'Failed to load reviews.' });
     }
 });
 
@@ -166,7 +166,7 @@ router.post('/reviews', authenticateToken, async (req, res) => {
         const review = db.prepare('SELECT * FROM reviews WHERE id = ?').get(id);
         res.status(201).json({ review });
     } catch (err) {
-        res.status(500).json({ error: 'Failed to submit review.' });
+        res.status(err.status || 500).json({ error: err.status === 503 ? 'Persistent database is temporarily unavailable.' : 'Failed to submit review.' });
     }
 });
 

@@ -61,7 +61,7 @@ router.post('/register', async (req, res) => {
         res.status(201).json({ user, token });
     } catch (err) {
         console.error('Registration error:', err);
-        res.status(500).json({ error: 'Registration failed. Please try again.' });
+        res.status(err.status || 500).json({ error: err.status === 503 ? 'Persistent database is temporarily unavailable.' : 'Registration failed. Please try again.' });
     }
 });
 
@@ -99,7 +99,7 @@ router.post('/login', async (req, res) => {
         res.json({ user: safeUser, token });
     } catch (err) {
         console.error('Login error:', err);
-        res.status(500).json({ error: 'Login failed. Please try again.' });
+        res.status(err.status || 500).json({ error: err.status === 503 ? 'Persistent database is temporarily unavailable.' : 'Login failed. Please try again.' });
     }
 });
 
@@ -124,7 +124,7 @@ router.get('/me', authenticateToken, async (req, res) => {
         res.json({ user, streak: streak || {} });
     } catch (err) {
         console.error('Profile fetch error:', err);
-        res.status(500).json({ error: 'Failed to load profile.' });
+        res.status(err.status || 500).json({ error: err.status === 503 ? 'Persistent database is temporarily unavailable.' : 'Failed to load profile.' });
     }
 });
 
@@ -194,7 +194,7 @@ router.put('/profile', authenticateToken, async (req, res) => {
         res.json({ user });
     } catch (err) {
         console.error('Profile update error:', err);
-        res.status(500).json({ error: 'Failed to update profile.' });
+        res.status(err.status || 500).json({ error: err.status === 503 ? 'Persistent database is temporarily unavailable.' : 'Failed to update profile.' });
     }
 });
 

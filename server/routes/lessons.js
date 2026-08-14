@@ -13,7 +13,7 @@ router.get('/categories', async (req, res) => {
         const categories = db.prepare('SELECT * FROM lesson_categories WHERE is_active = 1 ORDER BY sort_order').all();
         res.json({ categories });
     } catch (err) {
-        res.status(500).json({ error: 'Failed to load categories.' });
+        res.status(err.status || 500).json({ error: err.status === 503 ? 'Persistent database is temporarily unavailable.' : 'Failed to load categories.' });
     }
 });
 
@@ -53,7 +53,7 @@ router.get('/', optionalAuth, async (req, res) => {
         res.json({ lessons });
     } catch (err) {
         console.error('Lessons fetch error:', err);
-        res.status(500).json({ error: 'Failed to load lessons.' });
+        res.status(err.status || 500).json({ error: err.status === 503 ? 'Persistent database is temporarily unavailable.' : 'Failed to load lessons.' });
     }
 });
 
@@ -89,7 +89,7 @@ router.get('/:id', optionalAuth, async (req, res) => {
         res.json({ lesson, quizzes, vocabulary, progress });
     } catch (err) {
         console.error('Lesson fetch error:', err);
-        res.status(500).json({ error: 'Failed to load lesson.' });
+        res.status(err.status || 500).json({ error: err.status === 503 ? 'Persistent database is temporarily unavailable.' : 'Failed to load lesson.' });
     }
 });
 
@@ -122,7 +122,7 @@ router.post('/:id/start', authenticateToken, async (req, res) => {
         res.json({ message: 'Lesson started.' });
     } catch (err) {
         console.error('Lesson start error:', err);
-        res.status(500).json({ error: 'Failed to start lesson.' });
+        res.status(err.status || 500).json({ error: err.status === 503 ? 'Persistent database is temporarily unavailable.' : 'Failed to start lesson.' });
     }
 });
 
@@ -180,7 +180,7 @@ router.post('/:id/complete', authenticateToken, async (req, res) => {
         res.json({ message: 'Lesson completed!', score });
     } catch (err) {
         console.error('Lesson complete error:', err);
-        res.status(500).json({ error: 'Failed to complete lesson.' });
+        res.status(err.status || 500).json({ error: err.status === 503 ? 'Persistent database is temporarily unavailable.' : 'Failed to complete lesson.' });
     }
 });
 

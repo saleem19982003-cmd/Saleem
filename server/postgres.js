@@ -3,18 +3,18 @@
 // directory content remain in the local content database.
 const { Pool } = require('pg');
 
-const POSTGRES_URL = process.env.POSTGRES_URL_NON_POOLING
-    || process.env.POSTGRES_URL
+const POSTGRES_URL = process.env.POSTGRES_URL
     || process.env.POSTGRES_PRISMA_URL
-    || process.env.DATABASE_URL;
-const POSTGRES_SOURCE = process.env.POSTGRES_URL_NON_POOLING
-    ? 'POSTGRES_URL_NON_POOLING'
-    : process.env.POSTGRES_URL
-        ? 'POSTGRES_URL'
-        : process.env.POSTGRES_PRISMA_URL
-            ? 'POSTGRES_PRISMA_URL'
-            : process.env.DATABASE_URL
-                ? 'DATABASE_URL'
+    || process.env.DATABASE_URL
+    || process.env.POSTGRES_URL_NON_POOLING;
+const POSTGRES_SOURCE = process.env.POSTGRES_URL
+    ? 'POSTGRES_URL'
+    : process.env.POSTGRES_PRISMA_URL
+        ? 'POSTGRES_PRISMA_URL'
+        : process.env.DATABASE_URL
+            ? 'DATABASE_URL'
+            : process.env.POSTGRES_URL_NON_POOLING
+                ? 'POSTGRES_URL_NON_POOLING'
                 : null;
 
 const schema = [
@@ -166,7 +166,13 @@ class PostgresStore {
     }
 
     async ready() {
-        return this.readyPromise;
+        try {
+            return await this.readyPromise;
+        } catch (error) {
+            error.status = 503;
+            error.code = 'PERSISTENCE_UNAVAILABLE';
+            throw error;
+        }
     }
 
     async query(text, values = []) {
