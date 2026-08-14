@@ -3,7 +3,7 @@
 // =============================================================
 const jwt = require('jsonwebtoken');
 
-const JWT_SECRET = process.env.JWT_SECRET || '';
+const JWT_SECRET = process.env.JWT_SECRET;
 
 if (process.env.NODE_ENV === 'production' && !process.env.JWT_SECRET) {
     console.error('JWT_SECRET is not configured; public read routes remain available, authentication is disabled.');
