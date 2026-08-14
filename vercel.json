@@ -50,6 +50,15 @@
       ]
     }
   ],
+  "functions": {
+    "server/index.js": {
+      "includeFiles": [
+        "data/dialect_lessons_600.json",
+        "data/culture_lessons_100.json",
+        "data/phrases_45.json"
+      ]
+    }
+  },
   "routes": [
     {
       "src": "/api/(.*)",
