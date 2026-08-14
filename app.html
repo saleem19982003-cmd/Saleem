@@ -101,7 +101,7 @@
                             <div style="display: flex; align-items: center; gap: 16px;">
                                 <div style="text-align: center; background: rgba(232, 171, 99, 0.15); padding: 8px 16px; border-radius: 14px; border: 1px solid var(--warm-sand);">
                                     <span data-i18n="dailyStreak" style="font-size: 11px; color: var(--text-muted); display: block;">Daily Streak</span>
-                                    <strong style="font-size: 18px; color: var(--warm-sand);"><i class="fa-solid fa-fire text-gold"></i> <span id="user-streak-count">0</span> <span id="user-streak-label">Days</span></strong>
+                                    <strong style="font-size: 18px; color: var(--warm-sand);"><i class="fa-solid fa-fire text-gold"></i> <span id="user-streak-count">0</span> <span id="user-streak-label" data-i18n="daysLabel">Days</span></strong>
                                 </div>
                                 <div style="text-align: center; background: rgba(16, 185, 129, 0.15); padding: 8px 16px; border-radius: 14px; border: 1px solid var(--emerald);">
                                     <span data-i18n="totalXp" style="font-size: 11px; color: var(--text-muted); display: block;">Total XP</span>
@@ -124,7 +124,7 @@
                     <!-- Duolingo Curved Snake Path Container -->
                     <div class="card" style="position: relative; overflow: hidden; padding: 30px 20px;">
                         <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 20px;">
-                            <h3 id="current-track-title"><i class="fa-solid fa-route text-gold"></i> <span>Loading learning dataset...</span></h3>
+                            <h3 id="current-track-title"><i class="fa-solid fa-route text-gold"></i> <span data-i18n="loadingDataset">Loading learning dataset...</span></h3>
                             <div style="display: flex; align-items: center; gap: 10px;">
                                 <input type="number" id="lesson-jump-input" placeholder="Jump to Lesson..." min="1" class="form-control" style="width: 180px; font-size: 12px;">
                                 <button class="btn btn-outline" id="btn-jump-lesson" data-i18n="jump" style="padding: 8px 12px; font-size: 12px;"><i class="fa-solid fa-plane-departure"></i> Jump</button>
@@ -248,16 +248,16 @@
 
                         <!-- Mentor Matching & Resource Sharing -->
                         <div class="card action-card" style="background: linear-gradient(135deg, rgba(15, 76, 129, 0.3), rgba(31, 41, 59, 0.95)); border: 1px solid var(--warm-sand);">
-                            <h3><i class="fa-solid fa-handshake-simple text-gold"></i> Mentor Matching & Volunteer Support</h3>
-                            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">Connect with advanced learners and verified local volunteers speaking your native language.</p>
+                            <h3 data-i18n="mentorHeading"><i class="fa-solid fa-handshake-simple text-gold"></i> Mentor Matching & Volunteer Support</h3>
+                            <p data-i18n="mentorSub" style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">Connect with advanced learners and verified local volunteers speaking your native language.</p>
 
                             <div style="padding: 12px; background: rgba(0,0,0,0.3); border-radius: 10px; margin-bottom: 14px;">
-                                <strong style="font-size: 13px; color: var(--emerald); display: block;"><i class="fa-solid fa-award"></i> Weekly Community Challenge</strong>
-                                <span style="font-size: 12px; color: #fff;">Complete this week's Egyptian learning challenge and earn the "Cairo Pioneer" badge!</span>
+                                <strong data-i18n="weeklyChallenge" style="font-size: 13px; color: var(--emerald); display: block;"><i class="fa-solid fa-award"></i> Weekly Community Challenge</strong>
+                                <span data-i18n="weeklyChallengeSub" style="font-size: 12px; color: #fff;">Complete this week's Egyptian learning challenge and earn the "Cairo Pioneer" badge!</span>
                             </div>
 
                             <button class="btn btn-outline" id="btn-request-mentor" style="width: 100%; justify-content: center;">
-                                <i class="fa-solid fa-user-plus"></i> Request Peer Mentor
+                                <i class="fa-solid fa-user-plus"></i> <span data-i18n="requestMentor">Request Peer Mentor</span>
                             </button>
                         </div>
                     </div>
@@ -265,8 +265,8 @@
                     <!-- Discussion Feed -->
                     <div class="card" style="margin-top: 20px;">
                         <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
-                            <h3><i class="fa-solid fa-comments text-gold"></i> Community Discussion Feed</h3>
-                            <span class="tag tag-ngo"><i class="fa-solid fa-earth-africa"></i> Moderated & Safe</span>
+                            <h3 data-i18n="discussionFeed"><i class="fa-solid fa-comments text-gold"></i> Community Discussion Feed</h3>
+                            <span class="tag tag-ngo" data-i18n="moderatedSafe"><i class="fa-solid fa-earth-africa"></i> Moderated & Safe</span>
                         </div>
                         <div id="community-posts-list" style="display: flex; flex-direction: column; gap: 14px;">
                             <!-- Community posts render dynamically -->
@@ -277,9 +277,9 @@
                     <div style="margin-top: 24px;" class="grid-2">
                         <!-- Submit Review Card -->
                         <div class="card action-card">
-                            <h3><i class="fa-solid fa-star text-gold"></i> Rate Saleem & Recommend Improvements</h3>
+                            <h3 data-i18n="reviewHeading"><i class="fa-solid fa-star text-gold"></i> Rate Saleem & Recommend Improvements</h3>
                             <div style="margin-bottom: 12px;">
-                                <label style="font-size: 12px; color: var(--warm-sand); font-weight: 600; display: block; margin-bottom: 6px;">Rating Score:</label>
+                                <label data-i18n="ratingScore" style="font-size: 12px; color: var(--warm-sand); font-weight: 600; display: block; margin-bottom: 6px;">Rating Score:</label>
                                 <div id="star-rating-selector" style="display: flex; gap: 8px; font-size: 22px; color: #FBBF24; cursor: pointer;">
                                     <i class="fa-solid fa-star star-btn active" data-rating="1"></i>
                                     <i class="fa-solid fa-star star-btn active" data-rating="2"></i>
@@ -289,22 +289,22 @@
                                 </div>
                             </div>
 
-                            <textarea id="review-help-text" placeholder="Share how Saleem helped you in Egypt..." class="form-control" style="height: 80px; margin-bottom: 10px;"></textarea>
-                            <input type="text" id="review-improvement-text" placeholder="Recommended improvement (optional)..." class="form-control" style="margin-bottom: 12px;">
-                            <button class="btn btn-primary" id="btn-submit-review" style="width: 100%; justify-content: center;"><i class="fa-solid fa-paper-plane"></i> Submit Feedback</button>
+                            <textarea id="review-help-text" data-i18n-ph="reviewHelpPlaceholder" placeholder="Share how Saleem helped you in Egypt..." class="form-control" style="height: 80px; margin-bottom: 10px;"></textarea>
+                            <input type="text" id="review-improvement-text" data-i18n-ph="reviewImprovementPlaceholder" placeholder="Recommended improvement (optional)..." class="form-control" style="margin-bottom: 12px;">
+                            <button class="btn btn-primary" id="btn-submit-review" data-i18n="submitFeedback" style="width: 100%; justify-content: center;"><i class="fa-solid fa-paper-plane"></i> Submit Feedback</button>
                         </div>
 
                         <!-- Average Rating Card -->
                         <div class="card" style="text-align: center; display: flex; flex-direction: column; justify-content: center; background: linear-gradient(135deg, rgba(15, 76, 129, 0.3), rgba(31, 41, 59, 0.95)); border: 1px solid var(--warm-sand);">
                             <div style="font-size: 44px; font-weight: 800; color: #FBBF24; line-height: 1;" id="avg-rating-score">0.0</div>
                             <div style="font-size: 18px; color: #FBBF24; margin: 6px 0;">⭐⭐⭐⭐⭐</div>
-                            <h4 style="font-size: 15px; color: #fff; margin-bottom: 4px;">Community Average Rating</h4>
-                            <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;" id="total-reviews-count">No public reviews yet</p>
+                            <h4 data-i18n="communityAverage" style="font-size: 15px; color: #fff; margin-bottom: 4px;">Community Average Rating</h4>
+                            <p data-i18n="noPublicReviews" style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;" id="total-reviews-count">No public reviews yet</p>
                         </div>
                     </div>
 
                     <div class="card" style="margin-top: 16px;">
-                        <h4 style="font-size: 14px; margin-bottom: 12px;"><i class="fa-solid fa-comments"></i> Community Feedback Feed</h4>
+                        <h4 data-i18n="feedbackFeed" style="font-size: 14px; margin-bottom: 12px;"><i class="fa-solid fa-comments"></i> Community Feedback Feed</h4>
                         <div id="reviews-feed-container" style="display: flex; flex-direction: column; gap: 12px;">
                             <!-- Reviews render dynamically -->
                         </div>
@@ -330,53 +330,53 @@
                                     <div class="avatar" style="width: 48px; height: 48px; font-size: 22px;"><i class="fa-solid fa-user-astronaut"></i></div>
                                     <div>
                                         <h3 class="user-name" style="font-size: 18px; margin: 0; color: #fff;">Amina Hassan</h3>
-                                        <span class="user-status" style="font-size: 12px; color: var(--emerald);"><i class="fa-solid fa-circle-check"></i> Local app profile</span>
+                                        <span class="user-status" data-i18n="localAppProfile" style="font-size: 12px; color: var(--emerald);"><i class="fa-solid fa-circle-check"></i> Local app profile</span>
                                     </div>
                                 </div>
-                                <span class="tag" style="border-color: var(--warm-sand); color: var(--warm-sand);">Saleem Pass</span>
+                                <span class="tag" data-i18n="saleemPass" style="border-color: var(--warm-sand); color: var(--warm-sand);">Saleem Pass</span>
                             </div>
 
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 14px; background: rgba(0, 0, 0, 0.3); border-radius: 12px; margin-bottom: 16px;">
                                 <div>
-                                    <span style="font-size: 11px; color: var(--text-muted); text-transform: uppercase; display: block;">Country of Origin</span>
+                                    <span data-i18n="countryOrigin" style="font-size: 11px; color: var(--text-muted); text-transform: uppercase; display: block;">Country of Origin</span>
                                     <strong id="user-profile-nat" style="font-size: 15px; color: var(--warm-sand);">Sudan</strong>
                                 </div>
                                 <div>
-                                    <span style="font-size: 11px; color: var(--text-muted); text-transform: uppercase; display: block;">Saleem User ID</span>
+                                    <span data-i18n="saleemUserId" style="font-size: 11px; color: var(--text-muted); text-transform: uppercase; display: block;">Saleem User ID</span>
                                     <strong id="user-profile-id" style="font-size: 15px; color: #fff; font-family: monospace;">SLM-849201</strong>
                                 </div>
                             </div>
 
                             <div style="display: flex; align-items: center; justify-content: space-between;">
-                                <span style="font-size: 12px; color: var(--emerald);"><i class="fa-solid fa-cloud-check"></i> Offline & Cloud Synchronized</span>
-                                <button class="btn btn-outline" id="btn-edit-profile" style="padding: 6px 14px; font-size: 12px;"><i class="fa-solid fa-pen-to-square"></i> Edit Profile</button>
+                                <span data-i18n="offlineCloud" style="font-size: 12px; color: var(--emerald);"><i class="fa-solid fa-cloud-check"></i> Offline & Cloud Synchronized</span>
+                                <button class="btn btn-outline" id="btn-edit-profile" data-i18n="editProfile" style="padding: 6px 14px; font-size: 12px;"><i class="fa-solid fa-pen-to-square"></i> Edit Profile</button>
                             </div>
                         </div>
 
                         <!-- Progress Metrics Card -->
                         <div class="card">
-                            <h3><i class="fa-solid fa-chart-line text-gold"></i> Personal Learning Metrics</h3>
+                            <h3 data-i18n="learningMetrics"><i class="fa-solid fa-chart-line text-gold"></i> Personal Learning Metrics</h3>
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px;">
                                 <div style="padding: 12px; background: var(--surface-dark); border-radius: 10px; text-align: center;">
                                     <span style="font-size: 24px; font-weight: 700; color: var(--warm-sand); display: block;" id="stat-words-learned">0</span>
-                                    <span style="font-size: 11px; color: var(--text-muted);">Words Learned</span>
+                                    <span data-i18n="wordsLearned" style="font-size: 11px; color: var(--text-muted);">Words Learned</span>
                                 </div>
                                 <div style="padding: 12px; background: var(--surface-dark); border-radius: 10px; text-align: center;">
                                     <span style="font-size: 24px; font-weight: 700; color: var(--emerald); display: block;" id="stat-phrases-mastered">0</span>
-                                    <span style="font-size: 11px; color: var(--text-muted);">Phrases Mastered</span>
+                                    <span data-i18n="phrasesMastered" style="font-size: 11px; color: var(--text-muted);">Phrases Mastered</span>
                                 </div>
                                 <div style="padding: 12px; background: var(--surface-dark); border-radius: 10px; text-align: center;">
                                     <span style="font-size: 24px; font-weight: 700; color: var(--coral); display: block;" id="stat-streak-days">🔥 0</span>
-                                    <span style="font-size: 11px; color: var(--text-muted);">Days Streak</span>
+                                    <span data-i18n="daysStreak" style="font-size: 11px; color: var(--text-muted);">Days Streak</span>
                                 </div>
                                 <div style="padding: 12px; background: var(--surface-dark); border-radius: 10px; text-align: center;">
-                                    <span style="font-size: 24px; font-weight: 700; color: var(--accent-assistant); display: block;" id="stat-level">Level 1</span>
-                                    <span style="font-size: 11px; color: var(--text-muted);" id="stat-level-label">Beginner</span>
+                                    <span style="font-size: 24px; font-weight: 700; color: var(--accent-assistant); display: block;" id="stat-level"><span data-i18n="level">Level</span> 1</span>
+                                    <span data-i18n="beginner" style="font-size: 11px; color: var(--text-muted);" id="stat-level-label">Beginner</span>
                                 </div>
                             </div>
 
                             <button class="btn btn-outline" id="btn-download-offline" style="width: 100%; margin-top: 16px; justify-content: center;">
-                                <i class="fa-solid fa-download"></i> Download Content for Offline Use
+                                <i class="fa-solid fa-download"></i> <span data-i18n="downloadOffline">Download Content for Offline Use</span>
                             </button>
                         </div>
                     </div>
@@ -385,10 +385,10 @@
                     <div class="card" style="margin-top: 24px;">
                         <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 16px;">
                             <div>
-                                <h3><i class="fa-solid fa-map-location-dot text-gold"></i> Verified Services & Refugee Access Finder</h3>
-                                <p style="font-size: 13px; color: var(--text-muted); margin: 0;">Source-backed directory for UNHCR, legal aid, healthcare, and emergency contacts. Always verify hours before visiting.</p>
+                                <h3 data-i18n="verifiedServices"><i class="fa-solid fa-map-location-dot text-gold"></i> Verified Services & Refugee Access Finder</h3>
+                                <p data-i18n="verifiedServicesSub" style="font-size: 13px; color: var(--text-muted); margin: 0;">Source-backed directory for UNHCR, legal aid, healthcare, and emergency contacts. Always verify hours before visiting.</p>
                             </div>
-                            <input type="text" id="institution-search-input" placeholder="Search institution by name or location..." class="form-control" style="max-width: 280px; font-size: 12px;">
+                            <input type="text" id="institution-search-input" data-i18n-ph="searchInstitution" placeholder="Search institution by name or location..." class="form-control" style="max-width: 280px; font-size: 12px;">
                         </div>
 
                         <div class="service-location-tools" aria-live="polite">
@@ -410,20 +410,20 @@
 
                         <!-- Category Filter Chips -->
                         <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px;" id="institution-category-chips">
-                            <button class="chip-btn active" data-inst-cat="all">All Institutions</button>
-                            <button class="chip-btn" data-inst-cat="unhcr">🏛️ UNHCR & UN</button>
-                            <button class="chip-btn" data-inst-cat="immigration">🛂 Immigration & Passports</button>
-                            <button class="chip-btn" data-inst-cat="health">🏥 Health & Emergency Clinics</button>
-                            <button class="chip-btn" data-inst-cat="legal">⚖️ Legal Aid NGOs</button>
-                            <button class="chip-btn" data-inst-cat="police">👮 Police Stations</button>
+                            <button class="chip-btn active" data-inst-cat="all" data-i18n="allInstitutions">All Institutions</button>
+                            <button class="chip-btn" data-inst-cat="unhcr" data-i18n="catUnhcr">🏛️ UNHCR &amp; UN</button>
+                            <button class="chip-btn" data-inst-cat="immigration" data-i18n="catImmigration">🛂 Immigration &amp; Passports</button>
+                            <button class="chip-btn" data-inst-cat="health" data-i18n="catHealth">🏥 Health &amp; Emergency Clinics</button>
+                            <button class="chip-btn" data-inst-cat="legal" data-i18n="catLegal">⚖️ Legal Aid NGOs</button>
+                            <button class="chip-btn" data-inst-cat="police" data-i18n="catPolice">👮 Police Stations</button>
                         </div>
 
                         <!-- Google Maps Interactive Container -->
                         <div id="institution-map" style="width: 100%; height: 320px; border-radius: 14px; background: var(--surface-dark); border: 1px solid var(--glass-border); margin-bottom: 20px; overflow: hidden; position: relative;">
                             <div id="map-fallback-notice" style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px; background: linear-gradient(135deg, rgba(15, 76, 129, 0.7), rgba(31, 41, 59, 0.95)); color: #fff;">
                                 <i class="fa-solid fa-map-location-dot" style="font-size: 40px; color: var(--warm-sand); margin-bottom: 10px;"></i>
-                                <h4 style="font-size: 18px; margin-bottom: 4px;">Cairo & Giza Verified-Service Directory</h4>
-                                <p style="font-size: 13px; color: var(--text-muted); max-width: 480px;">Use the cards below for source links, direct calls, and map directions. Embedded maps stay disabled until a real Maps key is configured outside source control.</p>
+                                <h4 data-i18n="mapFallbackTitle" style="font-size: 18px; margin-bottom: 4px;">Cairo &amp; Giza Verified-Service Directory</h4>
+                                <p data-i18n="mapFallbackText" style="font-size: 13px; color: var(--text-muted); max-width: 480px;">Use the cards below for source links, direct calls, and map directions. Embedded maps stay disabled until a real Maps key is configured outside source control.</p>
                             </div>
                         </div>
 

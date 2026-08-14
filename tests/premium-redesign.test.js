@@ -15,13 +15,30 @@ test('premium shell keeps localized controls wired to the existing runtime', () 
         'forumAll', 'forumLanguage', 'forumCulture', 'forumTips', 'forumStories',
         'postHeading', 'postTitlePlaceholder', 'postBodyPlaceholder', 'submitPost',
         'profileIntro', 'chatTutor', 'chatWelcome', 'quickMetro', 'quickRent',
-        'quickUnhcr', 'quickPharmacy', 'chatPlaceholder'
+        'quickUnhcr', 'quickPharmacy', 'chatPlaceholder', 'daysLabel',
+        'sectionLearn', 'sectionLearnSub', 'dailyStreak', 'totalXp', 'jump', 'progress',
+        'sectionAi', 'sectionCommunity', 'sectionProfile', 'learningSnapshot',
+        'mentorHeading', 'mentorSub', 'weeklyChallenge', 'weeklyChallengeSub', 'requestMentor',
+        'discussionFeed', 'moderatedSafe', 'reviewHeading', 'ratingScore',
+        'reviewHelpPlaceholder', 'reviewImprovementPlaceholder', 'submitFeedback',
+        'communityAverage', 'noPublicReviews', 'feedbackFeed', 'localAppProfile',
+        'saleemPass', 'countryOrigin', 'saleemUserId', 'offlineCloud', 'editProfile',
+        'learningMetrics', 'wordsLearned', 'phrasesMastered', 'daysStreak', 'level',
+        'beginner', 'downloadOffline', 'verifiedServices', 'verifiedServicesSub',
+        'searchInstitution', 'allInstitutions', 'catUnhcr', 'catImmigration', 'catHealth',
+        'catLegal', 'catPolice', 'mapFallbackTitle', 'mapFallbackText'
     ]) {
         assert.match(html, new RegExp(`(?:data-i18n|data-i18n-ph)="${key}"`), `missing shell key ${key}`);
     }
     for (const language of ['fr', 'am', 'so', 'ti', 'sw', 'ha', 'om']) {
         assert.match(js, new RegExp(`\\b${language}:`), `missing localized shell language ${language}`);
     }
+    assert.match(js, /const APP_SHELL_TEXT = Object\.freeze/);
+    assert.match(js, /const APP_ACTION_TEXT = Object\.freeze/);
+    assert.match(js, /getAppActionText\('directions'\)/);
+    assert.match(js, /getAppActionText\('call'\)/);
+    assert.match(js, /ha:\s*\{[\s\S]*?step1_header/);
+    assert.match(js, /om:\s*\{[\s\S]*?step1_header/);
 });
 
 test('premium visual system has responsive and accessible foundations', () => {

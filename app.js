@@ -622,6 +622,48 @@ document.addEventListener('DOMContentLoaded', () => {
         om: { chatTutor: 'Gargaarsa AI Saleem:', chatWelcome: 'Ahlan wa Sahlan! Gaaffii gaafadhu ykn haala shaakalaa filadhu.', quickMetro: 'Metro Qaahiraa', quickRent: 'Kiraa mana', quickUnhcr: 'Waajjira UNHCR', quickPharmacy: 'Jechoota mana qorichaa', chatPlaceholder: 'Ergaa Afaan Oromoo ykn Afaan Arabaa Gibxiitiin barreessi...' }
     });
 
+    const APP_SHELL_TEXT = Object.freeze({
+        en: { daysLabel: 'Days', lessonsLabel: 'Lessons', sectionLearn: 'Section A: Learn Egyptian & Culture Path', sectionLearnSub: 'Interactive Egyptian dialect path with situational practice and culture lessons.', dailyStreak: 'Daily Streak', totalXp: 'Total XP', jump: 'Jump', progress: 'Progress', sectionAi: 'Section B: Saleem AI (Egyptian Dialect AI Tutor)', sectionCommunity: 'Section C: Refugee Community Hub & Peer Forums', sectionProfile: 'Section D: Profile & Legal Institutions Access', brandSupport: 'Refugee Support', localProfile: 'Local Saleem profile', learningSnapshot: 'Personal Learning Snapshot', loadingDataset: 'Loading learning dataset...', privateProgress: 'Private progress estimates from your activity on this device and synced account.', rank: 'Rank', learnerName: 'Learner Name', country: 'Country', xpPoints: 'XP Points', badge: 'Badge', noLessons: 'No lessons completed yet! Complete Lesson 1 to earn your first XP.', mentorHeading: 'Mentor Matching & Volunteer Support', mentorSub: 'Connect with advanced learners and verified local volunteers speaking your native language.', weeklyChallenge: 'Weekly Community Challenge', weeklyChallengeSub: 'Complete this Egyptian learning challenge and earn the Cairo Pioneer badge!', requestMentor: 'Request Peer Mentor', discussionFeed: 'Community Discussion Feed', moderatedSafe: 'Moderated & Safe', reviewHeading: 'Rate Saleem & Recommend Improvements', ratingScore: 'Rating Score:', reviewHelpPlaceholder: 'Share how Saleem helped you in Egypt...', reviewImprovementPlaceholder: 'Recommended improvement (optional)...', submitFeedback: 'Submit Feedback', communityAverage: 'Community Average Rating', noPublicReviews: 'No public reviews yet', feedbackFeed: 'Community Feedback Feed', localAppProfile: 'Local app profile', saleemPass: 'Saleem Pass', countryOrigin: 'Country of Origin', saleemUserId: 'Saleem User ID', offlineCloud: 'Offline & Cloud Synchronized', editProfile: 'Edit Profile', learningMetrics: 'Personal Learning Metrics', wordsLearned: 'Words Learned', phrasesMastered: 'Phrases Mastered', daysStreak: 'Days Streak', level: 'Level', beginner: 'Beginner', downloadOffline: 'Download Content for Offline Use', verifiedServices: 'Verified Services & Refugee Access Finder', verifiedServicesSub: 'Source-backed directory for UNHCR, legal aid, healthcare, and emergency contacts. Always verify hours before visiting.', searchInstitution: 'Search institution by name or location...', allInstitutions: 'All Institutions', catUnhcr: 'UNHCR & UN', catImmigration: 'Immigration & Passports', catHealth: 'Health & Emergency Clinics', catLegal: 'Legal Aid NGOs', catPolice: 'Police Stations', mapFallbackTitle: 'Cairo & Giza Verified-Service Directory', mapFallbackText: 'Use the cards below for source links, direct calls, and map directions. Embedded maps stay disabled until a real Maps key is configured outside source control.' },
+        ar: { daysLabel: '\u0623\u064a\u0627\u0645', lessonsLabel: '\u062f\u0631\u0648\u0633', sectionLearn: '\u0627\u0644\u0642\u0633\u0645 \u0623: \u062a\u0639\u0644\u0645 \u0627\u0644\u0644\u0647\u062c\u0629 \u0627\u0644\u0645\u0635\u0631\u064a\u0629 \u0648\u0627\u0644\u062b\u0642\u0627\u0641\u0629', sectionLearnSub: '\u0645\u0633\u0627\u0631 \u062a\u0641\u0627\u0639\u0644\u064a \u0644\u0644\u0644\u0647\u062c\u0629 \u0627\u0644\u0645\u0635\u0631\u064a\u0629 \u0648\u062f\u0631\u0648\u0633 \u0627\u0644\u062b\u0642\u0627\u0641\u0629.', dailyStreak: '\u0627\u0644\u0645\u062a\u0627\u0628\u0639\u0629 \u0627\u0644\u064a\u0648\u0645\u064a\u0629', totalXp: '\u0645\u062c\u0645\u0648\u0639 XP', jump: '\u0627\u0646\u062a\u0642\u0644', progress: '\u0627\u0644\u062a\u0642\u062f\u0645', sectionAi: '\u0627\u0644\u0642\u0633\u0645 \u0628: \u0645\u0633\u0627\u0639\u062f \u0633\u0644\u064a\u0645 \u0627\u0644\u0630\u0643\u064a', sectionCommunity: '\u0627\u0644\u0642\u0633\u0645 \u062c: \u0645\u0644\u062a\u0642\u0649 \u0627\u0644\u0645\u062c\u062a\u0645\u0639', sectionProfile: '\u0627\u0644\u0642\u0633\u0645 \u062f: \u0627\u0644\u0645\u0644\u0641 \u0627\u0644\u0634\u062e\u0635\u064a \u0648\u0627\u06484\u062e\u062f\u0645\u0627\u062a', brandSupport: '\u062f\u0639\u0645 \u0627\u0644\u0644\u0627\u062c\u0626\u064a\u0646', localProfile: '\u0645\u0644\u0641 \u0633\u0644\u064a\u0645 \u0627\u0644\u0645\u062d\u0644\u064a', learningSnapshot: '\u0645\u0644\u062e\u0635 \u0627\u0644\u062a\u0642\u062f\u0645 \u0627\u0644\u0634\u062e\u0635\u064a', loadingDataset: '\u062c\u0627\u0631\u064a \u062a\u062d\u0645\u064a\u0644 \u0628\u064a\u0627\u0646\u0627\u062a \u0627\u0644\u062a\u0639\u0644\u0645...', privateProgress: '\u062a\u0642\u062f\u064a\u0631\u0627\u062a \u0627\u0644\u062a\u0642\u062f\u0645 \u0627\u0644\u062e\u0627\u0635\u0629 \u0628\u0646\u0634\u0627\u0637\u0643 \u0648\u062d\u0633\u0627\u0628\u0643 \u0627\u0644\u0645\u062a\u0632\u0627\u0645\u0646.', rank: '\u0627\u0644\u0645\u0631\u062a\u0628\u0629', learnerName: '\u0627\u0633\u0645 \u0627\u0644\u0645\u062a\u0639\u0644\u0645', country: '\u0627\u0644\u062f\u0648\u0644\u0629', xpPoints: '\u0646\u0642\u0627\u0637 XP', badge: '\u0627\u0644\u0634\u0627\u0631\u0629', noLessons: '\u0644\u0645 \u062a\u0643\u0645\u0644 \u0623\u064a \u062f\u0631\u0633 \u0628\u0639\u062f. \u0623\u0643\u0645\u0644 \u0627\u0644\u062f\u0631\u0633 1 \u0644\u0643\u0633\u0628 \u0623\u0648\u0644 XP.', mentorHeading: '\u062a\u0648\u0641\u064a\u0642 \u0627\u0644\u0645\u0631\u0634\u062f\u064a\u0646 \u0648\u062f\u0639\u0645 \u0627\u0644\u0645\u062a\u0637\u0648\u0639\u064a\u0646', mentorSub: '\u062a\u0648\u0627\u0635\u0644 \u0645\u0639 \u0645\u062a\u0639\u0644\u0645\u064a\u0646 \u0645\u062a\u0642\u062f\u0645\u064a\u0646 \u0648\u0645\u062a\u0637\u0648\u0639\u064a\u0646 \u0645\u0648\u062b\u0648\u0642\u064a\u0646 \u064a\u062a\u062d\u062f\u062b\u0648\u0646 \u0644\u063a\u062a\u0643.', weeklyChallenge: '\u062a\u062d\u062f\u064a \u0627\u0644\u0623\u0633\u0628\u0648\u0639', weeklyChallengeSub: '\u0623\u0643\u0645\u0644 \u062a\u062d\u062f\u064a \u0627\u0644\u0644\u063a\u0629 \u0627\u0644\u0645\u0635\u0631\u064a\u0629 \u0644\u0647\u0630\u0627 \u0627\u0644\u0623\u0633\u0628\u0648\u0639 \u0648\u0627\u0643\u0633\u0628 \u0634\u0627\u0631\u0629 \u0631\u0627\u0626\u062f \u0627\u0644\u0642\u0627\u0647\u0631\u0629!', requestMentor: '\u0627\u0637\u0644\u0628 \u0645\u0631\u0634\u062f\u0627\u064b', discussionFeed: '\u0645\u0646\u062a\u062f\u0649 \u0646\u0642\u0627\u0634 \u0627\u0644\u0645\u062c\u062a\u0645\u0639', moderatedSafe: '\u0622\u0645\u0646 \u0648\u062a\u062d\u062a \u0627\u0644\u0625\u0634\u0631\u0627\u0641', reviewHeading: '\u0642\u064a\u0651\u0645 \u0633\u0644\u064a\u0645 \u0648\u0627\u0642\u062a\u0631\u062d \u062a\u062d\u0633\u064a\u0646\u0627\u062a', ratingScore: '\u062f\u0631\u062c\u0629 \u0627\u0644\u062a\u0642\u064a\u064a\u0645:', reviewHelpPlaceholder: '\u0634\u0627\u0631\u0643 \u0643\u064a\u0641 \u0633\u0627\u0639\u062f\u0643 \u0633\u0644\u064a\u0645 \u0641\u064a \u0645\u0635\u0631...', reviewImprovementPlaceholder: '\u062a\u062d\u0633\u064a\u0646 \u0645\u0642\u062a\u0631\u062d (\u0627\u062e\u062a\u064a\u0627\u0631\u064a)...', submitFeedback: '\u0625\u0631\u0633\u0627\u0644 \u0627\u0644\u0645\u0644\u0627\u062d\u0638\u0627\u062a', communityAverage: '\u0645\u062a\u0648\u0633\u0637 \u062a\u0642\u064a\u064a\u0645 \u0627\u0644\u0645\u062c\u062a\u0645\u0639', noPublicReviews: '\u0644\u0627 \u062a\u0648\u062c\u062f \u0645\u0631\u0627\u062c\u0639\u0627\u062a \u0639\u0627\u0645\u0629 \u0628\u0639\u062f', feedbackFeed: '\u0645\u0646\u0634\u0648\u0631\u0627\u062a \u0627\u0644\u0645\u062c\u062a\u0645\u0639', localAppProfile: '\u0645\u0644\u0641 \u0627\u0644\u062a\u0637\u0628\u064a\u0642 \u0627\u0644\u0645\u062d\u0644\u064a', saleemPass: '\u0628\u0637\u0627\u0642\u0629 \u0633\u0644\u064a\u0645', countryOrigin: '\u0628\u0644\u062f \u0627\u0644\u0623\u0635\u0644', saleemUserId: '\u0645\u0639\u0631\u0651\u0641 \u0645\u0633\u062a\u062e\u062f\u0645 \u0633\u0644\u064a\u0645', offlineCloud: '\u0645\u062a\u0632\u0627\u0645\u0646 \u0645\u0639 \u0627\u0644\u0633\u062d\u0627\u0628\u0629 \u0648\u0628\u062f\u0648\u0646 \u0627\u062a\u0635\u0627\u0644', editProfile: '\u062a\u0639\u062f\u064a\u0644 \u0627\u0644\u0645\u0644\u0641', learningMetrics: '\u0645\u0624\u0634\u0631\u0627\u062a \u0627\u0644\u062a\u0639\u0644\u0645 \u0627\u0644\u0634\u062e\u0635\u064a', wordsLearned: '\u0643\u0644\u0645\u0627\u062a \u062a\u0645 \u062a\u0639\u0644\u0645\u0647\u0627', phrasesMastered: '\u0639\u0628\u0627\u0631\u0627\u062a \u0645\u062a\u0642\u0646\u0629', daysStreak: '\u0623\u064a\u0627\u0645 \u0627\u0644\u0645\u062a\u0627\u0628\u0639\u0629', level: '\u0645\u0633\u062a\u0648\u0649', beginner: '\u0645\u0628\u062a\u062f\u0626', downloadOffline: '\u062a\u0646\u0632\u064a\u0644 \u0627\u0644\u0645\u062d\u062a\u0648\u0649 \u0644\u0644\u0627\u0633\u062a\u062e\u062f\u0627\u0645 \u0628\u062f\u0648\u0646 \u0627\u062a\u0635\u0627\u0644', verifiedServices: '\u0627\u0644\u062e\u062f\u0645\u0627\u062a \u0627\u0644\u0645\u0648\u062b\u0642\u0629 \u0648\u0627\u0644\u0628\u062d\u062b \u0639\u0646 \u0627\u0644\u0645\u0633\u0627\u0639\u062f\u0627\u062a', verifiedServicesSub: '\u062f\u0644\u064a\u0644 \u0645\u0648\u062b\u0642 \u0644\u0644\u0645\u0641\u0648\u0636\u064a\u0629 \u0648\u0627\u0644\u0645\u0633\u0627\u0639\u062f\u0627\u062a \u0627\u0644\u0642\u0627\u0646\u0648\u0646\u064a\u0629 \u0648\u0627\u0644\u0635\u062d\u064a\u0629. \u062a\u0623\u0643\u062f \u062f\u0627\u0626\u0645\u0627\u064b \u0645\u0646 \u0627\u0644\u0645\u0648\u0627\u0639\u064a\u062f \u0642\u0628\u0644 \u0627\u0644\u0632\u064a\u0627\u0631\u0629.', searchInstitution: '\u0627\u0628\u062d\u062b \u0639\u0646 \u0645\u0624\u0633\u0633\u0629 \u0628\u0627\u0644\u0627\u0633\u0645 \u0623\u0648 \u0627\u0644\u0645\u0648\u0642\u0639...', allInstitutions: '\u0643\u0644 \u0627\u0644\u0645\u0624\u0633\u0633\u0627\u062a', catUnhcr: 'UNHCR & UN', catImmigration: '\u0627\u0644\u0647\u062c\u0631\u0629 \u0648\u062c\u0648\u0627\u0632\u0627\u062a \u0627\u0644\u0633\u0641\u0631', catHealth: '\u0627\u0644\u0635\u062d\u0629 \u0648\u0627\u0644\u0637\u0648\u0627\u0631\u0626', catLegal: '\u0645\u0646\u0638\u0645\u0627\u062a \u0627\u0644\u0645\u0633\u0627\u0639\u062f\u0629 \u0627\u0644\u0642\u0627\u0646\u0648\u064a\u0629', catPolice: '\u0645\u0631\u0627\u0643\u0632 \u0627\u0644\u0634\u0631\u0637\u0629', mapFallbackTitle: '\u062f\u0644\u064a\u0644 \u0627\u0644\u062e\u062f\u0645\u0627\u062a \u0627\u0644\u0645\u0648\u062b\u0642\u0629 \u0641\u064a \u0627\u0644\u0642\u0627\u0647\u0631\u0629 \u0648\u0627\u0644\u062c\u064a\u0632\u0629', mapFallbackText: '\u0627\u0633\u062a\u062e\u062f\u0645 \u0627\u0644\u0628\u0637\u0627\u0642\u0627\u062a \u0644\u0641\u062a\u062d \u0627\u0644\u0645\u0635\u0627\u062f\u0631 \u0648\u0627\u0644\u0627\u062a\u0635\u0627\u0644 \u0648\u0627\u06484\u062c\u0647\u0627\u062a. \u0627\u0644\u062e\u0631\u0627\u0626\u0637 \u0627\u0644\u0645\u062f\u0645\u062c\u0629 \u0645\u0648\u0642\u0648\u0641\u0629 \u062d\u062a\u0649 \u062a\u0643\u0648\u0646 \u0645\u0641\u062a\u0627\u062d \u062e\u0631\u0627\u0626\u0637 \u062d\u0642\u064a\u0642\u064a \u0645\u0636\u0628\u0648\u0637\u0627\u064b \u062e\u0627\u0631\u062c \u0627\u0644\u0643\u0648\u062f.' },
+        fr: { daysLabel: 'Jours', lessonsLabel: 'Leçons', sectionLearn: 'Section A : Apprendre l’égyptien et la culture', sectionLearnSub: 'Parcours interactif d’arabe égyptien avec situations pratiques et leçons culturelles.', dailyStreak: 'Série quotidienne', totalXp: 'XP total', jump: 'Aller à', progress: 'Progression', sectionAi: 'Section B : Assistant Saleem', sectionCommunity: 'Section C : Centre communautaire', sectionProfile: 'Section D : Profil et services', brandSupport: 'Soutien aux réfugiés', localProfile: 'Profil local Saleem', learningSnapshot: 'Résumé de votre apprentissage', loadingDataset: 'Chargement des données...', privateProgress: 'Estimations privées de votre activité sur cet appareil et votre compte synchronisé.', rank: 'Rang', learnerName: 'Nom de l’apprenant', country: 'Pays', xpPoints: 'Points XP', badge: 'Badge', noLessons: 'Aucune leçon terminée. Terminez la leçon 1 pour gagner votre premier XP.', mentorHeading: 'Mentorat et soutien bénévole', mentorSub: 'Échangez avec des apprenants avancés et des bénévoles locaux vérifiés qui parlent votre langue.', weeklyChallenge: 'Défi communautaire hebdomadaire', weeklyChallengeSub: 'Terminez le défi d’arabe égyptien et gagnez le badge Pionnier du Caire !', requestMentor: 'Demander un mentor', discussionFeed: 'Fil de discussion communautaire', moderatedSafe: 'Modéré et sûr', reviewHeading: 'Évaluer Saleem et proposer des améliorations', ratingScore: 'Note :', reviewHelpPlaceholder: 'Expliquez comment Saleem vous a aidé en Égypte...', reviewImprovementPlaceholder: 'Amélioration recommandée (facultatif)...', submitFeedback: 'Envoyer un retour', communityAverage: 'Note moyenne de la communauté', noPublicReviews: 'Aucun avis public pour le moment', feedbackFeed: 'Retours de la communauté', localAppProfile: 'Profil local de l’application', saleemPass: 'Pass Saleem', countryOrigin: 'Pays d’origine', saleemUserId: 'Identifiant utilisateur Saleem', offlineCloud: 'Synchronisé hors ligne et avec le cloud', editProfile: 'Modifier le profil', learningMetrics: 'Indicateurs d’apprentissage', wordsLearned: 'Mots appris', phrasesMastered: 'Expressions maîtrisées', daysStreak: 'Jours de série', level: 'Niveau', beginner: 'Débutant', downloadOffline: 'Télécharger le contenu hors ligne', verifiedServices: 'Services vérifiés et recherche d’aide', verifiedServicesSub: 'Annuaire vérifié de services du HCR, d’aide juridique, de santé et d’urgence. Vérifiez toujours les horaires.', searchInstitution: 'Rechercher une institution par nom ou lieu...', allInstitutions: 'Toutes les institutions', catUnhcr: 'HCR et ONU', catImmigration: 'Immigration et passeports', catHealth: 'Santé et urgences', catLegal: 'ONG d’aide juridique', catPolice: 'Postes de police', mapFallbackTitle: 'Annuaire vérifié du Caire et de Gizeh', mapFallbackText: 'Utilisez les cartes pour les sources, appels et itinéraires. Les cartes intégrées restent désactivées sans clé Maps configurée hors du code.' },
+        so: { daysLabel: 'Maalmo', lessonsLabel: 'Casharro', sectionLearn: 'Qaybta A: Baro Carabiga Masar iyo dhaqanka', sectionLearnSub: 'Jid waxbarasho oo Carabi Masri ah leh tababar xaalado iyo casharro dhaqan.', dailyStreak: 'Silsiladda maalinlaha', totalXp: 'Wadarta XP', jump: 'U bood', progress: 'Horumar', sectionAi: 'Qaybta B: Kaaliyaha Saleem', sectionCommunity: 'Qaybta C: Xarunta bulshada', sectionProfile: 'Qaybta D: Profile iyo adeegyada', brandSupport: 'Taageerada qaxootiga', localProfile: 'Profile Saleem ee deegaanka', learningSnapshot: 'Kooban waxbarashadaada', loadingDataset: 'Xogta waa la soo dejinayaa...', privateProgress: 'Qiyaasaha horumarka gaarka ah ee qalabkan iyo koontadaada la isku waafajiyay.', rank: 'Darajo', learnerName: 'Magaca ardayga', country: 'Dalka', xpPoints: 'Dhibcaha XP', badge: 'Astaanta', noLessons: 'Cashar lama dhammayn. Dhammaystir casharka 1 si aad u hesho XP-gaaga koowaad.', mentorHeading: 'Isku xirka macallimiinta iyo taageerada mutadawiciinta', mentorSub: 'La xiriir arday horumarsan iyo mutadawiciin la xaqiijiyay oo ku hadla luqaddaada.', weeklyChallenge: 'Caqabadda bulshada ee toddobaadlaha', weeklyChallengeSub: 'Dhammaystir caqabadda Carabiga Masar oo hel astaanta Hormuudka Qaahira!', requestMentor: 'Codso hagaha ardayda', discussionFeed: 'Doodda bulshada', moderatedSafe: 'La ilaaliyo oo ammaan ah', reviewHeading: 'Qiimee Saleem oo soo jeedi horumarin', ratingScore: 'Dhibcaha qiimeynta:', reviewHelpPlaceholder: 'La wadaag sida Saleem kaaga caawiyay Masar...', reviewImprovementPlaceholder: 'Horumarin lagu taliyay (ikhtiyaari)...', submitFeedback: 'Gudbi jawaab-celin', communityAverage: 'Celceliska qiimeynta bulshada', noPublicReviews: 'Weli ma jiraan faallooyin dadweyne', feedbackFeed: 'Jawaab-celinta bulshada', localAppProfile: 'Profile-ka app-ka deegaanka', saleemPass: 'Baas Saleem', countryOrigin: 'Dalka asal ahaan', saleemUserId: 'Aqoonsiga isticmaalaha Saleem', offlineCloud: 'Offline iyo cloud waa la isku waafajiyay', editProfile: 'Wax ka beddel profile', learningMetrics: 'Cabbirrada waxbarashada', wordsLearned: 'Erayada la bartay', phrasesMastered: 'Weedhaha la bartay', daysStreak: 'Maalmaha silsiladda', level: 'Heer', beginner: 'Bilow', downloadOffline: 'Soo dejiso xogta offline', verifiedServices: 'Adeegyada la xaqiijiyay iyo raadinta caawimada', verifiedServicesSub: 'Hagaha la xaqiijiyay ee UNHCR, gargaarka sharciga, caafimaadka iyo xaaladaha degdegga ah. Hubi saacadaha.', searchInstitution: 'Raadi hay’ad magac ama meel...', allInstitutions: 'Dhammaan hay’adaha', catUnhcr: 'UNHCR iyo UN', catImmigration: 'Socdaalka iyo baasaboorrada', catHealth: 'Caafimaad iyo rugaha degdegga', catLegal: 'NGO-yada gargaarka sharciga', catPolice: 'Saldhigyada booliska', mapFallbackTitle: 'Hagaha adeegyada la xaqiijiyay ee Qaahira iyo Giza', mapFallbackText: 'Isticmaal kaararka hoose si aad u aragto ilaha, wicitaannada iyo tilmaamaha. Khariidadaha ku dhex jira way xiran yihiin ilaa furaha Maps la dejiyo.' },
+        sw: { daysLabel: 'Siku', lessonsLabel: 'Masomo', sectionLearn: 'Sehemu A: Jifunze Kiarabu cha Misri na utamaduni', sectionLearnSub: 'Njia ya maingiliano ya Kiarabu cha Misri yenye mazoezi ya hali na masomo ya utamaduni.', dailyStreak: 'Mfululizo wa kila siku', totalXp: 'XP yote', jump: 'Nenda', progress: 'Maendeleo', sectionAi: 'Sehemu B: Msaidizi wa Saleem', sectionCommunity: 'Sehemu C: Kituo cha jamii', sectionProfile: 'Sehemu D: Wasifu na huduma', brandSupport: 'Msaada wa wakimbizi', localProfile: 'Wasifu wa Saleem wa eneo', learningSnapshot: 'Muhtasari wa kujifunza', loadingDataset: 'Inapakia data...', privateProgress: 'Makadirio ya maendeleo ya faragha kutoka kwenye kifaa na akaunti yako iliyosawazishwa.', rank: 'Nafasi', learnerName: 'Jina la mwanafunzi', country: 'Nchi', xpPoints: 'Pointi za XP', badge: 'Beji', noLessons: 'Hakuna somo lililokamilika. Kamilisha somo la 1 kupata XP yako ya kwanza.', mentorHeading: 'Ulinganishaji wa washauri na msaada wa kujitolea', mentorSub: 'Ungana na wanafunzi wa juu na wajitolea waliothibitishwa wanaozungumza lugha yako.', weeklyChallenge: 'Changamoto ya jamii ya kila wiki', weeklyChallengeSub: 'Kamilisha changamoto ya Kiarabu cha Misri upate beji ya Mwanzilishi wa Cairo!', requestMentor: 'Omba mshauri', discussionFeed: 'Mijadala ya jamii', moderatedSafe: 'Inasimamiwa na salama', reviewHeading: 'Kadiria Saleem na pendekeza maboresho', ratingScore: 'Alama ya ukadiriaji:', reviewHelpPlaceholder: 'Shiriki jinsi Saleem alivyokusaidia Misri...', reviewImprovementPlaceholder: 'Uboreshaji unaopendekezwa (hiari)...', submitFeedback: 'Tuma maoni', communityAverage: 'Wastani wa ukadiriaji wa jamii', noPublicReviews: 'Hakuna maoni ya umma bado', feedbackFeed: 'Mrejesho wa jamii', localAppProfile: 'Wasifu wa programu wa eneo', saleemPass: 'Pasi ya Saleem', countryOrigin: 'Nchi ya asili', saleemUserId: 'Kitambulisho cha mtumiaji wa Saleem', offlineCloud: 'Imesawazishwa offline na cloud', editProfile: 'Hariri wasifu', learningMetrics: 'Vipimo vya kujifunza', wordsLearned: 'Maneno yaliyofunzwa', phrasesMastered: 'Misemo iliyomilikiwa', daysStreak: 'Siku za mfululizo', level: 'Kiwango', beginner: 'Mwanzo', downloadOffline: 'Pakua maudhui ya kutumia offline', verifiedServices: 'Huduma zilizothibitishwa na kitafuta msaada', verifiedServicesSub: 'Orodha iliyothibitishwa ya UNHCR, msaada wa kisheria, afya na dharura. Thibitisha saa kabla ya kutembelea.', searchInstitution: 'Tafuta taasisi kwa jina au eneo...', allInstitutions: 'Taasisi zote', catUnhcr: 'UNHCR na UN', catImmigration: 'Uhamiaji na pasipoti', catHealth: 'Afya na kliniki za dharura', catLegal: 'NGO za msaada wa kisheria', catPolice: 'Vituo vya polisi', mapFallbackTitle: 'Orodha ya huduma zilizothibitishwa Cairo na Giza', mapFallbackText: 'Tumia kadi kuona vyanzo, kupiga simu na maelekezo. Ramani zilizopachikwa zimezimwa hadi ufunguo halisi wa Maps usanidiwe.' },
+        ha: { daysLabel: 'Kwanaki', lessonsLabel: 'Darussa', sectionLearn: 'Sashe A: Koyi Larabcin Masar da al’adu', sectionLearnSub: 'Hanyar koyon Larabcin Masar mai atisayen yanayi da darussan al’adu.', dailyStreak: 'Jerin yau da kullum', totalXp: 'Jimillar XP', jump: 'Je zuwa', progress: 'Ci gaba', sectionAi: 'Sashe B: Mataimakin Saleem', sectionCommunity: 'Sashe C: Cibiyar al’umma', sectionProfile: 'Sashe D: Profile da ayyuka', brandSupport: 'Tallafin ’yan gudun hijira', localProfile: 'Profile na Saleem na gida', learningSnapshot: 'Takaitaccen karatu', loadingDataset: 'Ana loda bayanai...', privateProgress: 'Ƙididdigar ci gaban sirri daga wannan na’ura da asusun da aka daidaita.', rank: 'Matsayi', learnerName: 'Sunan mai koyo', country: 'Ƙasa', xpPoints: 'Makin XP', badge: 'Alama', noLessons: 'Ba a kammala darasi ba. Kammala darasi na 1 don samun XP na farko.', mentorHeading: 'Haɗa masu ba da shawara da taimakon masu sa kai', mentorSub: 'Haɗu da masu koyo na gaba da masu sa kai da aka tabbatar waɗanda ke magana da harshenka.', weeklyChallenge: 'Kalubalen al’umma na mako-mako', weeklyChallengeSub: 'Kammala kalubalen Larabcin Masar ka sami alamar Majagaba ta Alkahira!', requestMentor: 'Nemi mai ba da shawara', discussionFeed: 'Tattaunawar al’umma', moderatedSafe: 'Ana sa ido kuma lafiya', reviewHeading: 'Kimanta Saleem kuma ba da shawarar inganta', ratingScore: 'Makin kimantawa:', reviewHelpPlaceholder: 'Bayyana yadda Saleem ya taimake ka a Masar...', reviewImprovementPlaceholder: 'Ingantawa da aka ba da shawara (zaɓi)...', submitFeedback: 'Aika ra’ayi', communityAverage: 'Matsakaicin kimar al’umma', noPublicReviews: 'Babu ra’ayoyin jama’a tukuna', feedbackFeed: 'Ra’ayoyin al’umma', localAppProfile: 'Profile na app na gida', saleemPass: 'Katin Saleem', countryOrigin: 'Ƙasar asali', saleemUserId: 'ID ɗin mai amfani na Saleem', offlineCloud: 'An daidaita offline da cloud', editProfile: 'Gyara profile', learningMetrics: 'Ma’aunin koyo', wordsLearned: 'Kalmomin da aka koya', phrasesMastered: 'Jimlolin da aka ƙware', daysStreak: 'Kwanakin jere', level: 'Mataki', beginner: 'Mai farawa', downloadOffline: 'Sauke bayanai don amfani offline', verifiedServices: 'Ayyukan da aka tabbatar da mai neman taimako', verifiedServicesSub: 'Jerin UNHCR, taimakon doka, lafiya da gaggawa da aka tabbatar. Koyaushe tabbatar da lokuta.', searchInstitution: 'Nemo cibiya da suna ko wuri...', allInstitutions: 'Dukkan cibiyoyi', catUnhcr: 'UNHCR da UN', catImmigration: 'Shige da fice da fasfo', catHealth: 'Lafiya da asibitocin gaggawa', catLegal: 'NGO na taimakon doka', catPolice: 'Tashoshin ’yan sanda', mapFallbackTitle: 'Jerin ayyukan Cairo da Giza da aka tabbatar', mapFallbackText: 'Yi amfani da katunan don hanyoyin tushe, kira da jagora. An kashe taswirar har sai an saita ainihin Maps key.' },
+        om: { daysLabel: 'Guyyaa', lessonsLabel: 'Barnoota', sectionLearn: 'Kutaa A: Afaan Arabaa Gibxii fi aadaa baradhu', sectionLearnSub: 'Karaa barnootaa wal-qunnamtii qabu, shaakala haalaa fi barnoota aadaa qabu.', dailyStreak: 'Walitti fufiinsa guyyaa', totalXp: 'XP waliigalaa', jump: 'Ce’i', progress: 'Guddina', sectionAi: 'Kutaa B: Gargaarsa Saleem', sectionCommunity: 'Kutaa C: Giddugala hawaasaa', sectionProfile: 'Kutaa D: Piroofaayilaa fi tajaajiloota', brandSupport: 'Deeggarsa baqattootaa', localProfile: 'Piroofaayila Saleem naannoo', learningSnapshot: 'Cuunfaa barnootaa', loadingDataset: 'Daataan fe’amaa jira...', privateProgress: 'Tilmaama guddina dhuunfaa meeshaa kanaa fi herrega kee waliin wal-simsiifame.', rank: 'Sadarkaa', learnerName: 'Maqaa barataa', country: 'Biyya', xpPoints: 'Qabxii XP', badge: 'Mallattoo', noLessons: 'Barnoonni hin xumuramne. XP kee jalqabaa argachuuf barnoota 1 xumuri.', mentorHeading: 'Walitti hidhuu gorsitootaa fi deeggarsa fedhii', mentorSub: 'Barattoota sadarkaa ol’aanaa fi fedhiiwwan naannoo afaan kee dubbatan waliin wal qunnami.', weeklyChallenge: 'Qormaata hawaasaa torbanii', weeklyChallengeSub: 'Qormaata Afaan Arabaa Gibxii xumuri, mallattoo Qajeelchaa Qaahiraa argadhu!', requestMentor: 'Gorsaa gaafadhu', discussionFeed: 'Marii hawaasaa', moderatedSafe: 'To’atamaa fi nageenya qabu', reviewHeading: 'Saleem madaali, fooyya’iinsa yaadi', ratingScore: 'Qabxii madaallii:', reviewHelpPlaceholder: 'Akka Saleem Gibxii keessatti si gargaare qoodi...', reviewImprovementPlaceholder: 'Fooyya’iinsa yaadame (filannoo)...', submitFeedback: 'Yaada ergi', communityAverage: 'Madaallii giddu-galeessaa hawaasaa', noPublicReviews: 'Yaadni uummataa hin jiru', feedbackFeed: 'Yaada hawaasaa', localAppProfile: 'Piroofaayila appii naannoo', saleemPass: 'Paasii Saleem', countryOrigin: 'Biyya dhalootaa', saleemUserId: 'Eenyummaa fayyadamaa Saleem', offlineCloud: 'Offline fi cloud waliin wal-simsiifame', editProfile: 'Piroofaayila gulaali', learningMetrics: 'Safartuu barnootaa', wordsLearned: 'Jechoota barataman', phrasesMastered: 'Hima baratame', daysStreak: 'Guyyoota walitti aanan', level: 'Sadarkaa', beginner: 'Jalqabaa', downloadOffline: 'Qabiyyee offline buufadhu', verifiedServices: 'Tajaajiloota mirkanaa’an fi barbaacha gargaarsaa', verifiedServicesSub: 'Tarree UNHCR, gargaarsa seeraa, fayyaa fi hatattamaa mirkanaa’e. Yeroo hojii mirkaneessi.', searchInstitution: 'Dhaabbata maqaa ykn bakka barbaadi...', allInstitutions: 'Dhaabbilee hunda', catUnhcr: 'UNHCR fi UN', catImmigration: 'Immigireeshinii fi paaspoortii', catHealth: 'Fayyaa fi kilinika hatattamaa', catLegal: 'NGO gargaarsa seeraa', catPolice: 'Buufata poolisii', mapFallbackTitle: 'Tarree tajaajiloota Qaahiraa fi Giza mirkanaa’an', mapFallbackText: 'Kaardota fayyadamuun maddoota, bilbila fi kallattii ilaali. Kaartaan keessa jiru hanga furtuun Maps qophaa’utti cufameera.' },
+        am: { daysLabel: '\u1240\u1293\u1275', lessonsLabel: '\u1275\u121d\u1205\u122d\u1276\u127d', sectionLearn: '\u12ad\u134d\u120d A: \u12e8\u130d\u133d\u1275 \u12a0\u1228\u1265\u129b \u12a5\u1293 \u1263\u1205\u120d \u12ed\u121b\u1229', sectionLearnSub: '\u12e8\u130d\u133d\u1275 \u12a0\u1228\u1265\u129b \u1309\u12de \u12e8\u1205\u122d\u1235\u1275 \u1309\u12de \u12a5\u1293 \u12e8\u1263\u1205\u120d \u1275\u121d\u1205\u122d\u1276\u127d \u12eb\u1209\u1275\u1362', dailyStreak: '\u12e8\u12a5\u1208\u1275 \u1270\u12a8\u1273\u1273\u120d', totalXp: '\u1320\u1218\u122d XP', jump: '\u12dd\u1218\u1228\u1325', progress: '\u12e8\u12a5\u12e1\u1275 \u12a5\u12e5\u1308\u1263', sectionAi: '\u12ad\u134d\u120d B: \u12e8\u1233\u120a\u121d \u1228\u12f3\u1275', sectionCommunity: '\u12ad\u134d\u120d C: \u12e8\u1230\u1265\u1233\u1260\u1275 \u121b\u12a5\u1240\u120d', sectionProfile: '\u12ad\u134d\u120d D: \u12e8\u1218\u1308\u1208\u132b \u12a5\u1293 \u12a0\u1308\u120d\u130d\u120e\u1276\u127d', brandSupport: '\u12e8\u1263\u1270\u1270\u12a5\u12cd \u12f0\u130b\u134d', localProfile: '\u12e8\u1233\u120a\u121d \u12e8\u12a0\u1298\u1308\u1298\u1265 \u1218\u1308\u1208\u132b', learningSnapshot: '\u12e8\u1218\u121b\u122d \u133d\u1301\u134d', loadingDataset: '\u12f3\u1273 \u1260\u1218\u132b\u1295 \u120b\u12ed \u1290\u12cd...', privateProgress: '\u12a8\u12ad\u134d\u1209 \u12e8\u12a5\u12e1\u1275 \u130d\u1228\u12db \u1218\u1228\u1303 \u1290\u12cd.', rank: '\u12f0\u1228\u1303', learnerName: '\u12e8\u1270\u121b\u122a \u1235\u121d', country: '\u1200\u1308\u122d', xpPoints: '\u12e8 XP \u1290\u1300\u1276\u127d', badge: '\u121d\u120d\u12ad\u1275', noLessons: '\u121d\u1295\u121d \u121d\u12d5\u120b\u1218\u120b\u12e3\u1362 \u12e8\u1218\u1300\u1218\u122a\u12eb \u12f0\u1228\u1303 \u12ed\u1219\u1209\u1362', mentorHeading: '\u12e8\u1218\u122a\u12ab\u12a8\u122d \u12a5\u1293 \u12e8\u12f5\u130b\u134d \u12f5\u130b\u134d', mentorSub: '\u12e8\u12a5\u1235\u12f0\u1275 \u1270\u121b\u122a\u12ce\u127d\u1295 \u12a5\u1293 \u12e8\u1270\u1228\u130b\u1321 \u12a0\u1308\u120d\u130d\u120e\u127d\u1295 \u12eb\u130a\u1299\u1362', weeklyChallenge: '\u12e8\u1233\u121d\u1295\u1275 \u1205\u130d\u12f5', weeklyChallengeSub: '\u12e8\u130d\u133d\u1275 \u12a0\u1228\u1265\u129b \u12e8\u1233\u121d\u1295\u1275 \u1205\u130d\u12f5 \u12ed\u1219\u1209 \u12a5\u1293 \u12e8\u1243\u1205\u122d \u1240\u12f3\u121a \u1218\u1218\u122a\u12eb \u12eb\u130d\u1299\u1362', requestMentor: '\u1218\u122a\u12ab\u12a8\u122d \u12ed\u1300\u121d\u1229', discussionFeed: '\u12e8\u1230\u1265\u1233\u1260\u1275 \u12cd\u12ed\u12ed\u1275', moderatedSafe: '\u12e8\u1270\u1246\u1323\u1320\u1228 \u12a5\u1293 \u12f0\u1205\u1295\u1290\u1270\u129b', reviewHeading: '\u1233\u120a\u121d\u1295 \u12ed\u1218\u12dd\u1291 \u12a5\u1293 \u121b\u123b\u123b\u12eb \u12eb\u1275\u12e9', ratingScore: '\u12e8\u121d\u1308\u1218\u121b \u12cd\u1324\u1275:', reviewHelpPlaceholder: '\u1233\u120a\u121d \u1260\u130d\u133d\u1275 \u12a5\u1295\u12f4\u1275 \u12a5\u1290\u12f0\u1270\u12d5 \u12eb\u130b\u1229...', reviewImprovementPlaceholder: '\u12e8\u1270\u1218\u12a8\u1228\u12f0 \u121b\u123b\u1238\u1235 (\u12a0\u1205\u1273\u121a)...', submitFeedback: '\u130d\u1265\u123d \u12eb\u1235\u1308\u1261', communityAverage: '\u12e8\u1230\u1265\u1233\u1260\u1275 \u12a0\u122b\u1275', noPublicReviews: '\u12e8\u1230\u1265\u1233\u1260\u1275 \u130d\u121d\u130f\u127d \u12a5\u12f2\u1209\u121d', feedbackFeed: '\u12e8\u1230\u1265\u1233\u1260\u1275 \u130d\u121d\u1308\u121b', localAppProfile: '\u12e8\u12a0\u1300\u1263\u1262 \u121b\u1305\u1295 \u1218\u1308\u1208\u132b', saleemPass: '\u1233\u120a\u121d \u1353\u1235', countryOrigin: '\u12e8\u1218\u1323\u1325 \u1200\u1308\u122d', saleemUserId: '\u12e8\u1233\u120a\u121d \u1270\u1320\u1243\u121a \u1218\u1208\u12eb', offlineCloud: '\u12c6\u134b\u120b\u12ed\u1295 \u12a5\u1293 cloud \u1270\u1218\u12f3\u12f0\u1228', editProfile: '\u1218\u1308\u1208\u132b \u12a0\u1235\u1270\u12ab\u12ad', learningMetrics: '\u12e8\u1218\u121b\u122d \u1218\u12c8\u12e8\u12eb\u12ce\u127d', wordsLearned: '\u12e8\u1270\u121b\u1229 \u1243\u120b\u1275', phrasesMastered: '\u12e8\u1270\u121b\u1229 \u1210\u1228\u130e\u127d', daysStreak: '\u12e8\u1240\u1293\u1275 \u1270\u12a8\u1273\u1273\u120d', level: '\u12f0\u1228\u1303', beginner: '\u1307\u1205\u120d', downloadOffline: '\u12f3\u1273 \u1218\u1290\u1218\u1290\u127d \u1260\u12e6\u134b\u120b\u12ed \u1270\u12c4\u120b\u12ed', verifiedServices: '\u12e8\u1270\u1228\u130b\u1321 \u12a0\u1308\u120d\u130d\u120e\u1276\u127d \u12a5\u1293 \u12e8\u1203\u122c \u1218\u1348\u130a\u12eb', verifiedServicesSub: '\u12e8UNHCR \u12a8\u12a5\u1293 \u12e8\u1205\u130d \u12f5\u130b\u134d\u1363 \u130d\u1265\u133d \u12a5\u1293 \u12e8\u12a0\u12a8\u1263\u1262 \u12a0\u1308\u120d\u130d\u120e\u1276\u127d \u12f3\u130d\u1219\u1362', searchInstitution: '\u12a2\u1295\u1235\u1272\u1275\u12e9\u123d\u1295 \u1260\u1235\u121d \u12c8\u12ed\u121d \u1260\u1266\u1273 \u12f7\u130b', allInstitutions: '\u1201\u1209\u121d \u12a2\u1295\u1235\u1272\u1275\u12e0e\u127d', catUnhcr: 'UNHCR & UN', catImmigration: '\u12a2\u121a\u130d\u122c\u123d\u1295 \u12a5\u1293  passport', catHealth: '\u130d\u133d\u1275 \u12a5\u1293 \u12a0\u12a8\u1263\u1262', catLegal: '\u12e8\u1215\u130d \u12f5\u130b\u134d NGOs', catPolice: '\u12e8\u1356\u120a\u1235 \u1303\u1276\u127d', mapFallbackTitle: '\u12e8\u12a0\u12f2\u1235 \u12a0\u1260\u1263 \u1240\u1275\u122d \u12a5\u1293 \u1308\u12e8\u12a4\u12dd\u12a5 \u12e8\u1270\u1228\u130b\u1321 \u12a0\u1308\u120d\u130d\u120e\u1276\u127d', mapFallbackText: '\u1218\u1300\u1218\u122a\u12eb\u12ce\u127d\u1295 \u12a5\u1293 \u12a0\u1245\u1323\u132b\u12ce\u127d\u1295 \u1208\u121b\u12e8\u1275 \u12a8\u1273\u127d \u12ed\u1320\u1240\u1219\u1362' },
+        ti: { daysLabel: '\u1218\u12d3\u120d\u1272', lessonsLabel: '\u1275\u121d\u1205\u122d\u1272', sectionLearn: '\u12ad\u134d\u120d A: \u130d\u1265\u133a \u12d3\u1228\u1265\u129b \u12a5\u1293 \u1263\u1215\u120a \u121d\u1213\u122d', sectionLearnSub: '\u12dd\u1270\u12f3\u1208\u12e8 \u130d\u1265\u133a \u12d3\u1228\u1265\u129b \u1218\u1300\u1218\u122a\u12eb \u12a5\u1293 \u1263\u1215\u120a \u1275\u121d\u1205\u122d\u1272\u1362', dailyStreak: '\u12dd\u12d5\u12cd\u1270\u1290 \u1218\u12d3\u120d\u1272', totalXp: '\u1320\u121d\u1229 XP', jump: '\u12f5\u1208\u12ed', progress: '\u12dd\u1260\u133d\u1200 \u121d\u1295\u1263\u122d', sectionAi: '\u12ad\u134d\u120d B: \u1233\u120a\u121d AI', sectionCommunity: '\u12ad\u134d\u120d C: \u121b\u1205\u1260\u1228\u1230\u1265\u1233\u1260\u1275', sectionProfile: '\u12ad\u134d\u120d D: \u1218\u1308\u1208\u1325\u1295 \u12a0\u1308\u120d\u130d\u120e\u1275\u1295', brandSupport: '\u12f0\u130b\u134d \u1263\u1240\u122d\u1262', localProfile: '\u121e\u1323\u122a\u12e8 Saleem \u1218\u1308\u1208\u132b', learningSnapshot: '\u1230\u121e\u1295\u1275 \u1275\u121d\u1205\u122d\u1272', loadingDataset: '\u12f3\u1273 \u12ed\u132b\u129b\u120d', privateProgress: '\u12e8\u121b\u1201\u1275 \u130d\u1228\u12db \u130d\u1295\u12e1', rank: '\u12f0\u1228\u1303', learnerName: '\u1235\u121d \u1270\u121b\u122a', country: '\u1203\u1308\u122d', xpPoints: '\u12e8 XP \u1290\u1300\u1276\u127d', badge: '\u121d\u120d\u12ad\u1275', noLessons: '\u121d\u1295\u121d \u12f0\u122d\u1235 \u12a0\u120d\u1328\u1261\u121d', mentorHeading: '\u12a0\u1233\u1233\u1262 \u1218\u130b\u1300\u1265\u1295 \u12f0\u130b\u134d', mentorSub: '\u121d\u1235 \u12f0\u1240\u1245\u1260 \u1270\u121b\u122e\u127d \u12a5\u1293 \u1270\u1228\u130b\u1321 \u1263\u1208\u1219\u12eb\u1275 \u1215\u1265\u1228\u1275', weeklyChallenge: '\u1230\u1219\u1295\u1273\u12ca \u1270\u130d\u1263\u122d', weeklyChallengeSub: '\u12dd\u12c8\u12f3\u12f0 \u130d\u1265\u133a \u12d3\u1228\u1265\u129b \u1270\u130d\u1263\u122d \u12f5\u1208\u12ed\u1362', requestMentor: '\u1213\u1308\u12db \u12f5\u1208\u12ed', discussionFeed: '\u121b\u1215\u1260\u122b\u12ca \u12dd\u122d\u122d\u1265', moderatedSafe: '\u1265\u1265\u1215\u1275 \u12dd\u121d\u122d\u1213\u12a5', reviewHeading: '\u1233\u120a\u121d \u121d\u12f0\u12dd\u1295 \u121b\u123b\u123b\u12eb \u12a3\u1245\u122d\u1265', ratingScore: '\u12cd\u1325\u1295 \u121d\u130d\u121b\u1215', reviewHelpPlaceholder: '\u1233\u120a\u121d \u1265\u130d\u1265\u133a \u12a8\u121d\u1295\u1275\u12f5\u12a9 \u12a3\u1242\u1362', reviewImprovementPlaceholder: '\u121d\u12f5\u12b3\u121d \u12dd\u1260\u1208\u1338 (\u1215\u12f0\u1228\u1275)...', submitFeedback: '\u12a3\u1233\u12f0\u12f3 \u1218\u120d\u12e1', communityAverage: '\u121b\u12d3\u1228\u12f3 \u1265\u1265\u1215\u1275', noPublicReviews: '\u1213\u1295\u1272 \u1213\u1260\u122c\u1273 \u12e8\u120d\u1266\u1295', feedbackFeed: '\u1213\u1260\u122c\u1273 \u121b\u1205\u1260\u122b', localAppProfile: '\u121e\u1323\u122a\u12e8 app \u1218\u1308\u1208\u132b', saleemPass: '\u1233\u120a\u121d Pass', countryOrigin: '\u1203\u1308\u122d \u1218\u1295\u130e\u122d', saleemUserId: '\u12a5\u1301 \u1218\u1208\u12eb Saleem', offlineCloud: '\u12a8\u12f5\u130b\u134d \u12cd\u12ed\u121d cloud \u1270\u1218\u12f3\u12f0\u1228', editProfile: '\u1218\u1308\u1208\u132b \u121b\u1235\u1270\u12ab\u12a8\u12eb', learningMetrics: '\u12e8\u1218\u121b\u122d \u1218\u12c8\u12e8\u12eb', wordsLearned: '\u12e8\u1270\u121b\u1229 \u1243\u120b\u1275', phrasesMastered: '\u12e8\u1270\u121b\u1229 \u1210\u1228\u130e\u127d', daysStreak: '\u12e8\u1240\u1293\u1275 \u1270\u12a8\u1273\u1273\u120d', level: '\u12f0\u1228\u1303', beginner: '\u1307\u1205\u120d', downloadOffline: '\u12f3\u1273 \u1260\u12e6\u134b\u120b\u12ed \u1270\u12ac\u12f0\u12a8', verifiedServices: '\u12e8\u1270\u1228\u130b\u1321 \u12a0\u1308\u120d\u130d\u120e\u1275', verifiedServicesSub: '\u12e8UNHCR \u12d5\u12f3 \u12e8\u1215\u130d \u12f5\u130b\u134d \u12a5\u1293 \u12e8\u130d\u1265\u133d \u12a0\u1308\u120d\u130d\u120e\u1275 \u12a0\u1208\u1362', searchInstitution: '\u12a2\u1295\u1235\u1272\u1275\u12df\u12cd\u1295 \u1260\u1235\u121d \u12c8\u12ed\u121d \u1260\u1266\u1273 \u12ed\u121e\u1219', allInstitutions: '\u1201\u1209\u121d \u12a2\u1295\u1235\u1272\u1276\u127d', catUnhcr: 'UNHCR & UN', catImmigration: '\u12a2\u121a\u130d\u122c\u123d\u1295 \u12a5\u1293 \u12e8\u12a0\u120b\u134b \u1218\u12d8\u12eb', catHealth: '\u130d\u1265\u133d \u12a5\u1293 \u12a0\u12a8\u1263\u1262', catLegal: '\u12e8\u1205\u130d \u12f5\u130b\u134d', catPolice: '\u12e8\u1356\u120a\u1235 \u1303\u1276\u127d', mapFallbackTitle: '\u12e8\u12ab\u1205\u122d \u12a5\u1293 \u130a\u12db \u12e8\u1270\u1228\u130b\u1321 \u12a0\u1308\u120d\u130d\u120e\u1275', mapFallbackText: '\u121d\u12ad\u12d5\u1276\u127d\u1295 \u12a5\u1293 \u12a0\u1245\u1323\u132b\u12ce\u127d\u1295 \u1218\u12a8\u1270\u120d \u12d5\u12f0\u122d\u1362' }
+    });
+
+    const APP_ACTION_TEXT = Object.freeze({
+        en: { translate: 'Translate', translating: 'Translating...', sourceChecked: 'Source checked', officialSource: 'Official source', call: 'Call Direct', directions: 'Directions', usefulPhrase: 'Useful Phrase to Say', requiredDocs: 'Required Documents', replies: 'Answers / Replies', visible: 'Visible to Everyone' },
+        ar: { translate: '\u062a\u0631\u062c\u0645\u0629', translating: '\u062c\u0627\u0631\u064d \u0627\u0644\u062a\u0631\u062c\u0645\u0629...', sourceChecked: '\u062a\u0645 \u0627\u0644\u062a\u062d\u0642\u0642 \u0645\u0646 \u0627\u0644\u0645\u0635\u062f\u0631', officialSource: '\u0627\u0644\u0645\u0635\u062f\u0631 \u0627\u0644\u0631\u0633\u0645\u064a', call: '\u0627\u062a\u0635\u0627\u0644 \u0645\u0628\u0627\u0634\u0631', directions: '\u0627\u0644\u0627\u062a\u062c\u0627\u0647\u0627\u062a', usefulPhrase: '\u0639\u0628\u0627\u0631\u0629 \u0645\u0635\u0631\u064a\u0629 \u0645\u0641\u064a\u062f\u0629', requiredDocs: '\u0627\u0644\u0645\u0633\u062a\u0646\u062f\u0627\u062a \u0627\u0644\u0645\u0637\u0644\u0648\u0628\u0629', replies: '\u0627\u0644\u0631\u062f\u0648\u062f', visible: '\u0645\u0631\u0626\u064a \u0644\u0644\u062c\u0645\u064a\u0639' },
+        fr: { translate: 'Traduire', translating: 'Traduction en cours...', sourceChecked: 'Source vérifiée', officialSource: 'Source officielle', call: 'Appeler', directions: 'Itinéraire', usefulPhrase: 'Phrase utile à dire', requiredDocs: 'Documents requis', replies: 'Réponses', visible: 'Visible par tous' },
+        so: { translate: 'Turjun', translating: 'Turjumaad socota...', sourceChecked: 'Isha waa la hubiyay', officialSource: 'Isha rasmiga ah', call: 'Wac toos', directions: 'Tilmaamo', usefulPhrase: 'Weedh waxtar leh', requiredDocs: 'Dukumentiyada loo baahan yahay', replies: 'Jawaabo', visible: 'Qof walba wuu arki karaa' },
+        ti: { translate: 'ተርጉም', translating: 'ትርጉም ይካየድ ኣሎ...', sourceChecked: 'ምንጪ ተረጋጊጹ', officialSource: 'ወግዓዊ ምንጪ', call: 'ቀጥታ ደውል', directions: 'ኣንፈት', usefulPhrase: 'ጠቓሚ ሓረግ', requiredDocs: 'ዘድልዩ ሰነዳት', replies: 'መልስታት', visible: 'ንኹሉ ይርአ' },
+        sw: { translate: 'Tafsiri', translating: 'Inatafsiriwa...', sourceChecked: 'Chanzo kimethibitishwa', officialSource: 'Chanzo rasmi', call: 'Piga simu moja kwa moja', directions: 'Maelekezo', usefulPhrase: 'Maneno muhimu ya kusema', requiredDocs: 'Nyaraka zinazohitajika', replies: 'Majibu', visible: 'Inaonekana kwa wote' },
+        ha: { translate: 'Fassara', translating: 'Ana fassara...', sourceChecked: 'An tabbatar da tushe', officialSource: 'Tushen hukuma', call: 'Kira kai tsaye', directions: 'Hanyoyi', usefulPhrase: 'Jimla mai amfani', requiredDocs: 'Takardun da ake bukata', replies: 'Amsoshi', visible: 'Kowa zai gani' },
+        om: { translate: 'Hiiki', translating: 'Hiikamaa jira...', sourceChecked: 'Maddi mirkanaa’e', officialSource: 'Maddi mootummaa', call: 'Kallattiin bilbili', directions: 'Kallattii', usefulPhrase: 'Jechoota faayidaa qaban', requiredDocs: 'Sanadoota barbaachisan', replies: 'Deebiiwwan', visible: 'Hundaaf mul’ata' }
+    });
+
+    function getAppActionText(key, lang = getSelectedLanguage()) {
+        return APP_ACTION_TEXT[lang]?.[key] || APP_ACTION_TEXT.en[key] || '';
+    }
+
+    const LEARNING_UI_TEXT = Object.freeze({
+        en: { trackDialect: 'Track 1: Learn Egyptian Dialect', trackCulture: 'Track 2: Learn Egyptian Culture', datasetAvailable: 'Dataset available', datasetUnavailable: 'Dataset unavailable', unavailable: 'Unavailable', progressionDialect: 'Egyptian Dialect Progression', progressionCulture: 'Egyptian Culture Progression', lessons: 'Lessons', lesson: 'Lesson' },
+        ar: { trackDialect: '\u0627\u0644\u0645\u0633\u0627\u0631 1: \u062a\u0639\u0644\u0645 \u0627\u0644\u0644\u0647\u062c\u0629 \u0627\u0644\u0645\u0635\u0631\u064a\u0629', trackCulture: '\u0627\u0644\u0645\u0633\u0627\u0631 2: \u062a\u0639\u0644\u0645 \u0627\u0644\u062b\u0642\u0627\u0641\u0629 \u0627\u0644\u0645\u0635\u0631\u064a\u0629', datasetAvailable: '\u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a \u0645\u062a\u0627\u062d\u0629', datasetUnavailable: '\u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a \u063a\u064a\u0631 \u0645\u062a\u0627\u062d\u0629', unavailable: '\u063a\u064a\u0631 \u0645\u062a\u0627\u062d', progressionDialect: '\u0645\u0633\u0627\u0631 \u0627\u0644\u0644\u0647\u062c\u0629 \u0627\u0644\u0645\u0635\u0631\u064a\u0629', progressionCulture: '\u0645\u0633\u0627\u0631 \u0627\u0644\u062b\u0642\u0627\u0641\u0629 \u0627\u0644\u0645\u0635\u0631\u064a\u0629', lessons: '\u062f\u0631\u0648\u0633', lesson: '\u0627\u0644\u062f\u0631\u0633' },
+        fr: { trackDialect: 'Parcours 1 : apprendre l’arabe égyptien', trackCulture: 'Parcours 2 : apprendre la culture égyptienne', datasetAvailable: 'Données disponibles', datasetUnavailable: 'Données indisponibles', unavailable: 'Indisponible', progressionDialect: 'Parcours d’arabe égyptien', progressionCulture: 'Parcours de culture égyptienne', lessons: 'leçons', lesson: 'Leçon' },
+        so: { trackDialect: 'Jidka 1: Baro Carabiga Masar', trackCulture: 'Jidka 2: Baro dhaqanka Masar', datasetAvailable: 'Xogtu waa diyaar', datasetUnavailable: 'Xogtu ma jirto', unavailable: 'Lama heli karo', progressionDialect: 'Horumarka Carabiga Masar', progressionCulture: 'Horumarka dhaqanka Masar', lessons: 'casharro', lesson: 'Cashar' },
+        ti: { trackDialect: 'መስመር 1: ግብጺ ዓረብኛ ተማሃር', trackCulture: 'መስመር 2: ባህሊ ግብጺ ተማሃር', datasetAvailable: 'ዳታ ኣሎ', datasetUnavailable: 'ዳታ የለን', unavailable: 'የለን', progressionDialect: 'ምዕባለ ግብጺ ዓረብኛ', progressionCulture: 'ምዕባለ ባህሊ ግብጺ', lessons: 'ትምህርቲ', lesson: 'ትምህርቲ' },
+        sw: { trackDialect: 'Njia 1: Jifunze Kiarabu cha Misri', trackCulture: 'Njia 2: Jifunze utamaduni wa Misri', datasetAvailable: 'Data inapatikana', datasetUnavailable: 'Data haipatikani', unavailable: 'Haipatikani', progressionDialect: 'Maendeleo ya Kiarabu cha Misri', progressionCulture: 'Maendeleo ya utamaduni wa Misri', lessons: 'masomo', lesson: 'Somo' },
+        ha: { trackDialect: 'Hanya ta 1: Koyi Larabcin Masar', trackCulture: 'Hanya ta 2: Koyi al adun Masar', datasetAvailable: 'Bayanai suna nan', datasetUnavailable: 'Ba a samun bayanai', unavailable: 'Ba a samu ba', progressionDialect: 'Ci gaban Larabcin Masar', progressionCulture: 'Ci gaban al adun Masar', lessons: 'darussa', lesson: 'Darasi' },
+        om: { trackDialect: 'Karaa 1: Afaan Arabaa Gibxii baradhu', trackCulture: 'Karaa 2: Aadaa Gibxii baradhu', datasetAvailable: 'Daataan jira', datasetUnavailable: 'Daataan hin jiru', unavailable: 'Hin argamu', progressionDialect: 'Guddina Afaan Arabaa Gibxii', progressionCulture: 'Guddina aadaa Gibxii', lessons: 'barnoota', lesson: 'Barnoota' }
+    });
+
+    function getLearningUiText(key, lang = getSelectedLanguage()) {
+        return LEARNING_UI_TEXT[lang]?.[key] || LEARNING_UI_TEXT.en[key] || '';
+    }
+
     let activeUiLanguage = 'en';
 
     function normalizeLanguage(lang) {
@@ -635,28 +677,31 @@ document.addEventListener('DOMContentLoaded', () => {
     function getLanguageRuntimeText(key, lang = getSelectedLanguage()) {
         const serviceKeys = { serviceFindHelp: 'find', serviceChooseArea: 'area', serviceSearchArea: 'search', servicePermission: 'permission', serviceLocationDenied: 'denied', serviceGpsUnavailable: 'unavailable', serviceNoResults: 'empty', serviceGovernorate: 'governorate', serviceCity: 'city', serviceSort: 'sort', serviceNearest: 'nearest', serviceBestMatch: 'best', serviceRecentlyVerified: 'recent' };
         if (serviceKeys[key]) return SERVICE_RUNTIME_TEXT[lang]?.[serviceKeys[key]] || SERVICE_RUNTIME_TEXT.ar[serviceKeys[key]];
-        return CHAT_UI_TEXT[lang]?.[key] || PREMIUM_UI_OVERRIDES[lang]?.[key] || PREMIUM_UI_TEXT[lang]?.[key] || LANGUAGE_RUNTIME_TEXT[lang]?.[key] || CHAT_UI_TEXT.ar[key] || PREMIUM_UI_TEXT.ar[key] || LANGUAGE_RUNTIME_TEXT.ar[key] || '';
+        if (LEARNING_UI_TEXT[lang]?.[key]) return LEARNING_UI_TEXT[lang][key];
+        return APP_SHELL_TEXT[lang]?.[key] || CHAT_UI_TEXT[lang]?.[key] || PREMIUM_UI_OVERRIDES[lang]?.[key] || PREMIUM_UI_TEXT[lang]?.[key] || LANGUAGE_RUNTIME_TEXT[lang]?.[key] || APP_SHELL_TEXT.ar[key] || CHAT_UI_TEXT.ar[key] || PREMIUM_UI_TEXT.ar[key] || LANGUAGE_RUNTIME_TEXT.ar[key] || '';
     }
 
     function getUiTranslation(key, lang = getSelectedLanguage()) {
         if (key === 'hdr-translator-sub') {
-            return LANGUAGE_RUNTIME_TEXT[lang]?.translatorPair || (lang === 'en' ? LANGUAGE_RUNTIME_TEXT.en.translatorPair : getLanguageRuntimeText('egyptianArabicOnly', lang));
+            return APP_SHELL_TEXT[lang]?.translatorPair || LANGUAGE_RUNTIME_TEXT[lang]?.translatorPair || (lang === 'en' ? LANGUAGE_RUNTIME_TEXT.en.translatorPair : getLanguageRuntimeText('egyptianArabicOnly', lang));
         }
         if (key === 'hdr-assistant-sub') {
-            return LANGUAGE_RUNTIME_TEXT[lang]?.assistantPair || (lang === 'en' ? LANGUAGE_RUNTIME_TEXT.en.assistantPair : getLanguageRuntimeText('egyptianArabicOnly', lang));
+            return APP_SHELL_TEXT[lang]?.assistantPair || LANGUAGE_RUNTIME_TEXT[lang]?.assistantPair || (lang === 'en' ? LANGUAGE_RUNTIME_TEXT.en.assistantPair : getLanguageRuntimeText('egyptianArabicOnly', lang));
         }
         if (['brandSupport', 'localProfile', 'learningSnapshot'].includes(key)) {
-            return LANGUAGE_RUNTIME_TEXT[lang]?.[key] || (lang === 'en' ? LANGUAGE_RUNTIME_TEXT.en[key] : getLanguageRuntimeText('egyptianArabicOnly', lang));
+            return APP_SHELL_TEXT[lang]?.[key] || LANGUAGE_RUNTIME_TEXT[lang]?.[key] || (lang === 'en' ? LANGUAGE_RUNTIME_TEXT.en[key] : getLanguageRuntimeText('egyptianArabicOnly', lang));
         }
         const selectedDict = i18n[lang] || {};
         const alias = UI_I18N_ALIASES[key];
         return selectedDict[key]
             || (alias && selectedDict[alias])
+            || APP_SHELL_TEXT[lang]?.[key]
             || CHAT_UI_TEXT[lang]?.[key]
             || PREMIUM_UI_OVERRIDES[lang]?.[key]
             || PREMIUM_UI_TEXT[lang]?.[key]
             || LANGUAGE_RUNTIME_TEXT[lang]?.[key]
-            || (lang === 'en' ? LANGUAGE_RUNTIME_TEXT.en[key] : LANGUAGE_RUNTIME_TEXT.ar[key])
+            || APP_SHELL_TEXT[lang]?.[key]
+            || (lang === 'en' ? LANGUAGE_RUNTIME_TEXT.en[key] : APP_SHELL_TEXT.ar[key] || LANGUAGE_RUNTIME_TEXT.ar[key])
             || '';
     }
 
@@ -1239,13 +1284,13 @@ document.addEventListener('DOMContentLoaded', () => {
             title: post.title,
             desc: post.body || post.title,
             category: post.category || 'general',
-            timestamp: post.created_at ? new Date(post.created_at).toLocaleString() : 'Recently',
+            timestamp: post.created_at ? new Date(post.created_at).toLocaleString() : getLanguageRuntimeText('serviceRecentlyVerified'),
             replies: (post.replies || []).map(reply => ({
                 id: reply.id,
                 author: reply.author_name || 'Community member',
                 nationality: reply.author_nationality || 'Community',
                 text: reply.body,
-                timestamp: reply.created_at ? new Date(reply.created_at).toLocaleString() : 'Recently'
+                timestamp: reply.created_at ? new Date(reply.created_at).toLocaleString() : getLanguageRuntimeText('serviceRecentlyVerified')
             }))
         };
     }
@@ -1281,8 +1326,8 @@ document.addEventListener('DOMContentLoaded', () => {
             communityPostsList.innerHTML = `
                 <div class="empty-state">
                     <i class="fa-solid fa-comments"></i>
-                    <h4>No community posts yet</h4>
-                    <p>Ask the first practical question or share a verified resource tip for others.</p>
+                    <h4>${escapeHtml(getUiTranslation('discussionFeed'))}</h4>
+                    <p>${escapeHtml(getUiTranslation('privateProgress'))}</p>
                 </div>
             `;
             return;
@@ -1304,9 +1349,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
                             <div style="display: flex; align-items: center; gap: 6px;">
                                 <strong style="font-size: 12px; color: #fff;">${escapeHtml(r.author)}</strong>
-                                <span class="tag" style="padding: 1px 6px; font-size: 9px; border-color: var(--emerald); color: var(--emerald);">${escapeHtml(r.nationality || 'Community')}</span>
+                                <span class="tag" style="padding: 1px 6px; font-size: 9px; border-color: var(--emerald); color: var(--emerald);">${escapeHtml(r.nationality || getUiTranslation('discussionFeed'))}</span>
                             </div>
-                            <span style="font-size: 10px; color: var(--text-dim);">${escapeHtml(r.timestamp || 'Recently')}</span>
+                            <span style="font-size: 10px; color: var(--text-dim);">${escapeHtml(r.timestamp || getLanguageRuntimeText('serviceRecentlyVerified'))}</span>
                         </div>
                         <p style="font-size: 13px; color: var(--text-light); margin: 0; line-height: 1.4;">${escapeHtml(r.text)}</p>
                     </div>
@@ -1319,12 +1364,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         <div class="avatar" style="width: 32px; height: 32px; font-size: 14px;"><i class="fa-solid fa-user-astronaut"></i></div>
                         <div>
                             <span style="font-size: 14px; font-weight: 600; color: #fff; display: block;">${escapeHtml(post.author)}</span>
-                            <span class="tag" style="padding: 1px 6px; font-size: 10px; border-color: var(--warm-sand); color: var(--warm-sand);">${escapeHtml(post.nationality || 'Community')}</span>
+                            <span class="tag" style="padding: 1px 6px; font-size: 10px; border-color: var(--warm-sand); color: var(--warm-sand);">${escapeHtml(post.nationality || getUiTranslation('discussionFeed'))}</span>
                         </div>
                     </div>
                     <div style="display: flex; align-items: center; gap: 6px;">
                         <button class="btn btn-outline" onclick="translatePost('${escapeHtml(post.id)}')" style="padding: 4px 8px; font-size: 11px;">
-                            <i class="fa-solid fa-language"></i> Translate
+                            <i class="fa-solid fa-language"></i> ${escapeHtml(getLanguageRuntimeText('languagePair'))}
                         </button>
                         <span style="font-size: 11px; color: var(--text-dim);"><i class="fa-regular fa-clock"></i> ${escapeHtml(post.timestamp || 'Recently')}</span>
                     </div>
@@ -1339,8 +1384,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 <!-- Answers / Replies List -->
                 <div style="margin-bottom: 14px; margin-top: 10px;">
                     <div style="font-size: 12px; font-weight: 600; color: var(--emerald); margin-bottom: 6px; display: flex; align-items: center; justify-content: space-between;">
-                        <span><i class="fa-solid fa-comments"></i> ${replies.length} Answers / Replies</span>
-                        <span style="font-size: 11px; color: var(--text-dim);"><i class="fa-solid fa-globe"></i> Visible to Everyone</span>
+                        <span><i class="fa-solid fa-comments"></i> ${replies.length} ${escapeHtml(getAppActionText('replies'))}</span>
+                        <span style="font-size: 11px; color: var(--text-dim);"><i class="fa-solid fa-globe"></i> ${escapeHtml(getAppActionText('visible'))}</span>
                     </div>
                     <div id="replies-container-${post.id}">
                         ${repliesHTML}
@@ -1364,7 +1409,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const targetContainer = document.getElementById(`post-translation-${postId}`);
         if (!targetContainer) return;
 
-        targetContainer.innerHTML = `<span style="font-size: 12px; color: var(--warm-sand);"><i class="fa-solid fa-spinner fa-spin"></i> Translating...</span>`;
+        targetContainer.innerHTML = `<span style="font-size: 12px; color: var(--warm-sand);"><i class="fa-solid fa-spinner fa-spin"></i> ${escapeHtml(getLanguageRuntimeText('translationUnavailable'))}</span>`;
 
         const savedPosts = communityPostsCache.length ? communityPostsCache : JSON.parse(localStorage.getItem('saleem_community_posts') || '[]');
         const post = savedPosts.find(p => p.id === postId);
@@ -1386,12 +1431,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
             targetContainer.innerHTML = `
                 <div style="padding: 10px 12px; background: rgba(232, 171, 99, 0.15); border: 1px solid var(--warm-sand); border-radius: 10px; margin-top: 8px;">
-                    <div style="font-size: 11px; color: var(--warm-sand); font-weight: 600; margin-bottom: 4px;"><i class="fa-solid fa-language"></i> DeepSeek Translation:</div>
+                    <div style="font-size: 11px; color: var(--warm-sand); font-weight: 600; margin-bottom: 4px;"><i class="fa-solid fa-language"></i> ${escapeHtml(getLanguageRuntimeText('languagePair'))}</div>
                     <p style="font-size: 13px; color: #fff; margin: 0; line-height: 1.4;">${formatTrustedText(translatedText)}</p>
                 </div>
             `;
         } catch (e) {
-            targetContainer.innerHTML = `<span style="font-size: 12px; color: var(--coral);">Translation offline fallback.</span>`;
+            targetContainer.innerHTML = `<span style="font-size: 12px; color: var(--coral);">${escapeHtml(getLanguageRuntimeText('translationUnavailable'))}</span>`;
         }
     };
 
@@ -1535,12 +1580,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     rating: r.rating,
                     helpText: r.help_text || r.helpText,
                     improvementText: r.improvement_text || r.improvementText,
-                    timestamp: r.created_at ? new Date(r.created_at).toLocaleDateString() : 'Recently'
+                    timestamp: r.created_at ? new Date(r.created_at).toLocaleDateString() : getLanguageRuntimeText('serviceRecentlyVerified')
                 }));
                 reviewsToRender = mappedReviews;
                 localStorage.setItem('saleem_user_reviews', JSON.stringify(reviewsToRender));
                 if (avgRatingScore) avgRatingScore.textContent = data.average_rating || '0.0';
-                if (totalReviewsCount) totalReviewsCount.textContent = data.total_count ? `Based on ${data.total_count} community reviews` : 'No public reviews yet';
+                if (totalReviewsCount) totalReviewsCount.textContent = data.total_count ? `${data.total_count} ${getUiTranslation('feedbackFeed')}` : getUiTranslation('noPublicReviews');
             }
         } catch (err) {
             console.warn('Reviews sync offline mode active:', err);
@@ -1588,12 +1633,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (!Array.isArray(reviews) || reviews.length === 0) {
             if (avgRatingScore) avgRatingScore.textContent = '0.0';
-            if (totalReviewsCount) totalReviewsCount.textContent = 'No public reviews yet';
+            if (totalReviewsCount) totalReviewsCount.textContent = getUiTranslation('noPublicReviews');
             reviewsFeedContainer.innerHTML = `
                 <div class="empty-state">
                     <i class="fa-solid fa-star"></i>
-                    <h4>No community feedback yet</h4>
-                    <p>Feedback appears here only after real users submit it.</p>
+                    <h4>${escapeHtml(getUiTranslation('feedbackFeed'))}</h4>
+                    <p>${escapeHtml(getUiTranslation('privateProgress'))}</p>
                 </div>
             `;
             return;
@@ -1617,12 +1662,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         <div class="avatar" style="width: 32px; height: 32px; font-size: 14px;"><i class="fa-solid fa-user-astronaut"></i></div>
                         <div>
                             <span style="font-size: 14px; font-weight: 600; color: #fff; display: block;">${escapeHtml(r.author)}</span>
-                            <span class="tag" style="padding: 1px 6px; font-size: 10px; border-color: var(--warm-sand); color: var(--warm-sand);">${escapeHtml(r.nationality || 'Community')}</span>
+                            <span class="tag" style="padding: 1px 6px; font-size: 10px; border-color: var(--warm-sand); color: var(--warm-sand);">${escapeHtml(r.nationality || getUiTranslation('discussionFeed'))}</span>
                         </div>
                     </div>
                     <div style="display: flex; align-items: center; gap: 6px;">
                         <button class="btn btn-outline" onclick="translateReview('${r.id}')" style="padding: 4px 8px; font-size: 11px;">
-                            <i class="fa-solid fa-language"></i> Translate
+                            <i class="fa-solid fa-language"></i> ${escapeHtml(getLanguageRuntimeText('languagePair'))}
                         </button>
                         <div style="text-align: right;">
                             <div style="font-size: 13px; color: #FBBF24;">${starsString}</div>
@@ -1632,13 +1677,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
 
                 <div style="margin-bottom: 8px;">
-                    <strong style="font-size: 12px; color: var(--emerald); display: block; margin-bottom: 2px;"><i class="fa-solid fa-heart"></i> How Saleem Helped:</strong>
+                    <strong style="font-size: 12px; color: var(--emerald); display: block; margin-bottom: 2px;"><i class="fa-solid fa-heart"></i> ${escapeHtml(getUiTranslation('reviewHeading'))}</strong>
                     <p style="font-size: 13px; color: var(--text-light); line-height: 1.5; margin: 0;">${escapeHtml(r.helpText)}</p>
                 </div>
 
                 ${r.improvementText ? `
                     <div style="padding: 8px 12px; background: var(--surface-dark); border-radius: 8px; border-left: 3px solid var(--warm-sand); margin-top: 8px;">
-                        <strong style="font-size: 11px; color: var(--warm-sand); display: block; margin-bottom: 2px;"><i class="fa-solid fa-lightbulb"></i> Recommended Improvement:</strong>
+                        <strong style="font-size: 11px; color: var(--warm-sand); display: block; margin-bottom: 2px;"><i class="fa-solid fa-lightbulb"></i> ${escapeHtml(getUiTranslation('reviewImprovementPlaceholder').replace(/\s*\([^)]*\)/, ''))}</strong>
                         <p style="font-size: 12px; color: var(--text-muted); margin: 0;">${escapeHtml(r.improvementText)}</p>
                     </div>
                 ` : ''}
@@ -1653,7 +1698,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (reviews.length > 0) {
             const avg = (totalStars / reviews.length).toFixed(1);
             if (avgRatingScore) avgRatingScore.textContent = avg;
-            if (totalReviewsCount) totalReviewsCount.textContent = `Based on ${reviews.length} community reviews`;
+            if (totalReviewsCount) totalReviewsCount.textContent = `${reviews.length} ${getUiTranslation('feedbackFeed')}`;
         }
     }
 
@@ -1661,7 +1706,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const targetContainer = document.getElementById(`review-translation-${reviewId}`);
         if (!targetContainer) return;
 
-        targetContainer.innerHTML = `<span style="font-size: 12px; color: var(--warm-sand);"><i class="fa-solid fa-spinner fa-spin"></i> Translating review...</span>`;
+        targetContainer.innerHTML = `<span style="font-size: 12px; color: var(--warm-sand);"><i class="fa-solid fa-spinner fa-spin"></i> ${escapeHtml(getAppActionText('translating'))}</span>`;
 
         const savedReviews = JSON.parse(localStorage.getItem('saleem_user_reviews') || '[]');
         const review = savedReviews.find(r => r.id === reviewId) || defaultUserReviews.find(r => r.id === reviewId);
@@ -1679,16 +1724,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 })
             });
 
-            const translatedText = data && data.translation ? data.translation : 'Translation ready';
+            const translatedText = data && data.translation ? data.translation : getLanguageRuntimeText('translationUnavailable');
 
             targetContainer.innerHTML = `
                 <div style="padding: 10px 12px; background: rgba(232, 171, 99, 0.15); border: 1px solid var(--warm-sand); border-radius: 10px; margin-top: 8px;">
-                    <div style="font-size: 11px; color: var(--warm-sand); font-weight: 600; margin-bottom: 4px;"><i class="fa-solid fa-language"></i> DeepSeek Translation:</div>
+                    <div style="font-size: 11px; color: var(--warm-sand); font-weight: 600; margin-bottom: 4px;"><i class="fa-solid fa-language"></i> ${escapeHtml(getLanguageRuntimeText('languagePair'))}</div>
                     <p style="font-size: 13px; color: #fff; margin: 0; line-height: 1.4;">${translatedText}</p>
                 </div>
             `;
         } catch (e) {
-            targetContainer.innerHTML = `<span style="font-size: 12px; color: var(--coral);">Translation offline fallback.</span>`;
+            targetContainer.innerHTML = `<span style="font-size: 12px; color: var(--coral);">${escapeHtml(getLanguageRuntimeText('translationUnavailable'))}</span>`;
         }
     };
 
@@ -1970,7 +2015,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const srcLang = primaryLanguage;
             const tgtLang = 'ar_eg';
 
-            translateOutput.innerHTML = `<p><i class="fa-solid fa-spinner fa-spin"></i> Processing Multilingual Translation...</p>`;
+            translateOutput.innerHTML = `<p><i class="fa-solid fa-spinner fa-spin"></i> ${escapeHtml(getLanguageRuntimeText('translationUnavailable'))}</p>`;
 
             // Local Dialect Expressions Dictionary Lookup (Zero Latency)
             const lowerKey = text.toLowerCase().trim();
@@ -1995,7 +2040,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const match = dialectLookup[pattern];
                     translateOutput.innerHTML = `
                         <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; flex-wrap: wrap; gap: 10px;">
-                            <span class="tag" style="border-color: var(--emerald); color: var(--emerald);"><i class="fa-solid fa-circle-check"></i> Authentic Egyptian Dialect Translation</span>
+                            <span class="tag" style="border-color: var(--emerald); color: var(--emerald);"><i class="fa-solid fa-circle-check"></i> ${escapeHtml(getLanguageRuntimeText('egyptianArabicOnly'))}</span>
                             <button class="btn btn-primary" id="btn-speak-output" style="padding: 6px 14px; font-size: 12px;">
                                 <i class="fa-solid fa-volume-high"></i> Listen Egyptian Audio
                             </button>
@@ -2026,14 +2071,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     
                     translateOutput.innerHTML = `
                         <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; flex-wrap: wrap; gap: 10px;">
-                            <span class="tag" style="border-color: var(--emerald); color: var(--emerald);"><i class="fa-solid fa-circle-check"></i> Saleem AI Multilingual Translation</span>
+                            <span class="tag" style="border-color: var(--emerald); color: var(--emerald);"><i class="fa-solid fa-circle-check"></i> ${escapeHtml(getUiTranslation('sectionAi'))}</span>
                             <button class="btn btn-primary" id="btn-speak-output" style="padding: 6px 14px; font-size: 12px;">
-                                <i class="fa-solid fa-volume-high"></i> Listen Audio
+                                <i class="fa-solid fa-volume-high"></i> ${escapeHtml(getUiTranslation('chatTutor'))}
                             </button>
                         </div>
                         <div style="font-size: 16px; color: var(--text-light); line-height: 1.6;">${translationText}</div>
                         <p style="margin-top: 14px; font-size: 12px; color: var(--emerald); display: flex; align-items: center; gap: 6px;">
-                            <i class="fa-solid fa-bolt text-gold"></i> Saleem AI Translation Engine
+                            <i class="fa-solid fa-bolt text-gold"></i> ${escapeHtml(getUiTranslation('sectionAi'))}
                         </p>
                     `;
 
@@ -2048,7 +2093,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             translateOutput.innerHTML = `
                 <h3 style="color: var(--warm-sand); font-size: 20px;">${escapeHtml(text)}</h3>
-                <p style="margin-top: 10px; font-size: 13px; color: var(--coral);"><i class="fa-solid fa-triangle-exclamation"></i> Translation service is offline. Showing original text only.</p>
+                <p style="margin-top: 10px; font-size: 13px; color: var(--coral);"><i class="fa-solid fa-triangle-exclamation"></i> ${escapeHtml(getLanguageRuntimeText('translationUnavailable'))}</p>
             `;
             saveTranslationHistory(text, text);
             return;
@@ -2090,7 +2135,7 @@ Provide:
                             <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; flex-wrap: wrap; gap: 10px;">
                                 <span class="tag" style="border-color: var(--emerald); color: var(--emerald);"><i class="fa-solid fa-circle-check"></i> Saleem AI Dialect Translator</span>
                                 <button class="btn btn-primary" id="btn-speak-output" style="padding: 6px 14px; font-size: 12px;">
-                                    <i class="fa-solid fa-volume-high"></i> Listen Audio
+                                    <i class="fa-solid fa-volume-high"></i> ${escapeHtml(getUiTranslation('chatTutor'))}
                                 </button>
                             </div>
                             <div style="font-size: 16px; color: var(--text-light); line-height: 1.6;">${aiReply}</div>
@@ -2107,8 +2152,8 @@ Provide:
 
             // Fallback
             translateOutput.innerHTML = `
-                <h3 style="color: var(--warm-sand); font-size: 20px;">[Translation] ${text}</h3>
-                <p style="margin-top: 10px; font-size: 13px; color: var(--emerald);"><i class="fa-solid fa-circle-check"></i> Offline Translation Active</p>
+                <h3 style="color: var(--warm-sand); font-size: 20px;">${escapeHtml(getLanguageRuntimeText('languagePair'))}: ${text}</h3>
+                <p style="margin-top: 10px; font-size: 13px; color: var(--emerald);"><i class="fa-solid fa-circle-check"></i> ${escapeHtml(getLanguageRuntimeText('translationUnavailable'))}</p>
             `;
             saveTranslationHistory(text, text);
         });
@@ -2167,7 +2212,7 @@ Provide:
         const typingDiv = document.createElement('div');
         typingDiv.id = 'typing-indicator';
         typingDiv.className = 'chat-message assistant';
-        typingDiv.innerHTML = `<div class="msg-content" style="color: var(--warm-sand);"><i class="fa-solid fa-bolt fa-spin text-gold"></i> ${getSelectedLanguage() === 'en' ? 'Saleem AI...' : getLanguageRuntimeText('egyptianArabicOnly')}</div>`;
+        typingDiv.innerHTML = `<div class="msg-content" style="color: var(--warm-sand);"><i class="fa-solid fa-bolt fa-spin text-gold"></i> ${escapeHtml(getUiTranslation('chatTutor'))}</div>`;
         chatHistory.appendChild(typingDiv);
         chatHistory.scrollTop = chatHistory.scrollHeight;
 
@@ -2194,13 +2239,9 @@ Provide:
             console.warn('Backend AI route offline/fallback active:', err);
         }
 
-        const savedName = localStorage.getItem('saleem_user_name') || 'Friend';
-
         const indicator = document.getElementById('typing-indicator');
         if (indicator) indicator.remove();
-        const fallbackMessage = getSelectedLanguage() === 'en'
-            ? `Ahlan ${savedName}! Saleem AI is offline right now. I can still help with saved phrases and the verified services directory; please verify urgent legal, medical, or protection questions with the official provider.`
-            : `أهلاً ${savedName}! خدمة المساعد غير متاحة الآن. يمكنني مساعدتك بالمحتوى المصري المحفوظ ودليل الخدمات الموثوق. يرجى التأكد من المعلومات القانونية أو الطبية العاجلة مع الجهة الرسمية.`;
+        const fallbackMessage = `${getUiTranslation('chatWelcome')} ${getLanguageRuntimeText('translationUnavailable')}`;
         appendMessageUI('assistant', fallbackMessage);
         return;
 
@@ -2617,15 +2658,15 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
     }
 
     function getLearningTrackTitle(track, lang = getSelectedLanguage()) {
-        if (lang === 'en') return track === 'dialect' ? `Egyptian Dialect Progression (${dialectLessons600.length || 'Unavailable'} Lessons)` : `Egyptian Culture Progression (${cultureLessonsData.length || 'Unavailable'} Lessons)`;
-        if (lang === 'ar') return track === 'dialect' ? `مسار اللهجة المصرية (${dialectLessons600.length || 'غير متاح'} درس)` : `مسار الثقافة المصرية (${cultureLessonsData.length || 'غير متاح'} درس)`;
-        return track === 'dialect' ? `مسار اللهجة المصرية (${dialectLessons600.length || 'غير متاح'} درس)` : `مسار الثقافة المصرية (${cultureLessonsData.length || 'غير متاح'} درس)`;
+        const count = track === 'dialect' ? dialectLessons600.length : cultureLessonsData.length;
+        const label = getLearningUiText(track === 'dialect' ? 'progressionDialect' : 'progressionCulture', lang);
+        return `${label} (${count || getLearningUiText('unavailable', lang)} ${getLearningUiText('lessons', lang)})`;
     }
 
     function getLocalizedLessonTitle(lesson, id, lang = getSelectedLanguage()) {
-        if (lang === 'en') return lesson.title_en || '';
-        if (lang === 'ar') return lesson.title_ar || '';
-        return `\u0627\u0644\u062f\u0631\u0633 ${id}`;
+        if (lang === 'en') return lesson.title_en || `${getLearningUiText('lesson', lang)} ${id}`;
+        if (lang === 'ar') return lesson.title_ar || `${getLearningUiText('lesson', lang)} ${id}`;
+        return `${getLearningUiText('lesson', lang)} ${id}`;
     }
 
     // Render Duolingo Curved Snake Path for 600 Lessons (Zero Initial State)
@@ -2707,8 +2748,7 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
 
         const trackTitle = document.getElementById('current-track-title');
         if (trackTitle) {
-            const label = currentTrack === 'dialect' ? 'Egyptian Dialect' : 'Egyptian Culture';
-            trackTitle.innerHTML = `<i class="fa-solid fa-route text-gold"></i> <span>${label} Progression (${totalLessons} Lessons)</span>`;
+            trackTitle.innerHTML = `<i class="fa-solid fa-route text-gold"></i> <span>${escapeHtml(getLearningTrackTitle(currentTrack))}</span>`;
         }
         updateLearningDatasetUI();
 
@@ -2993,6 +3033,52 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
                 score_label: `Alama za Jaribio`,
                 xp_label: `XP Zilizopatikana`,
                 continue_btn: `<i class="fa-solid fa-circle-check"></i> Endelea na Fungua Somo Linalofuata`
+            },
+            ha: {
+                step1_header: `Darasi ${params.lessonId}: Mataki na 1 - Koyi Kalmomi (${params.wordIdx + 1} / 10)`,
+                word_count: `Kalma ta ${params.wordIdx + 1} cikin 10`,
+                spoken_pron: `Furucin magana:`,
+                meaning_label: `Ma'ana a cikin harshenka:`,
+                usage_example: `Misalin amfani na gaske:`,
+                prev_word: `<i class="fa-solid fa-arrow-left"></i> Kalmar baya`,
+                next_word: `Kalma ta gaba <i class="fa-solid fa-arrow-right"></i>`,
+                start_quiz: `Fara tambayoyin atisaye 20 <i class="fa-solid fa-gamepad"></i>`,
+                step2_header: `Darasi ${params.lessonId}: Mataki na 2 - Tambayoyin atisaye 20`,
+                question_count: `Tambaya ta ${params.quizIdx + 1} cikin 20`,
+                q1_text: `Menene ma'anar kalmar Larabcin Masar: '${params.word}'?`,
+                q2_text: `Zabi kalmar Larabcin Masar da ta dace da: '${params.english}'`,
+                explanation_text: `'${params.word}' a Larabcin Masar na nufin: '${params.english}' (Furuci: ${params.pron}).`,
+                correct_ans: `Amsa daidai! (+10 XP)`,
+                incorrect_ans: `Ba daidai ba. Sake gwadawa.`,
+                next_q: `Tambaya ta gaba <i class="fa-solid fa-arrow-right"></i>`,
+                congrats: `Taya murna! Ka kware a Darasi ${params.lessonId}!`,
+                summary_sub: `Ka koyi kalmomin Masar guda 10 kuma ka amsa tambayoyin atisaye 20.`,
+                score_label: `Sakamakon tambayoyi`,
+                xp_label: `XP da aka samu`,
+                continue_btn: `<i class="fa-solid fa-circle-check"></i> Ci gaba ka bude darasi na gaba`
+            },
+            om: {
+                step1_header: `Barnoota ${params.lessonId}: Tarkaanfii 1 - Jechoota baradhu (${params.wordIdx + 1} / 10)`,
+                word_count: `Jechoota ${params.wordIdx + 1} keessaa 10`,
+                spoken_pron: `Akkaataa dubbii:`,
+                meaning_label: `Hiika afaan keetii:`,
+                usage_example: `Fakkeenya itti fayyadama dhugaa:`,
+                prev_word: `<i class="fa-solid fa-arrow-left"></i> Jecha darbe`,
+                next_word: `Jecha itti aanu <i class="fa-solid fa-arrow-right"></i>`,
+                start_quiz: `Shaakala gaaffii 20 jalqabi <i class="fa-solid fa-gamepad"></i>`,
+                step2_header: `Barnoota ${params.lessonId}: Tarkaanfii 2 - Gaaffilee shaakalaa 20`,
+                question_count: `Gaaffii ${params.quizIdx + 1} keessaa 20`,
+                q1_text: `Hiikni jecha Arabiffaa Gibxii '${params.word}' maali?`,
+                q2_text: `Jechoota Arabiffaa Gibxii sirrii kan '${params.english}' filadhu`,
+                explanation_text: `'${params.word}' Afaan Arabaa Gibxiitiin jechuun: '${params.english}' (Dubbisa: ${params.pron}).`,
+                correct_ans: `Deebii sirrii! (+10 XP)`,
+                incorrect_ans: `Sirrii miti. Irra deebi'i.`,
+                next_q: `Gaaffii itti aanu <i class="fa-solid fa-arrow-right"></i>`,
+                congrats: `Baga gammaddan! Barnoota ${params.lessonId} xumurteetta!`,
+                summary_sub: `Jechoota Arabaa Gibxii 10 barattee gaaffilee shaakalaa 20 deebiste.`,
+                score_label: `Qabxii qormaataa`,
+                xp_label: `XP argame`,
+                continue_btn: `<i class="fa-solid fa-circle-check"></i> Itti fufi, barnoota itti aanu bani`
             },
             ar: {
                 step1_header: `الدرس ${params.lessonId}: الخطوة 1 - دراسة المفردات (${params.wordIdx + 1} / 10)`,
@@ -3705,15 +3791,15 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
             const showSourceLanguageDetails = selectedLanguage === 'en' || isArabic;
             const sourceHTML = inst.sourceUrl ? `
                 <div style="padding: 8px 10px; background: rgba(232, 171, 99, 0.1); border-left: 3px solid var(--warm-sand); border-radius: 6px; margin-bottom: 12px;">
-                    <strong style="font-size: 10px; color: var(--warm-sand); display: block;">${showSourceLanguageDetails ? (isArabic ? 'تم التحقق من المصدر' : 'Source checked') : escapeHtml(getLanguageRuntimeText('egyptianArabicOnly'))}${inst.sourceCheckedAt ? ` ${escapeHtml(inst.sourceCheckedAt)}` : ''}</strong>
-                    <a href="${escapeHtml(inst.sourceUrl)}" target="_blank" rel="noopener noreferrer" style="font-size: 11px; color: var(--text-light);">${escapeHtml(inst.sourceName || 'Official source')}</a>
+                    <strong style="font-size: 10px; color: var(--warm-sand); display: block;">${escapeHtml(getAppActionText('sourceChecked'))}${inst.sourceCheckedAt ? ` ${escapeHtml(inst.sourceCheckedAt)}` : ''}</strong>
+                    <a href="${escapeHtml(inst.sourceUrl)}" target="_blank" rel="noopener noreferrer" style="font-size: 11px; color: var(--text-light);">${escapeHtml(inst.sourceName || getAppActionText('officialSource'))}</a>
                     ${showSourceLanguageDetails && inst.trustNote ? `<p style="font-size: 11px; color: var(--text-muted); margin: 4px 0 0 0;">${escapeHtml(inst.trustNote)}</p>` : ''}
                 </div>
             ` : '';
 
             card.innerHTML = `
                 <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 8px;">
-                    <span class="tag tag-ngo" style="font-size: 10px;">${isArabic || selectedLanguage !== 'en' ? escapeHtml(getLanguageRuntimeText('egyptianArabicOnly')) : escapeHtml(inst.type)}</span>
+                    <span class="tag tag-ngo" style="font-size: 10px;">${escapeHtml(getUiTranslation(({ unhcr: 'catUnhcr', immigration: 'catImmigration', health: 'catHealth', legal: 'catLegal', police: 'catPolice' }[inst.cat] || 'verifiedServices'), selectedLanguage))}</span>
                     ${showSourceLanguageDetails && inst.wait ? `<span style="font-size: 10px; color: var(--emerald); font-weight: 600;"><i class="fa-solid fa-clock"></i> ${escapeHtml(inst.wait)}</span>` : ''}
                 </div>
                 <h3 style="font-size: 16px; color: #fff; margin-bottom: 6px;">${escapeHtml(inst.name)}</h3>
@@ -3721,7 +3807,7 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
                 ${showSourceLanguageDetails && inst.hours ? `<p style="font-size: 11px; color: var(--warm-sand); margin-bottom: 10px;">${escapeHtml(inst.hours)}</p>` : ''}
 
                 ${showSourceLanguageDetails && inst.docs.length ? `<div style="padding: 8px 10px; background: var(--surface-dark); border-radius: 8px; margin-bottom: 10px;">
-                    <strong style="font-size: 11px; color: var(--warm-sand); display: block; margin-bottom: 4px;"><i class="fa-solid fa-clipboard-check"></i> Required Documents:</strong>
+                    <strong style="font-size: 11px; color: var(--warm-sand); display: block; margin-bottom: 4px;"><i class="fa-solid fa-clipboard-check"></i> ${escapeHtml(getAppActionText('requiredDocs'))}:</strong>
                     <ul style="list-style: none; padding: 0; margin: 0;">${docsListHTML}</ul>
                 </div>` : ''}
 
@@ -3729,9 +3815,9 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
                 ${sourceHTML}
 
                 <div style="display: flex; gap: 8px; align-items: center; margin-top: auto;">
-                    ${inst.phone ? `<a href="tel:${escapeHtml(inst.phone)}" class="btn btn-primary" style="padding: 6px 12px; font-size: 11px; text-decoration: none; flex: 1; justify-content: center;"><i class="fa-solid fa-phone"></i> ${isArabic || selectedLanguage !== 'en' ? 'اتصال مباشر' : 'Call Direct'}</a>` : ''}
+                    ${inst.phone ? `<a href="tel:${escapeHtml(inst.phone)}" class="btn btn-primary" style="padding: 6px 12px; font-size: 11px; text-decoration: none; flex: 1; justify-content: center;"><i class="fa-solid fa-phone"></i> ${escapeHtml(getAppActionText('call'))}</a>` : ''}
                     <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(inst.name + ' ' + (inst.address || ''))}" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="padding: 6px 12px; font-size: 11px; text-decoration: none; flex: 1; justify-content: center;">
-                        <i class="fa-solid fa-diamond-turn-right"></i> ${isArabic || selectedLanguage !== 'en' ? 'الاتجاهات' : 'Directions'}
+                        <i class="fa-solid fa-diamond-turn-right"></i> ${escapeHtml(getAppActionText('directions'))}
                     </a>
                 </div>
             `;
