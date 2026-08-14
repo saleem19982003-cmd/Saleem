@@ -146,6 +146,8 @@ function createPool(connectionString) {
     return new Pool({
         connectionString,
         max: 1,
+        // Queries below never set a named statement, so transaction pooling
+        // does not depend on session-level prepared-statement state.
         idleTimeoutMillis: 10000,
         connectionTimeoutMillis: 10000,
         allowExitOnIdle: true,

@@ -105,7 +105,7 @@ app.get('/api/health', async (req, res) => {
         status: 'ok',
         database: postgresReady ? 'ready' : (userDb ? 'unavailable' : 'not-configured'),
         database_mode: postgresReady ? 'supabase-postgres' : (isVercelRuntime ? 'content-only-sqlite' : 'local'),
-        database_connection_source: postgresReady ? POSTGRES_SOURCE : null,
+        database_connection_source: userDb ? POSTGRES_SOURCE : null,
         jwt_secret_configured: Boolean(process.env.JWT_SECRET),
         ai_key_configured: Boolean(process.env.GROQ_API_KEY || process.env.DEEPSEEK_API_KEY || process.env.OPENROUTER_API_KEY)
     });
