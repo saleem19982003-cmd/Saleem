@@ -4,7 +4,14 @@ const knowledge = require('../server/ai-knowledge');
 const aiRouter = require('../server/routes/ai');
 
 test('AI retrieval indexes the complete public Saleem datasets', () => {
-    assert.deepEqual(knowledge.getDatasetStats(), { dialectLessons: 600, cultureLessons: 100, phrases: 45 });
+    assert.deepEqual(knowledge.getDatasetStats(), {
+        dialectLessons: 600,
+        dialectVocabulary: 6000,
+        dialectQuizzes: 12000,
+        cultureLessons: 100,
+        culturePracticeQuestions: 200,
+        phrases: 45
+    });
     for (const id of [1, 50, 100, 200, 300, 400, 500, 600]) {
         const result = knowledge.retrieveKnowledge(`lesson ${id}`, 'fr');
         assert.equal(result.intent, 'lesson');

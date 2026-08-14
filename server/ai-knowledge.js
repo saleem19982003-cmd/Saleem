@@ -67,11 +67,17 @@ function requestedLessonId(query) {
 }
 
 function searchableDialect(lesson) {
-    return [lesson.title_ar, lesson.title_en, ...(lesson.words || []).slice(0, 10).flatMap(word => Object.values(word)), ...(lesson.questions || []).slice(0, 4).flatMap(question => Object.values(question))];
+    return [lesson.title_ar, lesson.title_en, ...(lesson.words || []).flatMap(word => Object.values(word)), ...(lesson.questions || []).flatMap(question => Object.values(question))];
+}
+
+function flattenSearchValue(value) {
+    if (Array.isArray(value)) return value.flatMap(flattenSearchValue);
+    if (value && typeof value === 'object') return Object.values(value).flatMap(flattenSearchValue);
+    return [value];
 }
 
 function searchableCulture(lesson) {
-    return Object.entries(lesson).filter(([key]) => key !== 'practice_test').flatMap(([, value]) => value);
+    return flattenSearchValue(lesson);
 }
 
 function searchablePhrase(phrase) {
@@ -155,7 +161,14 @@ function formatKnowledgeContext(result) {
 }
 
 function getDatasetStats() {
-    return { dialectLessons: getDialect().length, cultureLessons: getCulture().length, phrases: getPhrases().length };
+    return {
+        dialectLessons: getDialect().length,
+        dialectVocabulary: getDialect().reduce((count, lesson) => count + (lesson.words || []).length, 0),
+        dialectQuizzes: getDialect().reduce((count, lesson) => count + (lesson.questions || []).length, 0),
+        cultureLessons: getCulture().length,
+        culturePracticeQuestions: getCulture().reduce((count, lesson) => count + (lesson.practice_test || []).length, 0),
+        phrases: getPhrases().length
+    };
 }
 
 module.exports = { SUPPORTED_LANGUAGES, normalize, detectIntent, retrieveKnowledge, formatKnowledgeContext, getDatasetStats };
