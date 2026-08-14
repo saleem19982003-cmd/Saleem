@@ -87,7 +87,7 @@ router.post('/login', (req, res) => {
         }
 
         // Update last login
-        db.prepare('UPDATE users SET last_login_at = datetime("now") WHERE id = ?').run(user.id);
+        db.prepare("UPDATE users SET last_login_at = datetime('now') WHERE id = ?").run(user.id);
 
         const token = generateToken(user);
         const { password_hash, ...safeUser } = user;
@@ -156,7 +156,7 @@ router.put('/profile', authenticateToken, (req, res) => {
             return res.status(400).json({ error: 'No valid fields to update.' });
         }
 
-        updates.push('updated_at = datetime("now")');
+        updates.push("updated_at = datetime('now')");
         params.push(req.user.id);
 
         db.prepare(`UPDATE users SET ${updates.join(', ')} WHERE id = ?`).run(...params);

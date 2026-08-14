@@ -13,6 +13,9 @@ const { initializeDatabase, seedDatabase } = require('./database');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+// Vercel forwards the client address through X-Forwarded-For; trust the
+// single platform proxy so rate limiting uses the real client boundary.
+app.set('trust proxy', 1);
 
 // Initialize database
 const isVercelRuntime = process.env.VERCEL === '1' || process.env.VERCEL === 'true';

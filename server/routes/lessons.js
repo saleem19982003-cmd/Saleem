@@ -106,7 +106,7 @@ router.post('/:id/start', authenticateToken, (req, res) => {
         }
 
         // Track analytics
-        db.prepare('INSERT INTO analytics_events (user_id, event_type, event_data) VALUES (?, "lesson_started", ?)').run(userId, JSON.stringify({ lesson_id: lessonId }));
+        db.prepare("INSERT INTO analytics_events (user_id, event_type, event_data) VALUES (?, 'lesson_started', ?)").run(userId, JSON.stringify({ lesson_id: lessonId }));
 
         res.json({ message: 'Lesson started.' });
     } catch (err) {
@@ -159,7 +159,7 @@ router.post('/:id/complete', authenticateToken, (req, res) => {
         }
 
         // Track analytics
-        db.prepare('INSERT INTO analytics_events (user_id, event_type, event_data) VALUES (?, "lesson_completed", ?)').run(userId, JSON.stringify({ lesson_id: lessonId, score }));
+        db.prepare("INSERT INTO analytics_events (user_id, event_type, event_data) VALUES (?, 'lesson_completed', ?)").run(userId, JSON.stringify({ lesson_id: lessonId, score }));
 
         res.json({ message: 'Lesson completed!', score });
     } catch (err) {

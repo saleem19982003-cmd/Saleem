@@ -91,7 +91,7 @@ router.put('/users/:id/role', authenticateToken, requireAdmin, (req, res) => {
         if (!['user', 'admin', 'moderator'].includes(role)) {
             return res.status(400).json({ error: 'Invalid role.' });
         }
-        db.prepare('UPDATE users SET role = ?, updated_at = datetime("now") WHERE id = ?').run(role, req.params.id);
+        db.prepare("UPDATE users SET role = ?, updated_at = datetime('now') WHERE id = ?").run(role, req.params.id);
         res.json({ message: 'User role updated.' });
     } catch (err) {
         res.status(500).json({ error: 'Failed to update role.' });
@@ -103,7 +103,7 @@ router.put('/users/:id/status', authenticateToken, requireAdmin, (req, res) => {
     try {
         const db = req.app.locals.db;
         const { is_active } = req.body;
-        db.prepare('UPDATE users SET is_active = ?, updated_at = datetime("now") WHERE id = ?').run(is_active ? 1 : 0, req.params.id);
+        db.prepare("UPDATE users SET is_active = ?, updated_at = datetime('now') WHERE id = ?").run(is_active ? 1 : 0, req.params.id);
         res.json({ message: is_active ? 'User activated.' : 'User deactivated.' });
     } catch (err) {
         res.status(500).json({ error: 'Failed to update user status.' });

@@ -243,7 +243,7 @@ router.get('/:id', optionalAuth, (req, res) => {
 
         // Track view
         if (req.user) {
-            db.prepare('INSERT INTO analytics_events (user_id, event_type, event_data) VALUES (?, "resource_viewed", ?)').run(req.user.id, JSON.stringify({ resource_id: resource.id }));
+            db.prepare("INSERT INTO analytics_events (user_id, event_type, event_data) VALUES (?, 'resource_viewed', ?)").run(req.user.id, JSON.stringify({ resource_id: resource.id }));
         }
 
         res.json({ resource });
@@ -264,7 +264,7 @@ router.post('/:id/save', authenticateToken, (req, res) => {
         }
 
         db.prepare('INSERT INTO saved_resources (id, user_id, resource_id) VALUES (?, ?, ?)').run(uuidv4(), req.user.id, req.params.id);
-        db.prepare('INSERT INTO analytics_events (user_id, event_type, event_data) VALUES (?, "resource_saved", ?)').run(req.user.id, JSON.stringify({ resource_id: req.params.id }));
+        db.prepare("INSERT INTO analytics_events (user_id, event_type, event_data) VALUES (?, 'resource_saved', ?)").run(req.user.id, JSON.stringify({ resource_id: req.params.id }));
 
         res.json({ saved: true, message: 'Resource saved.' });
     } catch (err) {
@@ -285,7 +285,7 @@ router.post('/', authenticateToken, requireAdmin, (req, res) => {
         const id = uuidv4();
         db.prepare(`
             INSERT INTO resources (id, name, description, category, address, city, phone, email, website, hours, languages, latitude, longitude, verification_status, services, required_documents, useful_phrase, wait_time, verified_by, last_verified_at, source_name, source_url, source_checked_at, trust_note)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'pending', ?, ?, ?, ?, ?, datetime("now"), ?, ?, datetime("now"), ?)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'pending', ?, ?, ?, ?, ?, datetime('now'), ?, ?, datetime('now'), ?)
         `).run(id, sanitizeHtml(name), sanitizeHtml(description), normalizeCategory(category), sanitizeHtml(address), sanitizeHtml(city || 'Cairo'), phone, email, website, hours, languages, latitude, longitude, services, JSON.stringify(required_documents || []), useful_phrase, wait_time, req.user.id, sanitizeHtml(source_name || ''), sanitizeHtml(source_url || ''), sanitizeHtml(trust_note || ''));
 
         const resource = db.prepare('SELECT * FROM resources WHERE id = ?').get(id);
@@ -306,7 +306,7 @@ router.put('/:id/verify', authenticateToken, requireAdmin, (req, res) => {
             return res.status(400).json({ error: 'Invalid verification status.' });
         }
 
-        db.prepare('UPDATE resources SET verification_status = ?, verified_by = ?, last_verified_at = datetime("now"), updated_at = datetime("now") WHERE id = ?').run(verification_status, req.user.id, req.params.id);
+        db.prepare("UPDATE resources SET verification_status = ?, verified_by = ?, last_verified_at = datetime('now'), updated_at = datetime('now') WHERE id = ?").run(verification_status, req.user.id, req.params.id);
 
         res.json({ message: `Resource marked as ${verification_status}.` });
     } catch (err) {

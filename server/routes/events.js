@@ -50,7 +50,7 @@ router.get('/:id', optionalAuth, (req, res) => {
         if (req.user) {
             const reg = db.prepare('SELECT id FROM event_registrations WHERE user_id = ? AND event_id = ?').get(req.user.id, event.id);
             event.is_registered = !!reg;
-            db.prepare('INSERT INTO analytics_events (user_id, event_type, event_data) VALUES (?, "event_viewed", ?)').run(req.user.id, JSON.stringify({ event_id: event.id }));
+            db.prepare("INSERT INTO analytics_events (user_id, event_type, event_data) VALUES (?, 'event_viewed', ?)").run(req.user.id, JSON.stringify({ event_id: event.id }));
         }
 
         res.json({ event });
@@ -80,7 +80,7 @@ router.post('/:id/register', authenticateToken, (req, res) => {
         }
 
         db.prepare('INSERT INTO event_registrations (id, user_id, event_id) VALUES (?, ?, ?)').run(uuidv4(), req.user.id, req.params.id);
-        db.prepare('INSERT INTO analytics_events (user_id, event_type, event_data) VALUES (?, "event_registered", ?)').run(req.user.id, JSON.stringify({ event_id: req.params.id }));
+        db.prepare("INSERT INTO analytics_events (user_id, event_type, event_data) VALUES (?, 'event_registered', ?)").run(req.user.id, JSON.stringify({ event_id: req.params.id }));
 
         res.json({ registered: true, message: 'Registered successfully!' });
     } catch (err) {

@@ -190,7 +190,7 @@ router.post('/chat', optionalAuth, async (req, res) => {
                 db.prepare('INSERT INTO chat_conversations (id, user_id, title) VALUES (?, ?, ?)').run(convId, req.user.id, cleanMessage.substring(0, 100));
             }
             // Save user message
-            db.prepare('INSERT INTO chat_messages (id, conversation_id, role, content) VALUES (?, ?, "user", ?)').run(uuidv4(), convId, cleanMessage);
+            db.prepare("INSERT INTO chat_messages (id, conversation_id, role, content) VALUES (?, ?, 'user', ?)").run(uuidv4(), convId, cleanMessage);
         }
 
         // Build message history
@@ -228,7 +228,7 @@ router.post('/chat', optionalAuth, async (req, res) => {
         if (!llmResult || !llmResult.text) {
             const fallback = generateFallbackResponse(cleanMessage, userName, language);
             if (req.user && convId) {
-                db.prepare('INSERT INTO chat_messages (id, conversation_id, role, content) VALUES (?, ?, "assistant", ?)').run(uuidv4(), convId, fallback);
+                db.prepare("INSERT INTO chat_messages (id, conversation_id, role, content) VALUES (?, ?, 'assistant', ?)").run(uuidv4(), convId, fallback);
             }
             return res.json({ response: fallback, conversation_id: convId, source: 'fallback' });
         }
@@ -237,13 +237,13 @@ router.post('/chat', optionalAuth, async (req, res) => {
 
         // Save assistant message
         if (req.user && convId) {
-            db.prepare('INSERT INTO chat_messages (id, conversation_id, role, content) VALUES (?, ?, "assistant", ?)').run(uuidv4(), convId, aiResponse);
-            db.prepare('UPDATE chat_conversations SET updated_at = datetime("now") WHERE id = ?').run(convId);
+            db.prepare("INSERT INTO chat_messages (id, conversation_id, role, content) VALUES (?, ?, 'assistant', ?)").run(uuidv4(), convId, aiResponse);
+            db.prepare("UPDATE chat_conversations SET updated_at = datetime('now') WHERE id = ?").run(convId);
         }
 
         // Track analytics
         if (req.user) {
-            db.prepare('INSERT INTO analytics_events (user_id, event_type) VALUES (?, "ai_message_sent")').run(req.user.id);
+                db.prepare("INSERT INTO analytics_events (user_id, event_type) VALUES (?, 'ai_message_sent')").run(req.user.id);
         }
 
         res.json({ response: aiResponse, conversation_id: convId, source: 'ai', provider: llmResult.provider });
