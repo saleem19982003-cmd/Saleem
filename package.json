@@ -7,6 +7,7 @@
     "start": "node server/index.js",
     "dev": "node --watch server/index.js",
     "test": "node --test tests/*.test.js",
+    "audit:translations": "node scripts/audit_translation_quality.js --json",
     "seed": "node scripts/seed_data.js"
   },
   "repository": {

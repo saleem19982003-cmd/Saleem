@@ -513,7 +513,20 @@ document.addEventListener('DOMContentLoaded', () => {
             badge: 'Badge',
             noLessons: 'No lessons completed yet! Complete Lesson 1 to earn your first XP and rank on the Hall of Fame.',
             translatorPair: 'Translate between English and Egyptian Arabic.',
-            assistantPair: 'Ask Saleem AI in English or Egyptian Arabic.'
+            assistantPair: 'Ask Saleem AI in English or Egyptian Arabic.',
+            serviceFindHelp: 'Find Help Near Me',
+            serviceChooseArea: 'Choose Area Manually',
+            serviceSearchArea: 'Search This Area',
+            servicePermission: 'Saleem uses your location once to sort verified services nearby. It is not stored or tracked.',
+            serviceLocationDenied: 'Location was not shared. Choose an area manually instead.',
+            serviceGpsUnavailable: 'Location is unavailable. Choose an area manually instead.',
+            serviceNoResults: 'No verified services match this area or category.',
+            serviceGovernorate: 'Governorate',
+            serviceCity: 'City or area',
+            serviceSort: 'Sort',
+            serviceNearest: 'Nearest',
+            serviceBestMatch: 'Best match',
+            serviceRecentlyVerified: 'Recently verified'
             ,brandSupport: 'Refugee Support'
             ,localProfile: 'Local Saleem profile'
             ,learningSnapshot: 'Personal Learning Snapshot'
@@ -551,7 +564,8 @@ document.addEventListener('DOMContentLoaded', () => {
             badge: '\u0627\u0644\u0634\u0627\u0631\u0629',
             noLessons: 'لم تكمل أي درس بعد. أكمل الدرس 1 لكسب أول XP لك.',
             translatorPair: '\u062a\u0631\u062c\u0645 \u0628\u064a\u0646 \u0627\u0644\u0644\u0647\u062c\u0629 \u0627\u0644\u0645\u0635\u0631\u064a\u0629 \u0648\u0627\u0644\u0644\u063a\u0629 \u0627\u0644\u0645\u062e\u062a\u0627\u0631\u0629.',
-            assistantPair: '\u0627\u0633\u0623\u0644 \u0645\u0633\u0627\u0639\u062f \u0633\u0644\u064a\u0645 \u0628\u0627\u0644\u0644\u0644\u0647\u062c\u0629 \u0627\u0644\u0645\u0635\u0631\u064a\u0629 \u0623\u0648 \u0627\u0644\u0644\u063a\u0629 \u0627\u0644\u0645\u062e\u062a\u0627\u0631\u0629.'
+            assistantPair: '\u0627\u0633\u0623\u0644 \u0645\u0633\u0627\u0639\u062f \u0633\u0644\u064a\u0645 \u0628\u0627\u0644\u0644\u0647\u062c\u0629 \u0627\u0644\u0645\u0635\u0631\u064a\u0629 \u0623\u0648 \u0627\u0644\u0644\u063a\u0629 \u0627\u0644\u0645\u062e\u062a\u0627\u0631\u0629.',
+            serviceFindHelp: '\u062f\u0648\u0651\u0631 \u0644\u064a \u0639\u0644\u0649 \u0645\u0633\u0627\u0639\u062f\u0629 \u0642\u0631\u064a\u0628\u0629', serviceChooseArea: '\u0627\u062e\u062a\u0627\u0631 \u0627\u0644\u0645\u0646\u0637\u0642\u0629 \u0628\u0646\u0641\u0633\u0643', serviceSearchArea: '\u0627\u0628\u062d\u062b \u0641\u064a \u0627\u0644\u0645\u0646\u0637\u0642\u0629', servicePermission: '\u0633\u064a\u0633\u062a\u062e\u062f\u0645 \u0633\u0644\u064a\u0645 \u0645\u0648\u0642\u0639\u0643 \u0645\u0631\u0629 \u0648\u0627\u062d\u062f\u0629 \u0644ترتيب \u0627ل\u062e\u062fم\u0627ت \u0627\u0644\u0645\u0648\u062b\u0642\u0629. \u0644ا \u064aتم \u062a\u062e\u0632\u064a\u0646\u0647 \u0623و \u062a\u062a\u0628\u0639\u0647.', serviceLocationDenied: '\u0644\u0645 \u064aتم \u0645ش\u0627ر\u0643ة \u0627\u0644\u0645وقع. \u0627ختر \u0645نطقة \u064aدو\u064a\u0627.', serviceGpsUnavailable: '\u0627لمو\u0642ع \u063aير \u0645تاح. \u0627ختر \u0645نطقة \u064aدوي\u0627.', serviceNoResults: '\u0644\u0627 \u062a\u0648\u062c\u062f \u062e\u062f\u0645\u0627\u062a \u0645\u0648\u062b\u0642\u0629 \u0645\u0646\u0627\u0633\u0628\u0629 \u0644\u0644\u0645\u0646\u0637\u0642\u0629.', serviceGovernorate: '\u0627\u0644\u0645\u062d\u0627\u0641\u0638\u0629', serviceCity: '\u0627\u0644\u0645\u062f\u064a\u0646\u0629 \u0623\u0648 \u0627\u0644\u0645\u0646\u0637\u0642\u0629', serviceSort: '\u062a\u0631\u062a\u064a\u0628', serviceNearest: '\u0627\u0644\u0623\u0642\u0631\u0628', serviceBestMatch: '\u0623\u0646\u0633\u0628 \u062a\u0637\u0627\u0628\u0642', serviceRecentlyVerified: '\u0627\u0644\u0623\u062d\u062f\u062b \u062a\u0648\u062b\u064a\u0642\u0627'
             ,brandSupport: '\u062f\u0639\u0645 \u0627\u0644\u0644\u0627\u062c\u0626\u064a\u0646'
             ,localProfile: '\u0645\u0644\u0641 \u0633\u0644\u064a\u0645 \u0627\u0644\u0645\u062d\u0644\u064a'
             ,learningSnapshot: '\u0645\u0644\u062e\u0635 \u0627\u0644\u062a\u0642\u062f\u0645 \u0627\u0644\u0634\u062e\u0635\u064a'
@@ -565,6 +579,17 @@ document.addEventListener('DOMContentLoaded', () => {
         om: { coverageNotice: 'Qabiyyeen qabiyyee afaan filatametti hin argamu. Afaan Arabaa Gibxi yeroo jiru ni mul’ata.', translationUnavailable: 'Hiikni afaan filatametti hin argamu.', egyptianArabicOnly: 'Qabiyyee Afaan Arabaa Gibxi qofa', languagePair: 'Lama afaanii' }
     });
 
+    const SERVICE_RUNTIME_TEXT = Object.freeze({
+        en: { find: 'Find Help Near Me', area: 'Choose Area Manually', search: 'Search This Area', permission: 'Saleem uses your location once to sort verified services nearby. It is not stored or tracked.', denied: 'Location was not shared. Choose an area manually instead.', unavailable: 'Location is unavailable. Choose an area manually instead.', empty: 'No verified services match this area or category.', governorate: 'Governorate', city: 'City or area', sort: 'Sort', nearest: 'Nearest', best: 'Best match', recent: 'Recently verified' },
+        ar: { find: '\u062f\u0648\u0651\u0631 \u0644\u064a \u0639\u0644\u0649 \u0645\u0633\u0627\u0639\u062f\u0629 \u0642\u0631\u064a\u0628\u0629', area: '\u0627\u062e\u062a\u0627\u0631 \u0627\u0644\u0645\u0646\u0637\u0642\u0629 \u0628\u0646\u0641\u0633\u0643', search: '\u0627\u0628\u062d\u062b \u0641\u064a \u0627\u0644\u0645\u0646\u0637\u0642\u0629', permission: '\u0633\u064a\u0633\u062a\u062e\u062f\u0645 \u0633\u0644\u064a\u0645 \u0645\u0648\u0642\u0639\u0643 \u0645\u0631\u0629 \u0648\u0627\u062d\u062f\u0629 \u0644\u062a\u0631\u062a\u064a\u0628 \u0627\u0644\u062e\u062f\u0645\u0627\u062a \u0627\u0644\u0645\u0648\u062b\u0642\u0629. \u0644\u0627 \u064a\u062a\u0645 \u062a\u062e\u0632\u064a\u0646\u0647 \u0623\u0648 \u062a\u062a\u0628\u0639\u0647.', denied: '\u0644\u0645 \u064a\u062a\u0645 \u0645\u0634\u0627\u0631\u0643\u0629 \u0627\u0644\u0645\u0648\u0642\u0639. \u0627\u062e\u062a\u0631 \u0645\u0646\u0637\u0642\u0629 \u064a\u062f\u0648\u064a\u0627.', unavailable: '\u0627\u0644\u0645\u0648\u0642\u0639 \u063a\u064a\u0631 \u0645\u062a\u0627\u062d. \u0627\u062e\u062a\u0631 \u0645\u0646\u0637\u0642\u0629 \u064a\u062f\u0648\u064a\u0627.', empty: '\u0644\u0627 \u062a\u0648\u062c\u062f \u062e\u062f\u0645\u0627\u062a \u0645\u0648\u062b\u0642\u0629 \u0645\u0646\u0627\u0633\u0628\u0629 \u0644\u0644\u0645\u0646\u0637\u0642\u0629.', governorate: '\u0627\u0644\u0645\u062d\u0627\u0641\u0638\u0629', city: '\u0627\u0644\u0645\u062f\u064a\u0646\u0629 \u0623\u0648 \u0627\u0644\u0645\u0646\u0637\u0642\u0629', sort: '\u062a\u0631\u062a\u064a\u0628', nearest: '\u0627\u0644\u0623\u0642\u0631\u0628', best: '\u0623\u0646\u0633\u0628 \u062a\u0637\u0627\u0628\u0642', recent: '\u0627\u0644\u0623\u062d\u062f\u062b \u062a\u0648\u062b\u064a\u0642\u0627' },
+        fr: { find: 'Trouver de l’aide près de moi', area: 'Choisir une zone manuellement', search: 'Chercher dans cette zone', permission: 'Saleem utilise votre position une seule fois pour classer les services vérifiés à proximité. Elle n’est ni enregistrée ni suivie.', denied: 'Position non partagée. Choisissez plutôt une zone manuellement.', unavailable: 'Position indisponible. Choisissez une zone manuellement.', empty: 'Aucun service vérifié ne correspond à cette zone.', governorate: 'Gouvernorat', city: 'Ville ou zone', sort: 'Trier', nearest: 'Plus proche', best: 'Meilleure correspondance', recent: 'Vérifié récemment' },
+        so: { find: 'Raadi caawimo ii dhow', area: 'Aagga gacanta ku dooro', search: 'Aaggan ka raadi', permission: 'Saleem wuxuu goobtaada isticmaalaa hal mar si uu u kala hormariyo adeegyada la xaqiijiyay. Lama kaydiyo ama lama raaco.', denied: 'Goobta lama wadaagin. Aag gacanta ku dooro.', unavailable: 'Goobtu ma heli karto. Aag gacanta ku dooro.', empty: 'Adeegyo la xaqiijiyay lagama helin aaggan.', governorate: 'Gobolka', city: 'Magaalada ama aagga', sort: 'Kala saar', nearest: 'Ugu dhow', best: 'Kuwa ugu habboon', recent: 'Dhawaan la xaqiijiyay' },
+        ti: { find: 'ሓገዝ ኣብ ኣብያተይ ድለይ', area: 'ከባቢ ብኢድካ ምረጽ', search: 'ኣብዚ ከባቢ ድለይ', permission: 'Saleem ንኣገልግሎታት ንምስራዕ ቦታኻ ሓንሳብ ጥራይ ይጥቀመሉ። ኣይዕቀብን ኣይከታተልን።', denied: 'ቦታ ኣይተካፈልካን። ከባቢ ብኢድካ ምረጽ።', unavailable: 'ቦታ ኣይርከብን። ከባቢ ብኢድካ ምረጽ።', empty: 'ኣብዚ ከባቢ ዝተረጋገጸ ኣገልግሎት የለን።', governorate: 'ኣውራጃ', city: 'ከተማ ወይ ከባቢ', sort: 'ስርዓት', nearest: 'ዝቐረበ', best: 'ዝበለጸ ምስማማዕ', recent: 'ቀረባ ግዜ ዝተረጋገጸ' },
+        sw: { find: 'Tafuta msaada karibu nami', area: 'Chagua eneo mwenyewe', search: 'Tafuta katika eneo hili', permission: 'Saleem hutumia eneo lako mara moja kupanga huduma zilizothibitishwa zilizo karibu. Halihifadhiwi wala kufuatiliwa.', denied: 'Eneo halikushirikiwa. Chagua eneo mwenyewe.', unavailable: 'Eneo halipatikani. Chagua eneo mwenyewe.', empty: 'Hakuna huduma iliyothibitishwa katika eneo hili.', governorate: 'Gavana', city: 'Mji au eneo', sort: 'Panga', nearest: 'Karibu zaidi', best: 'Inayolingana zaidi', recent: 'Imethibitishwa hivi karibuni' },
+        ha: { find: 'Nemo taimako kusa da ni', area: 'Zabi yanki da hannu', search: 'Nemo a wannan yanki', permission: 'Saleem zai yi amfani da wurinka sau daya don jera tabbatattun ayyuka kusa. Ba a adana ko bin sa.', denied: 'Ba a raba wurin ba. Zabi yanki da hannu.', unavailable: 'Ba a samun wurin. Zabi yanki da hannu.', empty: 'Babu tabbataccen sabis a wannan yankin.', governorate: 'Gwamnati', city: 'Birni ko yanki', sort: 'Tsara', nearest: 'Mafi kusa', best: 'Mafi dacewa', recent: 'An tabbatar kwanan nan' },
+        om: { find: 'Gargaarsa naannoo koo barbaadi', area: 'Naannoo harkaan filadhu', search: 'Naannoo kana keessa barbaadi', permission: 'Saleem tajaajiloota mirkanaa’an naannoo kee jiran tartiibsuuf bakka kee yeroo tokko qofa fayyadama. Hin kuufamu, hin hordofamus.', denied: 'Bakka hin qoodamne. Naannoo harkaan filadhu.', unavailable: 'Bakka hin argamne. Naannoo harkaan filadhu.', empty: 'Tajaajilli mirkanaa’e naannoo kana keessatti hin argamne.', governorate: 'Bulchiinsa', city: 'Magaalaa ykn naannoo', sort: 'Tartiibsi', nearest: 'Kan dhihoo', best: 'Kan caalaatti walsimu', recent: 'Dhiheenya mirkanaa’e' }
+    });
+
     let activeUiLanguage = 'en';
 
     function normalizeLanguage(lang) {
@@ -576,6 +601,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function getLanguageRuntimeText(key, lang = getSelectedLanguage()) {
+        const serviceKeys = { serviceFindHelp: 'find', serviceChooseArea: 'area', serviceSearchArea: 'search', servicePermission: 'permission', serviceLocationDenied: 'denied', serviceGpsUnavailable: 'unavailable', serviceNoResults: 'empty', serviceGovernorate: 'governorate', serviceCity: 'city', serviceSort: 'sort', serviceNearest: 'nearest', serviceBestMatch: 'best', serviceRecentlyVerified: 'recent' };
+        if (serviceKeys[key]) return SERVICE_RUNTIME_TEXT[lang]?.[serviceKeys[key]] || SERVICE_RUNTIME_TEXT.ar[serviceKeys[key]];
         return LANGUAGE_RUNTIME_TEXT[lang]?.[key] || LANGUAGE_RUNTIME_TEXT.ar[key] || '';
     }
 
@@ -668,6 +695,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (uiLangSwitcher) uiLangSwitcher.value = normalized;
 
         showLanguageCoverageNotice(normalized);
+        if (typeof updateServiceLocationCopy === 'function') updateServiceLocationCopy();
 
         try {
             if (typeof renderDailyPhrasesUI === 'function') renderDailyPhrasesUI();
@@ -2112,7 +2140,13 @@ Provide:
         try {
             const data = await API.fetch('/ai/chat', {
                 method: 'POST',
-                body: JSON.stringify({ message: prompt, primary_language: getSelectedLanguage() })
+                body: JSON.stringify({
+                    message: prompt,
+                    primary_language: getSelectedLanguage(),
+                    service_need: prompt,
+                    service_city: JSON.parse(localStorage.getItem('saleem_service_area') || '{}').city || '',
+                    service_category: document.querySelector('.chip-btn.active')?.getAttribute('data-inst-cat') || ''
+                })
             });
 
             if (data && data.response && data.source !== 'fallback') {
@@ -3579,6 +3613,15 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
     const instGrid = document.getElementById('institutions-directory-grid');
     const instCatChips = document.getElementById('institution-category-chips');
     const instSearchInput = document.getElementById('institution-search-input');
+    const findHelpButton = document.getElementById('find-help-btn');
+    const chooseAreaButton = document.getElementById('choose-area-btn');
+    const searchAreaButton = document.getElementById('search-area-btn');
+    const manualAreaPanel = document.getElementById('manual-area-panel');
+    const serviceStatus = document.getElementById('service-location-status');
+    const governorateSelect = document.getElementById('service-governorate');
+    const citySelect = document.getElementById('service-city');
+    const serviceSort = document.getElementById('service-sort');
+    let serviceLocationMode = 'all';
     legalInstitutionsData.length = 0;
     let googleMapInstance = null;
     let mapMarkers = [];
@@ -3586,7 +3629,7 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
     function normalizeInstitutionCategory(category) {
         const key = String(category || '').toLowerCase();
         if (key === 'healthcare') return 'health';
-        if (key === 'education' || key === 'employment') return 'legal';
+        if (key === 'education' || key === 'employment' || key === 'refugee_support' || key === 'ngo' || key === 'government' || key === 'training' || key === 'programming' || key === 'pharmacy') return key;
         return key || 'legal';
     }
 
@@ -3594,10 +3637,6 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
         if (!instGrid) return;
         instGrid.innerHTML = '';
         const selectedLanguage = getSelectedLanguage();
-        if (selectedLanguage !== 'en' && selectedLanguage !== 'ar') {
-            renderTranslationUnavailable(instGrid, getLanguageRuntimeText('coverageNotice', selectedLanguage));
-            return;
-        }
         const isArabic = selectedLanguage === 'ar';
 
         let filtered = legalInstitutionsData;
@@ -3613,8 +3652,8 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
             instGrid.innerHTML = `
                 <div class="empty-state" style="grid-column: 1 / -1;">
                     <i class="fa-solid fa-map-location-dot"></i>
-                    <h4>${isArabic ? 'لا توجد خدمات موثقة متاحة' : 'No verified services loaded'}</h4>
-                    <p>${isArabic ? 'تحقق من الاتصال أو جرّب تصنيفاً آخر. يعرض سليم السجلات العامة المدعومة بالمصادر فقط.' : 'Check your connection or try a different category. Saleem only shows source-backed public records by default.'}</p>
+                    <h4>${escapeHtml(getLanguageRuntimeText('serviceNoResults', selectedLanguage))}</h4>
+                    <p>${escapeHtml(getLanguageRuntimeText('coverageNotice', selectedLanguage))}</p>
                 </div>
             `;
             return;
@@ -3628,41 +3667,37 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
             card.style.background = 'var(--bg-dark)';
             card.style.border = '1px solid var(--glass-border)';
 
-            const docsListHTML = isArabic ? '' : inst.docs.map(d => `<li style="font-size: 11px; color: var(--text-light); margin-bottom: 2px;">- ${escapeHtml(d)}</li>`).join('');
+            const docsListHTML = inst.docs.map(d => `<li style="font-size: 11px; color: var(--text-light); margin-bottom: 2px;">- ${escapeHtml(d)}</li>`).join('');
+            const showSourceLanguageDetails = selectedLanguage === 'en' || isArabic;
             const sourceHTML = inst.sourceUrl ? `
                 <div style="padding: 8px 10px; background: rgba(232, 171, 99, 0.1); border-left: 3px solid var(--warm-sand); border-radius: 6px; margin-bottom: 12px;">
-                    <strong style="font-size: 10px; color: var(--warm-sand); display: block;">${isArabic ? 'تم التحقق من المصدر' : 'Source checked'}${inst.sourceCheckedAt ? ` ${escapeHtml(inst.sourceCheckedAt)}` : ''}</strong>
+                    <strong style="font-size: 10px; color: var(--warm-sand); display: block;">${showSourceLanguageDetails ? (isArabic ? 'تم التحقق من المصدر' : 'Source checked') : escapeHtml(getLanguageRuntimeText('egyptianArabicOnly'))}${inst.sourceCheckedAt ? ` ${escapeHtml(inst.sourceCheckedAt)}` : ''}</strong>
                     <a href="${escapeHtml(inst.sourceUrl)}" target="_blank" rel="noopener noreferrer" style="font-size: 11px; color: var(--text-light);">${escapeHtml(inst.sourceName || 'Official source')}</a>
-                    ${inst.trustNote ? `<p style="font-size: 11px; color: var(--text-muted); margin: 4px 0 0 0;">${escapeHtml(inst.trustNote)}</p>` : ''}
+                    ${showSourceLanguageDetails && inst.trustNote ? `<p style="font-size: 11px; color: var(--text-muted); margin: 4px 0 0 0;">${escapeHtml(inst.trustNote)}</p>` : ''}
                 </div>
             ` : '';
 
             card.innerHTML = `
                 <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 8px;">
-                    <span class="tag tag-ngo" style="font-size: 10px;">${isArabic ? 'خدمة موثقة' : escapeHtml(inst.type)}</span>
-                    ${isArabic ? '' : `<span style="font-size: 10px; color: var(--emerald); font-weight: 600;"><i class="fa-solid fa-clock"></i> Wait: ${escapeHtml(inst.wait)}</span>`}
+                    <span class="tag tag-ngo" style="font-size: 10px;">${isArabic || selectedLanguage !== 'en' ? escapeHtml(getLanguageRuntimeText('egyptianArabicOnly')) : escapeHtml(inst.type)}</span>
+                    ${showSourceLanguageDetails && inst.wait ? `<span style="font-size: 10px; color: var(--emerald); font-weight: 600;"><i class="fa-solid fa-clock"></i> ${escapeHtml(inst.wait)}</span>` : ''}
                 </div>
                 <h3 style="font-size: 16px; color: #fff; margin-bottom: 6px;">${escapeHtml(inst.name)}</h3>
-                <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 8px;"><i class="fa-solid fa-location-dot text-gold"></i> ${escapeHtml(inst.address)}</p>
-                ${isArabic ? '' : `<p style="font-size: 11px; color: var(--warm-sand); margin-bottom: 10px;">⏰ ${escapeHtml(inst.hours)}</p>`}
+                <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 8px;"><i class="fa-solid fa-location-dot text-gold"></i> ${escapeHtml(inst.address || '')}${inst.distanceKm !== null && inst.distanceKm !== undefined ? ` · ${escapeHtml(String(inst.distanceKm))} km` : ''}</p>
+                ${showSourceLanguageDetails && inst.hours ? `<p style="font-size: 11px; color: var(--warm-sand); margin-bottom: 10px;">${escapeHtml(inst.hours)}</p>` : ''}
 
-                ${isArabic ? '' : `<div style="padding: 8px 10px; background: var(--surface-dark); border-radius: 8px; margin-bottom: 10px;">
+                ${showSourceLanguageDetails && inst.docs.length ? `<div style="padding: 8px 10px; background: var(--surface-dark); border-radius: 8px; margin-bottom: 10px;">
                     <strong style="font-size: 11px; color: var(--warm-sand); display: block; margin-bottom: 4px;"><i class="fa-solid fa-clipboard-check"></i> Required Documents:</strong>
                     <ul style="list-style: none; padding: 0; margin: 0;">${docsListHTML}</ul>
-                </div>`}
+                </div>` : ''}
 
-                <div style="padding: 8px 10px; background: rgba(16, 185, 129, 0.1); border-left: 3px solid var(--emerald); border-radius: 6px; margin-bottom: 12px;">
-                    <strong style="font-size: 10px; color: var(--emerald); display: block;">💡 ${isArabic ? 'عبارة مصرية مفيدة' : 'Useful Phrase to Say:'}</strong>
-                    <span style="font-size: 12px; color: #fff;">"${escapeHtml(inst.phrase)}"</span>
-                </div>
+                ${showSourceLanguageDetails && inst.phrase ? `<div style="padding: 8px 10px; background: rgba(16, 185, 129, 0.1); border-left: 3px solid var(--emerald); border-radius: 6px; margin-bottom: 12px;"><strong style="font-size: 10px; color: var(--emerald); display: block;">💡 ${isArabic ? 'عبارة مصرية مفيدة' : 'Useful Phrase to Say:'}</strong><span style="font-size: 12px; color: #fff;">"${escapeHtml(inst.phrase)}"</span></div>` : ''}
                 ${sourceHTML}
 
                 <div style="display: flex; gap: 8px; align-items: center; margin-top: auto;">
-                    <a href="tel:${inst.phone}" class="btn btn-primary" style="padding: 6px 12px; font-size: 11px; text-decoration: none; flex: 1; justify-content: center;">
-                        <i class="fa-solid fa-phone"></i> ${isArabic ? 'اتصال مباشر' : 'Call Direct'}
-                    </a>
-                    <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(inst.name + ' ' + inst.address)}" target="_blank" class="btn btn-outline" style="padding: 6px 12px; font-size: 11px; text-decoration: none; flex: 1; justify-content: center;">
-                        <i class="fa-solid fa-diamond-turn-right"></i> ${isArabic ? 'الاتجاهات' : 'Directions'}
+                    ${inst.phone ? `<a href="tel:${escapeHtml(inst.phone)}" class="btn btn-primary" style="padding: 6px 12px; font-size: 11px; text-decoration: none; flex: 1; justify-content: center;"><i class="fa-solid fa-phone"></i> ${isArabic || selectedLanguage !== 'en' ? 'اتصال مباشر' : 'Call Direct'}</a>` : ''}
+                    <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(inst.name + ' ' + (inst.address || ''))}" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="padding: 6px 12px; font-size: 11px; text-decoration: none; flex: 1; justify-content: center;">
+                        <i class="fa-solid fa-diamond-turn-right"></i> ${isArabic || selectedLanguage !== 'en' ? 'الاتجاهات' : 'Directions'}
                     </a>
                 </div>
             `;
@@ -3680,15 +3715,18 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
                     cat: normalizeInstitutionCategory(r.category),
                     type: r.category.toUpperCase(),
                     address: r.address || r.location,
-                    phone: r.phone || '+20 2 2728 4300',
-                    hours: r.hours || 'Sun-Thu 8:00 AM - 3:00 PM',
-                    wait: r.wait_time || '30 mins',
-                    services: r.services || r.description,
-                    languages: r.languages || 'Arabic, English',
-                    docs: Array.isArray(r.required_documents) ? r.required_documents : ['ID / Passport'],
+                    phone: r.phone || '',
+                    hours: r.hours || '',
+                    wait: r.wait_time || '',
+                    services: r.services || r.description || '',
+                    languages: r.languages || '',
+                    docs: Array.isArray(r.required_documents) ? r.required_documents : [],
                     phrase: r.useful_phrase || 'محتاج مساعدة من فضلكم',
-                    lat: r.latitude || 30.0444,
-                    lng: r.longitude || 31.2357,
+                    lat: Number.isFinite(Number(r.latitude)) ? Number(r.latitude) : null,
+                    lng: Number.isFinite(Number(r.longitude)) ? Number(r.longitude) : null,
+                    distanceKm: r.distance_km,
+                    governorate: r.governorate || '',
+                    city: r.city || '',
                     sourceName: r.source_name,
                     sourceUrl: r.source_url,
                     sourceCheckedAt: r.source_checked_at,
@@ -3699,11 +3737,71 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
                 mapped.forEach(m => {
                     if (!existingIds.has(m.id)) legalInstitutionsData.push(m);
                 });
+                populateAreaSelectors();
+                updateServiceLocationCopy();
                 renderInstitutionsDirectoryUI('all', '');
             }
         } catch (e) {
             console.warn('Resources server sync offline fallback:', e);
         }
+    }
+
+    function updateServiceLocationCopy() {
+        const text = key => getLanguageRuntimeText(key, getSelectedLanguage());
+        const labels = {
+            'find-help-label': text('serviceFindHelp'),
+            'choose-area-label': text('serviceChooseArea'),
+            'search-area-label': text('serviceSearchArea'),
+            'service-governorate-label': text('serviceGovernorate'),
+            'service-city-label': text('serviceCity'),
+            'service-sort-label': text('serviceSort')
+        };
+        Object.entries(labels).forEach(([id, value]) => { const element = document.getElementById(id); if (element) element.textContent = value; });
+        if (serviceStatus && serviceLocationMode === 'all') serviceStatus.textContent = text('servicePermission');
+        if (serviceSort) {
+            const selected = serviceSort.value || 'best-match';
+            serviceSort.innerHTML = `<option value="nearest">${escapeHtml(text('serviceNearest'))}</option><option value="best-match">${escapeHtml(text('serviceBestMatch'))}</option><option value="recently-verified">${escapeHtml(text('serviceRecentlyVerified'))}</option>`;
+            serviceSort.value = selected;
+        }
+    }
+
+    function populateAreaSelectors() {
+        if (!governorateSelect || !citySelect) return;
+        const governorates = [...new Set(legalInstitutionsData.map(item => item.governorate).filter(Boolean))].sort();
+        const cities = [...new Set(legalInstitutionsData.map(item => item.city).filter(Boolean))].sort();
+        governorateSelect.innerHTML = governorates.map(value => `<option value="${escapeHtml(value)}">${escapeHtml(value)}</option>`).join('');
+        citySelect.innerHTML = cities.map(value => `<option value="${escapeHtml(value)}">${escapeHtml(value)}</option>`).join('');
+    }
+
+    async function loadNearbyResources(query) {
+        try {
+            const params = new URLSearchParams({ ...query, category: document.querySelector('.chip-btn.active')?.getAttribute('data-inst-cat') || '', sort: serviceSort?.value || 'best-match' });
+            if (!params.get('category') || params.get('category') === 'all') params.delete('category');
+            const data = await API.fetch(`/resources/nearby?${params.toString()}`);
+            const mapped = (data.resources || []).map(r => ({ id: r.id, name: r.name, cat: normalizeInstitutionCategory(r.category), type: String(r.category || '').toUpperCase(), address: r.address || r.location || '', phone: r.phone || '', hours: r.hours || '', wait: r.wait_time || '', services: r.services || r.description || '', languages: r.languages || '', docs: Array.isArray(r.required_documents) ? r.required_documents : [], phrase: r.useful_phrase || '', lat: Number.isFinite(Number(r.latitude)) ? Number(r.latitude) : null, lng: Number.isFinite(Number(r.longitude)) ? Number(r.longitude) : null, distanceKm: r.distance_km, governorate: r.governorate || '', city: r.city || '', sourceName: r.source_name, sourceUrl: r.source_url, sourceCheckedAt: r.source_checked_at, trustNote: r.trust_note }));
+            legalInstitutionsData.splice(0, legalInstitutionsData.length, ...mapped);
+            serviceLocationMode = data.location_mode || 'manual';
+            if (serviceStatus) serviceStatus.textContent = mapped.length ? `${mapped.length} · ${getLanguageRuntimeText('serviceBestMatch')}` : getLanguageRuntimeText('serviceNoResults');
+            renderInstitutionsDirectoryUI('all', instSearchInput?.value || '');
+        } catch (error) {
+            if (serviceStatus) serviceStatus.textContent = getLanguageRuntimeText('serviceNoResults');
+            console.warn('Nearby resources unavailable:', error);
+        }
+    }
+
+    function requestOneShotLocation() {
+        if (!navigator.geolocation) {
+            serviceLocationMode = 'manual';
+            if (serviceStatus) serviceStatus.textContent = getLanguageRuntimeText('serviceGpsUnavailable');
+            if (manualAreaPanel) manualAreaPanel.hidden = false;
+            return;
+        }
+        if (serviceStatus) serviceStatus.textContent = getLanguageRuntimeText('servicePermission');
+        navigator.geolocation.getCurrentPosition(
+            position => loadNearbyResources({ latitude: position.coords.latitude, longitude: position.coords.longitude }),
+            () => { serviceLocationMode = 'manual'; if (serviceStatus) serviceStatus.textContent = getLanguageRuntimeText('serviceLocationDenied'); if (manualAreaPanel) manualAreaPanel.hidden = false; },
+            { enableHighAccuracy: false, maximumAge: 0, timeout: 10000 }
+        );
     }
 
     async function loadUserStats() {
@@ -3757,7 +3855,7 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
                     ]
                 });
 
-                legalInstitutionsData.forEach(inst => {
+                legalInstitutionsData.filter(inst => Number.isFinite(inst.lat) && Number.isFinite(inst.lng)).forEach(inst => {
                     const marker = new google.maps.Marker({
                         position: { lat: inst.lat, lng: inst.lng },
                         map: googleMapInstance,
@@ -3802,6 +3900,26 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
             renderInstitutionsDirectoryUI(cat, e.target.value);
         });
     }
+
+    if (findHelpButton) findHelpButton.addEventListener('click', requestOneShotLocation);
+    if (chooseAreaButton) chooseAreaButton.addEventListener('click', () => {
+        if (manualAreaPanel) manualAreaPanel.hidden = !manualAreaPanel.hidden;
+        serviceLocationMode = 'manual';
+        if (serviceStatus) serviceStatus.textContent = getLanguageRuntimeText('serviceChooseArea');
+    });
+    if (searchAreaButton) searchAreaButton.addEventListener('click', () => {
+        const governorate = governorateSelect?.value || '';
+        const city = citySelect?.value || '';
+        localStorage.setItem('saleem_service_area', JSON.stringify({ governorate, city }));
+        loadNearbyResources({ governorate, city });
+    });
+    if (serviceSort) serviceSort.addEventListener('change', () => {
+        if (serviceLocationMode === 'all') return;
+        const savedArea = JSON.parse(localStorage.getItem('saleem_service_area') || '{}');
+        loadNearbyResources(savedArea);
+    });
+
+    updateServiceLocationCopy();
 
     initGoogleMapsAndDirectory();
 });

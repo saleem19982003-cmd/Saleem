@@ -16,6 +16,25 @@ function normalizePreferredLanguage(language) {
     return SUPPORTED_LANGUAGE_CODES.has(language) ? language : 'en';
 }
 
+function getVerifiedServiceContext(db, need = '', city = '', category = '') {
+    if (!db) return '';
+    const tokens = String(need).toLowerCase().split(/\s+/).filter(token => token.length > 2).slice(0, 8);
+    const normalizedCity = String(city).trim().toLowerCase();
+    const normalizedCategory = String(category).trim().toLowerCase();
+    const rows = db.prepare("SELECT name, category, description, address, city, phone, website, source_name, source_url, last_verified_at FROM resources WHERE verification_status = 'verified' AND is_demo_data = 0 ORDER BY last_verified_at DESC, name LIMIT 50").all();
+    const matches = rows.map(row => {
+        const haystack = `${row.name} ${row.category} ${row.description || ''} ${row.address || ''} ${row.city || ''}`.toLowerCase();
+        const score = (normalizedCategory && row.category === normalizedCategory ? 30 : 0)
+            + (normalizedCity && String(row.city || '').toLowerCase() === normalizedCity ? 20 : 0)
+            + tokens.filter(token => haystack.includes(token)).length * 5
+            + (row.source_url ? 5 : 0);
+        return { row, score };
+    }).filter(item => item.score > 0 || (!tokens.length && !normalizedCity && !normalizedCategory))
+        .sort((a, b) => b.score - a.score || a.row.name.localeCompare(b.row.name)).slice(0, 5).map(item => item.row);
+    if (!matches.length) return '';
+    return `\nVERIFIED SERVICE DIRECTORY RESULTS (source-backed records only; do not invent or alter these details):\n${matches.map(row => `- ${row.name} | ${row.category} | ${row.city || 'Egypt'} | ${row.address || 'Address not listed'} | ${row.phone || 'Phone not listed'} | ${row.source_url || 'Source link not listed'} | checked ${row.last_verified_at || 'date not listed'}`).join('\n')}\nIf no record matches the user's need, say that no matching verified record was found and direct the user to choose a category or area in the directory. Never provide a made-up service, route, distance, phone number, or opening time.`;
+}
+
 // Default model prioritization on Groq API: llama-3.3-70b-versatile
 const AI_MODEL = process.env.AI_MODEL || 'llama-3.3-70b-versatile';
 const UNHCR_EGYPT_FALLBACK = `UNHCR Egypt registration and document services:
@@ -154,7 +173,7 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
 // POST /api/ai/chat - Send message to AI
 router.post('/chat', optionalAuth, async (req, res) => {
     try {
-        const { message, conversation_id, scenario, primary_language } = req.body;
+        const { message, conversation_id, scenario, primary_language, service_need, service_city, service_category } = req.body;
 
         if (!message || message.trim().length === 0) {
             return res.status(400).json({ error: 'Message is required.' });
@@ -194,7 +213,7 @@ router.post('/chat', optionalAuth, async (req, res) => {
             }
         }
 
-        const systemPrompt = buildSystemPrompt(userName, nationality, language);
+        const systemPrompt = buildSystemPrompt(userName, nationality, language) + getVerifiedServiceContext(db, service_need, service_city, service_category);
 
         // Build messages payload
         const messages = [

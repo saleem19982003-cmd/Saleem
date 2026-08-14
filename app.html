@@ -391,6 +391,23 @@
                             <input type="text" id="institution-search-input" placeholder="Search institution by name or location..." class="form-control" style="max-width: 280px; font-size: 12px;">
                         </div>
 
+                        <div class="service-location-tools" aria-live="polite">
+                            <div class="service-location-actions">
+                                <button type="button" class="btn btn-primary" id="find-help-btn"><i class="fa-solid fa-location-crosshairs"></i><span id="find-help-label"></span></button>
+                                <button type="button" class="btn btn-outline" id="choose-area-btn"><i class="fa-solid fa-list-check"></i><span id="choose-area-label"></span></button>
+                            </div>
+                            <p id="service-location-status" class="service-location-status"></p>
+                            <div id="manual-area-panel" class="manual-area-panel" hidden>
+                                <label for="service-governorate" id="service-governorate-label"></label>
+                                <select id="service-governorate" class="form-control"></select>
+                                <label for="service-city" id="service-city-label"></label>
+                                <select id="service-city" class="form-control"></select>
+                                <button type="button" class="btn btn-primary" id="search-area-btn"><i class="fa-solid fa-magnifying-glass"></i><span id="search-area-label"></span></button>
+                            </div>
+                            <label class="service-sort-control" for="service-sort" id="service-sort-label"></label>
+                            <select id="service-sort" class="form-control service-sort-select"></select>
+                        </div>
+
                         <!-- Category Filter Chips -->
                         <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px;" id="institution-category-chips">
                             <button class="chip-btn active" data-inst-cat="all">All Institutions</button>

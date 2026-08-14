@@ -150,6 +150,7 @@ function initializeDatabase(dbPath) {
             category TEXT NOT NULL,
             location TEXT,
             city TEXT DEFAULT 'Cairo',
+            governorate TEXT,
             address TEXT,
             phone TEXT,
             email TEXT,
@@ -330,6 +331,7 @@ function initializeDatabase(dbPath) {
     ensureColumn(db, 'resources', 'source_url', 'TEXT');
     ensureColumn(db, 'resources', 'source_checked_at', 'TEXT');
     ensureColumn(db, 'resources', 'trust_note', 'TEXT');
+    ensureColumn(db, 'resources', 'governorate', 'TEXT');
     ensureColumn(db, 'community_posts', 'is_demo_data', 'INTEGER DEFAULT 0');
     ensureColumn(db, 'reviews', 'is_demo_data', 'INTEGER DEFAULT 0');
 
@@ -580,6 +582,7 @@ function refreshVerifiedResourceData(db) {
             category: 'legal',
             address: '17 Mecca El-Mokarrama Street, 7th District, 6th of October City',
             city: 'Giza',
+            governorate: 'Giza',
             phone: '0231330000',
             hours: 'Infoline Sun-Wed 08:15-15:30; Thu 08:15-14:00. Office hours can change; verify before visiting.',
             languages: 'Arabic, English and partner-supported languages vary by service',
@@ -600,6 +603,7 @@ function refreshVerifiedResourceData(db) {
             category: 'legal',
             address: '38 26th of July Street, Esaaf Square, Downtown Cairo',
             city: 'Cairo',
+            governorate: 'Cairo',
             phone: '+20 2 2575 9451',
             hours: 'Sun-Thu 09:00-17:00 for many services; call the relevant infoline first.',
             languages: 'Arabic, English, Amharic, Oromo, Somali, Tigrinya and others depending on service',
@@ -620,6 +624,7 @@ function refreshVerifiedResourceData(db) {
             category: 'healthcare',
             address: 'Caritas Egypt refugee services offices in Greater Cairo',
             city: 'Cairo',
+            governorate: 'Cairo',
             phone: '(02)27961771 / (02)2964441',
             hours: 'Call before visiting; service windows vary by program.',
             languages: 'Arabic, English, French depending on program',
@@ -637,15 +642,15 @@ function refreshVerifiedResourceData(db) {
 
     const upsert = db.prepare(`
         INSERT INTO resources (
-            id, name, description, category, address, city, phone, hours, languages,
+            id, name, description, category, address, city, governorate, phone, hours, languages,
             latitude, longitude, verification_status, required_documents, useful_phrase,
-            wait_time, services, is_demo_data, source_name, source_url, source_checked_at,
+            wait_time, services, is_demo_data, source_name, source_url, source_checked_at, last_verified_at,
             trust_note, updated_at
         )
         VALUES (
-            @id, @name, @description, @category, @address, @city, @phone, @hours, @languages,
+            @id, @name, @description, @category, @address, @city, @governorate, @phone, @hours, @languages,
             @latitude, @longitude, 'verified', @required_documents, @useful_phrase,
-            @wait_time, @services, 0, @source_name, @source_url, @source_checked_at,
+            @wait_time, @services, 0, @source_name, @source_url, @source_checked_at, @source_checked_at,
             @trust_note, datetime('now')
         )
         ON CONFLICT(id) DO UPDATE SET
@@ -654,6 +659,7 @@ function refreshVerifiedResourceData(db) {
             category = excluded.category,
             address = excluded.address,
             city = excluded.city,
+            governorate = excluded.governorate,
             phone = excluded.phone,
             hours = excluded.hours,
             languages = excluded.languages,
@@ -668,11 +674,13 @@ function refreshVerifiedResourceData(db) {
             source_name = excluded.source_name,
             source_url = excluded.source_url,
             source_checked_at = excluded.source_checked_at,
+            last_verified_at = excluded.last_verified_at,
             trust_note = excluded.trust_note,
             updated_at = datetime('now')
     `);
 
     rows.forEach(row => upsert.run({ ...row, source_checked_at: verifiedAt }));
+    db.prepare("UPDATE resources SET last_verified_at = source_checked_at WHERE verification_status = 'verified' AND source_checked_at IS NOT NULL AND last_verified_at IS NULL").run();
 
     db.prepare(`
         UPDATE community_posts

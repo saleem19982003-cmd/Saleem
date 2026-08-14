@@ -1322,6 +1322,68 @@ select option {
     font-style: italic;
 }
 
+.service-location-tools {
+    display: grid;
+    gap: 10px;
+    padding: 12px;
+    margin-bottom: 16px;
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-sm);
+    background: rgba(15, 76, 129, 0.12);
+}
+
+.service-location-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.service-location-status {
+    min-height: 18px;
+    color: var(--text-muted);
+    font-size: 12px;
+}
+
+.manual-area-panel {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    align-items: end;
+}
+
+.manual-area-panel[hidden] {
+    display: none;
+}
+
+.manual-area-panel label,
+.service-sort-control {
+    color: var(--text-muted);
+    font-size: 12px;
+}
+
+.service-sort-select {
+    width: min(220px, 100%);
+    margin: 0;
+}
+
+.service-location-tools .btn,
+.manual-area-panel .form-control,
+.service-sort-select {
+    min-height: 44px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .service-location-tools,
+    #institutions-directory-grid .card {
+        animation: saleem-fade-in 240ms ease both;
+    }
+}
+
+@keyframes saleem-fade-in {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 /* ============================================================
    RTL SUPPORT
    ============================================================ */
@@ -1462,6 +1524,23 @@ select option {
 
     .header-card h2 {
         font-size: 19px;
+    }
+
+    .service-location-actions,
+    .service-location-actions .btn {
+        width: 100%;
+    }
+
+    .manual-area-panel {
+        grid-template-columns: 1fr;
+    }
+
+    .service-sort-select {
+        width: 100%;
+    }
+
+    #institutions-directory-grid {
+        grid-template-columns: minmax(0, 1fr) !important;
     }
 }
 

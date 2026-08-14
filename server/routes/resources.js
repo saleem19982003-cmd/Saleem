@@ -17,7 +17,22 @@ const PUBLIC_CATEGORY_ALIASES = {
     language: 'education',
     work: 'employment',
     employment: 'employment',
-    emergency: 'emergency'
+    emergency: 'emergency',
+    refugee: 'refugee_support',
+    'refugee-support': 'refugee_support',
+    support: 'refugee_support',
+    pharmacy: 'pharmacy',
+    pharmacies: 'pharmacy',
+    clinic: 'healthcare',
+    clinics: 'healthcare',
+    hospital: 'healthcare',
+    hospitals: 'healthcare',
+    school: 'education',
+    schools: 'education',
+    training: 'training',
+    programming: 'programming',
+    ngo: 'ngo',
+    government: 'government'
 };
 
 function normalizeCategory(category) {
@@ -36,6 +51,29 @@ function parseResourceJsonFields(resource) {
     try { resource.required_documents = JSON.parse(resource.required_documents || '[]'); } catch(e) { resource.required_documents = []; }
     resource.is_demo_data = Boolean(resource.is_demo_data);
     return resource;
+}
+
+function validCoordinate(value, min, max) {
+    if (value === null || value === undefined || value === '') return null;
+    const number = Number(value);
+    return Number.isFinite(number) && number >= min && number <= max ? number : null;
+}
+
+function haversineKm(latitudeA, longitudeA, latitudeB, longitudeB) {
+    const toRadians = value => value * Math.PI / 180;
+    const earthRadiusKm = 6371;
+    const dLatitude = toRadians(latitudeB - latitudeA);
+    const dLongitude = toRadians(longitudeB - longitudeA);
+    const a = Math.sin(dLatitude / 2) ** 2
+        + Math.cos(toRadians(latitudeA)) * Math.cos(toRadians(latitudeB)) * Math.sin(dLongitude / 2) ** 2;
+    return earthRadiusKm * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
+
+function resourceDistance(resource, latitude, longitude) {
+    const resourceLatitude = validCoordinate(resource.latitude, -90, 90);
+    const resourceLongitude = validCoordinate(resource.longitude, -180, 180);
+    if (latitude === null || longitude === null || resourceLatitude === null || resourceLongitude === null) return null;
+    return Number(haversineKm(latitude, longitude, resourceLatitude, resourceLongitude).toFixed(1));
 }
 
 // GET /api/resources - Get resources (with filters)
@@ -94,6 +132,49 @@ router.get('/', optionalAuth, (req, res) => {
     } catch (err) {
         console.error('Resources fetch error:', err);
         res.status(500).json({ error: 'Failed to load resources.' });
+    }
+});
+
+// GET /api/resources/nearby - coarse, one-shot discovery; user coordinates are never stored or returned.
+router.get('/nearby', optionalAuth, (req, res) => {
+    try {
+        const db = req.app.locals.db;
+        const latitude = validCoordinate(req.query.latitude, -90, 90);
+        const longitude = validCoordinate(req.query.longitude, -180, 180);
+        const hasLatitude = req.query.latitude !== undefined && req.query.latitude !== '';
+        const hasLongitude = req.query.longitude !== undefined && req.query.longitude !== '';
+        if (hasLatitude !== hasLongitude || ((hasLatitude || hasLongitude) && (latitude === null || longitude === null))) {
+            return res.status(400).json({ error: 'Provide both valid coordinates or choose an area manually.' });
+        }
+        const category = normalizeCategory(req.query.category);
+        const city = String(req.query.city || '').trim();
+        const governorate = String(req.query.governorate || '').trim();
+        const sort = ['nearest', 'best-match', 'recently-verified'].includes(req.query.sort) ? req.query.sort : 'best-match';
+        const limit = Math.max(1, Math.min(parseInt(req.query.limit, 10) || 20, 50));
+        let query = "SELECT * FROM resources WHERE verification_status = 'verified' AND is_demo_data = 0";
+        const params = [];
+        if (category) { query += ' AND category = ?'; params.push(category); }
+        if (city) { query += ' AND city = ?'; params.push(city); }
+        if (governorate) { query += ' AND governorate = ?'; params.push(governorate); }
+        const resources = db.prepare(query).all(...params).map(parseResourceJsonFields).map(resource => ({
+            ...resource,
+            distance_km: resourceDistance(resource, latitude, longitude),
+            distance_source: resourceDistance(resource, latitude, longitude) === null ? null : 'straight_line',
+            recommendation_reason: category && resource.category === category
+                ? `Matches ${category} support`
+                : city && resource.city === city
+                    ? `Located in ${resource.city}`
+                    : 'Verified source-backed service'
+        }));
+        resources.sort((a, b) => {
+            if (sort === 'recently-verified') return String(b.last_verified_at || '').localeCompare(String(a.last_verified_at || '')) || a.name.localeCompare(b.name);
+            if (sort === 'nearest') return (a.distance_km === null ? Number.POSITIVE_INFINITY : a.distance_km) - (b.distance_km === null ? Number.POSITIVE_INFINITY : b.distance_km) || a.name.localeCompare(b.name);
+            return (b.distance_km === null ? -1 : 1) - (a.distance_km === null ? -1 : 1) || a.name.localeCompare(b.name);
+        });
+        res.json({ resources: resources.slice(0, limit), location_mode: latitude === null ? 'manual' : 'one-shot-gps', sort });
+    } catch (err) {
+        console.error('Nearby resources error:', err);
+        res.status(500).json({ error: 'Failed to load nearby resources.' });
     }
 });
 
@@ -195,7 +276,7 @@ router.post('/:id/save', authenticateToken, (req, res) => {
 router.post('/', authenticateToken, requireAdmin, (req, res) => {
     try {
         const db = req.app.locals.db;
-        const { name, description, category, address, city, phone, email, website, hours, languages, latitude, longitude, services, required_documents, useful_phrase, wait_time, source_name, source_url, trust_note } = req.body;
+        const { name, description, category, address, city, governorate, phone, email, website, hours, languages, latitude, longitude, services, required_documents, useful_phrase, wait_time, source_name, source_url, trust_note } = req.body;
 
         if (!name || !category) {
             return res.status(400).json({ error: 'Name and category are required.' });
@@ -203,9 +284,9 @@ router.post('/', authenticateToken, requireAdmin, (req, res) => {
 
         const id = uuidv4();
         db.prepare(`
-            INSERT INTO resources (id, name, description, category, address, city, phone, email, website, hours, languages, latitude, longitude, verification_status, services, required_documents, useful_phrase, wait_time, verified_by, last_verified_at, source_name, source_url, source_checked_at, trust_note)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'pending', ?, ?, ?, ?, ?, datetime("now"), ?, ?, datetime("now"), ?)
-        `).run(id, sanitizeHtml(name), sanitizeHtml(description), normalizeCategory(category), sanitizeHtml(address), sanitizeHtml(city || 'Cairo'), phone, email, website, hours, languages, latitude, longitude, services, JSON.stringify(required_documents || []), useful_phrase, wait_time, req.user.id, sanitizeHtml(source_name || ''), sanitizeHtml(source_url || ''), sanitizeHtml(trust_note || ''));
+            INSERT INTO resources (id, name, description, category, address, city, governorate, phone, email, website, hours, languages, latitude, longitude, verification_status, services, required_documents, useful_phrase, wait_time, verified_by, last_verified_at, source_name, source_url, source_checked_at, trust_note)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'pending', ?, ?, ?, ?, ?, datetime("now"), ?, ?, datetime("now"), ?)
+        `).run(id, sanitizeHtml(name), sanitizeHtml(description), normalizeCategory(category), sanitizeHtml(address), sanitizeHtml(city || 'Cairo'), sanitizeHtml(governorate || ''), phone, email, website, hours, languages, latitude, longitude, services, JSON.stringify(required_documents || []), useful_phrase, wait_time, req.user.id, sanitizeHtml(source_name || ''), sanitizeHtml(source_url || ''), sanitizeHtml(trust_note || ''));
 
         const resource = db.prepare('SELECT * FROM resources WHERE id = ?').get(id);
         res.status(201).json({ resource });
@@ -234,3 +315,6 @@ router.put('/:id/verify', authenticateToken, requireAdmin, (req, res) => {
 });
 
 module.exports = router;
+module.exports.normalizeCategory = normalizeCategory;
+module.exports.haversineKm = haversineKm;
+module.exports.resourceDistance = resourceDistance;
