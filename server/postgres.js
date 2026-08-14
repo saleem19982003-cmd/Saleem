@@ -3,16 +3,18 @@
 // directory content remain in the local content database.
 const { Pool } = require('pg');
 
-const POSTGRES_URL = process.env.POSTGRES_URL
+// Prefer the explicitly configured transaction-pooler URL. Marketplace
+// variables remain supported as compatibility fallbacks for existing deploys.
+const POSTGRES_URL = process.env.DATABASE_URL
+    || process.env.POSTGRES_URL
     || process.env.POSTGRES_PRISMA_URL
-    || process.env.DATABASE_URL
     || process.env.POSTGRES_URL_NON_POOLING;
-const POSTGRES_SOURCE = process.env.POSTGRES_URL
-    ? 'POSTGRES_URL'
-    : process.env.POSTGRES_PRISMA_URL
-        ? 'POSTGRES_PRISMA_URL'
-        : process.env.DATABASE_URL
-            ? 'DATABASE_URL'
+const POSTGRES_SOURCE = process.env.DATABASE_URL
+    ? 'DATABASE_URL'
+    : process.env.POSTGRES_URL
+        ? 'POSTGRES_URL'
+        : process.env.POSTGRES_PRISMA_URL
+            ? 'POSTGRES_PRISMA_URL'
             : process.env.POSTGRES_URL_NON_POOLING
                 ? 'POSTGRES_URL_NON_POOLING'
                 : null;
