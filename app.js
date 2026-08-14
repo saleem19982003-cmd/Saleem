@@ -458,46 +458,184 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    const LANGUAGE_METADATA = Object.freeze({
+        en: { label: 'English', dir: 'ltr' },
+        ar: { label: 'Egyptian Arabic', dir: 'rtl' },
+        am: { label: 'Amharic', dir: 'ltr' },
+        so: { label: 'Somali', dir: 'ltr' },
+        fr: { label: 'French', dir: 'ltr' },
+        ti: { label: 'Tigrinya', dir: 'ltr' },
+        sw: { label: 'Swahili', dir: 'ltr' },
+        ha: { label: 'Hausa', dir: 'ltr' },
+        om: { label: 'Oromo', dir: 'ltr' }
+    });
+
+    const UI_I18N_ALIASES = Object.freeze({
+        'nav-learn-translate': 'nav-learning',
+        'nav-saleem-ai': 'nav-assistant',
+        'nav-community-hub': 'nav-community',
+        'nav-profile-dashboard': 'nav-profile'
+    });
+
+    // These messages are deliberately limited to language-contract states. They
+    // are not substitutes for missing lesson or service translations.
+    const LANGUAGE_RUNTIME_TEXT = Object.freeze({
+        en: {
+            coverageNotice: 'Some content is unavailable in the selected language. Egyptian Arabic content remains available where provided.',
+            translationUnavailable: 'Translation unavailable in the selected language.',
+            egyptianArabicOnly: 'Egyptian Arabic content only',
+            languagePair: 'Language pair',
+            startPractice: 'Start practice test',
+            sectionLearn: 'Section A: Learn Egyptian & Culture Path',
+            sectionLearnSub: 'Interactive Egyptian dialect path with situational practice and culture lessons.',
+            dailyStreak: 'Daily Streak',
+            totalXp: 'Total XP',
+            jump: 'Jump',
+            progress: 'Progress',
+            sectionAi: 'Section B: Saleem AI (Egyptian Dialect AI Tutor)',
+            sectionCommunity: 'Section C: Refugee Community Hub & Peer Forums',
+            sectionProfile: 'Section D: Profile & Legal Institutions Access',
+            translatorPair: 'Translate between English and Egyptian Arabic.',
+            assistantPair: 'Ask Saleem AI in English or Egyptian Arabic.'
+        },
+        ar: {
+            coverageNotice: '\u0628\u0639\u0636 \u0627\u0644\u0645\u062d\u062a\u0648\u0649 \u063a\u064a\u0631 \u0645\u062a\u0627\u062d \u0628\u0627\u0644\u0644\u063a\u0629 \u0627\u0644\u0645\u062e\u062a\u0627\u0631\u0629. \u0627\u0644\u0645\u062d\u062a\u0648\u0649 \u0627\u0644\u0645\u0635\u0631\u064a \u0645\u062a\u0627\u062d \u062d\u064a\u062b\u0645\u0627 \u064a\u0648\u062c\u062f.',
+            translationUnavailable: '\u0627\u0644\u062a\u0631\u062c\u0645\u0629 \u063a\u064a\u0631 \u0645\u062a\u0627\u062d\u0629 \u0628\u0627\u0644\u0644\u063a\u0629 \u0627\u0644\u0645\u062e\u062a\u0627\u0631\u0629.',
+            egyptianArabicOnly: '\u0627\u0644\u0645\u062d\u062a\u0648\u0649 \u0628\u0627\u0644\u0644\u0647\u062c\u0629 \u0627\u0644\u0645\u0635\u0631\u064a\u0629 \u0641\u0642\u0637',
+            languagePair: '\u0632\u0648\u062c \u0627\u0644\u0644\u063a\u0627\u062a',
+            startPractice: '\u0627\u0628\u062f\u0623 \u0627\u062e\u062a\u0628\u0627\u0631 \u0627\u0644\u0645\u0645\u0627\u0631\u0633\u0629',
+            sectionLearn: '\u0627\u0644\u0642\u0633\u0645 \u0623: \u062a\u0639\u0644\u0645 \u0627\u0644\u0644\u0647\u062c\u0629 \u0627\u0644\u0645\u0635\u0631\u064a\u0629 \u0648\u0627\u0644\u062b\u0642\u0627\u0641\u0629',
+            sectionLearnSub: '\u0645\u0633\u0627\u0631 \u062a\u0641\0627\u0639\u0644\u064a \u0644\u0644\0647\u062c\u0629 \u0627\u0644\u0645\u0635\u0631\u064a\u0629 \u0648\u062f\u0631\u0648\u0633 \u0627\u0644\u062b\u0642\u0627\u0641\u0629.',
+            dailyStreak: '\u0627\u0644\u0645\u062a\u0627\u0628\u0639\u0629 \u0627\u0644\u064a\u0648\u0645\u064a\u0629',
+            totalXp: '\u0645\u062c\u0645\u0648\u0639 XP',
+            jump: '\u0627\u0646\u062a\u0642\u0644',
+            progress: '\u0627\u0644\u062a\u0642\u062f\u0645',
+            sectionAi: '\u0627\u0644\u0642\u0633\u0645 \u0628: \u0645\u0633\u0627\u0639\u062f \u0633\u0644\u064a\u0645 \u0627\u0644\u0630\u0643\u064a',
+            sectionCommunity: '\u0627\u0644\u0642\u0633\u0645 \u062c: \u0645\u0644\u062a\u0642\u0649 \u0627\u0644\u0645\u062c\u062a\u0645\u0639',
+            sectionProfile: '\u0627\u0644\u0642\u0633\u0645 \u062f: \u0627\u0644\u0645\u0644\u0641 \u0627\u0644\u0634\u062e\u0635\u064a \u0648\u0627\u0644\u062e\u062f\u0645\u0627\u062a',
+            translatorPair: '\u062a\u0631\u062c\u0645 \u0628\u064a\u0646 \u0627\u0644\u0644\u0647\u062c\u0629 \u0627\u0644\u0645\u0635\u0631\u064a\u0629 \u0648\u0627\u0644\u0644\u063a\u0629 \u0627\u0644\u0645\u062e\u062a\u0627\u0631\u0629.',
+            assistantPair: '\u0627\u0633\u0623\u0644 \u0645\u0633\u0627\u0639\u062f \u0633\u0644\u064a\u0645 \u0628\u0627\u0644\u0644\u0644\u0647\u062c\u0629 \u0627\u0644\u0645\u0635\u0631\u064a\u0629 \u0623\u0648 \u0627\u0644\u0644\u063a\u0629 \u0627\u0644\u0645\u062e\u062a\u0627\u0631\u0629.'
+        },
+        am: { coverageNotice: '\u1230\u121b\u1290\u1271 \u12a8\u1270\u1218\u1228\u1320\u12cd \u1265\u127b \u12ad\u120d\u120d \u12a0\u12ed\u1308\u129d\u121d\u1362 \u12e8\u130d\u133d\u1275 \u12a0\u1228\u1265\u129b \u12ed\u1308\129b\u120d\u1362', translationUnavailable: '\u1275\u122d\u1309\u121d \u12a0\u1208\u1270\u1308\1298\u121d\u1362', egyptianArabicOnly: '\u12e8\u130d\u133d\u1275 \u12a0\u1228\u1265\u129b \u12ed\u1308\u129b\u120d\u1362', languagePair: '\u12e8\u1270\u12a8\u1348\u1270 \u124b\1295\u124b\u1362' },
+        so: { coverageNotice: 'Qaar ka mid ah waxyaabaha lama heli karo luqadda la doortay. Carabiga Masariga ah ayaa la muujiyaa marka uu jiro.', translationUnavailable: 'Turjumaad lagama heli karo luqadda la doortay.', egyptianArabicOnly: 'Kaliya lahjada Carabiga Masariga ah', languagePair: 'Lammaanaha luqadaha' },
+        fr: { coverageNotice: 'Certains contenus ne sont pas disponibles dans la langue sélectionnée. Le contenu en arabe égyptien reste affiché lorsqu’il existe.', translationUnavailable: 'Traduction indisponible dans la langue sélectionnée.', egyptianArabicOnly: 'Contenu en arabe égyptien uniquement', languagePair: 'Paire de langues' },
+        ti: { coverageNotice: '\u12ab\u12e5\u1273 \u12dd\u1270\u1218\u1228\u1338 \u12ed\u122d\u12a8\u1265\u1362 \u12d3\u1228\u1265\u129b \u130d\u1265\u133d \u12a3\u1265 \u12dd\u1205\u120d\u12cc \u12a5\u12cb\u1295 \u12ed\u122d\u12a8\u1265\u1362', translationUnavailable: '\u1275\u122d\u1309\u121d \u12a3\u12ed\u122d\u12a8\u1265\u1295\u1362', egyptianArabicOnly: '\u130d\u1265\u133d \u12d3\u1228\u1265\u129b \u130e\u1290\u1295\u1362', languagePair: '\u1213\u1218\u12f0\u1275 \u1265\u122d\u12a5\u1272' },
+        sw: { coverageNotice: 'Baadhi ya maudhui hayapatikani katika lugha uliyochagua. Maudhui ya Kiarabu cha Misri yanaonyeshwa yanapopatikana.', translationUnavailable: 'Tafsiri haipatikani katika lugha uliyochagua.', egyptianArabicOnly: 'Maudhui ya Kiarabu cha Misri pekee', languagePair: 'Jozi ya lugha' },
+        ha: { coverageNotice: 'Ba a samun wasu bayanai a harshen da aka zaba. Ana nuna Larabcin Masar idan akwai.', translationUnavailable: 'Ba a samun fassara a harshen da aka zaba.', egyptianArabicOnly: 'Abun cikin Larabcin Masar kawai', languagePair: 'Ma’auratan harsuna' },
+        om: { coverageNotice: 'Qabiyyeen qabiyyee afaan filatametti hin argamu. Afaan Arabaa Gibxi yeroo jiru ni mul’ata.', translationUnavailable: 'Hiikni afaan filatametti hin argamu.', egyptianArabicOnly: 'Qabiyyee Afaan Arabaa Gibxi qofa', languagePair: 'Lama afaanii' }
+    });
+
+    let activeUiLanguage = 'en';
+
+    function normalizeLanguage(lang) {
+        return LANGUAGE_METADATA[lang] ? lang : 'en';
+    }
+
+    function getSelectedLanguage() {
+        return normalizeLanguage(activeUiLanguage || localStorage.getItem('saleem_ui_lang') || localStorage.getItem('saleem_user_language') || 'en');
+    }
+
+    function getLanguageRuntimeText(key, lang = getSelectedLanguage()) {
+        return LANGUAGE_RUNTIME_TEXT[lang]?.[key] || LANGUAGE_RUNTIME_TEXT.ar[key] || '';
+    }
+
+    function getUiTranslation(key, lang = getSelectedLanguage()) {
+        if (key === 'hdr-translator-sub') {
+            return LANGUAGE_RUNTIME_TEXT[lang]?.translatorPair || (lang === 'en' ? LANGUAGE_RUNTIME_TEXT.en.translatorPair : getLanguageRuntimeText('egyptianArabicOnly', lang));
+        }
+        if (key === 'hdr-assistant-sub') {
+            return LANGUAGE_RUNTIME_TEXT[lang]?.assistantPair || (lang === 'en' ? LANGUAGE_RUNTIME_TEXT.en.assistantPair : getLanguageRuntimeText('egyptianArabicOnly', lang));
+        }
+        const selectedDict = i18n[lang] || {};
+        const alias = UI_I18N_ALIASES[key];
+        return selectedDict[key]
+            || (alias && selectedDict[alias])
+            || LANGUAGE_RUNTIME_TEXT[lang]?.[key]
+            || (lang === 'en' ? LANGUAGE_RUNTIME_TEXT.en[key] : LANGUAGE_RUNTIME_TEXT.ar[key])
+            || '';
+    }
+
     const uiLangSwitcher = document.getElementById('ui-lang-switcher');
-    
-    function setUiLanguage(lang) {
-        const selectedDict = i18n[lang] || i18n.en;
-        document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+
+    function showLanguageCoverageNotice(lang) {
+        let notice = document.getElementById('language-coverage-notice');
+        if (!notice) {
+            notice = document.createElement('div');
+            notice.id = 'language-coverage-notice';
+            notice.setAttribute('role', 'status');
+            notice.style.cssText = 'margin:0 0 14px;padding:10px 14px;border:1px solid var(--warm-sand);border-radius:10px;color:var(--warm-sand);font-size:12px;line-height:1.5;';
+            document.querySelector('.content-container')?.prepend(notice);
+        }
+        notice.textContent = lang === 'en' ? '' : getLanguageRuntimeText('coverageNotice', lang);
+        notice.style.display = lang === 'en' ? 'none' : 'block';
+    }
+
+    function persistPreferredLanguage(lang, syncRemote = true) {
+        const normalized = normalizeLanguage(lang);
+        activeUiLanguage = normalized;
+        localStorage.setItem('saleem_ui_lang', normalized);
+        localStorage.setItem('saleem_user_language', normalized);
+        localStorage.setItem('saleem_app_language', normalized);
+
+        if (syncRemote && API.getToken()) {
+            API.fetch('/auth/profile', {
+                method: 'PUT',
+                body: JSON.stringify({ preferred_language: normalized })
+            }).catch(() => {});
+        }
+        return normalized;
+    }
+
+    function setUiLanguage(lang, options = {}) {
+        const normalized = persistPreferredLanguage(lang, options.syncRemote !== false);
+        const selectedDict = i18n[normalized] || {};
+        const direction = LANGUAGE_METADATA[normalized].dir;
+        document.documentElement.setAttribute('lang', normalized);
+        document.documentElement.setAttribute('dir', direction);
+        document.body?.setAttribute('data-primary-language', normalized);
+        document.body?.setAttribute('data-local-language', 'ar-EG');
 
         document.querySelectorAll('[data-i18n]').forEach(el => {
             const key = el.getAttribute('data-i18n');
-            if (selectedDict[key]) {
-                const span = el.querySelector('span');
-                if (span) {
-                    span.textContent = selectedDict[key];
+            const value = getUiTranslation(key, normalized);
+            const span = el.querySelector('span');
+            if (value && span) span.textContent = value;
+            else if (value) {
+                const icon = el.querySelector('i');
+                if (icon) {
+                    el.replaceChildren(icon, document.createTextNode(` ${value}`));
                 } else {
-                    el.textContent = selectedDict[key];
+                    el.textContent = value;
                 }
             }
+            else el.setAttribute('data-translation-missing', 'true');
         });
 
         document.querySelectorAll('[data-i18n-ph]').forEach(el => {
             const key = el.getAttribute('data-i18n-ph');
-            if (selectedDict[key]) {
-                el.setAttribute('placeholder', selectedDict[key]);
-            }
+            const value = getUiTranslation(key, normalized);
+            if (value) el.setAttribute('placeholder', value);
+            else el.setAttribute('data-translation-missing', 'true');
         });
 
-        // Point 3: Auto-set Translator Source Language dropdown to match selected UI language
         const sourceLangSelect = document.getElementById('source-lang');
-        if (sourceLangSelect) {
-            sourceLangSelect.value = lang;
-        }
+        if (sourceLangSelect) sourceLangSelect.value = normalized;
+        const targetLangSelect = document.getElementById('target-lang');
+        if (targetLangSelect) targetLangSelect.value = 'ar_eg';
+        if (uiLangSwitcher) uiLangSwitcher.value = normalized;
 
-        // Point 1: Re-render Daily Phrases in the new selected language (guarded - dailyPhrasesData may not be initialized yet)
+        showLanguageCoverageNotice(normalized);
+
         try {
-            if (typeof renderDailyPhrasesUI === 'function') {
-                renderDailyPhrasesUI();
+            if (typeof renderDailyPhrasesUI === 'function') renderDailyPhrasesUI();
+        } catch (e) { /* optional legacy module */ }
+        window.setTimeout(() => {
+            if (typeof renderDuolingoSnakePath === 'function') renderDuolingoSnakePath();
+            if (typeof updateLocalLearningStats === 'function') updateLocalLearningStats();
+            if (document.getElementById('institutions-directory-grid')) {
+                if (typeof renderInstitutionsDirectoryUI === 'function') renderInstitutionsDirectoryUI('all', '');
             }
-        } catch (e) { /* dailyPhrasesData not yet initialized, skip silently */ }
-
-        localStorage.setItem('saleem_ui_lang', lang);
-        localStorage.setItem('saleem_user_language', lang);
+        }, 0);
     }
 
     // -------------------------------------------------------------
@@ -532,6 +670,8 @@ document.addEventListener('DOMContentLoaded', () => {
         modal.style.overflowY = 'auto';
 
         let selectedNationality = '';
+        let selectedLanguage = normalizeLanguage(localStorage.getItem('saleem_ui_lang') || 'en');
+        let languageWasExplicitlySelected = false;
 
         modal.innerHTML = `
             <div class="card" style="width: 100%; max-width: 500px; padding: 28px 24px; text-align: center; border: 1px solid var(--warm-sand); box-shadow: 0 20px 50px rgba(0,0,0,0.6); background: var(--surface-dark); border-radius: 20px;">
@@ -543,6 +683,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 <p id="onboard-sub" style="color:var(--text-muted); font-size:13px; margin-bottom:18px; line-height:1.5;">
                     Choose your country first. The app will automatically adapt to your native language!
                 </p>
+
+                <div style="margin-bottom:16px; text-align:left;">
+                    <label style="font-size:12px; color:var(--warm-sand); font-weight:600; display:block; margin-bottom:6px; text-transform:uppercase;">Choose your app language:</label>
+                    <select id="onboarding-language-select" class="form-control" style="font-size:14px; padding:10px; border-radius:10px; background:var(--bg-dark); border:1px solid var(--glass-border); color:#fff; width:100%;">
+                        <option value="en">English</option>
+                        <option value="ar">Egyptian Arabic</option>
+                        <option value="am">Amharic</option>
+                        <option value="so">Somali</option>
+                        <option value="fr">French</option>
+                        <option value="ti">Tigrinya</option>
+                        <option value="sw">Swahili</option>
+                        <option value="ha">Hausa</option>
+                        <option value="om">Oromo</option>
+                    </select>
+                </div>
 
                 <!-- Welcome Banner (appears after country selection) -->
                 <div id="onboard-welcome-banner" style="display:none; padding:12px; background:rgba(16, 185, 129, 0.15); border:1px solid var(--emerald); border-radius:12px; margin-bottom:16px; color:var(--emerald); font-weight:600; font-size:14px;">
@@ -585,6 +740,15 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
 
         document.body.appendChild(modal);
+        const onboardingLanguageSelect = document.getElementById('onboarding-language-select');
+        if (onboardingLanguageSelect) {
+            onboardingLanguageSelect.value = selectedLanguage;
+            onboardingLanguageSelect.addEventListener('change', event => {
+                selectedLanguage = normalizeLanguage(event.target.value);
+                languageWasExplicitlySelected = true;
+                setUiLanguage(selectedLanguage, { syncRemote: false });
+            });
+        }
 
         const welcomeGreetings = {
             Sudan: "أهلاً وسهلاً بك في تطبيق سليم! 🇸🇩",
@@ -616,8 +780,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Auto-switch entire UI language instantly!
                 const mapping = nationalityMap[selectedNationality] || nationalityMap["Other"];
-                if (uiLangSwitcher) uiLangSwitcher.value = mapping.lang;
-                setUiLanguage(mapping.lang);
+                if (!languageWasExplicitlySelected) selectedLanguage = mapping.lang;
+                if (onboardingLanguageSelect) onboardingLanguageSelect.value = selectedLanguage;
+                if (uiLangSwitcher) uiLangSwitcher.value = selectedLanguage;
+                setUiLanguage(selectedLanguage, { syncRemote: false });
 
                 // Show welcome greeting banner in selected language
                 const welcomeBanner = document.getElementById('onboard-welcome-banner');
@@ -656,14 +822,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     return;
                 }
 
-                applyUserData(rawName, finalCountry);
+                applyUserData(rawName, finalCountry, selectedLanguage);
                 modal.remove();
             });
         }
     }
 
-    function applyUserData(userName, nationality) {
+    function applyUserData(userName, nationality, preferredLanguage) {
         const mapping = nationalityMap[nationality] || nationalityMap["Other"];
+        const selectedLanguage = normalizeLanguage(preferredLanguage || mapping.lang);
         
         // Generate or retrieve unique Saleem Digital Pass User ID
         let userId = localStorage.getItem('saleem_user_id');
@@ -675,6 +842,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // 1. Permanent Local Storage Persistence
         localStorage.setItem('saleem_user_name', userName);
         localStorage.setItem('saleem_user_nationality', nationality);
+        localStorage.setItem('saleem_ui_lang', selectedLanguage);
+        localStorage.setItem('saleem_user_language', selectedLanguage);
         localStorage.setItem('saleem_user_joined', new Date().toISOString());
 
         // 2. Permanent IndexedDB Secondary Fallback Persistence
@@ -690,23 +859,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 const db = e.target.result;
                 const tx = db.transaction('userProfile', 'readwrite');
                 const store = tx.objectStore('userProfile');
-                store.put({ key: 'profile', userId, userName, nationality, lang: mapping.lang });
+                store.put({ key: 'profile', userId, userName, nationality, lang: selectedLanguage });
             };
         } catch (err) {
             console.warn('IndexedDB persistence fallback:', err);
         }
 
         // 3. Supabase / Cloud Database Persistence Sync
-        syncProfileToCloudDB(userId, userName, nationality, mapping.lang);
+        syncProfileToCloudDB(userId, userName, nationality, selectedLanguage);
 
         // Auto-change UI language
-        if (uiLangSwitcher) uiLangSwitcher.value = mapping.lang;
-        setUiLanguage(mapping.lang);
+        if (uiLangSwitcher) uiLangSwitcher.value = selectedLanguage;
+        setUiLanguage(selectedLanguage, { syncRemote: false });
 
         // Auto-set Translator Source Language
         const sourceLangSelect = document.getElementById('source-lang');
         if (sourceLangSelect) {
-            sourceLangSelect.value = mapping.lang;
+            sourceLangSelect.value = selectedLanguage;
         }
 
         updateUserProfileUI(userName, nationality, userId);
@@ -765,13 +934,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize Language Switcher & Onboarding Check
     if (uiLangSwitcher) {
-        const savedLang = localStorage.getItem('saleem_ui_lang') || 'en';
+        const savedLang = normalizeLanguage(localStorage.getItem('saleem_ui_lang') || localStorage.getItem('saleem_user_language') || 'en');
         uiLangSwitcher.value = savedLang;
-        setUiLanguage(savedLang);
+        setUiLanguage(savedLang, { syncRemote: false });
 
         uiLangSwitcher.addEventListener('change', (e) => {
-            setUiLanguage(e.target.value);
+            setUiLanguage(e.target.value, { syncRemote: true });
         });
+
+        // An authenticated profile is authoritative after the local preference
+        // has been applied, so reopening the app does not reset the language.
+        if (API.getToken()) {
+            API.fetch('/auth/me').then(data => {
+                const serverLanguage = data?.user?.preferred_language;
+                if (serverLanguage && LANGUAGE_METADATA[serverLanguage]) {
+                    setUiLanguage(serverLanguage, { syncRemote: false });
+                }
+            }).catch(() => {});
+        }
     }
 
     checkFirstTimeOnboarding();
@@ -1681,8 +1861,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const text = translateInput.value.trim();
             if (!text) return;
 
-            const srcLang = sourceLangSelect ? sourceLangSelect.value : 'en';
-            const tgtLang = targetLangSelect ? targetLangSelect.value : 'ar_eg';
+            const primaryLanguage = getSelectedLanguage();
+            const srcLang = primaryLanguage;
+            const tgtLang = 'ar_eg';
 
             translateOutput.innerHTML = `<p><i class="fa-solid fa-spinner fa-spin"></i> Processing Multilingual Translation...</p>`;
 
@@ -1704,6 +1885,7 @@ document.addEventListener('DOMContentLoaded', () => {
             };
 
             for (const pattern in dialectLookup) {
+                if (primaryLanguage !== 'en') break;
                 if (lowerKey.includes(pattern)) {
                     const match = dialectLookup[pattern];
                     translateOutput.innerHTML = `
@@ -1728,6 +1910,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     method: 'POST',
                     body: JSON.stringify({
                         text,
+                        primary_language: primaryLanguage,
                         source_lang: srcLang,
                         target_lang: tgtLang
                     })
@@ -1879,14 +2062,14 @@ Provide:
         const typingDiv = document.createElement('div');
         typingDiv.id = 'typing-indicator';
         typingDiv.className = 'chat-message assistant';
-        typingDiv.innerHTML = `<div class="msg-content" style="color: var(--warm-sand);"><i class="fa-solid fa-bolt fa-spin text-gold"></i> Saleem AI (Groq Llama 3.3 70B)...</div>`;
+        typingDiv.innerHTML = `<div class="msg-content" style="color: var(--warm-sand);"><i class="fa-solid fa-bolt fa-spin text-gold"></i> ${getSelectedLanguage() === 'en' ? 'Saleem AI...' : getLanguageRuntimeText('egyptianArabicOnly')}</div>`;
         chatHistory.appendChild(typingDiv);
         chatHistory.scrollTop = chatHistory.scrollHeight;
 
         try {
             const data = await API.fetch('/ai/chat', {
                 method: 'POST',
-                body: JSON.stringify({ message: prompt })
+                body: JSON.stringify({ message: prompt, primary_language: getSelectedLanguage() })
             });
 
             if (data && data.response && data.source !== 'fallback') {
@@ -1904,7 +2087,10 @@ Provide:
 
         const indicator = document.getElementById('typing-indicator');
         if (indicator) indicator.remove();
-        appendMessageUI('assistant', `Ahlan ${savedName}! Saleem AI is offline right now. I can still help with saved phrases and the verified services directory; please verify urgent legal, medical, or protection questions with the official provider.`);
+        const fallbackMessage = getSelectedLanguage() === 'en'
+            ? `Ahlan ${savedName}! Saleem AI is offline right now. I can still help with saved phrases and the verified services directory; please verify urgent legal, medical, or protection questions with the official provider.`
+            : `أهلاً ${savedName}! خدمة المساعد غير متاحة الآن. يمكنني مساعدتك بالمحتوى المصري المحفوظ ودليل الخدمات الموثوق. يرجى التأكد من المعلومات القانونية أو الطبية العاجلة مع الجهة الرسمية.`;
+        appendMessageUI('assistant', fallbackMessage);
         return;
 
         try {
@@ -2084,7 +2270,7 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
         }
         if (searchQuery.trim().length > 0) {
             const q = searchQuery.toLowerCase().trim();
-            filtered = filtered.filter(p => p.eg.toLowerCase().includes(q) || p.en.toLowerCase().includes(q));
+            filtered = filtered.filter(p => p.eg.toLowerCase().includes(q) || (getSelectedLanguage() === 'en' && p.en.toLowerCase().includes(q)));
         }
 
         filtered.forEach(item => {
@@ -2096,6 +2282,7 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
             card.style.border = '1px solid var(--glass-border)';
 
             const safeEg = item.eg.replace(/'/g, "\\'");
+            const selectedPhraseTranslation = getSelectedLanguage() === 'en' ? item.en : '';
             card.innerHTML = `
                 <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 6px;">
                     <span class="tag" style="font-size: 9px; padding: 2px 6px; border-color: var(--warm-sand); color: var(--warm-sand);">${item.lvl}</span>
@@ -2104,7 +2291,7 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
                     </button>
                 </div>
                 <strong style="font-size: 15px; color: #fff; display: block; margin-bottom: 4px;">${item.eg}</strong>
-                <p style="font-size: 12px; color: var(--emerald); margin: 0; line-height: 1.4;">${item.en}</p>
+                ${selectedPhraseTranslation ? `<p style="font-size: 12px; color: var(--emerald); margin: 0; line-height: 1.4;">${escapeHtml(selectedPhraseTranslation)}</p>` : ''}
             `;
             phrasesGrid.appendChild(card);
         });
@@ -2159,6 +2346,8 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
             cultureStatus.style.borderColor = cultureTotal ? 'var(--emerald)' : 'var(--coral)';
             cultureStatus.style.color = cultureTotal ? 'var(--emerald)' : 'var(--coral)';
         }
+        const titleEl = document.getElementById('current-track-title');
+        if (titleEl) titleEl.innerHTML = `<i class="fa-solid fa-route text-gold"></i> <span>${escapeHtml(getLearningTrackTitle(currentTrack))}</span>`;
     }
 
     async function loadLearningDataset(path, key) {
@@ -2209,7 +2398,7 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
             btnTrackDialect.classList.add('active');
             btnTrackCulture.classList.remove('active');
             currentLessonOffset = 1;
-            if (trackTitle) trackTitle.innerHTML = `<i class="fa-solid fa-route text-gold"></i> <span>Egyptian Dialect Progression (${dialectLessons600.length || 'Unavailable'} Lessons)</span>`;
+            if (trackTitle) trackTitle.innerHTML = `<i class="fa-solid fa-route text-gold"></i> <span>${escapeHtml(getLearningTrackTitle('dialect'))}</span>`;
             renderDuolingoSnakePath();
         });
 
@@ -2218,7 +2407,7 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
             btnTrackCulture.classList.add('active');
             btnTrackDialect.classList.remove('active');
             currentLessonOffset = 1;
-            if (trackTitle) trackTitle.innerHTML = `<i class="fa-solid fa-route text-gold"></i> <span>Egyptian Culture Progression (${cultureLessonsData.length || 'Unavailable'} Lessons)</span>`;
+            if (trackTitle) trackTitle.innerHTML = `<i class="fa-solid fa-route text-gold"></i> <span>${escapeHtml(getLearningTrackTitle('culture'))}</span>`;
             renderDuolingoSnakePath();
         });
     }
@@ -2261,6 +2450,18 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
         if (levelEl) levelEl.textContent = level[0];
         if (levelLabelEl) levelLabelEl.textContent = level[1];
         return cultureCompleted.length;
+    }
+
+    function getLearningTrackTitle(track, lang = getSelectedLanguage()) {
+        if (lang === 'en') return track === 'dialect' ? `Egyptian Dialect Progression (${dialectLessons600.length || 'Unavailable'} Lessons)` : `Egyptian Culture Progression (${cultureLessonsData.length || 'Unavailable'} Lessons)`;
+        if (lang === 'ar') return track === 'dialect' ? `مسار اللهجة المصرية (${dialectLessons600.length || 'غير متاح'} درس)` : `مسار الثقافة المصرية (${cultureLessonsData.length || 'غير متاح'} درس)`;
+        return track === 'dialect' ? `مسار اللهجة المصرية (${dialectLessons600.length || 'غير متاح'} درس)` : `مسار الثقافة المصرية (${cultureLessonsData.length || 'غير متاح'} درس)`;
+    }
+
+    function getLocalizedLessonTitle(lesson, id, lang = getSelectedLanguage()) {
+        if (lang === 'en') return lesson.title_en || '';
+        if (lang === 'ar') return lesson.title_ar || '';
+        return `\u0627\u0644\u062f\u0631\u0633 ${id}`;
     }
 
     // Render Duolingo Curved Snake Path for 600 Lessons (Zero Initial State)
@@ -2311,7 +2512,7 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
                 const clickHandler = isClickable ? `onclick="${openHandler}"` : `onclick="alert('Complete the previous lesson first to unlock this lesson.')"`;
                 const lesson = lessons.find(item => Number(item.id) === i);
                 if (!lesson) continue;
-                const title = escapeHtml(lesson.title_en || lesson.title_ar || `Lesson ${i}`);
+                const title = escapeHtml(getLocalizedLessonTitle(lesson, i));
 
                 html += `
                     <div class="duolingo-snake-node ${statusClass}" style="transform: translateX(${offsetLeft});" ${clickHandler}>
@@ -2654,8 +2855,41 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
             }
         };
 
-        const dict = translations[lang] || translations.en;
-        return dict[key] || (translations.en[key] || '');
+        const dict = translations[lang] || {};
+        // Never expose English as a hidden third-language fallback. Egyptian
+        // Arabic is the only permitted fallback when the selected UI language
+        // has no lesson-control translation.
+        return dict[key] || translations.ar[key] || getLanguageRuntimeText('translationUnavailable', lang);
+    }
+
+    function getLocalizedDialectWord(word, lang = getSelectedLanguage()) {
+        if (lang === 'en' && word.english && word.example_english) {
+            return { meaning: word.english, example: word.example_english };
+        }
+        if (lang === 'ar' && word.meaning && word.example) {
+            return { meaning: word.meaning, example: word.example };
+        }
+        return null;
+    }
+
+    function getLocalizedDialectQuestion(question, lang = getSelectedLanguage()) {
+        if (lang === 'en' && question.question_en && Array.isArray(question.options)) {
+            return { ...question, prompt: question.question_en };
+        }
+        if (lang === 'ar' && question.question && Array.isArray(question.options) && question.options.every(option => /[\u0600-\u06FF]/.test(option))) {
+            return { ...question, prompt: question.question };
+        }
+        return null;
+    }
+
+    function renderTranslationUnavailable(container, detail = '') {
+        if (!container) return;
+        container.innerHTML = `
+            <div style="text-align:center; padding:32px 20px; color:var(--text-muted);" dir="${LANGUAGE_METADATA[getSelectedLanguage()].dir}">
+                <strong style="display:block; color:var(--warm-sand); margin-bottom:8px;">${escapeHtml(getLanguageRuntimeText('translationUnavailable'))}</strong>
+                <span>${escapeHtml(detail || getLanguageRuntimeText('egyptianArabicOnly'))}</span>
+            </div>
+        `;
     }
 
     // Step 1: Render Word Flashcard (10 Words Step-by-Step) Multilingual
@@ -2667,6 +2901,12 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
         const currentWord = words[wordIdx];
 
         if (!currentWord) return;
+        const selectedLanguage = getSelectedLanguage();
+        const localizedWord = getLocalizedDialectWord(currentWord, selectedLanguage);
+        if (!localizedWord) {
+            renderTranslationUnavailable(content, getLanguageRuntimeText('coverageNotice', selectedLanguage));
+            return;
+        }
 
         content.innerHTML = `
             <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;">
@@ -2694,13 +2934,12 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
 
                 <div style="padding: 12px 16px; background: var(--surface-dark); border-radius: 12px; border: 1px solid var(--glass-border); margin-bottom: 14px;">
                     <span style="font-size: 11px; color: var(--emerald); display: block; text-transform: uppercase; font-weight: bold; margin-bottom: 4px;">${getMultilingualLessonText('meaning_label')}</span>
-                    <strong style="font-size: 18px; color: var(--text-light);">${currentWord.english}</strong>
-                    <p style="font-size: 13px; color: var(--warm-sand); margin: 4px 0 0 0;">(${currentWord.meaning})</p>
+                    <strong style="font-size: 18px; color: var(--text-light);">${escapeHtml(localizedWord.meaning)}</strong>
                 </div>
 
                 <div style="padding: 10px 14px; background: rgba(232, 171, 99, 0.1); border-radius: 10px; border-left: 3px solid var(--warm-sand); text-align: left;">
                     <span style="font-size: 11px; color: var(--warm-sand); font-weight: bold; display: block;">${getMultilingualLessonText('usage_example')}</span>
-                    <p style="font-size: 14px; color: var(--text-light); margin: 2px 0 0 0;">"${currentWord.example}"</p>
+                    <p style="font-size: 14px; color: var(--text-light); margin: 2px 0 0 0;">"${escapeHtml(localizedWord.example)}"</p>
                 </div>
             </div>
 
@@ -2748,6 +2987,11 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
             renderLessonCompleteSummary();
             return;
         }
+        const localizedQuestion = getLocalizedDialectQuestion(q, getSelectedLanguage());
+        if (!localizedQuestion) {
+            renderTranslationUnavailable(content, getLanguageRuntimeText('coverageNotice'));
+            return;
+        }
 
         content.innerHTML = `
             <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
@@ -2765,7 +3009,7 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
             <!-- Question Box -->
             <div style="background: var(--surface-dark); border: 1px solid var(--glass-border-strong); border-radius: 16px; padding: 20px; margin-bottom: 18px;">
                 <h3 style="font-size: 18px; color: var(--text-light); margin-bottom: 16px; line-height: 1.5;">
-                    <i class="fa-solid fa-circle-question text-gold"></i> ${q.question}
+                    <i class="fa-solid fa-circle-question text-gold"></i> ${escapeHtml(localizedQuestion.prompt)}
                 </h3>
 
                 <div style="display: flex; flex-direction: column; gap: 10px;">
@@ -2878,16 +3122,24 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
             modal.style.display = 'flex';
             return;
         }
+        const selectedLanguage = getSelectedLanguage();
+        const cultureTitle = selectedLanguage === 'en' ? lesson.title_en : selectedLanguage === 'ar' ? lesson.title_ar : '';
+        const cultureStory = selectedLanguage === 'en' ? lesson.story_en : selectedLanguage === 'ar' ? lesson.story_ar : '';
+        if (!cultureTitle || !cultureStory) {
+            renderTranslationUnavailable(content, getLanguageRuntimeText('coverageNotice', selectedLanguage));
+            modal.style.display = 'flex';
+            return;
+        }
         activeCultureLessonId = Number(lessonId);
 
         content.innerHTML = `
             <div style="margin-bottom:18px;">
-                <span class="tag" style="border-color:var(--emerald); color:var(--emerald);">${escapeHtml(lesson.category_en || 'Culture')}</span>
-                <h2 style="font-size:22px; color:var(--warm-sand); margin:10px 0 8px;">${escapeHtml(lesson.title_en || lesson.title_ar || `Lesson ${lessonId}`)}</h2>
-                <p style="font-size:14px; line-height:1.7; color:var(--text-light);">${formatTrustedText(lesson.story_en || lesson.story_ar || '')}</p>
+                <span class="tag" style="border-color:var(--emerald); color:var(--emerald);">${escapeHtml(selectedLanguage === 'en' ? lesson.category_en : lesson.category_ar)}</span>
+                <h2 style="font-size:22px; color:var(--warm-sand); margin:10px 0 8px;">${escapeHtml(cultureTitle)}</h2>
+                <p style="font-size:14px; line-height:1.7; color:var(--text-light);">${formatTrustedText(cultureStory)}</p>
             </div>
             <div id="practice-test-container">
-                <button class="btn btn-primary" style="width:100%; justify-content:center;" onclick="startSituationalTest(${Number(lessonId)})">Start practice test</button>
+                <button class="btn btn-primary" style="width:100%; justify-content:center;" onclick="startSituationalTest(${Number(lessonId)})">${escapeHtml(getLanguageRuntimeText('startPractice', selectedLanguage))}</button>
             </div>
         `;
         modal.style.display = 'flex';
@@ -2905,21 +3157,26 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
             testContainer.innerHTML = '<p style="color:var(--text-muted);">This lesson has no practice test in the existing dataset.</p>';
             return;
         }
-        const q = (lesson && lesson.practice_test && lesson.practice_test[0]) ? lesson.practice_test[0] : {
-            question: "أنت في سوق وسألت عن سعر حاجة وكان غالي، تقول إيه؟",
-            options: ["اكرمني في السعر يا حاج من فضلك", "السعر ده مش عاجبني", "أنت غالي جداً", "مش هشتري"],
-            answer: 0,
-            explanation: "'اكرمني في السعر يا حاج' هي العبارة الأفضل للخصم والتودد."
-        };
+        const selectedLanguage = getSelectedLanguage();
+        if (selectedLanguage !== 'en' && selectedLanguage !== 'ar') {
+            renderTranslationUnavailable(testContainer, getLanguageRuntimeText('coverageNotice', selectedLanguage));
+            return;
+        }
+        const q = lesson.practice_test[0];
+        if (!q.question || !Array.isArray(q.options) || !q.options.every(option => /[\u0600-\u06FF]/.test(option))) {
+            renderTranslationUnavailable(testContainer);
+            return;
+        }
+        const quizHeading = selectedLanguage === 'en' ? 'Real-Life Situation Quiz:' : 'اختبار موقف واقعي:';
 
         testContainer.innerHTML = `
             <div style="background: var(--surface-dark); padding: 16px; border-radius: 14px; border: 1px solid var(--glass-border-strong); margin-top: 10px;">
-                <h4 style="font-size: 16px; color: var(--warm-sand); margin-bottom: 12px;"><i class="fa-solid fa-circle-question"></i> Real-Life Situation Quiz:</h4>
-                <p style="font-size: 15px; color: var(--text-light); margin-bottom: 16px;">${q.question}</p>
+                <h4 style="font-size: 16px; color: var(--warm-sand); margin-bottom: 12px;"><i class="fa-solid fa-circle-question"></i> ${quizHeading}</h4>
+                <p style="font-size: 15px; color: var(--text-light); margin-bottom: 16px;">${escapeHtml(q.question)}</p>
                 <div style="display: flex; flex-direction: column; gap: 10px;">
                     ${q.options.map((opt, idx) => `
                         <button class="btn btn-outline" style="justify-content: flex-start; text-align: left;" onclick="checkAnswer(${idx}, ${q.answer}, '${q.explanation.replace(/'/g, "\\'")}')">
-                            ${idx + 1}. ${opt}
+                            ${idx + 1}. ${escapeHtml(opt)}
                         </button>
                     `).join('')}
                 </div>
@@ -3201,6 +3458,12 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
     function renderInstitutionsDirectoryUI(selectedCat = 'all', searchQuery = '') {
         if (!instGrid) return;
         instGrid.innerHTML = '';
+        const selectedLanguage = getSelectedLanguage();
+        if (selectedLanguage !== 'en' && selectedLanguage !== 'ar') {
+            renderTranslationUnavailable(instGrid, getLanguageRuntimeText('coverageNotice', selectedLanguage));
+            return;
+        }
+        const isArabic = selectedLanguage === 'ar';
 
         let filtered = legalInstitutionsData;
         if (selectedCat !== 'all') {
@@ -3208,15 +3471,15 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
         }
         if (searchQuery.trim().length > 0) {
             const q = searchQuery.toLowerCase().trim();
-            filtered = filtered.filter(i => i.name.toLowerCase().includes(q) || i.address.toLowerCase().includes(q) || i.services.toLowerCase().includes(q));
+            filtered = filtered.filter(i => i.name.toLowerCase().includes(q) || i.address.toLowerCase().includes(q) || i.phrase.toLowerCase().includes(q) || (selectedLanguage === 'en' && i.services.toLowerCase().includes(q)));
         }
 
         if (filtered.length === 0) {
             instGrid.innerHTML = `
                 <div class="empty-state" style="grid-column: 1 / -1;">
                     <i class="fa-solid fa-map-location-dot"></i>
-                    <h4>No verified services loaded</h4>
-                    <p>Check your connection or try a different category. Saleem only shows source-backed public records by default.</p>
+                    <h4>${isArabic ? 'لا توجد خدمات موثقة متاحة' : 'No verified services loaded'}</h4>
+                    <p>${isArabic ? 'تحقق من الاتصال أو جرّب تصنيفاً آخر. يعرض سليم السجلات العامة المدعومة بالمصادر فقط.' : 'Check your connection or try a different category. Saleem only shows source-backed public records by default.'}</p>
                 </div>
             `;
             return;
@@ -3230,10 +3493,10 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
             card.style.background = 'var(--bg-dark)';
             card.style.border = '1px solid var(--glass-border)';
 
-            const docsListHTML = inst.docs.map(d => `<li style="font-size: 11px; color: var(--text-light); margin-bottom: 2px;">- ${escapeHtml(d)}</li>`).join('');
+            const docsListHTML = isArabic ? '' : inst.docs.map(d => `<li style="font-size: 11px; color: var(--text-light); margin-bottom: 2px;">- ${escapeHtml(d)}</li>`).join('');
             const sourceHTML = inst.sourceUrl ? `
                 <div style="padding: 8px 10px; background: rgba(232, 171, 99, 0.1); border-left: 3px solid var(--warm-sand); border-radius: 6px; margin-bottom: 12px;">
-                    <strong style="font-size: 10px; color: var(--warm-sand); display: block;">Source checked${inst.sourceCheckedAt ? ` ${escapeHtml(inst.sourceCheckedAt)}` : ''}</strong>
+                    <strong style="font-size: 10px; color: var(--warm-sand); display: block;">${isArabic ? 'تم التحقق من المصدر' : 'Source checked'}${inst.sourceCheckedAt ? ` ${escapeHtml(inst.sourceCheckedAt)}` : ''}</strong>
                     <a href="${escapeHtml(inst.sourceUrl)}" target="_blank" rel="noopener noreferrer" style="font-size: 11px; color: var(--text-light);">${escapeHtml(inst.sourceName || 'Official source')}</a>
                     ${inst.trustNote ? `<p style="font-size: 11px; color: var(--text-muted); margin: 4px 0 0 0;">${escapeHtml(inst.trustNote)}</p>` : ''}
                 </div>
@@ -3241,30 +3504,30 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
 
             card.innerHTML = `
                 <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 8px;">
-                    <span class="tag tag-ngo" style="font-size: 10px;">${escapeHtml(inst.type)}</span>
-                    <span style="font-size: 10px; color: var(--emerald); font-weight: 600;"><i class="fa-solid fa-clock"></i> Wait: ${escapeHtml(inst.wait)}</span>
+                    <span class="tag tag-ngo" style="font-size: 10px;">${isArabic ? 'خدمة موثقة' : escapeHtml(inst.type)}</span>
+                    ${isArabic ? '' : `<span style="font-size: 10px; color: var(--emerald); font-weight: 600;"><i class="fa-solid fa-clock"></i> Wait: ${escapeHtml(inst.wait)}</span>`}
                 </div>
                 <h3 style="font-size: 16px; color: #fff; margin-bottom: 6px;">${escapeHtml(inst.name)}</h3>
                 <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 8px;"><i class="fa-solid fa-location-dot text-gold"></i> ${escapeHtml(inst.address)}</p>
-                <p style="font-size: 11px; color: var(--warm-sand); margin-bottom: 10px;">⏰ ${inst.hours}</p>
+                ${isArabic ? '' : `<p style="font-size: 11px; color: var(--warm-sand); margin-bottom: 10px;">⏰ ${escapeHtml(inst.hours)}</p>`}
 
-                <div style="padding: 8px 10px; background: var(--surface-dark); border-radius: 8px; margin-bottom: 10px;">
+                ${isArabic ? '' : `<div style="padding: 8px 10px; background: var(--surface-dark); border-radius: 8px; margin-bottom: 10px;">
                     <strong style="font-size: 11px; color: var(--warm-sand); display: block; margin-bottom: 4px;"><i class="fa-solid fa-clipboard-check"></i> Required Documents:</strong>
                     <ul style="list-style: none; padding: 0; margin: 0;">${docsListHTML}</ul>
-                </div>
+                </div>`}
 
                 <div style="padding: 8px 10px; background: rgba(16, 185, 129, 0.1); border-left: 3px solid var(--emerald); border-radius: 6px; margin-bottom: 12px;">
-                    <strong style="font-size: 10px; color: var(--emerald); display: block;">💡 Useful Phrase to Say:</strong>
+                    <strong style="font-size: 10px; color: var(--emerald); display: block;">💡 ${isArabic ? 'عبارة مصرية مفيدة' : 'Useful Phrase to Say:'}</strong>
                     <span style="font-size: 12px; color: #fff;">"${escapeHtml(inst.phrase)}"</span>
                 </div>
                 ${sourceHTML}
 
                 <div style="display: flex; gap: 8px; align-items: center; margin-top: auto;">
                     <a href="tel:${inst.phone}" class="btn btn-primary" style="padding: 6px 12px; font-size: 11px; text-decoration: none; flex: 1; justify-content: center;">
-                        <i class="fa-solid fa-phone"></i> Call Direct
+                        <i class="fa-solid fa-phone"></i> ${isArabic ? 'اتصال مباشر' : 'Call Direct'}
                     </a>
                     <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(inst.name + ' ' + inst.address)}" target="_blank" class="btn btn-outline" style="padding: 6px 12px; font-size: 11px; text-decoration: none; flex: 1; justify-content: center;">
-                        <i class="fa-solid fa-diamond-turn-right"></i> Directions
+                        <i class="fa-solid fa-diamond-turn-right"></i> ${isArabic ? 'الاتجاهات' : 'Directions'}
                     </a>
                 </div>
             `;

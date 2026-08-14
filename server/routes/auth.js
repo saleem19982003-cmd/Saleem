@@ -7,6 +7,7 @@ const bcrypt = require('bcryptjs');
 const { v4: uuidv4 } = require('uuid');
 const { generateToken, authenticateToken } = require('../middleware/auth');
 const { sanitizeHtml, isValidEmail, isValidLength } = require('../middleware/sanitize');
+const SUPPORTED_LANGUAGE_CODES = new Set(['en', 'ar', 'am', 'so', 'fr', 'ti', 'sw', 'ha', 'om']);
 
 // POST /api/auth/register
 router.post('/register', (req, res) => {
@@ -36,7 +37,8 @@ router.post('/register', (req, res) => {
         const passwordHash = bcrypt.hashSync(password, 10);
         const cleanName = sanitizeHtml(name);
         const cleanNationality = sanitizeHtml(nationality || 'Other');
-        const lang = (preferred_language || 'en').substring(0, 5);
+        const requestedLanguage = String(preferred_language || 'en').substring(0, 5);
+        const lang = SUPPORTED_LANGUAGE_CODES.has(requestedLanguage) ? requestedLanguage : 'en';
 
         db.prepare(`
             INSERT INTO users (id, email, password_hash, name, nationality, preferred_language, role)
@@ -134,8 +136,12 @@ router.put('/profile', authenticateToken, (req, res) => {
             params.push(sanitizeHtml(nationality));
         }
         if (preferred_language) {
+            const requestedLanguage = String(preferred_language).substring(0, 5);
+            if (!SUPPORTED_LANGUAGE_CODES.has(requestedLanguage)) {
+                return res.status(400).json({ error: 'Unsupported language.' });
+            }
             updates.push('preferred_language = ?');
-            params.push(preferred_language.substring(0, 5));
+            params.push(requestedLanguage);
         }
         if (onboarding_completed !== undefined) {
             updates.push('onboarding_completed = ?');

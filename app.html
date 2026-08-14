@@ -95,16 +95,16 @@
                     <div class="card header-card" style="margin-bottom: 20px;">
                         <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
                             <div>
-                                <h2><i class="fa-solid fa-graduation-cap text-gold"></i> <span>Section A: Learn Egyptian & Culture Path</span></h2>
-                                <p>Interactive Egyptian dialect path with situational practice, verified service context, and clearly labeled sample learning exercises.</p>
+                        <h2 data-i18n="sectionLearn"><i class="fa-solid fa-graduation-cap text-gold"></i> <span>Section A: Learn Egyptian & Culture Path</span></h2>
+                        <p data-i18n="sectionLearnSub">Interactive Egyptian dialect path with situational practice, verified service context, and clearly labeled sample learning exercises.</p>
                             </div>
                             <div style="display: flex; align-items: center; gap: 16px;">
                                 <div style="text-align: center; background: rgba(232, 171, 99, 0.15); padding: 8px 16px; border-radius: 14px; border: 1px solid var(--warm-sand);">
-                                    <span style="font-size: 11px; color: var(--text-muted); display: block;">Daily Streak</span>
+                                    <span data-i18n="dailyStreak" style="font-size: 11px; color: var(--text-muted); display: block;">Daily Streak</span>
                                     <strong style="font-size: 18px; color: var(--warm-sand);"><i class="fa-solid fa-fire text-gold"></i> <span id="user-streak-count">0</span> Days</strong>
                                 </div>
                                 <div style="text-align: center; background: rgba(16, 185, 129, 0.15); padding: 8px 16px; border-radius: 14px; border: 1px solid var(--emerald);">
-                                    <span style="font-size: 11px; color: var(--text-muted); display: block;">Total XP</span>
+                                    <span data-i18n="totalXp" style="font-size: 11px; color: var(--text-muted); display: block;">Total XP</span>
                                     <strong style="font-size: 18px; color: var(--emerald);"><i class="fa-solid fa-bolt text-gold"></i> <span id="user-xp-count">0</span> XP</strong>
                                 </div>
                             </div>
@@ -127,7 +127,7 @@
                             <h3 id="current-track-title"><i class="fa-solid fa-route text-gold"></i> <span>Loading learning dataset...</span></h3>
                             <div style="display: flex; align-items: center; gap: 10px;">
                                 <input type="number" id="lesson-jump-input" placeholder="Jump to Lesson..." min="1" class="form-control" style="width: 180px; font-size: 12px;">
-                                <button class="btn btn-outline" id="btn-jump-lesson" style="padding: 8px 12px; font-size: 12px;"><i class="fa-solid fa-plane-departure"></i> Jump</button>
+                                <button class="btn btn-outline" id="btn-jump-lesson" data-i18n="jump" style="padding: 8px 12px; font-size: 12px;"><i class="fa-solid fa-plane-departure"></i> Jump</button>
                             </div>
                         </div>
 
@@ -144,7 +144,7 @@
                                 <h3><i class="fa-solid fa-trophy text-gold"></i> Personal Learning Snapshot</h3>
                                 <p style="font-size: 13px; color: var(--text-muted); margin: 0;">Private progress estimates from your activity on this device and synced account.</p>
                             </div>
-                            <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #F59E0B;">Progress</span>
+                            <span class="card-badge" data-i18n="progress" style="background: rgba(245, 158, 11, 0.2); color: #F59E0B;">Progress</span>
                         </div>
 
                         <table class="leaderboard-table">
@@ -171,7 +171,7 @@
                      ============================================================ -->
                 <section id="tab-saleem-ai" class="tab-pane">
                     <div class="card header-card">
-                        <h2><i class="fa-solid fa-robot text-gold"></i> <span>Section B: Saleem AI (Egyptian Dialect AI Tutor)</span></h2>
+                        <h2 data-i18n="sectionAi"><i class="fa-solid fa-robot text-gold"></i> <span>Section B: Saleem AI (Egyptian Dialect AI Tutor)</span></h2>
                         <p>Conversational AI companion trained on native Egyptian dialect. Practice real scenarios, receive grammar feedback, and ask any questions.</p>
                     </div>
 
@@ -220,7 +220,7 @@
                      ============================================================ -->
                 <section id="tab-community-hub" class="tab-pane">
                     <div class="card header-card">
-                        <h2><i class="fa-solid fa-users text-gold"></i> <span>Section C: Refugee Community Hub & Peer Forums</span></h2>
+                        <h2 data-i18n="sectionCommunity"><i class="fa-solid fa-users text-gold"></i> <span>Section C: Refugee Community Hub & Peer Forums</span></h2>
                         <p>Refugee-safe peer learning space, discussion forums, practical resource sharing, weekly challenges, and community feedback.</p>
                     </div>
 
@@ -317,7 +317,7 @@
                      ============================================================ -->
                 <section id="tab-profile-dashboard" class="tab-pane">
                     <div class="card header-card">
-                        <h2><i class="fa-solid fa-user-gear text-gold"></i> <span>Section D: Profile & Legal Institutions Access</span></h2>
+                        <h2 data-i18n="sectionProfile"><i class="fa-solid fa-user-gear text-gold"></i> <span>Section D: Profile & Legal Institutions Access</span></h2>
                         <p>Personal learning dashboard, local Saleem profile, and verified-service access finder.</p>
                     </div>
 
@@ -426,19 +426,19 @@
         <div class="bottom-nav-inner" style="display: grid; grid-template-columns: repeat(4, 1fr);">
             <button class="bottom-nav-btn active" data-tab="tab-learn-translate" aria-label="Learn & Translate">
                 <i class="fa-solid fa-graduation-cap"></i>
-                <span>Learn</span>
+                <span data-i18n="nav-learn-translate">Learn</span>
             </button>
             <button class="bottom-nav-btn" data-tab="tab-saleem-ai" aria-label="Saleem AI">
                 <i class="fa-solid fa-robot"></i>
-                <span>Saleem AI</span>
+                <span data-i18n="nav-saleem-ai">Saleem AI</span>
             </button>
             <button class="bottom-nav-btn" data-tab="tab-community-hub" aria-label="Community">
                 <i class="fa-solid fa-users"></i>
-                <span>Community</span>
+                <span data-i18n="nav-community-hub">Community</span>
             </button>
             <button class="bottom-nav-btn" data-tab="tab-profile-dashboard" aria-label="Profile & Map">
                 <i class="fa-solid fa-user-gear"></i>
-                <span>Profile & Map</span>
+                <span data-i18n="nav-profile-dashboard">Profile & Map</span>
             </button>
         </div>
     </nav>
@@ -449,19 +449,19 @@
         <div class="more-drawer-handle"></div>
         <button class="more-drawer-item" data-tab="tab-learn-translate">
             <i class="fa-solid fa-graduation-cap"></i>
-            <span>Learn & Translate</span>
+            <span data-i18n="nav-learn-translate">Learn & Translate</span>
         </button>
         <button class="more-drawer-item" data-tab="tab-saleem-ai">
             <i class="fa-solid fa-robot"></i>
-            <span>Saleem AI (Tutor)</span>
+            <span data-i18n="nav-saleem-ai">Saleem AI (Tutor)</span>
         </button>
         <button class="more-drawer-item" data-tab="tab-community-hub">
             <i class="fa-solid fa-users"></i>
-            <span>Community Hub</span>
+            <span data-i18n="nav-community-hub">Community Hub</span>
         </button>
         <button class="more-drawer-item" data-tab="tab-profile-dashboard">
             <i class="fa-solid fa-user-gear"></i>
-            <span>Profile & Map</span>
+            <span data-i18n="nav-profile-dashboard">Profile & Map</span>
         </button>
     </div>
 

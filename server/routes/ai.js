@@ -10,6 +10,11 @@ const { sanitizeHtml } = require('../middleware/sanitize');
 const GROQ_API_KEY = process.env.GROQ_API_KEY;
 const DEEPSEEK_API_KEY = process.env.DEEPSEEK_API_KEY;
 const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
+const SUPPORTED_LANGUAGE_CODES = new Set(['en', 'ar', 'am', 'so', 'fr', 'ti', 'sw', 'ha', 'om']);
+
+function normalizePreferredLanguage(language) {
+    return SUPPORTED_LANGUAGE_CODES.has(language) ? language : 'en';
+}
 
 // Default model prioritization on Groq API: llama-3.3-70b-versatile
 const AI_MODEL = process.env.AI_MODEL || 'llama-3.3-70b-versatile';
@@ -117,6 +122,7 @@ USER CONTEXT:
 - Name: ${userName || 'Friend'}
 - Origin/Nationality: ${nationality || 'Abroad'}
 - Preferred Language: ${language || 'English'}
+- Language contract: respond only in the preferred language and Egyptian Arabic. Do not add English unless English is the preferred language. Do not silently switch to another language.
 
 KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
 1. UNHCR & LEGAL AID (استشارة قانونية ووثائق اللجوء):
@@ -140,15 +146,15 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
    - Work & Vocational Training: IRC (International Rescue Committee) & CRS provide free vocational training (sewing, mobile repair, electrical, computing).
    - Financial Support & Banking: Cash assistance prioritized for families with children/elderly. Bank accounts can be opened at major Egyptian banks with UNHCR card or passport.
 
-6. DYNAMIC DIALECT & MULTILINGUAL INSTRUCTIONS:
-   - Speak fluently in Egyptian Arabic (عامية مصرية), Sudanese Arabic (لهجة سودانية), Amharic (አማርኛ), Somali (Soomaali), Tigrinya (ትግርኛ), English, or Standard Arabic matching whatever the user requests.
+ 6. DYNAMIC DIALECT & LANGUAGE INSTRUCTIONS:
+    - Speak in the preferred language above together with Egyptian Arabic (عامية مصرية) only. Keep Egyptian expressions authentic and do not replace them with Modern Standard Arabic.
    - Maintain a friendly, empowering, and respectful tone at all times. Use clear formatting and bullet points.`;
 }
 
 // POST /api/ai/chat - Send message to AI
 router.post('/chat', optionalAuth, async (req, res) => {
     try {
-        const { message, conversation_id, scenario } = req.body;
+        const { message, conversation_id, scenario, primary_language } = req.body;
 
         if (!message || message.trim().length === 0) {
             return res.status(400).json({ error: 'Message is required.' });
@@ -178,13 +184,13 @@ router.post('/chat', optionalAuth, async (req, res) => {
         // Get user info for personalization
         let userName = 'Friend';
         let nationality = 'abroad';
-        let language = 'en';
+        let language = normalizePreferredLanguage(primary_language);
         if (req.user) {
             const user = db.prepare('SELECT name, nationality, preferred_language FROM users WHERE id = ?').get(req.user.id);
             if (user) {
                 userName = user.name;
                 nationality = user.nationality;
-                language = user.preferred_language;
+                language = normalizePreferredLanguage(user.preferred_language || language);
             }
         }
 
@@ -201,7 +207,7 @@ router.post('/chat', optionalAuth, async (req, res) => {
         const llmResult = await callLLMCompletions(messages, 1024, 0.6);
 
         if (!llmResult || !llmResult.text) {
-            const fallback = generateFallbackResponse(cleanMessage, userName);
+            const fallback = generateFallbackResponse(cleanMessage, userName, language);
             if (req.user && convId) {
                 db.prepare('INSERT INTO chat_messages (id, conversation_id, role, content) VALUES (?, ?, "assistant", ?)').run(uuidv4(), convId, fallback);
             }
@@ -231,7 +237,7 @@ router.post('/chat', optionalAuth, async (req, res) => {
 // POST /api/ai/translate - Translation via AI
 router.post('/translate', optionalAuth, async (req, res) => {
     try {
-        const { text, source_lang, target_lang } = req.body;
+        const { text, primary_language } = req.body;
 
         if (!text || text.trim().length === 0) {
             return res.status(400).json({ error: 'Text to translate is required.' });
@@ -239,14 +245,22 @@ router.post('/translate', optionalAuth, async (req, res) => {
 
         const cleanText = sanitizeHtml(text).substring(0, 2000);
 
+        let preferredLanguage = normalizePreferredLanguage(primary_language);
+        if (req.user) {
+            const user = req.app.locals.db.prepare('SELECT preferred_language FROM users WHERE id = ?').get(req.user.id);
+            preferredLanguage = normalizePreferredLanguage(user?.preferred_language || preferredLanguage);
+        }
+        const effectiveSource = req.body.source_lang === 'ar_eg' ? 'ar_eg' : preferredLanguage;
+        const effectiveTarget = effectiveSource === 'ar_eg' ? preferredLanguage : 'ar_eg';
+
         const langLabels = {
             en: 'English', ar: 'Arabic', ar_eg: 'Egyptian Colloquial Arabic (عامية مصرية)',
             am: 'Amharic (አማርኛ)', so: 'Somali (Soomaali)', fr: 'French (Français)',
             ti: 'Tigrinya (ትግርኛ)', sw: 'Swahili (Kiswahili)', ha: 'Hausa', om: 'Oromo (Afaan Oromoo)'
         };
 
-        const sourceLabel = langLabels[source_lang] || source_lang || 'auto-detect';
-        const targetLabel = langLabels[target_lang] || target_lang || 'Egyptian Arabic';
+        const sourceLabel = langLabels[effectiveSource] || effectiveSource;
+        const targetLabel = langLabels[effectiveTarget] || effectiveTarget;
 
         const translateMessages = [
             {
@@ -291,7 +305,7 @@ Provide:
         if (!llmResult || !llmResult.text) {
             // Fallback to MyMemory
             try {
-                const langPair = `${source_lang || 'en'}|${target_lang === 'ar_eg' ? 'ar' : (target_lang || 'ar')}`;
+                const langPair = `${effectiveSource === 'ar_eg' ? 'ar' : effectiveSource}|${effectiveTarget === 'ar_eg' ? 'ar' : effectiveTarget}`;
                 const mmResponse = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(cleanText)}&langpair=${langPair}`);
                 const mmData = await mmResponse.json();
                 if (mmData?.responseData?.translatedText) {
@@ -307,7 +321,7 @@ Provide:
         // Save to history if authenticated
         if (req.user) {
             const db = req.app.locals.db;
-            db.prepare('INSERT INTO translation_history (id, user_id, source_text, translated_text, source_lang, target_lang) VALUES (?, ?, ?, ?, ?, ?)').run(uuidv4(), req.user.id, cleanText, translation, source_lang, target_lang);
+            db.prepare('INSERT INTO translation_history (id, user_id, source_text, translated_text, source_lang, target_lang) VALUES (?, ?, ?, ?, ?, ?)').run(uuidv4(), req.user.id, cleanText, translation, effectiveSource, effectiveTarget);
         }
 
         res.json({ translation, source: 'ai', provider: llmResult.provider });
@@ -344,7 +358,10 @@ router.get('/conversations/:id/messages', authenticateToken, (req, res) => {
 });
 
 // Fallback response generator
-function generateFallbackResponse(message, userName) {
+function generateFallbackResponse(message, userName, language = 'en') {
+    if (language !== 'en') {
+        return `أهلاً ${userName || ''}! خدمة المساعد غير متاحة الآن. يمكنني مساعدتك بالمحتوى المصري المحفوظ ودليل الخدمات الموثوق. يرجى التأكد من المعلومات القانونية أو الطبية العاجلة مع الجهة الرسمية.`;
+    }
     const lower = message.toLowerCase();
     if (lower.includes('metro') || lower.includes('مترو')) {
         return `The Cairo Metro has 3 main lines:\n• Line 1 (Helwan ↔ El-Marg): Red line\n• Line 2 (Shobra ↔ El-Mounib): Yellow line\n• Line 3 (Airport ↔ Kit Kat): Green line\n\nTicket prices: 6-15 EGP depending on stations. Ladies-only carriages are in the center of every train.\n\n*Note: This is general information. Please verify current fares at the station.*`;
