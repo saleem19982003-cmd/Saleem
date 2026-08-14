@@ -10,7 +10,7 @@ const rateLimit = require('express-rate-limit');
 const path = require('path');
 const os = require('os');
 const { initializeDatabase, seedDatabase } = require('./database');
-const { createPostgresStore, hasPostgresConfig } = require('./postgres');
+const { createPostgresStore, hasPostgresConfig, POSTGRES_SOURCE } = require('./postgres');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -105,6 +105,7 @@ app.get('/api/health', async (req, res) => {
         status: 'ok',
         database: postgresReady ? 'ready' : (userDb ? 'unavailable' : 'not-configured'),
         database_mode: postgresReady ? 'supabase-postgres' : (isVercelRuntime ? 'content-only-sqlite' : 'local'),
+        database_connection_source: postgresReady ? POSTGRES_SOURCE : null,
         jwt_secret_configured: Boolean(process.env.JWT_SECRET),
         ai_key_configured: Boolean(process.env.GROQ_API_KEY || process.env.DEEPSEEK_API_KEY || process.env.OPENROUTER_API_KEY)
     });

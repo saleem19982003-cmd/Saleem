@@ -3,10 +3,19 @@
 // directory content remain in the local content database.
 const { Pool } = require('pg');
 
-const POSTGRES_URL = process.env.POSTGRES_PRISMA_URL
-    || process.env.POSTGRES_URL
+const POSTGRES_URL = process.env.POSTGRES_URL
+    || process.env.POSTGRES_PRISMA_URL
     || process.env.DATABASE_URL
     || process.env.POSTGRES_URL_NON_POOLING;
+const POSTGRES_SOURCE = process.env.POSTGRES_URL
+    ? 'POSTGRES_URL'
+    : process.env.POSTGRES_PRISMA_URL
+        ? 'POSTGRES_PRISMA_URL'
+        : process.env.DATABASE_URL
+            ? 'DATABASE_URL'
+            : process.env.POSTGRES_URL_NON_POOLING
+                ? 'POSTGRES_URL_NON_POOLING'
+                : null;
 
 const schema = [
     `CREATE TABLE IF NOT EXISTS users (
@@ -134,7 +143,7 @@ const schema = [
 function createPool(connectionString) {
     return new Pool({
         connectionString,
-        max: 5,
+        max: 1,
         idleTimeoutMillis: 10000,
         connectionTimeoutMillis: 10000,
         allowExitOnIdle: true,
@@ -146,8 +155,10 @@ class PostgresStore {
     constructor(connectionString = POSTGRES_URL) {
         if (!connectionString) throw new Error('PostgreSQL connection is not configured.');
         this.mode = 'supabase-postgres';
+        this.source = POSTGRES_SOURCE;
         this.pool = createPool(connectionString);
         this.readyPromise = this.initialize();
+        this.readyPromise.catch(() => {});
     }
 
     async initialize() {
@@ -346,4 +357,4 @@ function createPostgresStore() {
     return hasPostgresConfig() ? new PostgresStore() : null;
 }
 
-module.exports = { PostgresStore, createPostgresStore, hasPostgresConfig };
+module.exports = { PostgresStore, createPostgresStore, hasPostgresConfig, POSTGRES_SOURCE };
