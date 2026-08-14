@@ -30,6 +30,10 @@
       "use": "@vercel/static"
     },
     {
+      "src": "favicon.svg",
+      "use": "@vercel/static"
+    },
+    {
       "src": "data/dialect_lessons_600.json",
       "use": "@vercel/static"
     },
