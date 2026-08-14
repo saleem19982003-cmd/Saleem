@@ -10,7 +10,7 @@ const rateLimit = require('express-rate-limit');
 const path = require('path');
 const os = require('os');
 const { initializeDatabase, seedDatabase } = require('./database');
-const { createPostgresStore, hasPostgresConfig, POSTGRES_SOURCE } = require('./postgres');
+const { createPostgresStore, hasPostgresConfig, POSTGRES_SOURCE, diagnosePostgresConnection } = require('./postgres');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -97,6 +97,10 @@ app.use('/api/analytics', require('./routes/analytics'));
 app.use('/api/tts', require('./routes/tts'));
 
 app.get('/api/health', async (req, res) => {
+    if (req.query.diagnostics === 'postgres') {
+        const diagnostics = await diagnosePostgresConnection();
+        return res.status(diagnostics.select_1 === 'PASS' ? 200 : 503).json({ status: 'ok', diagnostics });
+    }
     let postgresReady = false;
     if (userDb) {
         try { await userDb.ready(); postgresReady = true; } catch (error) { console.error('PostgreSQL readiness check failed:', error.message); }

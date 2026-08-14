@@ -1,7 +1,10 @@
 // Durable PostgreSQL store for user-owned Saleem data.
 // Static lessons, vocabulary, quizzes, culture, phrases, and verified
 // directory content remain in the local content database.
-const { Pool } = require('pg');
+const { Pool, Client } = require('pg');
+const dns = require('node:dns').promises;
+const net = require('node:net');
+const { parse: parseConnectionString } = require('pg-connection-string');
 
 // Prefer the explicitly configured transaction-pooler URL. Marketplace
 // variables remain supported as compatibility fallbacks for existing deploys.
@@ -149,10 +152,153 @@ function createPool(connectionString) {
         // Queries below never set a named statement, so transaction pooling
         // does not depend on session-level prepared-statement state.
         idleTimeoutMillis: 10000,
-        connectionTimeoutMillis: 10000,
+        connectionTimeoutMillis: 7000,
         allowExitOnIdle: true,
-        ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : undefined,
+        ssl: process.env.NODE_ENV === 'production' ? true : undefined,
     });
+}
+
+function classifyConnectionError(error, fallback = 'OTHER') {
+    const code = String(error?.code || '').toUpperCase();
+    const message = String(error?.message || '').toLowerCase();
+    if (code === 'ENOTFOUND' || code === 'EAI_AGAIN' || code === 'ENODATA') return 'DNS';
+    if (code === 'ETIMEDOUT' || code === 'ESOCKETTIMEDOUT' || message.includes('timeout')) return 'TIMEOUT';
+    if (code === 'ECONNREFUSED' || code === 'ECONNRESET' || code === 'EHOSTUNREACH' || code === 'ENETUNREACH') return 'TCP';
+    if (code === 'DEPTH_ZERO_SELF_SIGNED_CERT' || code === 'UNABLE_TO_VERIFY_LEAF_SIGNATURE' || message.includes('tls') || message.includes('certificate')) return 'TLS';
+    if (code === '28P01' || code === '28000') return 'AUTH';
+    if (code === '3D000') return 'DATABASE';
+    if (code === '53300' || code === '57P03') return 'POOLER';
+    return fallback;
+}
+
+function safeErrorCode(error) {
+    const code = String(error?.code || '').trim();
+    return /^[A-Za-z0-9_.-]{1,32}$/.test(code) ? code : null;
+}
+
+function parseRuntimeMetadata(connectionString) {
+    const parsed = parseConnectionString(connectionString);
+    const protocolMatch = String(connectionString).match(/^([^:]+):\/\//);
+    const host = String(parsed.host || '').toLowerCase();
+    const password = parsed.password == null ? '' : String(parsed.password);
+    return {
+        protocol: protocolMatch ? protocolMatch[1].toLowerCase() : null,
+        hostname: host || null,
+        port: parsed.port ? Number(parsed.port) : 5432,
+        database: parsed.database || null,
+        username_exists: Boolean(parsed.user),
+        password_exists: password.length > 0,
+        password_placeholder: /your[-_ ]?password|\[password\]|placeholder/i.test(password),
+        pooler_hostname: host.endsWith('.pooler.supabase.com'),
+        _config: {
+            host,
+            port: parsed.port ? Number(parsed.port) : 5432,
+            database: parsed.database || undefined,
+            user: parsed.user || undefined,
+            password: parsed.password || undefined,
+        },
+    };
+}
+
+function withTimeout(promise, timeoutMs) {
+    let timer;
+    const timeout = new Promise((_, reject) => {
+        timer = setTimeout(() => reject(Object.assign(new Error('diagnostic timeout'), { code: 'ETIMEDOUT' })), timeoutMs);
+    });
+    return Promise.race([promise, timeout]).finally(() => clearTimeout(timer));
+}
+
+async function resolveDatabaseHost(host) {
+    try {
+        const addresses = await withTimeout(dns.lookup(host, { all: true, verbatim: true }), 5000);
+        return { status: 'PASS', address_families: [...new Set(addresses.map(({ family }) => `IPv${family}`))] };
+    } catch (error) {
+        return { status: 'FAIL', error_class: classifyConnectionError(error, 'DNS'), error_code: safeErrorCode(error) };
+    }
+}
+
+function testTcpEndpoint(host, port) {
+    return new Promise((resolve) => {
+        let settled = false;
+        const finish = (status, error) => {
+            if (settled) return;
+            settled = true;
+            resolve({ status, error_code: safeErrorCode(error) });
+        };
+        const socket = net.createConnection({ host, port });
+        socket.setTimeout(5000, () => {
+            socket.destroy();
+            finish('TIMEOUT', { code: 'ETIMEDOUT' });
+        });
+        socket.once('connect', () => {
+            socket.destroy();
+            finish('PASS');
+        });
+        socket.once('error', (error) => {
+            socket.destroy();
+            const errorClass = classifyConnectionError(error, 'TCP');
+            finish(errorClass === 'DNS' ? 'DNS FAILURE' : error.code === 'ECONNREFUSED' ? 'REFUSED' : errorClass === 'TCP' ? 'FAIL' : errorClass, error);
+        });
+    });
+}
+
+async function freshSelectOne(config) {
+    const client = new Client({
+        ...config,
+        connectionTimeoutMillis: 7000,
+        query_timeout: 7000,
+        statement_timeout: 7000,
+        ssl: true,
+    });
+    try {
+        await client.connect();
+        const result = await client.query('SELECT 1');
+        return { status: result.rows[0]?.['?column?'] === 1 ? 'PASS' : 'FAIL' };
+    } catch (error) {
+        return { status: 'FAIL', error_class: classifyConnectionError(error, 'POSTGRES'), error_code: safeErrorCode(error) };
+    } finally {
+        await client.end().catch(() => {});
+    }
+}
+
+async function diagnosePostgresConnection(connectionString = POSTGRES_URL) {
+    if (!connectionString) return { configured: false, first_failure: 'ENV' };
+    let metadata;
+    try {
+        metadata = parseRuntimeMetadata(connectionString);
+    } catch (error) {
+        return { configured: true, parse: 'FAIL', first_failure: 'ENV', error_class: 'OTHER', error_code: safeErrorCode(error) };
+    }
+
+    const { _config: config, ...safeMetadata } = metadata;
+    const dnsResult = await resolveDatabaseHost(config.host);
+    if (dnsResult.status !== 'PASS') {
+        return { configured: true, ...safeMetadata, dns: dnsResult, tcp_6543: { status: 'DNS FAILURE' }, select_1: 'FAIL', first_failure: 'DNS', supavisor: 'UNABLE_TO_INSPECT' };
+    }
+
+    const tcp6543 = await testTcpEndpoint(config.host, 6543);
+    if (tcp6543.status !== 'PASS') {
+        const tcp5432 = await testTcpEndpoint(config.host, 5432);
+        return { configured: true, ...safeMetadata, dns: dnsResult, tcp_6543: tcp6543, session_5432: tcp5432.status, select_1: 'NOT_REACHED', first_failure: 'TCP', tcp_6543_classification: tcp6543.status, supavisor: 'UNABLE_TO_INSPECT' };
+    }
+
+    const select1 = await freshSelectOne(config);
+    let session5432 = null;
+    if (select1.status !== 'PASS') session5432 = await freshSelectOne({ ...config, port: 5432 });
+    return {
+        configured: true,
+        ...safeMetadata,
+        dns: dnsResult,
+        tcp_6543: tcp6543,
+        tls: select1.status === 'PASS' ? 'PASS' : (select1.error_class === 'TLS' ? 'FAIL' : 'NOT_PROVEN'),
+        postgresql_authentication: select1.status === 'PASS' ? 'PASS' : (select1.error_class === 'AUTH' ? 'FAIL' : 'NOT_PROVEN'),
+        select_1: select1.status,
+        select_1_error_class: select1.error_class || null,
+        select_1_error_code: select1.error_code || null,
+        session_5432: session5432 ? { status: session5432.status, error_class: session5432.error_class || null, error_code: session5432.error_code || null } : 'NOT_TESTED',
+        first_failure: select1.status === 'PASS' ? null : (select1.error_class || 'POSTGRES'),
+        supavisor: 'UNABLE_TO_INSPECT',
+    };
 }
 
 class PostgresStore {
@@ -160,6 +306,7 @@ class PostgresStore {
         if (!connectionString) throw new Error('PostgreSQL connection is not configured.');
         this.mode = 'supabase-postgres';
         this.source = POSTGRES_SOURCE;
+        this.connectionString = connectionString;
         this.pool = createPool(connectionString);
         this.readyPromise = this.initialize();
         this.readyPromise.catch(() => {});
@@ -171,8 +318,12 @@ class PostgresStore {
 
     async ready() {
         try {
+            if (!this.readyPromise) this.readyPromise = this.initialize();
             return await this.readyPromise;
         } catch (error) {
+            this.readyPromise = null;
+            await this.pool.end().catch(() => {});
+            this.pool = createPool(this.connectionString);
             error.status = 503;
             error.code = 'PERSISTENCE_UNAVAILABLE';
             throw error;
@@ -367,4 +518,4 @@ function createPostgresStore() {
     return hasPostgresConfig() ? new PostgresStore() : null;
 }
 
-module.exports = { PostgresStore, createPostgresStore, hasPostgresConfig, POSTGRES_SOURCE };
+module.exports = { PostgresStore, createPostgresStore, hasPostgresConfig, POSTGRES_SOURCE, diagnosePostgresConnection };
