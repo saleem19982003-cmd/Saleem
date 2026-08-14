@@ -495,6 +495,9 @@ document.addEventListener('DOMContentLoaded', () => {
             sectionAi: 'Section B: Saleem AI (Egyptian Dialect AI Tutor)',
             sectionCommunity: 'Section C: Refugee Community Hub & Peer Forums',
             sectionProfile: 'Section D: Profile & Legal Institutions Access',
+            brandSupport: 'Refugee Support',
+            localProfile: 'Local Saleem profile',
+            learningSnapshot: 'Personal Learning Snapshot',
             daysLabel: 'Days',
             lessonsLabel: 'Lessons',
             trackDialect: 'Track 1: Learn Egyptian Dialect',
@@ -511,6 +514,9 @@ document.addEventListener('DOMContentLoaded', () => {
             noLessons: 'No lessons completed yet! Complete Lesson 1 to earn your first XP and rank on the Hall of Fame.',
             translatorPair: 'Translate between English and Egyptian Arabic.',
             assistantPair: 'Ask Saleem AI in English or Egyptian Arabic.'
+            ,brandSupport: 'Refugee Support'
+            ,localProfile: 'Local Saleem profile'
+            ,learningSnapshot: 'Personal Learning Snapshot'
         },
         ar: {
             coverageNotice: '\u0628\u0639\u0636 \u0627\u0644\u0645\u062d\u062a\u0648\u0649 \u063a\u064a\u0631 \u0645\u062a\u0627\u062d \u0628\u0627\u0644\u0644\u063a\u0629 \u0627\u0644\u0645\u062e\u062a\u0627\u0631\u0629. \u0627\u0644\u0645\u062d\u062a\u0648\u0649 \u0627\u0644\u0645\u0635\u0631\u064a \u0645\u062a\u0627\u062d \u062d\u064a\u062b\u0645\u0627 \u064a\u0648\u062c\u062f.',
@@ -527,6 +533,9 @@ document.addEventListener('DOMContentLoaded', () => {
             sectionAi: '\u0627\u0644\u0642\u0633\u0645 \u0628: \u0645\u0633\u0627\u0639\u062f \u0633\u0644\u064a\u0645 \u0627\u0644\u0630\u0643\u064a',
             sectionCommunity: '\u0627\u0644\u0642\u0633\u0645 \u062c: \u0645\u0644\u062a\u0642\u0649 \u0627\u0644\u0645\u062c\u062a\u0645\u0639',
             sectionProfile: '\u0627\u0644\u0642\u0633\u0645 \u062f: \u0627\u0644\u0645\u0644\u0641 \u0627\u0644\u0634\u062e\u0635\u064a \u0648\u0627\u0644\u062e\u062f\u0645\u0627\u062a',
+            brandSupport: '\u062f\u0639\u0645 \u0627\u0644\u0644\u0627\u062c\u0626\u064a\u0646',
+            localProfile: '\u0645\u0644\u0641 \u0633\u0644\u064a\u0645 \u0627\u0644\u0645\u062d\u0644\u064a',
+            learningSnapshot: '\u0645\u0644\u062e\u0635 \u0627\u0644\u062a\u0642\u062f\u0645 \u0627\u0644\u0634\u062e\u0635\u064a',
             daysLabel: '\u064a\u0648\u0645',
             lessonsLabel: '\u062f\u0631\u0648\u0633',
             trackDialect: '\u0627\u0644\u0645\u0633\u0627\u0631 1: \u062a\u0639\u0644\u0645 \u0627\u0644\u0644\u0647\u062c\u0629 \u0627\u0644\u0645\u0635\u0631\u064a\u0629',
@@ -543,6 +552,9 @@ document.addEventListener('DOMContentLoaded', () => {
             noLessons: 'لم تكمل أي درس بعد. أكمل الدرس 1 لكسب أول XP لك.',
             translatorPair: '\u062a\u0631\u062c\u0645 \u0628\u064a\u0646 \u0627\u0644\u0644\u0647\u062c\u0629 \u0627\u0644\u0645\u0635\u0631\u064a\u0629 \u0648\u0627\u0644\u0644\u063a\u0629 \u0627\u0644\u0645\u062e\u062a\u0627\u0631\u0629.',
             assistantPair: '\u0627\u0633\u0623\u0644 \u0645\u0633\u0627\u0639\u062f \u0633\u0644\u064a\u0645 \u0628\u0627\u0644\u0644\u0644\u0647\u062c\u0629 \u0627\u0644\u0645\u0635\u0631\u064a\u0629 \u0623\u0648 \u0627\u0644\u0644\u063a\u0629 \u0627\u0644\u0645\u062e\u062a\u0627\u0631\u0629.'
+            ,brandSupport: '\u062f\u0639\u0645 \u0627\u0644\u0644\u0627\u062c\u0626\u064a\u0646'
+            ,localProfile: '\u0645\u0644\u0641 \u0633\u0644\u064a\u0645 \u0627\u0644\u0645\u062d\u0644\u064a'
+            ,learningSnapshot: '\u0645\u0644\u062e\u0635 \u0627\u0644\u062a\u0642\u062f\u0645 \u0627\u0644\u0634\u062e\u0635\u064a'
         },
         am: { coverageNotice: '\u1230\u121b\u1290\u1271 \u12a8\u1270\u1218\u1228\u1320\u12cd \u1265\u127b \u12ad\u120d\u120d \u12a0\u12ed\u1308\u129d\u121d\u1362 \u12e8\u130d\u133d\u1275 \u12a0\u1228\u1265\u129b \u12ed\u1308\129b\u120d\u1362', translationUnavailable: '\u1275\u122d\u1309\u121d \u12a0\u1208\u1270\u1308\1298\u121d\u1362', egyptianArabicOnly: '\u12e8\u130d\u133d\u1275 \u12a0\u1228\u1265\u129b \u12ed\u1308\u129b\u120d\u1362', languagePair: '\u12e8\u1270\u12a8\u1348\u1270 \u124b\1295\u124b\u1362' },
         so: { coverageNotice: 'Qaar ka mid ah waxyaabaha lama heli karo luqadda la doortay. Carabiga Masariga ah ayaa la muujiyaa marka uu jiro.', translationUnavailable: 'Turjumaad lagama heli karo luqadda la doortay.', egyptianArabicOnly: 'Kaliya lahjada Carabiga Masariga ah', languagePair: 'Lammaanaha luqadaha' },
@@ -573,6 +585,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         if (key === 'hdr-assistant-sub') {
             return LANGUAGE_RUNTIME_TEXT[lang]?.assistantPair || (lang === 'en' ? LANGUAGE_RUNTIME_TEXT.en.assistantPair : getLanguageRuntimeText('egyptianArabicOnly', lang));
+        }
+        if (['brandSupport', 'localProfile', 'learningSnapshot'].includes(key)) {
+            return LANGUAGE_RUNTIME_TEXT[lang]?.[key] || (lang === 'en' ? LANGUAGE_RUNTIME_TEXT.en[key] : getLanguageRuntimeText('egyptianArabicOnly', lang));
         }
         const selectedDict = i18n[lang] || {};
         const alias = UI_I18N_ALIASES[key];
