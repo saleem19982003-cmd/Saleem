@@ -8,10 +8,16 @@ const { authenticateToken, optionalAuth } = require('../middleware/auth');
 const { sanitizeHtml, isValidLength } = require('../middleware/sanitize');
 
 // GET /api/community/posts
-router.get('/posts', optionalAuth, (req, res) => {
+router.get('/posts', optionalAuth, async (req, res) => {
     try {
         const db = req.app.locals.db;
+        const durableDb = req.app.locals.userDb;
         const { category, page = 1, limit = 20 } = req.query;
+
+        if (durableDb) {
+            const posts = await durableDb.listCommunityPosts({ category, page, limit, includeDemo: req.query.include_demo === '1' || req.query.include_demo === 'true' });
+            return res.json({ posts });
+        }
 
         const includeDemo = req.query.include_demo === '1' || req.query.include_demo === 'true';
         let query = 'SELECT * FROM community_posts WHERE 1=1';
@@ -44,13 +50,19 @@ router.get('/posts', optionalAuth, (req, res) => {
 });
 
 // POST /api/community/posts
-router.post('/posts', authenticateToken, (req, res) => {
+router.post('/posts', authenticateToken, async (req, res) => {
     try {
         const db = req.app.locals.db;
+        const durableDb = req.app.locals.userDb;
         const { title, body, category } = req.body;
 
         if (!title || !isValidLength(title, 3, 200)) {
             return res.status(400).json({ error: 'Title must be 3-200 characters.' });
+        }
+
+        if (durableDb) {
+            const post = await durableDb.createCommunityPost({ id: uuidv4(), author_id: req.user.id, title: sanitizeHtml(title), body: sanitizeHtml(body || title), category: category || 'general' });
+            return res.status(201).json({ post });
         }
 
         const user = db.prepare('SELECT name, nationality FROM users WHERE id = ?').get(req.user.id);
@@ -70,13 +82,21 @@ router.post('/posts', authenticateToken, (req, res) => {
 });
 
 // POST /api/community/posts/:id/reply
-router.post('/posts/:id/reply', authenticateToken, (req, res) => {
+router.post('/posts/:id/reply', authenticateToken, async (req, res) => {
     try {
         const db = req.app.locals.db;
+        const durableDb = req.app.locals.userDb;
         const { body } = req.body;
 
         if (!body || !isValidLength(body, 1, 2000)) {
             return res.status(400).json({ error: 'Reply text is required.' });
+        }
+
+        if (durableDb) {
+            const post = await durableDb.one('SELECT id FROM community_posts WHERE id = $1', [req.params.id]);
+            if (!post) return res.status(404).json({ error: 'Post not found.' });
+            const reply = await durableDb.createReply({ id: uuidv4(), post_id: req.params.id, author_id: req.user.id, body: sanitizeHtml(body) });
+            return res.status(201).json({ reply });
         }
 
         const post = db.prepare('SELECT id FROM community_posts WHERE id = ?').get(req.params.id);
@@ -98,9 +118,15 @@ router.post('/posts/:id/reply', authenticateToken, (req, res) => {
 });
 
 // GET /api/community/reviews
-router.get('/reviews', (req, res) => {
+router.get('/reviews', async (req, res) => {
     try {
         const db = req.app.locals.db;
+        const durableDb = req.app.locals.userDb;
+        if (durableDb) {
+            const reviews = await durableDb.getReviews();
+            const total = await durableDb.getReviewSummary();
+            return res.json({ reviews, total_count: total.count, average_rating: total.avg_rating ? parseFloat(Number(total.avg_rating).toFixed(1)) : 0 });
+        }
         const reviews = db.prepare('SELECT * FROM reviews WHERE is_demo_data = 0 ORDER BY created_at DESC LIMIT 50').all();
         const total = db.prepare('SELECT COUNT(*) as count, AVG(rating) as avg_rating FROM reviews WHERE is_demo_data = 0').get();
 
@@ -111,9 +137,10 @@ router.get('/reviews', (req, res) => {
 });
 
 // POST /api/community/reviews
-router.post('/reviews', authenticateToken, (req, res) => {
+router.post('/reviews', authenticateToken, async (req, res) => {
     try {
         const db = req.app.locals.db;
+        const durableDb = req.app.locals.userDb;
         const { rating, help_text, improvement_text } = req.body;
 
         if (!rating || rating < 1 || rating > 5) {
@@ -121,6 +148,11 @@ router.post('/reviews', authenticateToken, (req, res) => {
         }
         if (!help_text || !isValidLength(help_text, 5, 1000)) {
             return res.status(400).json({ error: 'Please describe how Saleem helped you (5+ characters).' });
+        }
+
+        if (durableDb) {
+            const review = await durableDb.createReview({ id: uuidv4(), author_id: req.user.id, rating, help_text: sanitizeHtml(help_text), improvement_text: sanitizeHtml(improvement_text || '') });
+            return res.status(201).json({ review });
         }
 
         const user = db.prepare('SELECT name, nationality FROM users WHERE id = ?').get(req.user.id);

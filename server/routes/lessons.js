@@ -7,9 +7,9 @@ const { v4: uuidv4 } = require('uuid');
 const { authenticateToken, optionalAuth } = require('../middleware/auth');
 
 // GET /api/lessons/categories - Get all lesson categories
-router.get('/categories', (req, res) => {
+router.get('/categories', async (req, res) => {
     try {
-        const db = req.app.locals.db;
+        const db = req.app.locals.contentDb || req.app.locals.db;
         const categories = db.prepare('SELECT * FROM lesson_categories WHERE is_active = 1 ORDER BY sort_order').all();
         res.json({ categories });
     } catch (err) {
@@ -18,9 +18,10 @@ router.get('/categories', (req, res) => {
 });
 
 // GET /api/lessons - Get all lessons (with optional category filter)
-router.get('/', optionalAuth, (req, res) => {
+router.get('/', optionalAuth, async (req, res) => {
     try {
-        const db = req.app.locals.db;
+        const db = req.app.locals.contentDb || req.app.locals.db;
+        const durableDb = req.app.locals.userDb;
         const { category, difficulty } = req.query;
 
         let query = 'SELECT l.*, lc.name_en as category_name, lc.icon as category_icon FROM lessons l JOIN lesson_categories lc ON l.category_id = lc.id WHERE l.is_active = 1';
@@ -41,7 +42,9 @@ router.get('/', optionalAuth, (req, res) => {
 
         // If user is authenticated, attach progress
         if (req.user) {
-            const progress = db.prepare('SELECT lesson_id, status, score, completed_at FROM user_progress WHERE user_id = ?').all(req.user.id);
+            const progress = durableDb
+                ? await durableDb.getProgress(req.user.id)
+                : db.prepare('SELECT lesson_id, status, score, completed_at FROM user_progress WHERE user_id = ?').all(req.user.id);
             const progressMap = {};
             progress.forEach(p => { progressMap[p.lesson_id] = p; });
             lessons.forEach(l => { l.progress = progressMap[l.id] || null; });
@@ -55,9 +58,10 @@ router.get('/', optionalAuth, (req, res) => {
 });
 
 // GET /api/lessons/:id - Get single lesson with content
-router.get('/:id', optionalAuth, (req, res) => {
+router.get('/:id', optionalAuth, async (req, res) => {
     try {
-        const db = req.app.locals.db;
+        const db = req.app.locals.contentDb || req.app.locals.db;
+        const durableDb = req.app.locals.userDb;
         const lesson = db.prepare('SELECT l.*, lc.name_en as category_name FROM lessons l JOIN lesson_categories lc ON l.category_id = lc.id WHERE l.id = ?').get(req.params.id);
 
         if (!lesson) {
@@ -77,7 +81,9 @@ router.get('/:id', optionalAuth, (req, res) => {
         // Get user progress if authenticated
         let progress = null;
         if (req.user) {
-            progress = db.prepare('SELECT * FROM user_progress WHERE user_id = ? AND lesson_id = ?').get(req.user.id, req.params.id);
+            progress = durableDb
+                ? await durableDb.getLessonProgress(req.user.id, req.params.id)
+                : db.prepare('SELECT * FROM user_progress WHERE user_id = ? AND lesson_id = ?').get(req.user.id, req.params.id);
         }
 
         res.json({ lesson, quizzes, vocabulary, progress });
@@ -88,11 +94,16 @@ router.get('/:id', optionalAuth, (req, res) => {
 });
 
 // POST /api/lessons/:id/start - Start a lesson
-router.post('/:id/start', authenticateToken, (req, res) => {
+router.post('/:id/start', authenticateToken, async (req, res) => {
     try {
         const db = req.app.locals.db;
         const lessonId = req.params.id;
         const userId = req.user.id;
+
+        if (req.app.locals.userDb) {
+            await req.app.locals.userDb.startLesson(userId, lessonId, uuidv4(), { lesson_id: lessonId });
+            return res.json({ message: 'Lesson started.' });
+        }
 
         // Check if progress exists
         const existing = db.prepare('SELECT * FROM user_progress WHERE user_id = ? AND lesson_id = ?').get(userId, lessonId);
@@ -116,12 +127,17 @@ router.post('/:id/start', authenticateToken, (req, res) => {
 });
 
 // POST /api/lessons/:id/complete - Complete a lesson with quiz score
-router.post('/:id/complete', authenticateToken, (req, res) => {
+router.post('/:id/complete', authenticateToken, async (req, res) => {
     try {
         const db = req.app.locals.db;
         const lessonId = req.params.id;
         const userId = req.user.id;
         const { score } = req.body;
+
+        if (req.app.locals.userDb) {
+            await req.app.locals.userDb.completeLesson(userId, lessonId, uuidv4(), Number(score) || 0);
+            return res.json({ message: 'Lesson completed!', score: Number(score) || 0 });
+        }
 
         const existing = db.prepare('SELECT * FROM user_progress WHERE user_id = ? AND lesson_id = ?').get(userId, lessonId);
 

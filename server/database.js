@@ -345,12 +345,15 @@ function ensureColumn(db, tableName, columnName, columnType) {
 }
 
 // Seed initial data
-function seedDatabase(db) {
+function seedDatabase(db, options = {}) {
     const { v4: uuidv4 } = require('uuid');
+    const contentOnly = options.contentOnly === true;
 
     // Check if already seeded
-    const userCount = db.prepare('SELECT COUNT(*) as count FROM users').get();
-    if (userCount.count > 0) {
+    const seedCount = contentOnly
+        ? db.prepare('SELECT COUNT(*) as count FROM lesson_categories').get()
+        : db.prepare('SELECT COUNT(*) as count FROM users').get();
+    if (seedCount.count > 0) {
         refreshVerifiedResourceData(db);
         console.log('Database already seeded, skipping...');
         return;
@@ -358,13 +361,16 @@ function seedDatabase(db) {
 
     console.log('Seeding database with initial data...');
 
-    // Create admin user
-    const adminId = uuidv4();
-    const adminPasswordHash = bcrypt.hashSync(process.env.ADMIN_PASSWORD || 'SaleemAdmin2026!', 10);
-    db.prepare(`
-        INSERT INTO users (id, email, password_hash, name, nationality, preferred_language, role, onboarding_completed)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-    `).run(adminId, process.env.ADMIN_EMAIL || 'admin@saleem.app', adminPasswordHash, 'Admin', 'Egypt', 'en', 'admin', 1);
+    if (!contentOnly) {
+        // Create the local development admin user only. Production user data
+        // is created in PostgreSQL when the durable store is configured.
+        const adminId = uuidv4();
+        const adminPasswordHash = bcrypt.hashSync(process.env.ADMIN_PASSWORD || 'SaleemAdmin2026!', 10);
+        db.prepare(`
+            INSERT INTO users (id, email, password_hash, name, nationality, preferred_language, role, onboarding_completed)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        `).run(adminId, process.env.ADMIN_EMAIL || 'admin@saleem.app', adminPasswordHash, 'Admin', 'Egypt', 'en', 'admin', 1);
+    }
 
     // Seed Lesson Categories
     const categories = [

@@ -10,9 +10,10 @@ const { sanitizeHtml, isValidEmail, isValidLength } = require('../middleware/san
 const SUPPORTED_LANGUAGE_CODES = new Set(['en', 'ar', 'am', 'so', 'fr', 'ti', 'sw', 'ha', 'om']);
 
 // POST /api/auth/register
-router.post('/register', (req, res) => {
+router.post('/register', async (req, res) => {
     try {
         const db = req.app.locals.db;
+        const durableDb = req.app.locals.userDb;
         const { email, password, name, nationality, preferred_language } = req.body;
 
         // Validation
@@ -27,7 +28,10 @@ router.post('/register', (req, res) => {
         }
 
         // Check existing user
-        const existing = db.prepare('SELECT id FROM users WHERE email = ?').get(email.toLowerCase().trim());
+        const normalizedEmail = email.toLowerCase().trim();
+        const existing = durableDb
+            ? await durableDb.getUserByEmail(normalizedEmail)
+            : db.prepare('SELECT id FROM users WHERE email = ?').get(normalizedEmail);
         if (existing) {
             return res.status(409).json({ error: 'An account with this email already exists.' });
         }
@@ -40,23 +44,18 @@ router.post('/register', (req, res) => {
         const requestedLanguage = String(preferred_language || 'en').substring(0, 5);
         const lang = SUPPORTED_LANGUAGE_CODES.has(requestedLanguage) ? requestedLanguage : 'en';
 
-        db.prepare(`
-            INSERT INTO users (id, email, password_hash, name, nationality, preferred_language, role)
-            VALUES (?, ?, ?, ?, ?, ?, 'user')
-        `).run(id, email.toLowerCase().trim(), passwordHash, cleanName, cleanNationality, lang);
-
-        // Create initial streak record
-        db.prepare(`
-            INSERT INTO user_streaks (id, user_id) VALUES (?, ?)
-        `).run(uuidv4(), id);
-
-        // Track analytics
-        db.prepare(`
-            INSERT INTO analytics_events (user_id, event_type, event_data)
-            VALUES (?, 'user_registered', ?)
-        `).run(id, JSON.stringify({ nationality: cleanNationality, language: lang }));
-
-        const user = db.prepare('SELECT id, email, name, nationality, preferred_language, role, created_at FROM users WHERE id = ?').get(id);
+        let user;
+        if (durableDb) {
+            user = await durableDb.createUser({ id, email: normalizedEmail, password_hash: passwordHash, name: cleanName, nationality: cleanNationality, preferred_language: lang }, uuidv4(), { nationality: cleanNationality, language: lang });
+        } else {
+            db.prepare(`
+                INSERT INTO users (id, email, password_hash, name, nationality, preferred_language, role)
+                VALUES (?, ?, ?, ?, ?, ?, 'user')
+            `).run(id, normalizedEmail, passwordHash, cleanName, cleanNationality, lang);
+            db.prepare(`INSERT INTO user_streaks (id, user_id) VALUES (?, ?)`).run(uuidv4(), id);
+            db.prepare(`INSERT INTO analytics_events (user_id, event_type, event_data) VALUES (?, 'user_registered', ?)`).run(id, JSON.stringify({ nationality: cleanNationality, language: lang }));
+            user = db.prepare('SELECT id, email, name, nationality, preferred_language, role, created_at FROM users WHERE id = ?').get(id);
+        }
         const token = generateToken(user);
 
         res.status(201).json({ user, token });
@@ -67,16 +66,20 @@ router.post('/register', (req, res) => {
 });
 
 // POST /api/auth/login
-router.post('/login', (req, res) => {
+router.post('/login', async (req, res) => {
     try {
         const db = req.app.locals.db;
+        const durableDb = req.app.locals.userDb;
         const { email, password } = req.body;
 
         if (!email || !password) {
             return res.status(400).json({ error: 'Email and password are required.' });
         }
 
-        const user = db.prepare('SELECT * FROM users WHERE email = ? AND is_active = 1').get(email.toLowerCase().trim());
+        const normalizedEmail = email.toLowerCase().trim();
+        const user = durableDb
+            ? await durableDb.getUserByEmail(normalizedEmail)
+            : db.prepare('SELECT * FROM users WHERE email = ? AND is_active = 1').get(normalizedEmail);
         if (!user) {
             return res.status(401).json({ error: 'Invalid email or password.' });
         }
@@ -87,7 +90,8 @@ router.post('/login', (req, res) => {
         }
 
         // Update last login
-        db.prepare("UPDATE users SET last_login_at = datetime('now') WHERE id = ?").run(user.id);
+        if (durableDb) await durableDb.updateLastLogin(user.id);
+        else db.prepare("UPDATE users SET last_login_at = datetime('now') WHERE id = ?").run(user.id);
 
         const token = generateToken(user);
         const { password_hash, ...safeUser } = user;
@@ -100,9 +104,15 @@ router.post('/login', (req, res) => {
 });
 
 // GET /api/auth/me - Get current user profile
-router.get('/me', authenticateToken, (req, res) => {
+router.get('/me', authenticateToken, async (req, res) => {
     try {
         const db = req.app.locals.db;
+        const durableDb = req.app.locals.userDb;
+        if (durableDb) {
+            const profile = await durableDb.getProfile(req.user.id);
+            if (!profile.user) return res.status(404).json({ error: 'User not found.' });
+            return res.json(profile);
+        }
         const user = db.prepare('SELECT id, email, name, nationality, preferred_language, role, onboarding_completed, onboarding_preferences, created_at, last_login_at FROM users WHERE id = ?').get(req.user.id);
         if (!user) {
             return res.status(404).json({ error: 'User not found.' });
@@ -119,9 +129,10 @@ router.get('/me', authenticateToken, (req, res) => {
 });
 
 // PUT /api/auth/profile - Update profile
-router.put('/profile', authenticateToken, (req, res) => {
+router.put('/profile', authenticateToken, async (req, res) => {
     try {
         const db = req.app.locals.db;
+        const durableDb = req.app.locals.userDb;
         const { name, nationality, preferred_language, onboarding_completed, onboarding_preferences } = req.body;
 
         const updates = [];
@@ -154,6 +165,17 @@ router.put('/profile', authenticateToken, (req, res) => {
 
         if (updates.length === 0) {
             return res.status(400).json({ error: 'No valid fields to update.' });
+        }
+
+        if (durableDb) {
+            const durableFields = {};
+            if (name && isValidLength(name, 1, 100)) durableFields.name = sanitizeHtml(name);
+            if (nationality) durableFields.nationality = sanitizeHtml(nationality);
+            if (preferred_language) durableFields.preferred_language = String(preferred_language).substring(0, 5);
+            if (onboarding_completed !== undefined) durableFields.onboarding_completed = onboarding_completed ? 1 : 0;
+            if (onboarding_preferences) durableFields.onboarding_preferences = JSON.stringify(onboarding_preferences);
+            const user = await durableDb.updateProfile(req.user.id, durableFields);
+            return res.json({ user });
         }
 
         updates.push("updated_at = datetime('now')");

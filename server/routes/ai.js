@@ -180,23 +180,28 @@ router.post('/chat', optionalAuth, async (req, res) => {
         }
 
         const cleanMessage = sanitizeHtml(message).substring(0, 2000);
-        const db = req.app.locals.db;
+        const db = req.app.locals.contentDb || req.app.locals.db;
+        const durableDb = req.app.locals.userDb;
 
         // Get or create conversation
         let convId = conversation_id;
         if (req.user) {
             if (!convId) {
                 convId = uuidv4();
-                db.prepare('INSERT INTO chat_conversations (id, user_id, title) VALUES (?, ?, ?)').run(convId, req.user.id, cleanMessage.substring(0, 100));
+                if (durableDb) await durableDb.createConversation(convId, req.user.id, cleanMessage.substring(0, 100));
+                else db.prepare('INSERT INTO chat_conversations (id, user_id, title) VALUES (?, ?, ?)').run(convId, req.user.id, cleanMessage.substring(0, 100));
             }
             // Save user message
-            db.prepare("INSERT INTO chat_messages (id, conversation_id, role, content) VALUES (?, ?, 'user', ?)").run(uuidv4(), convId, cleanMessage);
+            if (durableDb) await durableDb.addChatMessage(uuidv4(), convId, 'user', cleanMessage);
+            else db.prepare("INSERT INTO chat_messages (id, conversation_id, role, content) VALUES (?, ?, 'user', ?)").run(uuidv4(), convId, cleanMessage);
         }
 
         // Build message history
         let historyMessages = [];
         if (convId && req.user) {
-            const recentMessages = db.prepare('SELECT role, content FROM chat_messages WHERE conversation_id = ? ORDER BY created_at DESC LIMIT 10').all(convId);
+            const recentMessages = durableDb
+                ? await durableDb.getRecentMessages(convId)
+                : db.prepare('SELECT role, content FROM chat_messages WHERE conversation_id = ? ORDER BY created_at DESC LIMIT 10').all(convId);
             historyMessages = recentMessages.reverse();
         }
 
@@ -205,7 +210,9 @@ router.post('/chat', optionalAuth, async (req, res) => {
         let nationality = 'abroad';
         let language = normalizePreferredLanguage(primary_language);
         if (req.user) {
-            const user = db.prepare('SELECT name, nationality, preferred_language FROM users WHERE id = ?').get(req.user.id);
+            const user = durableDb
+                ? await durableDb.getUserById(req.user.id)
+                : db.prepare('SELECT name, nationality, preferred_language FROM users WHERE id = ?').get(req.user.id);
             if (user) {
                 userName = user.name;
                 nationality = user.nationality;
@@ -228,7 +235,8 @@ router.post('/chat', optionalAuth, async (req, res) => {
         if (!llmResult || !llmResult.text) {
             const fallback = generateFallbackResponse(cleanMessage, userName, language);
             if (req.user && convId) {
-                db.prepare("INSERT INTO chat_messages (id, conversation_id, role, content) VALUES (?, ?, 'assistant', ?)").run(uuidv4(), convId, fallback);
+                if (durableDb) await durableDb.addChatMessage(uuidv4(), convId, 'assistant', fallback);
+                else db.prepare("INSERT INTO chat_messages (id, conversation_id, role, content) VALUES (?, ?, 'assistant', ?)").run(uuidv4(), convId, fallback);
             }
             return res.json({ response: fallback, conversation_id: convId, source: 'fallback' });
         }
@@ -237,13 +245,19 @@ router.post('/chat', optionalAuth, async (req, res) => {
 
         // Save assistant message
         if (req.user && convId) {
-            db.prepare("INSERT INTO chat_messages (id, conversation_id, role, content) VALUES (?, ?, 'assistant', ?)").run(uuidv4(), convId, aiResponse);
-            db.prepare("UPDATE chat_conversations SET updated_at = datetime('now') WHERE id = ?").run(convId);
+            if (durableDb) {
+                await durableDb.addChatMessage(uuidv4(), convId, 'assistant', aiResponse);
+                await durableDb.touchConversation(convId);
+            } else {
+                db.prepare("INSERT INTO chat_messages (id, conversation_id, role, content) VALUES (?, ?, 'assistant', ?)").run(uuidv4(), convId, aiResponse);
+                db.prepare("UPDATE chat_conversations SET updated_at = datetime('now') WHERE id = ?").run(convId);
+            }
         }
 
         // Track analytics
         if (req.user) {
-                db.prepare("INSERT INTO analytics_events (user_id, event_type) VALUES (?, 'ai_message_sent')").run(req.user.id);
+                if (durableDb) await durableDb.recordAnalytics(req.user.id, 'ai_message_sent');
+                else db.prepare("INSERT INTO analytics_events (user_id, event_type) VALUES (?, 'ai_message_sent')").run(req.user.id);
         }
 
         res.json({ response: aiResponse, conversation_id: convId, source: 'ai', provider: llmResult.provider });
@@ -266,7 +280,9 @@ router.post('/translate', optionalAuth, async (req, res) => {
 
         let preferredLanguage = normalizePreferredLanguage(primary_language);
         if (req.user) {
-            const user = req.app.locals.db.prepare('SELECT preferred_language FROM users WHERE id = ?').get(req.user.id);
+            const user = req.app.locals.userDb
+                ? await req.app.locals.userDb.getUserById(req.user.id)
+                : req.app.locals.db.prepare('SELECT preferred_language FROM users WHERE id = ?').get(req.user.id);
             preferredLanguage = normalizePreferredLanguage(user?.preferred_language || preferredLanguage);
         }
         const effectiveSource = req.body.source_lang === 'ar_eg' ? 'ar_eg' : preferredLanguage;
@@ -339,8 +355,9 @@ Provide:
 
         // Save to history if authenticated
         if (req.user) {
-            const db = req.app.locals.db;
-            db.prepare('INSERT INTO translation_history (id, user_id, source_text, translated_text, source_lang, target_lang) VALUES (?, ?, ?, ?, ?, ?)').run(uuidv4(), req.user.id, cleanText, translation, effectiveSource, effectiveTarget);
+            const durableDb = req.app.locals.userDb;
+            if (durableDb) await durableDb.saveTranslation({ id: uuidv4(), user_id: req.user.id, source_text: cleanText, translated_text: translation, source_lang: effectiveSource, target_lang: effectiveTarget });
+            else req.app.locals.db.prepare('INSERT INTO translation_history (id, user_id, source_text, translated_text, source_lang, target_lang) VALUES (?, ?, ?, ?, ?, ?)').run(uuidv4(), req.user.id, cleanText, translation, effectiveSource, effectiveTarget);
         }
 
         res.json({ translation, source: 'ai', provider: llmResult.provider });
@@ -351,10 +368,12 @@ Provide:
 });
 
 // GET /api/ai/conversations - Get user's conversation history
-router.get('/conversations', authenticateToken, (req, res) => {
+router.get('/conversations', authenticateToken, async (req, res) => {
     try {
         const db = req.app.locals.db;
-        const conversations = db.prepare('SELECT * FROM chat_conversations WHERE user_id = ? ORDER BY updated_at DESC LIMIT 20').all(req.user.id);
+        const conversations = req.app.locals.userDb
+            ? await req.app.locals.userDb.getConversations(req.user.id)
+            : db.prepare('SELECT * FROM chat_conversations WHERE user_id = ? ORDER BY updated_at DESC LIMIT 20').all(req.user.id);
         res.json({ conversations });
     } catch (err) {
         res.status(500).json({ error: 'Failed to load conversations.' });
@@ -362,14 +381,18 @@ router.get('/conversations', authenticateToken, (req, res) => {
 });
 
 // GET /api/ai/conversations/:id/messages - Get messages in a conversation
-router.get('/conversations/:id/messages', authenticateToken, (req, res) => {
+router.get('/conversations/:id/messages', authenticateToken, async (req, res) => {
     try {
         const db = req.app.locals.db;
         // Verify ownership
-        const conv = db.prepare('SELECT * FROM chat_conversations WHERE id = ? AND user_id = ?').get(req.params.id, req.user.id);
+        const conv = req.app.locals.userDb
+            ? await req.app.locals.userDb.getConversation(req.params.id, req.user.id)
+            : db.prepare('SELECT * FROM chat_conversations WHERE id = ? AND user_id = ?').get(req.params.id, req.user.id);
         if (!conv) return res.status(404).json({ error: 'Conversation not found.' });
 
-        const messages = db.prepare('SELECT * FROM chat_messages WHERE conversation_id = ? ORDER BY created_at').all(req.params.id);
+        const messages = req.app.locals.userDb
+            ? await req.app.locals.userDb.getMessages(req.params.id)
+            : db.prepare('SELECT * FROM chat_messages WHERE conversation_id = ? ORDER BY created_at').all(req.params.id);
         res.json({ messages });
     } catch (err) {
         res.status(500).json({ error: 'Failed to load messages.' });

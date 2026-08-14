@@ -6,9 +6,13 @@ const router = express.Router();
 const { authenticateToken } = require('../middleware/auth');
 
 // GET /api/user/progress - Get all learning progress
-router.get('/progress', authenticateToken, (req, res) => {
+router.get('/progress', authenticateToken, async (req, res) => {
     try {
         const db = req.app.locals.db;
+        const durableDb = req.app.locals.userDb;
+        if (durableDb) {
+            return res.json({ progress: await durableDb.getProgress(req.user.id), streak: await durableDb.getStreak(req.user.id) || {} });
+        }
         const progress = db.prepare(`
             SELECT up.*, l.title_en as lesson_title, l.difficulty, lc.name_en as category_name, lc.icon as category_icon
             FROM user_progress up
@@ -27,9 +31,16 @@ router.get('/progress', authenticateToken, (req, res) => {
 });
 
 // GET /api/user/saved-resources
-router.get('/saved-resources', authenticateToken, (req, res) => {
+router.get('/saved-resources', authenticateToken, async (req, res) => {
     try {
         const db = req.app.locals.db;
+        const durableDb = req.app.locals.userDb;
+        if (durableDb) {
+            const contentDb = req.app.locals.contentDb || db;
+            const saved = await durableDb.getSavedResources(req.user.id);
+            const resources = saved.map((item) => contentDb.prepare('SELECT * FROM resources WHERE id = ?').get(item.resource_id)).filter(Boolean).map((resource, index) => ({ ...resource, saved_at: saved[index].saved_at }));
+            return res.json({ resources });
+        }
         const saved = db.prepare(`
             SELECT r.*, sr.saved_at
             FROM saved_resources sr
@@ -49,9 +60,11 @@ router.get('/saved-resources', authenticateToken, (req, res) => {
 });
 
 // GET /api/user/registered-events
-router.get('/registered-events', authenticateToken, (req, res) => {
+router.get('/registered-events', authenticateToken, async (req, res) => {
     try {
         const db = req.app.locals.db;
+        const durableDb = req.app.locals.userDb;
+        if (durableDb) return res.json({ events: await durableDb.getRegisteredEvents(req.user.id) });
         const events = db.prepare(`
             SELECT e.*, er.registered_at
             FROM event_registrations er
@@ -67,9 +80,11 @@ router.get('/registered-events', authenticateToken, (req, res) => {
 });
 
 // GET /api/user/stats
-router.get('/stats', authenticateToken, (req, res) => {
+router.get('/stats', authenticateToken, async (req, res) => {
     try {
         const db = req.app.locals.db;
+        const durableDb = req.app.locals.userDb;
+        if (durableDb) return res.json(await durableDb.getUserStats(req.user.id));
         const streak = db.prepare('SELECT * FROM user_streaks WHERE user_id = ?').get(req.user.id);
         const completedLessons = db.prepare("SELECT COUNT(*) as count FROM user_progress WHERE user_id = ? AND status = 'completed'").get(req.user.id);
         const savedResources = db.prepare('SELECT COUNT(*) as count FROM saved_resources WHERE user_id = ?').get(req.user.id);

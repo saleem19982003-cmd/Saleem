@@ -10,6 +10,7 @@ const rateLimit = require('express-rate-limit');
 const path = require('path');
 const os = require('os');
 const { initializeDatabase, seedDatabase } = require('./database');
+const { createPostgresStore, hasPostgresConfig } = require('./postgres');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -21,12 +22,17 @@ app.set('trust proxy', 1);
 const isVercelRuntime = process.env.VERCEL === '1' || process.env.VERCEL === 'true';
 // Vercel's deployed bundle is immutable. Keep the existing local path for
 // development, but use its writable ephemeral directory in serverless runs.
-const dbPath = isVercelRuntime ? path.join(os.tmpdir(), 'saleem.db') : (process.env.DATABASE_PATH || './data/saleem.db');
+const dbPath = isVercelRuntime ? path.join(os.tmpdir(), 'saleem-content.db') : (process.env.DATABASE_PATH || './data/saleem.db');
 const db = initializeDatabase(path.resolve(__dirname, '..', dbPath));
-seedDatabase(db);
+seedDatabase(db, { contentOnly: isVercelRuntime && hasPostgresConfig() });
+const userDb = createPostgresStore();
 
-// Make db available to routes
+// The SQLite database is content-only in production. Durable user-owned data
+// uses the server-side Supabase PostgreSQL store when configured.
 app.locals.db = db;
+app.locals.contentDb = db;
+app.locals.userDb = userDb;
+app.locals.hasPostgresConfig = hasPostgresConfig();
 
 // =============================================================
 // MIDDLEWARE
@@ -90,11 +96,15 @@ app.use('/api/admin', require('./routes/admin'));
 app.use('/api/analytics', require('./routes/analytics'));
 app.use('/api/tts', require('./routes/tts'));
 
-app.get('/api/health', (req, res) => {
-    res.json({
+app.get('/api/health', async (req, res) => {
+    let postgresReady = false;
+    if (userDb) {
+        try { await userDb.ready(); postgresReady = true; } catch (error) { console.error('PostgreSQL readiness check failed:', error.message); }
+    }
+    res.status(userDb && !postgresReady ? 503 : 200).json({
         status: 'ok',
-        database: 'ready',
-        database_mode: isVercelRuntime ? 'ephemeral-serverless' : 'local',
+        database: postgresReady ? 'ready' : (userDb ? 'unavailable' : 'not-configured'),
+        database_mode: postgresReady ? 'supabase-postgres' : (isVercelRuntime ? 'content-only-sqlite' : 'local'),
         jwt_secret_configured: Boolean(process.env.JWT_SECRET),
         ai_key_configured: Boolean(process.env.GROQ_API_KEY || process.env.DEEPSEEK_API_KEY || process.env.OPENROUTER_API_KEY)
     });

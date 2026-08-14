@@ -78,9 +78,10 @@ function resourceDistance(resource, latitude, longitude) {
 }
 
 // GET /api/resources - Get resources (with filters)
-router.get('/', optionalAuth, (req, res) => {
+router.get('/', optionalAuth, async (req, res) => {
     try {
-        const db = req.app.locals.db;
+        const db = req.app.locals.contentDb || req.app.locals.db;
+        const durableDb = req.app.locals.userDb;
         const { city, status, search } = req.query;
         const category = normalizeCategory(req.query.category);
         const includeDemo = req.query.include_demo === '1' || req.query.include_demo === 'true';
@@ -124,7 +125,9 @@ router.get('/', optionalAuth, (req, res) => {
         // Get user's saved resources
         let savedIds = [];
         if (req.user) {
-            const saved = db.prepare('SELECT resource_id FROM saved_resources WHERE user_id = ?').all(req.user.id);
+            const saved = durableDb
+                ? await durableDb.getSavedResources(req.user.id)
+                : db.prepare('SELECT resource_id FROM saved_resources WHERE user_id = ?').all(req.user.id);
             savedIds = saved.map(s => s.resource_id);
         }
         resources.forEach(r => { r.is_saved = savedIds.includes(r.id); });
@@ -137,9 +140,9 @@ router.get('/', optionalAuth, (req, res) => {
 });
 
 // GET /api/resources/nearby - coarse, one-shot discovery; user coordinates are never stored or returned.
-router.get('/nearby', optionalAuth, (req, res) => {
+router.get('/nearby', optionalAuth, async (req, res) => {
     try {
-        const db = req.app.locals.db;
+        const db = req.app.locals.contentDb || req.app.locals.db;
         const latitude = validCoordinate(req.query.latitude, -90, 90);
         const longitude = validCoordinate(req.query.longitude, -180, 180);
         const hasLatitude = req.query.latitude !== undefined && req.query.latitude !== '';
@@ -179,9 +182,9 @@ router.get('/nearby', optionalAuth, (req, res) => {
 });
 
 // GET /api/resources/recommendations - Explainable service recommendations
-router.get('/recommendations', optionalAuth, (req, res) => {
+router.get('/recommendations', optionalAuth, async (req, res) => {
     try {
-        const db = req.app.locals.db;
+        const db = req.app.locals.contentDb || req.app.locals.db;
         const need = String(req.query.need || req.query.search || '').toLowerCase().trim();
         const preferredCity = String(req.query.city || '').toLowerCase().trim();
         const category = normalizeCategory(req.query.category);
@@ -230,9 +233,10 @@ router.get('/recommendations', optionalAuth, (req, res) => {
 });
 
 // GET /api/resources/:id
-router.get('/:id', optionalAuth, (req, res) => {
+router.get('/:id', optionalAuth, async (req, res) => {
     try {
-        const db = req.app.locals.db;
+        const db = req.app.locals.contentDb || req.app.locals.db;
+        const durableDb = req.app.locals.userDb;
         const resource = db.prepare('SELECT * FROM resources WHERE id = ?').get(req.params.id);
         if (!resource) return res.status(404).json({ error: 'Resource not found.' });
         if ((!req.user || req.user.role !== 'admin') && (resource.verification_status !== 'verified' || resource.is_demo_data)) {
@@ -243,7 +247,8 @@ router.get('/:id', optionalAuth, (req, res) => {
 
         // Track view
         if (req.user) {
-            db.prepare("INSERT INTO analytics_events (user_id, event_type, event_data) VALUES (?, 'resource_viewed', ?)").run(req.user.id, JSON.stringify({ resource_id: resource.id }));
+            if (durableDb) await durableDb.recordAnalytics(req.user.id, 'resource_viewed', { resource_id: resource.id });
+            else db.prepare("INSERT INTO analytics_events (user_id, event_type, event_data) VALUES (?, 'resource_viewed', ?)").run(req.user.id, JSON.stringify({ resource_id: resource.id }));
         }
 
         res.json({ resource });
@@ -253,9 +258,14 @@ router.get('/:id', optionalAuth, (req, res) => {
 });
 
 // POST /api/resources/:id/save - Save a resource
-router.post('/:id/save', authenticateToken, (req, res) => {
+router.post('/:id/save', authenticateToken, async (req, res) => {
     try {
         const db = req.app.locals.db;
+        const durableDb = req.app.locals.userDb;
+        if (durableDb) {
+            const saved = await durableDb.toggleSavedResource(req.user.id, req.params.id, uuidv4());
+            return res.json({ saved, message: saved ? 'Resource saved.' : 'Resource removed from saved.' });
+        }
         const existing = db.prepare('SELECT id FROM saved_resources WHERE user_id = ? AND resource_id = ?').get(req.user.id, req.params.id);
 
         if (existing) {
