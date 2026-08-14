@@ -172,20 +172,20 @@
                 <section id="tab-saleem-ai" class="tab-pane">
                     <div class="card header-card">
                         <h2 data-i18n="sectionAi"><i class="fa-solid fa-robot text-gold"></i> <span>Section B: Saleem AI (Egyptian Dialect AI Tutor)</span></h2>
-                        <p>Conversational AI companion trained on native Egyptian dialect. Practice real scenarios, receive grammar feedback, and ask any questions.</p>
+                        <p data-i18n="aiIntro">Conversational AI companion trained on native Egyptian dialect. Practice real scenarios, receive grammar feedback, and ask any questions.</p>
                     </div>
 
                     <!-- Custom Practice Scenarios -->
                     <div class="card" style="margin-bottom: 20px;">
-                        <h3><i class="fa-solid fa-masks-theater text-gold"></i> Interactive Roleplay Practice Scenarios</h3>
-                        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 14px;">Select a real-world scenario to practice conversation with Saleem AI:</p>
+                        <h3 data-i18n="aiScenarios"><i class="fa-solid fa-masks-theater text-gold"></i> Interactive Roleplay Practice Scenarios</h3>
+                        <p data-i18n="aiScenariosSub" style="font-size: 13px; color: var(--text-muted); margin-bottom: 14px;">Select a real-world scenario to practice conversation with Saleem AI:</p>
 
                         <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-                            <button class="chip-btn" onclick="startAiScenario('cafe')">☕ Ordering at a Café (Ahwa Saada)</button>
-                            <button class="chip-btn" onclick="startAiScenario('hospital')">🏥 At the Hospital & Pharmacy</button>
-                            <button class="chip-btn" onclick="startAiScenario('police')">👮 Police Station & Legal Protocol</button>
-                            <button class="chip-btn" onclick="startAiScenario('rental')">🏠 Apartment Lease Negotiation</button>
-                            <button class="chip-btn" onclick="startAiScenario('microbus')">🚖 Microbus & Taxi Directions</button>
+                            <button class="chip-btn" data-i18n="scenarioCafe" onclick="startAiScenario('cafe')">☕ Ordering at a Café (Ahwa Saada)</button>
+                            <button class="chip-btn" data-i18n="scenarioHospital" onclick="startAiScenario('hospital')">🏥 At the Hospital &amp; Pharmacy</button>
+                            <button class="chip-btn" data-i18n="scenarioPolice" onclick="startAiScenario('police')">👮 Police Station &amp; Legal Protocol</button>
+                            <button class="chip-btn" data-i18n="scenarioRental" onclick="startAiScenario('rental')">🏠 Apartment Lease Negotiation</button>
+                            <button class="chip-btn" data-i18n="scenarioTransport" onclick="startAiScenario('microbus')">🚖 Microbus &amp; Taxi Directions</button>
                         </div>
                     </div>
 
@@ -195,20 +195,20 @@
                             <div class="chat-message assistant">
                                 <div class="msg-avatar"><i class="fa-solid fa-robot"></i></div>
                                 <div class="msg-content">
-                                    <strong>Saleem AI Tutor:</strong> Ahlan wa Sahlan! I am your Egyptian Dialect AI Companion. Ask me questions or click a practice scenario above to start chatting!
+                                    <strong data-i18n="chatTutor">Saleem AI Tutor:</strong> <span data-i18n="chatWelcome">Ahlan wa Sahlan! I am your Egyptian Dialect AI Companion. Ask me a question or choose a practice scenario.</span>
                                 </div>
                             </div>
                         </div>
 
                         <div class="quick-questions">
-                            <button class="chip-btn" onclick="sendQuickQuestion('How do I ask for directions to Cairo Metro?')">🚆 Cairo Metro</button>
-                            <button class="chip-btn" onclick="sendQuickQuestion('How do I negotiate apartment rent with a landlord?')">🏠 Apartment Rent</button>
-                            <button class="chip-btn" onclick="sendQuickQuestion('Where is the UNHCR registration center?')">🏛️ UNHCR Office</button>
-                            <button class="chip-btn" onclick="sendQuickQuestion('What phrases should I use at the pharmacy?')">💊 Pharmacy Phrases</button>
+                            <button class="chip-btn" data-i18n="quickMetro" onclick="sendQuickQuestion('How do I ask for directions to Cairo Metro?')">🚆 Cairo Metro</button>
+                            <button class="chip-btn" data-i18n="quickRent" onclick="sendQuickQuestion('How do I negotiate apartment rent with a landlord?')">🏠 Apartment Rent</button>
+                            <button class="chip-btn" data-i18n="quickUnhcr" onclick="sendQuickQuestion('Where is the UNHCR registration center?')">🏛️ UNHCR Office</button>
+                            <button class="chip-btn" data-i18n="quickPharmacy" onclick="sendQuickQuestion('What phrases should I use at the pharmacy?')">💊 Pharmacy Phrases</button>
                         </div>
 
                         <div class="chat-input-bar">
-                            <input type="text" id="chat-input" placeholder="Type a message or response in your native language or Egyptian Arabic...">
+                            <input type="text" id="chat-input" data-i18n-ph="chatPlaceholder" placeholder="Type a message in your language or Egyptian Arabic...">
                             <button class="btn btn-primary" id="btn-send-chat"><i class="fa-solid fa-paper-plane"></i></button>
                         </div>
                     </div>
@@ -221,28 +221,28 @@
                 <section id="tab-community-hub" class="tab-pane">
                     <div class="card header-card">
                         <h2 data-i18n="sectionCommunity"><i class="fa-solid fa-users text-gold"></i> <span>Section C: Refugee Community Hub & Peer Forums</span></h2>
-                        <p>Refugee-safe peer learning space, discussion forums, practical resource sharing, weekly challenges, and community feedback.</p>
+                        <p data-i18n="communityIntro">Refugee-safe peer learning space, discussion forums, practical resource sharing, weekly challenges, and community feedback.</p>
                     </div>
 
                     <!-- Forum Categories -->
                     <div class="card" style="margin-bottom: 20px;">
                         <div style="display: flex; flex-wrap: wrap; gap: 8px;" id="forum-category-chips">
-                            <button class="chip-btn active" data-forum="all">All Topics</button>
-                            <button class="chip-btn" data-forum="lang">💬 Language Questions</button>
-                            <button class="chip-btn" data-forum="culture">🏛️ Cultural Discussions</button>
-                            <button class="chip-btn" data-forum="tips">📍 Local Area Tips</button>
-                            <button class="chip-btn" data-forum="stories">🎉 Success Stories</button>
+                            <button class="chip-btn active" data-forum="all" data-i18n="forumAll">All Topics</button>
+                            <button class="chip-btn" data-forum="lang" data-i18n="forumLanguage">💬 Language Questions</button>
+                            <button class="chip-btn" data-forum="culture" data-i18n="forumCulture">🏛️ Cultural Discussions</button>
+                            <button class="chip-btn" data-forum="tips" data-i18n="forumTips">📍 Local Area Tips</button>
+                            <button class="chip-btn" data-forum="stories" data-i18n="forumStories">🎉 Success Stories</button>
                         </div>
                     </div>
 
                     <div class="grid-2">
                         <!-- Post Question Box -->
                         <div class="card">
-                            <h3><i class="fa-solid fa-pen-to-square text-gold"></i> Post a Question or Tip</h3>
+                            <h3 data-i18n="postHeading"><i class="fa-solid fa-pen-to-square text-gold"></i> Post a Question or Tip</h3>
                             <div class="ask-box">
-                                <input type="text" id="qa-title" placeholder="Topic Title (e.g. Best Arabic language courses in Nasr City?)">
-                                <textarea id="qa-desc" placeholder="Share details or tips with fellow refugees..."></textarea>
-                                <button class="btn btn-primary" id="btn-post-qa"><i class="fa-solid fa-plus"></i> Submit Post</button>
+                                <input type="text" id="qa-title" data-i18n-ph="postTitlePlaceholder" placeholder="Topic Title (e.g. Best Arabic language courses in Nasr City?)">
+                                <textarea id="qa-desc" data-i18n-ph="postBodyPlaceholder" placeholder="Share details or tips with fellow refugees..."></textarea>
+                                <button class="btn btn-primary" id="btn-post-qa" data-i18n="submitPost"><i class="fa-solid fa-plus"></i> Submit Post</button>
                             </div>
                         </div>
 
@@ -318,7 +318,7 @@
                 <section id="tab-profile-dashboard" class="tab-pane">
                     <div class="card header-card">
                         <h2 data-i18n="sectionProfile"><i class="fa-solid fa-user-gear text-gold"></i> <span>Section D: Profile & Legal Institutions Access</span></h2>
-                        <p>Personal learning dashboard, local Saleem profile, and verified-service access finder.</p>
+                        <p data-i18n="profileIntro">Personal learning dashboard, local Saleem profile, and verified-service access finder.</p>
                     </div>
 
                     <!-- 1. Learning Dashboard & Refugee Digital Pass -->
