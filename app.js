@@ -2240,6 +2240,7 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
     // -------------------------------------------------------------
     // 6. CURATED EGYPTIAN PHRASES LIBRARY ENGINE (45 checked-in entries)
     // -------------------------------------------------------------
+    const LEARNING_DATA_VERSION = '2026-08-14-multilingual';
     const phrasesLibraryData = [
         // 🚨 EMERGENCY & SAFETY (50+)
         { eg: "لحقوني! (Laha'oony!)", en: "Help me!", cat: "emergency", lvl: "Beginner" },
@@ -2303,6 +2304,19 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
     const phraseCategoryChips = document.getElementById('phrase-category-chips');
     const phraseSearchInput = document.getElementById('phrase-library-search');
 
+    async function loadPhrasesLibrary() {
+        try {
+            const response = await fetch(`/data/phrases_45.json?v=${LEARNING_DATA_VERSION}`, { cache: 'force-cache' });
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            const data = await response.json();
+            if (!Array.isArray(data.phrases) || data.phrases.length !== 45) throw new Error('Phrase dataset is incomplete');
+            phrasesLibraryData.splice(0, phrasesLibraryData.length, ...data.phrases);
+            renderPhrasesLibraryUI();
+        } catch (error) {
+            console.warn('Phrase dataset unavailable; keeping the checked-in source list.', error);
+        }
+    }
+
     function renderPhrasesLibraryUI(selectedCat = 'all', searchQuery = '') {
         if (!phrasesGrid) return;
         phrasesGrid.innerHTML = '';
@@ -2313,7 +2327,8 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
         }
         if (searchQuery.trim().length > 0) {
             const q = searchQuery.toLowerCase().trim();
-            filtered = filtered.filter(p => p.eg.toLowerCase().includes(q) || (getSelectedLanguage() === 'en' && p.en.toLowerCase().includes(q)));
+            const lang = getSelectedLanguage();
+            filtered = filtered.filter(p => p.eg.toLowerCase().includes(q) || (lang === 'en' ? p.en.toLowerCase().includes(q) : Boolean(p[`translation_${lang}`]) && p[`translation_${lang}`].toLowerCase().includes(q)));
         }
 
         filtered.forEach(item => {
@@ -2325,20 +2340,37 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
             card.style.border = '1px solid var(--glass-border)';
 
             const safeEg = item.eg.replace(/'/g, "\\'");
-            const selectedPhraseTranslation = getSelectedLanguage() === 'en' ? item.en : '';
+            const selectedLanguage = getSelectedLanguage();
+            const selectedPhraseTranslation = selectedLanguage === 'en'
+                ? item.en
+                : selectedLanguage === 'ar'
+                    ? ''
+                    : item[`translation_${selectedLanguage}`] || '';
+            const localizedCategory = selectedLanguage === 'en'
+                ? item.cat
+                : selectedLanguage === 'ar'
+                    ? item.cat
+                    : item[`category_${selectedLanguage}`] || '';
+            const localizedLevel = selectedLanguage === 'en'
+                ? item.lvl
+                : selectedLanguage === 'ar'
+                    ? item.lvl
+                    : item[`level_${selectedLanguage}`] || '';
             card.innerHTML = `
                 <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 6px;">
-                    <span class="tag" style="font-size: 9px; padding: 2px 6px; border-color: var(--warm-sand); color: var(--warm-sand);">${item.lvl}</span>
+                    <span class="tag" style="font-size: 9px; padding: 2px 6px; border-color: var(--warm-sand); color: var(--warm-sand);">${escapeHtml(localizedCategory)} · ${escapeHtml(localizedLevel)}</span>
                     <button class="icon-btn" onclick="speakText('${safeEg}', 'ar-EG')" title="Listen Egyptian Audio" style="padding: 4px;">
                         <i class="fa-solid fa-volume-high" style="color: var(--warm-sand); font-size: 13px;"></i>
                     </button>
                 </div>
-                <strong style="font-size: 15px; color: #fff; display: block; margin-bottom: 4px;">${item.eg}</strong>
+                <strong style="font-size: 15px; color: #fff; display: block; margin-bottom: 4px;">${escapeHtml(item.eg)}</strong>
                 ${selectedPhraseTranslation ? `<p style="font-size: 12px; color: var(--emerald); margin: 0; line-height: 1.4;">${escapeHtml(selectedPhraseTranslation)}</p>` : ''}
             `;
             phrasesGrid.appendChild(card);
         });
     }
+
+    loadPhrasesLibrary();
 
     if (phraseCategoryChips) {
         phraseCategoryChips.querySelectorAll('.chip-btn').forEach(btn => {
@@ -2401,7 +2433,7 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
 
     async function loadLearningDataset(path, key) {
         try {
-            const res = await fetch(path, { cache: 'no-store' });
+            const res = await fetch(`${path}?v=${LEARNING_DATA_VERSION}`, { cache: 'force-cache' });
             if (!res.ok) throw new Error(`HTTP ${res.status}`);
             const data = await res.json();
             if (!Array.isArray(data.lessons) || data.lessons.length === 0) throw new Error('Dataset contains no lessons');
@@ -2918,15 +2950,36 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
         if (lang === 'ar' && word.meaning && word.example) {
             return { meaning: word.meaning, example: word.example };
         }
+        if (LANGUAGE_METADATA[lang] && lang !== 'en' && lang !== 'ar' && word[`meaning_${lang}`] && word[`example_${lang}`]) {
+            return { meaning: word[`meaning_${lang}`], example: word[`example_${lang}`] };
+        }
         return null;
     }
 
     function getLocalizedDialectQuestion(question, lang = getSelectedLanguage()) {
         if (lang === 'en' && question.question_en && Array.isArray(question.options)) {
-            return { ...question, prompt: question.question_en };
+            return { ...question, prompt: question.question_en, displayOptions: question.options, displayExplanation: question.explanation };
         }
-        if (lang === 'ar' && question.question && Array.isArray(question.options) && question.options.every(option => /[\u0600-\u06FF]/.test(option))) {
-            return { ...question, prompt: question.question };
+        if (lang === 'ar' && question.question && Array.isArray(question.options)) {
+            const word = dialectLessons600.flatMap(lesson => lesson.words || []).find(candidate => question.question.includes(`'${candidate.word}'`) || question.options[question.answer] === candidate.word);
+            const displayOptions = question.options.map(option => {
+                if (/[\u0600-\u06FF]/.test(option)) return option;
+                const vocabularyMatch = dialectLessons600.flatMap(lesson => lesson.words || []).find(candidate => candidate.english === option);
+                const phraseMatch = phrasesLibraryData.find(phrase => phrase.en === option);
+                return vocabularyMatch?.meaning || phraseMatch?.eg || '\u063a\u064a\u0631 \u0645\u062a\u0627\u062d';
+            });
+            const displayExplanation = word
+                ? `\u0639\u0628\u0627\u0631\u0629 '${word.word}' \u062a\u0639\u0646\u064a: '${word.meaning}' (\u0627\u0644\u0646\u0637\u0642: ${word.pronunciation}).`
+                : question.explanation.replace(/\([^)]*\)/g, '').replace(/\u0628\u0627\u0644\u0625\u0646\u062c\u0644\u064a\u0632\u064a:\s*'[^']*'/g, '');
+            return { ...question, prompt: question.question, displayOptions, displayExplanation };
+        }
+        if (LANGUAGE_METADATA[lang] && lang !== 'en' && lang !== 'ar' && question[`question_${lang}`] && Array.isArray(question[`options_${lang}`]) && question[`explanation_${lang}`]) {
+            return {
+                ...question,
+                prompt: question[`question_${lang}`],
+                displayOptions: question[`options_${lang}`],
+                displayExplanation: question[`explanation_${lang}`]
+            };
         }
         return null;
     }
@@ -3062,9 +3115,9 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
                 </h3>
 
                 <div style="display: flex; flex-direction: column; gap: 10px;">
-                    ${q.options.map((opt, idx) => `
-                        <button class="btn btn-outline" style="justify-content: flex-start; text-align: left; padding: 12px 16px; font-size: 15px;" onclick="answerLessonQuestion(${idx}, ${q.answer}, '${q.explanation.replace(/'/g, "\\'")}')">
-                            <span style="font-weight: bold; color: var(--warm-sand); margin-right: 8px;">${String.fromCharCode(65 + idx)}.</span> ${opt}
+                    ${localizedQuestion.displayOptions.map((opt, idx) => `
+                        <button class="btn btn-outline" style="justify-content: flex-start; text-align: left; padding: 12px 16px; font-size: 15px;" onclick="answerLessonQuestion(${idx}, ${q.answer}, '${localizedQuestion.displayExplanation.replace(/'/g, "\\'")}')">
+                            <span style="font-weight: bold; color: var(--warm-sand); margin-right: 8px;">${String.fromCharCode(65 + idx)}.</span> ${escapeHtml(opt)}
                         </button>
                     `).join('')}
                 </div>
@@ -3172,8 +3225,21 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
             return;
         }
         const selectedLanguage = getSelectedLanguage();
-        const cultureTitle = selectedLanguage === 'en' ? lesson.title_en : selectedLanguage === 'ar' ? lesson.title_ar : '';
-        const cultureStory = selectedLanguage === 'en' ? lesson.story_en : selectedLanguage === 'ar' ? lesson.story_ar : '';
+        const cultureTitle = selectedLanguage === 'en'
+            ? lesson.title_en
+            : selectedLanguage === 'ar'
+                ? lesson.title_ar
+                : lesson[`title_${selectedLanguage}`];
+        const cultureStory = selectedLanguage === 'en'
+            ? lesson.story_en
+            : selectedLanguage === 'ar'
+                ? lesson.story_ar
+                : lesson[`story_${selectedLanguage}`];
+        const cultureCategory = selectedLanguage === 'en'
+            ? lesson.category_en
+            : selectedLanguage === 'ar'
+                ? lesson.category_ar
+                : lesson[`category_${selectedLanguage}`];
         if (!cultureTitle || !cultureStory) {
             renderTranslationUnavailable(content, getLanguageRuntimeText('coverageNotice', selectedLanguage));
             modal.style.display = 'flex';
@@ -3183,7 +3249,7 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
 
         content.innerHTML = `
             <div style="margin-bottom:18px;">
-                <span class="tag" style="border-color:var(--emerald); color:var(--emerald);">${escapeHtml(selectedLanguage === 'en' ? lesson.category_en : lesson.category_ar)}</span>
+                <span class="tag" style="border-color:var(--emerald); color:var(--emerald);">${escapeHtml(cultureCategory)}</span>
                 <h2 style="font-size:22px; color:var(--warm-sand); margin:10px 0 8px;">${escapeHtml(cultureTitle)}</h2>
                 <p style="font-size:14px; line-height:1.7; color:var(--text-light);">${formatTrustedText(cultureStory)}</p>
             </div>
@@ -3207,12 +3273,17 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
             return;
         }
         const selectedLanguage = getSelectedLanguage();
-        if (selectedLanguage !== 'en' && selectedLanguage !== 'ar') {
-            renderTranslationUnavailable(testContainer, getLanguageRuntimeText('coverageNotice', selectedLanguage));
-            return;
-        }
         const q = lesson.practice_test[0];
-        if (!q.question || !Array.isArray(q.options) || !q.options.every(option => /[\u0600-\u06FF]/.test(option))) {
+        const localizedQuestion = selectedLanguage === 'en'
+            ? { prompt: q.question_en || q.question, options: q.options, explanation: q.explanation }
+            : selectedLanguage === 'ar'
+                ? { prompt: q.question, options: q.options, explanation: q.explanation }
+                : {
+                    prompt: q[`question_${selectedLanguage}`],
+                    options: q[`options_${selectedLanguage}`],
+                    explanation: q[`explanation_${selectedLanguage}`]
+                };
+        if (!localizedQuestion.prompt || !Array.isArray(localizedQuestion.options) || !localizedQuestion.explanation) {
             renderTranslationUnavailable(testContainer);
             return;
         }
@@ -3221,10 +3292,10 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
         testContainer.innerHTML = `
             <div style="background: var(--surface-dark); padding: 16px; border-radius: 14px; border: 1px solid var(--glass-border-strong); margin-top: 10px;">
                 <h4 style="font-size: 16px; color: var(--warm-sand); margin-bottom: 12px;"><i class="fa-solid fa-circle-question"></i> ${quizHeading}</h4>
-                <p style="font-size: 15px; color: var(--text-light); margin-bottom: 16px;">${escapeHtml(q.question)}</p>
+                <p style="font-size: 15px; color: var(--text-light); margin-bottom: 16px;">${escapeHtml(localizedQuestion.prompt)}</p>
                 <div style="display: flex; flex-direction: column; gap: 10px;">
-                    ${q.options.map((opt, idx) => `
-                        <button class="btn btn-outline" style="justify-content: flex-start; text-align: left;" onclick="checkAnswer(${idx}, ${q.answer}, '${q.explanation.replace(/'/g, "\\'")}')">
+                    ${localizedQuestion.options.map((opt, idx) => `
+                        <button class="btn btn-outline" style="justify-content: flex-start; text-align: left;" onclick="checkAnswer(${idx}, ${q.answer}, '${localizedQuestion.explanation.replace(/'/g, "\\'")}')">
                             ${idx + 1}. ${escapeHtml(opt)}
                         </button>
                     `).join('')}

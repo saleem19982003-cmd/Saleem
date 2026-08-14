@@ -31,7 +31,7 @@ test('frontend and AI do not use English as a hidden language fallback', () => {
     assert.match(aiSource, /effectiveTarget/);
 });
 
-test('lesson datasets expose only Egyptian Arabic and English translation fields', () => {
+test('lesson datasets expose every requested translation field', () => {
     const firstWord = dialect.lessons[0].words[0];
     const firstQuestion = dialect.lessons[0].questions[0];
     const firstCulture = culture.lessons[0];
@@ -42,9 +42,13 @@ test('lesson datasets expose only Egyptian Arabic and English translation fields
     assert.ok(firstQuestion.question && firstQuestion.question_en);
     assert.ok(firstCulture.story_ar && firstCulture.story_en);
 
-    const nonEnglishWordFields = ['fr', 'sw', 'am', 'so', 'ti', 'ha', 'om'];
-    for (const field of nonEnglishWordFields) {
-        assert.equal(Object.hasOwn(firstWord, field), false, `unexpected ${field} word field`);
+    for (const language of ['fr', 'am', 'so', 'ti', 'sw', 'ha', 'om']) {
+        assert.ok(firstWord[`meaning_${language}`] && firstWord[`example_${language}`]);
+        assert.ok(firstQuestion[`question_${language}`] && Array.isArray(firstQuestion[`options_${language}`]) && firstQuestion[`explanation_${language}`]);
+        assert.ok(firstCulture[`title_${language}`] && firstCulture[`category_${language}`] && firstCulture[`story_${language}`]);
+        assert.ok(firstCulture.practice_test[0][`question_${language}`]);
+        assert.ok(firstCulture.practice_test[0][`options_${language}`]);
+        assert.ok(firstCulture.practice_test[0][`explanation_${language}`]);
     }
 });
 
