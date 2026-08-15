@@ -6,6 +6,7 @@ const path = require('node:path');
 const root = path.join(__dirname, '..');
 const html = fs.readFileSync(path.join(root, 'app.html'), 'utf8');
 const landingHtml = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+const landingCss = fs.readFileSync(path.join(root, 'landing.css'), 'utf8');
 const css = fs.readFileSync(path.join(root, 'styles.css'), 'utf8');
 const js = fs.readFileSync(path.join(root, 'app.js'), 'utf8');
 const favicon = fs.readFileSync(path.join(root, 'favicon.svg'), 'utf8');
@@ -68,4 +69,19 @@ test('premium visual system has responsive and accessible foundations', () => {
     }
     assert.match(css, /#dialect-modal-content \[style\*="rgba\(15, 23, 42"\]/);
     assert.match(css, /@media \(max-width: 430px\)/);
+});
+
+test('editorial landing theme preserves APK and web demo entry points', () => {
+    assert.match(landingHtml, /href="downloads\/saleem-v1\.0\.0\.apk"\s+download/);
+    assert.match(landingHtml, /href="app\.html"/);
+    assert.match(landingHtml, />Open Web Demo</);
+    assert.match(landingHtml, /href="landing\.css"/);
+    assert.match(landingHtml, /src="assets\/saleem-app-first-open\.png"/);
+    assert.match(landingHtml, /https:\/\/www\.linkedin\.com\/company\/saleem-ai/);
+    assert.match(landingCss, /\.app-screen-shot\s*\{/);
+    assert.match(landingCss, /--landing-cream:\s*#f5f0e6/);
+    assert.match(landingCss, /--landing-ink:\s*#0b352f/);
+    assert.match(landingCss, /--landing-coral:\s*#ef624f/);
+    assert.match(landingCss, /@media \(max-width: 767px\)/);
+    assert.match(js, /document\.querySelector\('\.app-layout'\)\) checkFirstTimeOnboarding\(\)/);
 });

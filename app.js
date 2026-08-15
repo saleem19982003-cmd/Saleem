@@ -165,8 +165,8 @@ document.addEventListener('DOMContentLoaded', () => {
             "btn-voice-input": "Voice Input",
             "btn-hotlines": "Hotlines",
             "btn-get-apk": "Get APK",
-            "hero-title": "Empowering Every Refugee to Build a Safe, Independent Life",
-            "hero-sub": "Saleem bridges language barriers with real-time Egyptian colloquial translation, AI-driven legal & rights guidance, essential service directories, verified volunteers, and free programming education."
+            "hero-title": "Feel at home, one phrase at a time.",
+            "hero-sub": "Saleem helps refugees and displaced people in Egypt learn the local dialect, understand everyday culture, and reach essential services with dignity."
         },
         ar: {
             "nav-translator": "المترجم",
@@ -1105,7 +1105,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    checkFirstTimeOnboarding();
+    // Onboarding belongs to the application shell, never the public landing page.
+    if (document.querySelector('.app-layout')) checkFirstTimeOnboarding();
 
     // -------------------------------------------------------------
     // 4. NAVIGATION TAB SWITCHER & GLOBAL SEARCH
