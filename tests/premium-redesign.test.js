@@ -84,4 +84,8 @@ test('editorial landing theme preserves APK and web demo entry points', () => {
     assert.match(landingCss, /--landing-coral:\s*#ef624f/);
     assert.match(landingCss, /@media \(max-width: 767px\)/);
     assert.match(js, /document\.querySelector\('\.app-layout'\)\) checkFirstTimeOnboarding\(\)/);
+    assert.match(js, /assets\/saleem-app-first-open\$\{previewSuffix\}\.png/);
+    for (const language of ['ar', 'fr', 'am', 'so', 'ti', 'sw', 'ha', 'om']) {
+        assert.equal(fs.existsSync(path.join(root, `assets/saleem-app-first-open-${language}.png`)), true);
+    }
 });

@@ -746,6 +746,12 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body?.setAttribute('data-primary-language', normalized);
         document.body?.setAttribute('data-local-language', 'ar-EG');
 
+        const landingAppPreview = document.querySelector('.app-screen-shot');
+        if (landingAppPreview) {
+            const previewSuffix = normalized === 'en' ? '' : `-${normalized}`;
+            landingAppPreview.src = `assets/saleem-app-first-open${previewSuffix}.png`;
+        }
+
         document.querySelectorAll('[data-i18n]').forEach(el => {
             const key = el.getAttribute('data-i18n');
             const value = getUiTranslation(key, normalized);
