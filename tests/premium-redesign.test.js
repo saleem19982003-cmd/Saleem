@@ -79,6 +79,8 @@ test('editorial landing theme preserves APK and web demo entry points', () => {
     assert.match(landingHtml, /src="assets\/saleem-app-first-open\.png"/);
     assert.match(landingHtml, /https:\/\/www\.linkedin\.com\/company\/saleem-ai/);
     assert.match(landingCss, /\.app-screen-shot\s*\{/);
+    assert.match(landingCss, /aspect-ratio:\s*390\s*\/\s*844/);
+    assert.match(landingCss, /object-fit:\s*contain/);
     assert.match(landingCss, /--landing-cream:\s*#f5f0e6/);
     assert.match(landingCss, /--landing-ink:\s*#0b352f/);
     assert.match(landingCss, /--landing-coral:\s*#ef624f/);
