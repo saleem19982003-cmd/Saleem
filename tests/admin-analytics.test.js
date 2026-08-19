@@ -6,23 +6,23 @@ const { describe, it } = require('node:test');
 const assert = require('node:assert/strict');
 
 describe('Admin Analytics & Baseline Calculation Suite', () => {
-    const LEGACY_USER_BASELINE = 50;
+    const LEGACY_USER_BASELINE = 53;
 
-    it('1. Historical Baseline starts at 50 with 0 new tracked users', () => {
+    it('1. Historical Baseline starts at 53 with 0 new tracked users', () => {
         const trackedNewUsers = 0;
         const totalDisplayedUsers = LEGACY_USER_BASELINE + trackedNewUsers;
-        assert.equal(totalDisplayedUsers, 50, 'Must display exactly 50 users when 0 new users are tracked');
+        assert.equal(totalDisplayedUsers, 53, 'Must display exactly 53 users when 0 new users are tracked');
     });
 
-    it('2. Adding 1 new tracked user increases displayed total from 50 -> 51', () => {
+    it('2. Adding 1 new tracked user increases displayed total from 53 -> 54', () => {
         const trackedUsersSet = new Set();
         trackedUsersSet.add('user_uuid_1');
 
         const totalDisplayed = LEGACY_USER_BASELINE + trackedUsersSet.size;
-        assert.equal(totalDisplayed, 51, 'Display must be 51 when 1 new tracked user joins');
+        assert.equal(totalDisplayed, 54, 'Display must be 54 when 1 new tracked user joins');
     });
 
-    it('3. Page refresh by existing user does NOT increment user count (51 stays 51)', () => {
+    it('3. Page refresh by existing user does NOT increment user count (54 stays 54)', () => {
         const trackedUsersSet = new Set();
         trackedUsersSet.add('user_uuid_1');
 
@@ -32,16 +32,16 @@ describe('Admin Analytics & Baseline Calculation Suite', () => {
         }
 
         const totalDisplayed = LEGACY_USER_BASELINE + trackedUsersSet.size;
-        assert.equal(totalDisplayed, 51, 'Refreshes by the same user must NEVER increment total users');
+        assert.equal(totalDisplayed, 54, 'Refreshes by the same user must NEVER increment total users');
     });
 
-    it('4. Genuinely new unique user increases count from 51 -> 52', () => {
+    it('4. Genuinely new unique user increases count from 54 -> 55', () => {
         const trackedUsersSet = new Set();
         trackedUsersSet.add('user_uuid_1');
         trackedUsersSet.add('user_uuid_2');
 
         const totalDisplayed = LEGACY_USER_BASELINE + trackedUsersSet.size;
-        assert.equal(totalDisplayed, 52, 'Second unique user must increase total to 52');
+        assert.equal(totalDisplayed, 55, 'Second unique user must increase total to 55');
     });
 
     it('5. Online Now calculates users with activity within the last 2 minutes', () => {

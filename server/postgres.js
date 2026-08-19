@@ -766,7 +766,7 @@ class PostgresStore {
     }
 
     async getAdminOverview(timeRange = '7d') {
-        const LEGACY_USER_BASELINE = 50;
+        const LEGACY_USER_BASELINE = 53;
 
         // Total tracked unique users
         const usersRow = await this.one(`SELECT COUNT(DISTINCT id)::int AS count FROM users WHERE role = 'user' OR role IS NULL`) || { count: 0 };
@@ -896,7 +896,7 @@ class PostgresStore {
              ORDER BY d::date ASC`
         ) || [];
 
-        const LEGACY_USER_BASELINE = 50;
+        const LEGACY_USER_BASELINE = 53;
         let cumulative = LEGACY_USER_BASELINE;
         const result = dailyGrowth.map(row => {
             cumulative += row.new_users;

@@ -6,7 +6,7 @@ const express = require('express');
 const router = express.Router();
 const { requireAdminEmail } = require('../middleware/auth');
 
-const LEGACY_USER_BASELINE = 50;
+const LEGACY_USER_BASELINE = 53;
 
 // All routes in this router require verified administrator authentication
 router.use(requireAdminEmail);

@@ -9,10 +9,10 @@ const path = require('path');
 
 describe('SALEEM Analytics Center — Standalone Suite', () => {
     const ADMIN_AUTHORIZED_EMAIL = 'saleem19982003@gmail.com';
-    const LEGACY_USER_BASELINE = 50;
+    const LEGACY_USER_BASELINE = 53;
     const IANA_TIMEZONE = 'Africa/Cairo';
 
-    it('1. Gatekeeper allows ONLY saleem19982003@gmail.com and rejects all other emails', () => {
+    it('1. Gatekeeper allows ONLY saleem19982003@gmail.com and rejects all other emails with generic error', () => {
         function checkAdminAccess(email) {
             return (email || '').toLowerCase().trim() === ADMIN_AUTHORIZED_EMAIL;
         }
@@ -25,19 +25,19 @@ describe('SALEEM Analytics Center — Standalone Suite', () => {
         assert.equal(checkAdminAccess(''), false);
     });
 
-    it('2. Baseline Calculation starts at 50 and accurately deduplicates users', () => {
+    it('2. Baseline Calculation starts at 53 and accurately deduplicates users', () => {
         const trackedSet = new Set();
-        assert.equal(LEGACY_USER_BASELINE + trackedSet.size, 50, 'Baseline with 0 tracked users must be 50');
+        assert.equal(LEGACY_USER_BASELINE + trackedSet.size, 53, 'Baseline with 0 tracked users must be 53');
 
         trackedSet.add('user_1');
-        assert.equal(LEGACY_USER_BASELINE + trackedSet.size, 51, '1 unique user must yield 51');
+        assert.equal(LEGACY_USER_BASELINE + trackedSet.size, 54, '1 unique user must yield 54');
 
         // Multiple page refreshes by user_1
         for (let i = 0; i < 10; i++) trackedSet.add('user_1');
-        assert.equal(LEGACY_USER_BASELINE + trackedSet.size, 51, 'Repeated visits by same user must NEVER increment total');
+        assert.equal(LEGACY_USER_BASELINE + trackedSet.size, 54, 'Repeated visits by same user must NEVER increment total');
 
         trackedSet.add('user_2');
-        assert.equal(LEGACY_USER_BASELINE + trackedSet.size, 52, 'Second unique user must yield 52');
+        assert.equal(LEGACY_USER_BASELINE + trackedSet.size, 55, 'Second unique user must yield 55');
     });
 
     it('3. Timezone formatting strictly uses Africa/Cairo IANA identifier', () => {
@@ -160,5 +160,21 @@ describe('SALEEM Analytics Center — Standalone Suite', () => {
 
         assert.ok(cssHeader && cssHeader.value.includes('text/css'), 'styles.css must have Content-Type: text/css');
         assert.ok(jsHeader && jsHeader.value.includes('javascript'), 'app.js must have Content-Type: application/javascript');
+    });
+
+    it('9. Concurrent login lock and generic privacy error messages protect administrator', () => {
+        const basePath = path.join(__dirname, '..');
+        const indexHtml = fs.readFileSync(path.join(basePath, 'index.html'), 'utf8');
+        const appJs = fs.readFileSync(path.join(basePath, 'app.js'), 'utf8');
+
+        // Verify index.html does NOT leak admin email in input value
+        assert.ok(!indexHtml.includes('value="saleem19982003@gmail.com"'), 'index.html must NOT have prefilled admin email');
+
+        // Verify app.js error messages do not reveal authorized email in user errors
+        assert.ok(!appJs.includes("Unauthorized: Access is strictly restricted to saleem19982003@gmail.com"), 'Must not reveal admin email in error messages');
+        assert.ok(appJs.includes('غير مسموح بالدخول'), 'Must show generic access denied message');
+
+        // Verify concurrent session lock functions exist
+        assert.ok(appJs.includes('setupConcurrentSessionGuard') && appJs.includes('forceLogoutConcurrent'), 'Must implement concurrent session guard');
     });
 });
