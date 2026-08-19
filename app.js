@@ -2540,20 +2540,132 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
     // -------------------------------------------------------------
     // 6. CURATED EGYPTIAN PHRASES LIBRARY ENGINE (45 checked-in entries)
     // -------------------------------------------------------------
-    const LEARNING_DATA_VERSION = '2026-08-14-multilingual';
+    const LEARNING_DATA_VERSION = '2026-08-19-v4';
     const LEARNING_CACHE_NAME = `saleem-learning-${LEARNING_DATA_VERSION}`;
+
+    // Safely prune deprecated cache partitions without touching user profile/progress data
+    async function cleanupOldLearningCaches() {
+        if (typeof window === 'undefined' || !('caches' in window)) return;
+        try {
+            const cacheKeys = await window.caches.keys();
+            for (const key of cacheKeys) {
+                if (key.startsWith('saleem-learning-') && key !== LEARNING_CACHE_NAME) {
+                    await window.caches.delete(key).catch(() => {});
+                    console.log(`[Dataset] Stale cache partition removed: ${key}`);
+                }
+            }
+        } catch (e) {
+            console.warn('[Dataset] Stale cache cleanup notice:', e?.message || e);
+        }
+    }
+    cleanupOldLearningCaches();
+
+    function isValidDatasetStructure(data, expectedKey) {
+        if (!data || typeof data !== 'object') return false;
+        if (expectedKey === 'phrases') {
+            return Array.isArray(data.phrases) && data.phrases.length > 0;
+        }
+        return Array.isArray(data.lessons) && data.lessons.length > 0;
+    }
+
+    /**
+     * Resilient dataset loader:
+     * - Network-first with immediate usage on success
+     * - Completely isolated, non-blocking background cache write (Cache.put errors NEVER break loading)
+     * - Cache Storage fallback if network is offline
+     * - Self-healing removal of corrupted cache entries
+     * - Feature-detected Cache API support
+     */
+    async function fetchLearningDatasetJson(path, expectedKey = 'lessons') {
+        const url = `${path}?v=${LEARNING_DATA_VERSION}`;
+
+        // 1. Primary: Network-First Fetch
+        try {
+            const networkResponse = await fetch(url, { cache: 'no-cache' });
+            if (networkResponse.ok) {
+                const parsedData = await networkResponse.json();
+                if (isValidDatasetStructure(parsedData, expectedKey)) {
+                    console.log(`[Dataset] Network load success: ${path}`);
+
+                    // Background optional cache write — 100% isolated, non-blocking
+                    if (typeof window !== 'undefined' && 'caches' in window) {
+                        (async () => {
+                            try {
+                                const cache = await window.caches.open(LEARNING_CACHE_NAME);
+                                const jsonBlob = new Blob([JSON.stringify(parsedData)], { type: 'application/json' });
+                                const cacheResponse = new Response(jsonBlob, {
+                                    status: 200,
+                                    statusText: 'OK',
+                                    headers: { 'Content-Type': 'application/json', 'X-Saleem-Version': LEARNING_DATA_VERSION }
+                                });
+                                await cache.put(url, cacheResponse);
+                            } catch (cachePutErr) {
+                                console.warn(`[Dataset] Optional cache write skipped for ${path}:`, cachePutErr?.message || cachePutErr);
+                            }
+                        })();
+                    }
+
+                    return parsedData;
+                }
+            }
+        } catch (networkErr) {
+            console.warn(`[Dataset] Network fetch unavailable for ${path}, attempting cache recovery:`, networkErr?.message || networkErr);
+        }
+
+        // 2. Secondary: Cache Storage Fallback (e.g. Offline)
+        if (typeof window !== 'undefined' && 'caches' in window) {
+            try {
+                const cache = await window.caches.open(LEARNING_CACHE_NAME);
+                const cachedResponse = await cache.match(url);
+                if (cachedResponse) {
+                    try {
+                        const cachedData = await cachedResponse.json();
+                        if (isValidDatasetStructure(cachedData, expectedKey)) {
+                            console.log(`[Dataset] Recovered from Cache Storage: ${path}`);
+                            return cachedData;
+                        }
+                        throw new Error('Corrupted or invalid cache payload');
+                    } catch (corruptErr) {
+                        console.warn(`[Dataset] Removing corrupted cache entry for ${path}:`, corruptErr?.message);
+                        await cache.delete(url).catch(() => {});
+                    }
+                }
+            } catch (cacheReadErr) {
+                console.warn(`[Dataset] Cache read skipped for ${path}:`, cacheReadErr?.message || cacheReadErr);
+            }
+        }
+
+        // 3. Direct fetch fallback without cache parameters
+        try {
+            const fallbackRes = await fetch(path);
+            if (fallbackRes.ok) {
+                const fallbackData = await fallbackRes.json();
+                if (isValidDatasetStructure(fallbackData, expectedKey)) {
+                    console.log(`[Dataset] Direct fetch success: ${path}`);
+                    return fallbackData;
+                }
+            }
+        } catch (directErr) {
+            console.warn(`[Dataset] Direct fetch failed for ${path}:`, directErr?.message || directErr);
+        }
+
+        throw new Error(`Failed to load dataset from network and cache: ${path}`);
+    }
 
     async function fetchLearningAsset(path) {
         const url = `${path}?v=${LEARNING_DATA_VERSION}`;
+        try {
+            const res = await fetch(url, { cache: 'no-cache' });
+            if (res.ok) return res;
+        } catch (e) {}
         if (typeof window !== 'undefined' && 'caches' in window) {
-            const cache = await window.caches.open(LEARNING_CACHE_NAME);
-            const cached = await cache.match(url);
-            if (cached) return cached;
-            const response = await fetch(url, { cache: 'reload' });
-            if (response.ok) await cache.put(url, response.clone());
-            return response;
+            try {
+                const cache = await window.caches.open(LEARNING_CACHE_NAME);
+                const cached = await cache.match(url);
+                if (cached) return cached;
+            } catch (e) {}
         }
-        return fetch(url, { cache: 'force-cache' });
+        return fetch(url);
     }
 
     const phrasesLibraryData = [
@@ -2621,14 +2733,13 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
 
     async function loadPhrasesLibrary() {
         try {
-            const response = await fetchLearningAsset('/data/phrases_45.json');
-            if (!response.ok) throw new Error(`HTTP ${response.status}`);
-            const data = await response.json();
-            if (!Array.isArray(data.phrases) || data.phrases.length !== 45) throw new Error('Phrase dataset is incomplete');
-            phrasesLibraryData.splice(0, phrasesLibraryData.length, ...data.phrases);
-            renderPhrasesLibraryUI();
+            const data = await fetchLearningDatasetJson('/data/phrases_45.json', 'phrases');
+            if (Array.isArray(data?.phrases) && data.phrases.length === 45) {
+                phrasesLibraryData.splice(0, phrasesLibraryData.length, ...data.phrases);
+                renderPhrasesLibraryUI();
+            }
         } catch (error) {
-            console.warn('Phrase dataset unavailable; keeping the checked-in source list.', error);
+            console.warn('Phrase dataset network/cache unavailable; keeping the checked-in source list.', error?.message || error);
         }
     }
 
@@ -2748,10 +2859,10 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
 
     async function loadLearningDataset(path, key) {
         try {
-            const res = await fetchLearningAsset(path);
-            if (!res.ok) throw new Error(`HTTP ${res.status}`);
-            const data = await res.json();
-            if (!Array.isArray(data.lessons) || data.lessons.length === 0) throw new Error('Dataset contains no lessons');
+            const data = await fetchLearningDatasetJson(path, 'lessons');
+            if (!data || !Array.isArray(data.lessons) || data.lessons.length === 0) {
+                throw new Error(`Dataset contains no valid lessons: ${path}`);
+            }
             if (key === 'dialect') dialectLessons600 = data.lessons;
             else cultureLessonsData = data.lessons;
             learningDataState[key] = 'ready';
@@ -2762,7 +2873,7 @@ KNOWLEDGE BASE & REFUGEE SERVICES DIRECTORY (EGYPT):
             learningDataState[key] = 'unavailable';
             updateLearningDatasetUI();
             renderDuolingoSnakePath();
-            console.warn(`Failed to load ${path}:`, e);
+            console.warn(`Failed to load ${path}:`, e?.message || e);
         }
     }
 
