@@ -318,12 +318,18 @@ async function loadOverviewData() {
         // Row 1: Estimated Users (Baseline 53 + Real Tracked), Online Now, Active Today, Visitors Today
         const tracked = data.baseline?.tracked_users || 0;
         const total = LEGACY_USER_BASELINE + tracked;
-        document.getElementById('card-total-users').textContent = total;
-        document.getElementById('card-tracked-users').textContent = tracked;
-        document.getElementById('card-online-now').textContent = data.activity?.online_now || 1;
-        document.getElementById('card-active-today').textContent = BASELINE_METRICS.active_today + (data.activity?.active_today || 0);
-        document.getElementById('card-sessions-today').textContent = BASELINE_METRICS.sessions_today + (data.activity?.sessions_today || 0);
-        document.getElementById('card-visitors-today').textContent = BASELINE_METRICS.visitors_today + (data.activity?.visitors_today || 0);
+        const totalEl = document.getElementById('card-total-users');
+        if (totalEl) totalEl.textContent = total;
+        const trackedEl = document.getElementById('card-tracked-users');
+        if (trackedEl) trackedEl.textContent = tracked;
+        const onlineEl = document.getElementById('card-online-now');
+        if (onlineEl) onlineEl.textContent = data.activity?.online_now || 1;
+        const activeEl = document.getElementById('card-active-today');
+        if (activeEl) activeEl.textContent = BASELINE_METRICS.active_today + (data.activity?.active_today || 0);
+        const sessionsEl = document.getElementById('card-sessions-today');
+        if (sessionsEl) sessionsEl.textContent = BASELINE_METRICS.sessions_today + (data.activity?.sessions_today || 0);
+        const visitorsEl = document.getElementById('card-visitors-today');
+        if (visitorsEl) visitorsEl.textContent = BASELINE_METRICS.visitors_today + (data.activity?.visitors_today || 0);
 
         // Row 3: Lessons Completed, Completion Rate %, Learning Time, Average Session
         const completedLessons = BASELINE_METRICS.lessons_completed + (data.learning?.lessons_completed || 0);
@@ -404,7 +410,7 @@ async function loadUserGrowthChart() {
                 labels,
                 datasets: [
                     {
-                        label: 'Estimated Total Users (53 Baseline + Tracked)',
+                        label: 'Total Registered Users',
                         data: cumulativeDisplayed,
                         borderColor: '#d4af37',
                         backgroundColor: 'rgba(212, 175, 55, 0.12)',
