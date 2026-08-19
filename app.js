@@ -34,6 +34,76 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     window.SaleemAPI = API;
 
+    // -------------------------------------------------------------
+    // SUPABASE ANONYMOUS AUTH CLIENT
+    // -------------------------------------------------------------
+    let _supabaseClient = null;
+    let _supabaseInitPromise = null;
+
+    async function getSupabaseClient() {
+        if (_supabaseClient) return _supabaseClient;
+        if (_supabaseInitPromise) return _supabaseInitPromise;
+        _supabaseInitPromise = (async () => {
+            try {
+                if (!window.supabase?.createClient) {
+                    console.warn('Supabase SDK not loaded, anonymous auth unavailable');
+                    return null;
+                }
+                const cfgRes = await fetch('/api/config/public');
+                const config = await cfgRes.json();
+                if (config.supabase_url && config.supabase_anon_key) {
+                    _supabaseClient = window.supabase.createClient(config.supabase_url, config.supabase_anon_key);
+                    console.log('Supabase client initialized');
+                    return _supabaseClient;
+                }
+                console.warn('Supabase not configured on server, using local-only mode');
+                return null;
+            } catch (e) {
+                console.warn('Failed to initialize Supabase client:', e.message);
+                return null;
+            }
+        })();
+        return _supabaseInitPromise;
+    }
+
+    let _authPromise = null;
+
+    async function ensureAuthenticatedUser() {
+        if (_authPromise) return _authPromise;
+        _authPromise = (async () => {
+            const existingUid = localStorage.getItem('saleem_supabase_uid');
+            const sb = await getSupabaseClient();
+            if (sb) {
+                try {
+                    const { data: sessionData } = await sb.auth.getSession();
+                    if (sessionData?.session?.user?.id) {
+                        const uid = sessionData.session.user.id;
+                        localStorage.setItem('saleem_supabase_uid', uid);
+                        return { uid, source: 'supabase' };
+                    }
+                    const { data, error } = await sb.auth.signInAnonymously();
+                    if (error) throw error;
+                    const uid = data.user.id;
+                    localStorage.setItem('saleem_supabase_uid', uid);
+                    console.log('Supabase anonymous auth success:', uid);
+                    return { uid, source: 'supabase' };
+                } catch (e) {
+                    console.warn('Supabase auth failed, falling back to local:', e.message);
+                }
+            }
+            if (existingUid) return { uid: existingUid, source: 'local' };
+            let legacyId = localStorage.getItem('saleem_user_id');
+            if (!legacyId) {
+                legacyId = 'SLM-' + Math.floor(100000 + Math.random() * 900000);
+                localStorage.setItem('saleem_user_id', legacyId);
+            }
+            return { uid: legacyId, source: 'local' };
+        })();
+        _authPromise.catch(() => { _authPromise = null; });
+        return _authPromise;
+    }
+
+
     function escapeHtml(value) {
         return String(value ?? '')
             .replace(/&/g, '&amp;')
@@ -798,7 +868,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // -------------------------------------------------------------
     // 3. FIRST-TIME USER NAME & NATIONALITY ONBOARDING MODAL
     // -------------------------------------------------------------
-    function checkFirstTimeOnboarding() {
+    async function checkFirstTimeOnboarding() {
         const savedName = localStorage.getItem('saleem_user_name');
         const savedNationality = localStorage.getItem('saleem_user_nationality');
 
@@ -806,6 +876,33 @@ document.addEventListener('DOMContentLoaded', () => {
             showOnboardingModal();
         } else {
             updateUserProfileUI(savedName, savedNationality);
+
+            // --- Legacy identity migration ---
+            const legacyId = localStorage.getItem('saleem_user_id');
+            const alreadyMigrated = localStorage.getItem('anonymous_auth_identity_migration_v1');
+            const hasSupabaseUid = localStorage.getItem('saleem_supabase_uid');
+
+            if (legacyId && !alreadyMigrated && !hasSupabaseUid) {
+                try {
+                    const authResult = await ensureAuthenticatedUser();
+                    if (authResult.source === 'supabase' && authResult.uid !== legacyId) {
+                        console.log('Migrating legacy identity:', legacyId, '->', authResult.uid);
+                        const res = await API.fetch('/auth/migrate-identity', {
+                            method: 'POST',
+                            body: JSON.stringify({ old_user_id: legacyId, new_user_id: authResult.uid })
+                        });
+                        if (res.token) {
+                            API.setToken(res.token);
+                            localStorage.setItem('saleem_user_id', authResult.uid);
+                            localStorage.setItem('saleem_supabase_uid', authResult.uid);
+                            localStorage.setItem('anonymous_auth_identity_migration_v1', new Date().toISOString());
+                            console.log('Identity migration complete:', authResult.uid);
+                        }
+                    }
+                } catch (e) {
+                    console.warn('Legacy identity migration deferred (will retry):', e.message);
+                }
+            }
         }
     }
 
@@ -985,15 +1082,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function applyUserData(userName, nationality, preferredLanguage) {
+    async function applyUserData(userName, nationality, preferredLanguage) {
         const mapping = nationalityMap[nationality] || nationalityMap["Other"];
         const selectedLanguage = normalizeLanguage(preferredLanguage || mapping.lang);
         
         // Generate or retrieve unique Saleem Digital Pass User ID
-        let userId = localStorage.getItem('saleem_user_id');
-        if (!userId) {
-            userId = 'SLM-' + Math.floor(100000 + Math.random() * 900000);
-            localStorage.setItem('saleem_user_id', userId);
+        // Get Supabase Auth UUID or fall back to legacy local ID
+        const authResult = await ensureAuthenticatedUser();
+        let userId = authResult.uid;
+        localStorage.setItem('saleem_user_id', userId);
+        if (authResult.source === 'supabase') {
+            localStorage.setItem('saleem_supabase_uid', userId);
         }
 
         // 1. Permanent Local Storage Persistence
@@ -1049,15 +1148,29 @@ document.addEventListener('DOMContentLoaded', () => {
                     console.log('Profile synchronized with Saleem Server:', res.user.id);
                 }
             } else {
-                // Auto register session with server
-                const email = `${userId.toLowerCase()}@saleem.local`;
-                const res = await API.fetch('/auth/register', {
-                    method: 'POST',
-                    body: JSON.stringify({ email, password: getOrCreateLocalSecret(), name: userName, nationality, preferred_language: lang })
-                });
-                if (res.token) {
-                    API.setToken(res.token);
-                    console.log('Registered new session on Saleem Server:', res.user.id);
+                // Check if this is a Supabase-authenticated user
+                const supabaseUid = localStorage.getItem('saleem_supabase_uid');
+                if (supabaseUid) {
+                    // Register via anonymous auth endpoint
+                    const res = await API.fetch('/auth/register-anon', {
+                        method: 'POST',
+                        body: JSON.stringify({ supabase_uid: supabaseUid, name: userName, nationality, preferred_language: lang })
+                    });
+                    if (res.token) {
+                        API.setToken(res.token);
+                        console.log('Anonymous auth registered on Saleem Server:', res.user.id);
+                    }
+                } else {
+                    // Legacy fallback: register with synthetic email
+                    const email = `${userId.toLowerCase()}@saleem.local`;
+                    const res = await API.fetch('/auth/register', {
+                        method: 'POST',
+                        body: JSON.stringify({ email, password: getOrCreateLocalSecret(), name: userName, nationality, preferred_language: lang })
+                    });
+                    if (res.token) {
+                        API.setToken(res.token);
+                        console.log('Registered new session on Saleem Server:', res.user.id);
+                    }
                 }
             }
         } catch (e) {

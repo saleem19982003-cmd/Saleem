@@ -368,6 +368,128 @@ class PostgresStore {
         }
     }
 
+    async createAnonymousUser(supabaseUid, name, nationality, lang, streakId) {
+        return this.transaction(async (client) => {
+            const syntheticEmail = `${supabaseUid}@anon.saleem.local`;
+            // Anonymous users have no real password; store a placeholder hash
+            const placeholderHash = '$2a$10$ANON_USER_NO_PASSWORD_HASH_PLACEHOLDER00000000000000000';
+            const result = await client.query(`
+                INSERT INTO users (id, email, password_hash, name, nationality, preferred_language, role)
+                VALUES ($1, $2, $3, $4, $5, $6, 'user')
+                ON CONFLICT (id) DO UPDATE SET name = EXCLUDED.name, nationality = EXCLUDED.nationality,
+                    preferred_language = EXCLUDED.preferred_language, updated_at = CURRENT_TIMESTAMP
+                RETURNING id, email, name, nationality, preferred_language, role, created_at
+            `, [supabaseUid, syntheticEmail, placeholderHash, name, nationality, lang]);
+            // Only create streak if it doesn't exist yet
+            await client.query(`INSERT INTO user_streaks (id, user_id) VALUES ($1, $2) ON CONFLICT (user_id) DO NOTHING`, [streakId, supabaseUid]);
+            await client.query('INSERT INTO analytics_events (user_id, event_type, event_data) VALUES ($1, $2, $3)',
+                [supabaseUid, 'anonymous_registration', JSON.stringify({ nationality, language: lang })]);
+            return result.rows[0];
+        });
+    }
+
+    async migrateUserIdentity(oldId, newId) {
+        return this.transaction(async (client) => {
+            // Verify old user exists
+            const oldUserRes = await client.query('SELECT * FROM users WHERE id = $1', [oldId]);
+            const oldUser = oldUserRes.rows[0];
+            if (!oldUser) throw Object.assign(new Error('Legacy user not found'), { status: 404 });
+
+            // Check if newId already has a user row (e.g. from register-anon)
+            const newUserRes = await client.query('SELECT id FROM users WHERE id = $1', [newId]);
+            const newUser = newUserRes.rows[0];
+            const newEmail = `${newId}@anon.saleem.local`;
+
+            if (!newUser) {
+                // Insert new user copying details from old user
+                await client.query(`
+                    INSERT INTO users (id, email, password_hash, name, nationality, preferred_language, role, onboarding_completed, onboarding_preferences, avatar_url, created_at, updated_at, last_login_at, is_active)
+                    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, CURRENT_TIMESTAMP, $12, $13)
+                `, [
+                    newId,
+                    newEmail,
+                    oldUser.password_hash || '$2a$10$ANON_USER_NO_PASSWORD_HASH_PLACEHOLDER00000000000000000',
+                    oldUser.name,
+                    oldUser.nationality,
+                    oldUser.preferred_language,
+                    oldUser.role || 'user',
+                    oldUser.onboarding_completed || 0,
+                    oldUser.onboarding_preferences || '[]',
+                    oldUser.avatar_url || null,
+                    oldUser.created_at,
+                    oldUser.last_login_at || null,
+                    oldUser.is_active !== undefined ? oldUser.is_active : 1
+                ]);
+            } else {
+                await client.query(`
+                    UPDATE users SET name = COALESCE(NULLIF(name, ''), $1), nationality = COALESCE(NULLIF(nationality, ''), $2), preferred_language = COALESCE(NULLIF(preferred_language, ''), $3), updated_at = CURRENT_TIMESTAMP
+                    WHERE id = $4
+                `, [oldUser.name, oldUser.nationality, oldUser.preferred_language, newId]);
+            }
+
+            // Merge unique child tables
+            const newStreakRes = await client.query('SELECT * FROM user_streaks WHERE user_id = $1', [newId]);
+            const oldStreakRes = await client.query('SELECT * FROM user_streaks WHERE user_id = $1', [oldId]);
+            const newStreak = newStreakRes.rows[0];
+            const oldStreak = oldStreakRes.rows[0];
+            if (newStreak && oldStreak) {
+                await client.query(`
+                    UPDATE user_streaks SET
+                        current_streak = GREATEST(current_streak, $1),
+                        longest_streak = GREATEST(longest_streak, $2),
+                        total_words_learned = total_words_learned + $3,
+                        total_phrases_mastered = total_phrases_mastered + $4,
+                        total_lessons_completed = total_lessons_completed + $5,
+                        total_quizzes_completed = total_quizzes_completed + $6,
+                        xp_points = xp_points + $7
+                    WHERE user_id = $8
+                `, [
+                    oldStreak.current_streak || 0,
+                    oldStreak.longest_streak || 0,
+                    oldStreak.total_words_learned || 0,
+                    oldStreak.total_phrases_mastered || 0,
+                    oldStreak.total_lessons_completed || 0,
+                    oldStreak.total_quizzes_completed || 0,
+                    oldStreak.xp_points || 0,
+                    newId
+                ]);
+                await client.query('DELETE FROM user_streaks WHERE user_id = $1', [oldId]);
+            } else if (oldStreak && !newStreak) {
+                await client.query('UPDATE user_streaks SET user_id = $1 WHERE user_id = $2', [newId, oldId]);
+            }
+
+            // 2. user_progress (unique user_id, lesson_id)
+            await client.query('DELETE FROM user_progress WHERE user_id = $1 AND lesson_id IN (SELECT lesson_id FROM user_progress WHERE user_id = $2)', [oldId, newId]);
+            await client.query('UPDATE user_progress SET user_id = $1 WHERE user_id = $2', [newId, oldId]);
+
+            // 3. saved_resources (unique user_id, resource_id)
+            await client.query('DELETE FROM saved_resources WHERE user_id = $1 AND resource_id IN (SELECT resource_id FROM saved_resources WHERE user_id = $2)', [oldId, newId]);
+            await client.query('UPDATE saved_resources SET user_id = $1 WHERE user_id = $2', [newId, oldId]);
+
+            // 4. event_registrations (unique user_id, event_id)
+            await client.query('DELETE FROM event_registrations WHERE user_id = $1 AND event_id IN (SELECT event_id FROM event_registrations WHERE user_id = $2)', [oldId, newId]);
+            await client.query('UPDATE event_registrations SET user_id = $1 WHERE user_id = $2', [newId, oldId]);
+
+            // 5. Non-unique tables
+            await client.query('UPDATE translation_history SET user_id = $1 WHERE user_id = $2', [newId, oldId]);
+            await client.query('UPDATE analytics_events SET user_id = $1 WHERE user_id = $2', [newId, oldId]);
+            await client.query('UPDATE chat_conversations SET user_id = $1 WHERE user_id = $2', [newId, oldId]);
+            await client.query('UPDATE community_posts SET author_id = $1 WHERE author_id = $2', [newId, oldId]);
+            await client.query('UPDATE post_replies SET author_id = $1 WHERE author_id = $2', [newId, oldId]);
+            await client.query('UPDATE reviews SET author_id = $1 WHERE author_id = $2', [newId, oldId]);
+
+            // 6. Delete old user row (CASCADE handles any remaining)
+            await client.query('DELETE FROM users WHERE id = $1', [oldId]);
+
+            // 7. Record analytics event
+            await client.query('INSERT INTO analytics_events (user_id, event_type, event_data) VALUES ($1, $2, $3)',
+                [newId, 'identity_migrated', JSON.stringify({ old_id: oldId })]);
+
+            const migrated = await client.query(`SELECT id, email, name, nationality, preferred_language, role, created_at FROM users WHERE id = $1`, [newId]);
+            return migrated.rows[0];
+        });
+    }
+
     async createUser(user, streakId, analyticsData) {
         return this.transaction(async (client) => {
             const result = await client.query(`

@@ -96,6 +96,15 @@ app.use('/api/admin', require('./routes/admin'));
 app.use('/api/analytics', require('./routes/analytics'));
 app.use('/api/tts', require('./routes/tts'));
 
+// Public configuration endpoint — exposes only client-safe values
+app.get('/api/config/public', (req, res) => {
+    res.json({
+        supabase_url: process.env.SUPABASE_URL || null,
+        supabase_anon_key: process.env.SUPABASE_ANON_KEY || null,
+    });
+});
+
+
 app.get('/api/health', async (req, res) => {
     if (req.query.diagnostics === 'postgres') {
         const diagnostics = await diagnosePostgresConnection();
