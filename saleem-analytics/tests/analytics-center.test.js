@@ -127,4 +127,38 @@ describe('SALEEM Analytics Center — Standalone Suite', () => {
         assert.ok(csv.includes('"u_1","Fatima","Sudan"'));
         assert.ok(!csv.includes('password'));
     });
+
+    it('8. Static asset routing delivers real CSS and JS (not index.html fallback)', () => {
+        const basePath = path.join(__dirname, '..');
+        const stylesCss = fs.readFileSync(path.join(basePath, 'styles.css'), 'utf8');
+        const appJs = fs.readFileSync(path.join(basePath, 'app.js'), 'utf8');
+        const indexHtml = fs.readFileSync(path.join(basePath, 'index.html'), 'utf8');
+
+        // Verify files are distinct and contain proper syntax
+        assert.notEqual(stylesCss, indexHtml, 'styles.css must not equal index.html');
+        assert.notEqual(appJs, indexHtml, 'app.js must not equal index.html');
+        assert.ok(stylesCss.includes(':root') && stylesCss.includes('--bg-dark'), 'styles.css must contain valid CSS rules');
+        assert.ok(appJs.includes('initAnalyticsCenter') && appJs.includes('supabaseClient'), 'app.js must contain JavaScript logic');
+
+        // Verify vercel.json has explicit static routes and filesystem handler
+        const vercelJson = JSON.parse(fs.readFileSync(path.join(basePath, 'vercel.json'), 'utf8'));
+        const routes = vercelJson.routes || [];
+        const hasCssRoute = routes.some(r => r.src === '/styles.css' && r.dest === '/styles.css');
+        const hasJsRoute = routes.some(r => r.src === '/app.js' && r.dest === '/app.js');
+        const hasFsHandle = routes.some(r => r.handle === 'filesystem');
+        const hasConfigRoute = routes.some(r => r.src === '/api/config' && r.dest === '/api/config.js');
+
+        assert.ok(hasCssRoute, 'vercel.json must have explicit route for /styles.css');
+        assert.ok(hasJsRoute, 'vercel.json must have explicit route for /app.js');
+        assert.ok(hasFsHandle, 'vercel.json must contain {"handle": "filesystem"}');
+        assert.ok(hasConfigRoute, 'vercel.json must route /api/config to serverless function');
+
+        // Verify Content-Type headers in vercel.json
+        const headers = vercelJson.headers || [];
+        const cssHeader = headers.find(h => h.source === '/styles.css')?.headers?.find(h => h.key === 'Content-Type');
+        const jsHeader = headers.find(h => h.source === '/app.js')?.headers?.find(h => h.key === 'Content-Type');
+
+        assert.ok(cssHeader && cssHeader.value.includes('text/css'), 'styles.css must have Content-Type: text/css');
+        assert.ok(jsHeader && jsHeader.value.includes('javascript'), 'app.js must have Content-Type: application/javascript');
+    });
 });
