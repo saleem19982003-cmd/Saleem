@@ -105,7 +105,7 @@ describe('Anonymous Auth: POST /api/auth/migrate-identity', () => {
         });
     });
 
-    it('should migrate a legacy user to a new Supabase UID', async () => {
+    it('should migrate a legacy user to a new Supabase UID and match auth.users.id = public.users.id', async () => {
         const res = await request('POST', '/api/auth/migrate-identity', {
             old_user_id: legacyId,
             new_user_id: newId,
@@ -113,7 +113,25 @@ describe('Anonymous Auth: POST /api/auth/migrate-identity', () => {
         assert.equal(res.status, 200, `Expected 200, got ${res.status}: ${JSON.stringify(res.data)}`);
         assert.ok(res.data.token, 'Should return a new JWT token');
         assert.ok(res.data.migrated, 'Should indicate migration happened');
-        assert.equal(res.data.user.id, newId, 'User ID should be the new UID');
+        assert.equal(res.data.user.id, newId, 'Public user ID must equal the new Auth UUID');
+        assert.equal(res.data.user.name, 'Legacy User');
+    });
+
+    it('should support /auth/migrate-identity reverse proxy alias', async () => {
+        const testOld = 'SLM-alias-' + Date.now();
+        const testNew = 'supabase-alias-uid-' + Date.now();
+        await request('POST', '/api/auth/register-anon', {
+            supabase_uid: testOld,
+            name: 'Alias User',
+            nationality: 'Sudan',
+            preferred_language: 'ar',
+        });
+        const res = await request('POST', '/auth/migrate-identity', {
+            old_user_id: testOld,
+            new_user_id: testNew,
+        });
+        assert.equal(res.status, 200);
+        assert.equal(res.data.user.id, testNew);
     });
 
     it('should reject migration with non-existent old_user_id', async () => {

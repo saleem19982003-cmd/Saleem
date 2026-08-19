@@ -85,7 +85,9 @@ app.use((req, res, next) => {
 // =============================================================
 // ROUTES
 // =============================================================
-app.use('/api/auth', require('./routes/auth'));
+const authRouter = require('./routes/auth');
+app.use('/api/auth', authRouter);
+app.use('/auth', authRouter); // Compatibility alias for reverse proxies
 app.use('/api/lessons', require('./routes/lessons'));
 app.use('/api/resources', require('./routes/resources'));
 app.use('/api/events', require('./routes/events'));
@@ -97,12 +99,14 @@ app.use('/api/analytics', require('./routes/analytics'));
 app.use('/api/tts', require('./routes/tts'));
 
 // Public configuration endpoint — exposes only client-safe values
-app.get('/api/config/public', (req, res) => {
+const publicConfigHandler = (req, res) => {
     res.json({
         supabase_url: process.env.SUPABASE_URL || null,
         supabase_anon_key: process.env.SUPABASE_ANON_KEY || null,
     });
-});
+};
+app.get('/api/config/public', publicConfigHandler);
+app.get('/config/public', publicConfigHandler);
 
 
 app.get('/api/health', async (req, res) => {
