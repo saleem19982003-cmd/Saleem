@@ -133,12 +133,68 @@ const schema = [
         content TEXT NOT NULL,
         created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
     )`,
+    `CREATE TABLE IF NOT EXISTS analytics_users (
+        id TEXT PRIMARY KEY,
+        auth_user_id TEXT,
+        anonymous_id TEXT,
+        display_name TEXT,
+        country TEXT DEFAULT 'Other',
+        preferred_language TEXT DEFAULT 'en',
+        platform TEXT DEFAULT 'web',
+        first_seen_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
+        last_seen_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
+        last_active_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
+        created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+    )`,
+    `CREATE TABLE IF NOT EXISTS analytics_sessions (
+        id TEXT PRIMARY KEY,
+        user_id TEXT,
+        anonymous_id TEXT,
+        platform TEXT DEFAULT 'web',
+        started_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
+        ended_at TIMESTAMPTZ,
+        duration_seconds INTEGER DEFAULT 0,
+        last_activity_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+    )`,
     `CREATE TABLE IF NOT EXISTS analytics_events (
         id BIGSERIAL PRIMARY KEY,
-        user_id TEXT REFERENCES users(id) ON DELETE SET NULL,
+        user_id TEXT,
+        anonymous_id TEXT,
+        session_id TEXT,
         event_type TEXT NOT NULL,
+        event_category TEXT DEFAULT 'general',
+        page_or_screen TEXT,
+        lesson_id INTEGER,
+        quiz_id TEXT,
         event_data TEXT DEFAULT '{}',
         created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+    )`,
+    `CREATE TABLE IF NOT EXISTS lesson_progress (
+        id TEXT PRIMARY KEY,
+        user_id TEXT NOT NULL,
+        lesson_id INTEGER NOT NULL,
+        track TEXT DEFAULT 'dialect',
+        progress_percentage INTEGER DEFAULT 0,
+        quiz_score INTEGER,
+        started_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
+        completed_at TIMESTAMPTZ,
+        duration_seconds INTEGER DEFAULT 0,
+        updated_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
+        CONSTRAINT unique_user_lesson_track UNIQUE (user_id, lesson_id, track)
+    )`,
+    `CREATE TABLE IF NOT EXISTS analytics_daily (
+        date DATE PRIMARY KEY,
+        new_users INTEGER DEFAULT 0,
+        active_users INTEGER DEFAULT 0,
+        unique_visitors INTEGER DEFAULT 0,
+        total_sessions INTEGER DEFAULT 0,
+        page_views INTEGER DEFAULT 0,
+        lessons_started INTEGER DEFAULT 0,
+        lessons_completed INTEGER DEFAULT 0,
+        learning_seconds BIGINT DEFAULT 0,
+        android_sessions INTEGER DEFAULT 0,
+        web_sessions INTEGER DEFAULT 0,
+        updated_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
     )`,
     `CREATE TABLE IF NOT EXISTS translation_history (
         id TEXT PRIMARY KEY,
@@ -637,6 +693,425 @@ class PostgresStore {
     countEventRegistrations(eventId) { return this.one('SELECT COUNT(*)::int AS count FROM event_registrations WHERE event_id = $1', [eventId]); }
     removeEventRegistration(id) { return this.query('DELETE FROM event_registrations WHERE id = $1', [id]); }
     getCommunityPostId(id) { return this.one('SELECT id FROM community_posts WHERE id = $1', [id]); }
+
+    // =============================================================
+    // ADMIN & ANALYTICS PIPELINE METHODS
+    // =============================================================
+    async recordAnalyticsEventDetailed({ userId, anonymousId, sessionId, eventType, category = 'general', page, lessonId, quizId, metadata = {} }) {
+        try {
+            await this.query(
+                `INSERT INTO analytics_events (user_id, anonymous_id, session_id, event_type, event_category, page_or_screen, lesson_id, quiz_id, event_data, created_at)
+                 VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, CURRENT_TIMESTAMP)`,
+                [userId || null, anonymousId || null, sessionId || null, eventType, category, page || null, lessonId || null, quizId || null, JSON.stringify(metadata)]
+            );
+
+            // Update user last_active_at if user exists
+            if (userId) {
+                await this.query(
+                    `INSERT INTO analytics_users (id, auth_user_id, anonymous_id, last_active_at, last_seen_at)
+                     VALUES ($1, $1, $2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+                     ON CONFLICT (id) DO UPDATE SET last_active_at = CURRENT_TIMESTAMP, last_seen_at = CURRENT_TIMESTAMP`,
+                    [userId, anonymousId || null]
+                );
+            } else if (anonymousId) {
+                await this.query(
+                    `INSERT INTO analytics_users (id, anonymous_id, last_active_at, last_seen_at)
+                     VALUES ($1, $1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+                     ON CONFLICT (id) DO UPDATE SET last_active_at = CURRENT_TIMESTAMP, last_seen_at = CURRENT_TIMESTAMP`,
+                    [anonymousId]
+                );
+            }
+
+            // Update session last_activity_at
+            if (sessionId) {
+                await this.query(
+                    `INSERT INTO analytics_sessions (id, user_id, anonymous_id, last_activity_at)
+                     VALUES ($1, $2, $3, CURRENT_TIMESTAMP)
+                     ON CONFLICT (id) DO UPDATE SET last_activity_at = CURRENT_TIMESTAMP`,
+                    [sessionId, userId || null, anonymousId || null]
+                );
+            }
+            return true;
+        } catch (err) {
+            console.warn('[Analytics Store] Record event notice:', err?.message || err);
+            return false;
+        }
+    }
+
+    async recordSessionHeartbeat({ sessionId, userId, anonymousId, platform = 'web', durationSeconds = 0 }) {
+        try {
+            await this.query(
+                `INSERT INTO analytics_sessions (id, user_id, anonymous_id, platform, started_at, duration_seconds, last_activity_at)
+                 VALUES ($1, $2, $3, $4, CURRENT_TIMESTAMP, $5, CURRENT_TIMESTAMP)
+                 ON CONFLICT (id) DO UPDATE SET
+                    duration_seconds = GREATEST(analytics_sessions.duration_seconds, EXCLUDED.duration_seconds),
+                    last_activity_at = CURRENT_TIMESTAMP,
+                    user_id = COALESCE(EXCLUDED.user_id, analytics_sessions.user_id),
+                    platform = COALESCE(EXCLUDED.platform, analytics_sessions.platform)`,
+                [sessionId, userId || null, anonymousId || null, platform, durationSeconds]
+            );
+
+            const activeId = userId || anonymousId;
+            if (activeId) {
+                await this.query(
+                    `UPDATE analytics_users SET last_active_at = CURRENT_TIMESTAMP, platform = COALESCE($2, platform) WHERE id = $1`,
+                    [activeId, platform]
+                );
+            }
+            return true;
+        } catch (err) {
+            console.warn('[Analytics Store] Heartbeat notice:', err?.message || err);
+            return false;
+        }
+    }
+
+    async getAdminOverview(timeRange = '7d') {
+        const LEGACY_USER_BASELINE = 50;
+
+        // Total tracked unique users
+        const usersRow = await this.one(`SELECT COUNT(DISTINCT id)::int AS count FROM users WHERE role = 'user' OR role IS NULL`) || { count: 0 };
+        const trackedUsers = usersRow.count || 0;
+        const totalDisplayedUsers = LEGACY_USER_BASELINE + trackedUsers;
+
+        // Online now (active in last 2 minutes)
+        const onlineRow = await this.one(
+            `SELECT COUNT(DISTINCT user_id)::int AS count FROM analytics_sessions
+             WHERE last_activity_at >= CURRENT_TIMESTAMP - INTERVAL '2 minutes'`
+        ) || { count: 0 };
+
+        // Active today, 7d, 30d
+        const activeTodayRow = await this.one(
+            `SELECT COUNT(DISTINCT user_id)::int AS count FROM analytics_events
+             WHERE created_at >= CURRENT_DATE`
+        ) || { count: 0 };
+
+        const active7dRow = await this.one(
+            `SELECT COUNT(DISTINCT user_id)::int AS count FROM analytics_events
+             WHERE created_at >= CURRENT_DATE - INTERVAL '7 days'`
+        ) || { count: 0 };
+
+        const active30dRow = await this.one(
+            `SELECT COUNT(DISTINCT user_id)::int AS count FROM analytics_events
+             WHERE created_at >= CURRENT_DATE - INTERVAL '30 days'`
+        ) || { count: 0 };
+
+        // Visitors & sessions today
+        const visitorsTodayRow = await this.one(
+            `SELECT COUNT(DISTINCT COALESCE(user_id, anonymous_id))::int AS count FROM analytics_sessions
+             WHERE started_at >= CURRENT_DATE`
+        ) || { count: 0 };
+
+        const sessionsTodayRow = await this.one(
+            `SELECT COUNT(*)::int AS count FROM analytics_sessions WHERE started_at >= CURRENT_DATE`
+        ) || { count: 0 };
+
+        // Learning stats
+        const lessonsStartedRow = await this.one(
+            `SELECT COUNT(*)::int AS count FROM analytics_events WHERE event_type = 'lesson_started'`
+        ) || { count: 0 };
+
+        const lessonsCompletedRow = await this.one(
+            `SELECT COUNT(*)::int AS count FROM analytics_events WHERE event_type = 'lesson_completed'`
+        ) || { count: 0 };
+
+        const completionRate = lessonsStartedRow.count > 0
+            ? Number(((lessonsCompletedRow.count / lessonsStartedRow.count) * 100).toFixed(1))
+            : 0;
+
+        // Session duration stats
+        const sessionStats = await this.one(
+            `SELECT AVG(duration_seconds)::int AS avg_dur, SUM(duration_seconds)::bigint AS total_dur
+             FROM analytics_sessions WHERE duration_seconds > 0 AND duration_seconds < 86400`
+        ) || { avg_dur: 0, total_dur: 0 };
+
+        // Platform breakdown
+        const platformStats = await this.many(
+            `SELECT COALESCE(platform, 'web') AS platform, COUNT(*)::int AS count
+             FROM analytics_sessions GROUP BY COALESCE(platform, 'web')`
+        ) || [];
+
+        return {
+            baseline: {
+                historical_baseline: LEGACY_USER_BASELINE,
+                tracked_users: trackedUsers,
+                total_displayed_users: totalDisplayedUsers
+            },
+            activity: {
+                online_now: onlineRow.count || 0,
+                active_today: activeTodayRow.count || 0,
+                active_last_7_days: active7dRow.count || 0,
+                active_last_30_days: active30dRow.count || 0,
+                visitors_today: visitorsTodayRow.count || 0,
+                sessions_today: sessionsTodayRow.count || 0
+            },
+            learning: {
+                lessons_started: lessonsStartedRow.count || 0,
+                lessons_completed: lessonsCompletedRow.count || 0,
+                completion_rate_percentage: completionRate,
+                total_learning_seconds: Number(sessionStats.total_dur || 0),
+                average_session_duration_seconds: sessionStats.avg_dur || 0
+            },
+            platforms: platformStats
+        };
+    }
+
+    async getAdminLiveUsers() {
+        const liveUsers = await this.many(
+            `SELECT s.id AS session_id, s.user_id, s.anonymous_id, s.platform, s.duration_seconds, s.last_activity_at,
+                    u.display_name, u.country, u.preferred_language
+             FROM analytics_sessions s
+             LEFT JOIN analytics_users u ON COALESCE(s.user_id, s.anonymous_id) = u.id
+             WHERE s.last_activity_at >= CURRENT_TIMESTAMP - INTERVAL '30 minutes'
+             ORDER BY s.last_activity_at DESC LIMIT 50`
+        ) || [];
+
+        const recentEvents = await this.many(
+            `SELECT e.id, e.user_id, e.event_type, e.event_category, e.page_or_screen, e.lesson_id, e.created_at,
+                    u.display_name, u.country
+             FROM analytics_events e
+             LEFT JOIN analytics_users u ON e.user_id = u.id
+             ORDER BY e.created_at DESC LIMIT 25`
+        ) || [];
+
+        const onlineCount = await this.one(
+            `SELECT COUNT(DISTINCT COALESCE(user_id, anonymous_id))::int AS count
+             FROM analytics_sessions WHERE last_activity_at >= CURRENT_TIMESTAMP - INTERVAL '2 minutes'`
+        ) || { count: 0 };
+
+        return {
+            online_now: onlineCount.count || 0,
+            active_sessions: liveUsers,
+            recent_activity: recentEvents
+        };
+    }
+
+    async getAdminUserGrowth(timeRange = '30d') {
+        const days = timeRange === '7d' ? 7 : timeRange === '90d' ? 90 : 30;
+        const dailyGrowth = await this.many(
+            `SELECT d::date AS date,
+                    COUNT(u.id)::int AS new_users
+             FROM generate_series(CURRENT_DATE - INTERVAL '${days} days', CURRENT_DATE, '1 day'::interval) d
+             LEFT JOIN users u ON u.created_at::date = d::date
+             GROUP BY d::date
+             ORDER BY d::date ASC`
+        ) || [];
+
+        const LEGACY_USER_BASELINE = 50;
+        let cumulative = LEGACY_USER_BASELINE;
+        const result = dailyGrowth.map(row => {
+            cumulative += row.new_users;
+            return {
+                date: row.date,
+                new_users: row.new_users,
+                cumulative_tracked: cumulative - LEGACY_USER_BASELINE,
+                cumulative_displayed: cumulative
+            };
+        });
+
+        return { baseline: LEGACY_USER_BASELINE, growth: result };
+    }
+
+    async getAdminLearningAnalytics() {
+        // Funnel
+        const funnelViews = await this.one("SELECT COUNT(*)::int AS c FROM analytics_events WHERE event_type = 'lesson_viewed'") || { c: 0 };
+        const funnelStarts = await this.one("SELECT COUNT(*)::int AS c FROM analytics_events WHERE event_type = 'lesson_started'") || { c: 0 };
+        const funnelCompletions = await this.one("SELECT COUNT(*)::int AS c FROM analytics_events WHERE event_type = 'lesson_completed'") || { c: 0 };
+        const funnelQuizzes = await this.one("SELECT COUNT(*)::int AS c FROM analytics_events WHERE event_type = 'quiz_completed'") || { c: 0 };
+
+        // Most completed lessons
+        const mostCompleted = await this.many(
+            `SELECT lesson_id, COUNT(*)::int AS completions
+             FROM analytics_events WHERE event_type = 'lesson_completed' AND lesson_id IS NOT NULL
+             GROUP BY lesson_id ORDER BY completions DESC LIMIT 10`
+        ) || [];
+
+        // Most abandoned lessons (high start, low completion)
+        const abandoned = await this.many(
+            `SELECT s.lesson_id,
+                    s.starts,
+                    COALESCE(c.comps, 0) AS completions,
+                    (s.starts - COALESCE(c.comps, 0)) AS abandonments
+             FROM (SELECT lesson_id, COUNT(*)::int AS starts FROM analytics_events WHERE event_type = 'lesson_started' AND lesson_id IS NOT NULL GROUP BY lesson_id) s
+             LEFT JOIN (SELECT lesson_id, COUNT(*)::int AS comps FROM analytics_events WHERE event_type = 'lesson_completed' AND lesson_id IS NOT NULL GROUP BY lesson_id) c ON s.lesson_id = c.lesson_id
+             ORDER BY abandonments DESC LIMIT 10`
+        ) || [];
+
+        return {
+            funnel: {
+                viewed: funnelViews.c,
+                started: funnelStarts.c,
+                completed: funnelCompletions.c,
+                quiz_completed: funnelQuizzes.c
+            },
+            most_completed: mostCompleted,
+            most_abandoned: abandoned
+        };
+    }
+
+    async getAdminUsersList({ page = 1, limit = 50, search = '', filterCountry = '', filterLang = '', filterPlatform = '' }) {
+        const offset = (Number(page) - 1) * Number(limit);
+        let where = "WHERE (u.role = 'user' OR u.role IS NULL)";
+        const params = [];
+
+        if (search) {
+            params.push(`%${search}%`);
+            where += ` AND (u.name ILIKE ${params.length} OR u.email ILIKE ${params.length} OR u.id ILIKE ${params.length})`;
+        }
+        if (filterCountry) {
+            params.push(filterCountry);
+            where += ` AND u.nationality = ${params.length}`;
+        }
+        if (filterLang) {
+            params.push(filterLang);
+            where += ` AND u.preferred_language = ${params.length}`;
+        }
+
+        const totalRow = await this.one(`SELECT COUNT(*)::int AS count FROM users u ${where}`, params) || { count: 0 };
+
+        params.push(Number(limit), offset);
+        const users = await this.many(
+            `SELECT u.id, u.email, u.name AS display_name, u.nationality AS country, u.preferred_language,
+                    u.created_at, u.last_login_at,
+                    COALESCE(s.last_activity_at, u.last_login_at, u.created_at) AS last_active,
+                    COALESCE(prog.completed_count, 0)::int AS lessons_completed,
+                    COALESCE(sess.session_count, 0)::int AS session_count,
+                    COALESCE(sess.total_duration, 0)::int AS total_duration_seconds,
+                    CASE WHEN s.last_activity_at >= CURRENT_TIMESTAMP - INTERVAL '2 minutes' THEN 'online' ELSE 'offline' END AS status
+             FROM users u
+             LEFT JOIN (SELECT user_id, MAX(last_activity_at) AS last_activity_at FROM analytics_sessions GROUP BY user_id) s ON u.id = s.user_id
+             LEFT JOIN (SELECT user_id, COUNT(*)::int AS completed_count FROM user_progress WHERE status = 'completed' GROUP BY user_id) prog ON u.id = prog.user_id
+             LEFT JOIN (SELECT user_id, COUNT(*)::int AS session_count, SUM(duration_seconds)::int AS total_duration FROM analytics_sessions GROUP BY user_id) sess ON u.id = sess.user_id
+             ${where}
+             ORDER BY last_active DESC
+             LIMIT ${params.length - 1} OFFSET ${params.length}`,
+            params
+        ) || [];
+
+        return { users, total: totalRow.count, page: Number(page), limit: Number(limit) };
+    }
+
+    async getAdminUserDetails(userId) {
+        const user = await this.one(
+            `SELECT u.id, u.email, u.name AS display_name, u.nationality AS country, u.preferred_language,
+                    u.created_at, u.last_login_at,
+                    COALESCE(sess.session_count, 0)::int AS total_sessions,
+                    COALESCE(sess.total_duration, 0)::int AS total_learning_seconds,
+                    COALESCE(prog.completed_count, 0)::int AS lessons_completed
+             FROM users u
+             LEFT JOIN (SELECT user_id, COUNT(*)::int AS session_count, SUM(duration_seconds)::int AS total_duration FROM analytics_sessions WHERE user_id = $1 GROUP BY user_id) sess ON true
+             LEFT JOIN (SELECT user_id, COUNT(*)::int AS completed_count FROM user_progress WHERE user_id = $1 AND status = 'completed' GROUP BY user_id) prog ON true
+             WHERE u.id = $1`,
+            [userId]
+        );
+
+        if (!user) return null;
+
+        // Timeline of recent activity
+        const timeline = await this.many(
+            `SELECT event_type, event_category, page_or_screen, lesson_id, event_data, created_at
+             FROM analytics_events WHERE user_id = $1
+             ORDER BY created_at DESC LIMIT 50`,
+            [userId]
+        ) || [];
+
+        // Completed lessons
+        const completedLessons = await this.many(
+            `SELECT lesson_id, score, started_at, completed_at
+             FROM user_progress WHERE user_id = $1 AND status = 'completed'
+             ORDER BY completed_at DESC`,
+            [userId]
+        ) || [];
+
+        // Sessions
+        const sessions = await this.many(
+            `SELECT id, platform, started_at, ended_at, duration_seconds, last_activity_at
+             FROM analytics_sessions WHERE user_id = $1
+             ORDER BY started_at DESC LIMIT 30`,
+            [userId]
+        ) || [];
+
+        return { user, timeline, completed_lessons: completedLessons, sessions };
+    }
+
+    async getAdminCountryStats() {
+        return this.many(
+            `SELECT COALESCE(nationality, 'Other') AS country, COUNT(*)::int AS user_count
+             FROM users WHERE role = 'user' OR role IS NULL
+             GROUP BY COALESCE(nationality, 'Other')
+             ORDER BY user_count DESC`
+        ) || [];
+    }
+
+    async getAdminLanguageStats() {
+        return this.many(
+            `SELECT COALESCE(preferred_language, 'en') AS language, COUNT(*)::int AS user_count
+             FROM users WHERE role = 'user' OR role IS NULL
+             GROUP BY COALESCE(preferred_language, 'en')
+             ORDER BY user_count DESC`
+        ) || [];
+    }
+
+    async getAdminPlatformStats() {
+        return this.many(
+            `SELECT COALESCE(platform, 'web') AS platform, COUNT(*)::int AS session_count,
+                    AVG(duration_seconds)::int AS avg_duration_seconds
+             FROM analytics_sessions
+             GROUP BY COALESCE(platform, 'web')
+             ORDER BY session_count DESC`
+        ) || [];
+    }
+
+    async getAdminTimeAnalytics() {
+        // Usage by hour of day (Cairo timezone UTC+2)
+        const hourly = await this.many(
+            `SELECT EXTRACT(HOUR FROM created_at AT TIME ZONE 'Africa/Cairo')::int AS hour_cairo,
+                    COUNT(*)::int AS event_count
+             FROM analytics_events
+             GROUP BY hour_cairo ORDER BY hour_cairo ASC`
+        ) || [];
+
+        // Usage by day of week (0 = Sunday, 6 = Saturday)
+        const weekly = await this.many(
+            `SELECT EXTRACT(DOW FROM created_at AT TIME ZONE 'Africa/Cairo')::int AS dow,
+                    COUNT(*)::int AS event_count
+             FROM analytics_events
+             GROUP BY dow ORDER BY dow ASC`
+        ) || [];
+
+        return { hourly, weekly };
+    }
+
+    async getAdminRetention() {
+        // DAU / WAU / MAU
+        const dau = await this.one("SELECT COUNT(DISTINCT user_id)::int AS count FROM analytics_events WHERE created_at >= CURRENT_DATE") || { count: 0 };
+        const wau = await this.one("SELECT COUNT(DISTINCT user_id)::int AS count FROM analytics_events WHERE created_at >= CURRENT_DATE - INTERVAL '7 days'") || { count: 0 };
+        const mau = await this.one("SELECT COUNT(DISTINCT user_id)::int AS count FROM analytics_events WHERE created_at >= CURRENT_DATE - INTERVAL '30 days'") || { count: 0 };
+
+        const dauMauRatio = mau.count > 0 ? Number(((dau.count / mau.count) * 100).toFixed(1)) : 0;
+
+        return {
+            dau: dau.count,
+            wau: wau.count,
+            mau: mau.count,
+            dau_mau_ratio_percentage: dauMauRatio
+        };
+    }
+
+    async getAdminSystemHealth() {
+        const latestEvent = await this.one("SELECT event_type, created_at FROM analytics_events ORDER BY created_at DESC LIMIT 1");
+        const eventsToday = await this.one("SELECT COUNT(*)::int AS count FROM analytics_events WHERE created_at >= CURRENT_DATE") || { count: 0 };
+        const androidEvents = await this.one("SELECT COUNT(*)::int AS count FROM analytics_sessions WHERE platform = 'android' AND started_at >= CURRENT_DATE") || { count: 0 };
+        const webEvents = await this.one("SELECT COUNT(*)::int AS count FROM analytics_sessions WHERE platform != 'android' AND started_at >= CURRENT_DATE") || { count: 0 };
+
+        return {
+            status: 'healthy',
+            latest_event: latestEvent || null,
+            events_today: eventsToday.count,
+            android_sessions_today: androidEvents.count,
+            web_sessions_today: webEvents.count,
+            realtime_connected: true
+        };
+    }
 }
 
 function hasPostgresConfig() {

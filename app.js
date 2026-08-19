@@ -166,6 +166,107 @@ document.addEventListener('DOMContentLoaded', () => {
         return _authPromise;
     }
 
+    // =============================================================
+    // 1.5. SALEEM CLIENT ANALYTICS ENGINE (Web & Android)
+    // =============================================================
+    const SaleemAnalytics = (function() {
+        let visitorId = typeof localStorage !== 'undefined' ? localStorage.getItem('saleem_visitor_id') : null;
+        if (!visitorId && typeof localStorage !== 'undefined') {
+            visitorId = 'v_' + Math.random().toString(36).substring(2, 15) + Date.now().toString(36);
+            localStorage.setItem('saleem_visitor_id', visitorId);
+        }
+
+        let sessionId = typeof sessionStorage !== 'undefined' ? sessionStorage.getItem('saleem_session_id') : null;
+        let sessionStartTime = (typeof sessionStorage !== 'undefined' && parseInt(sessionStorage.getItem('saleem_session_start'), 10)) || Date.now();
+        if (!sessionId && typeof sessionStorage !== 'undefined') {
+            sessionId = 's_' + Math.random().toString(36).substring(2, 15) + Date.now().toString(36);
+            sessionStorage.setItem('saleem_session_id', sessionId);
+            sessionStorage.setItem('saleem_session_start', sessionStartTime.toString());
+        }
+
+        function getPlatform() {
+            if (typeof window !== 'undefined' && (window.Capacitor || window.AndroidBridge || navigator.userAgent.includes('SaleemAndroid') || navigator.userAgent.includes('SaleemApp') || (navigator.userAgent.includes('Android') && !navigator.userAgent.includes('Mobile')))) {
+                return 'android';
+            }
+            if (typeof navigator !== 'undefined' && /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                return 'mobile_web';
+            }
+            return 'desktop_web';
+        }
+
+        function getEnvironment() {
+            if (typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
+                return 'development';
+            }
+            return 'production';
+        }
+
+        async function trackEvent(eventName, data = {}) {
+            try {
+                const user = (typeof currentUser !== 'undefined' && currentUser) ? currentUser : null;
+                const payload = {
+                    event_name: eventName,
+                    event_category: data.category || 'general',
+                    session_id: sessionId,
+                    anonymous_id: visitorId,
+                    user_id: user?.id || null,
+                    platform: getPlatform(),
+                    page_or_screen: data.screen || data.page || null,
+                    lesson_id: data.lessonId || data.lesson_id || null,
+                    quiz_id: data.quizId || data.quiz_id || null,
+                    metadata: {
+                        ...data,
+                        environment: getEnvironment(),
+                        language: (typeof getSelectedLanguage === 'function') ? getSelectedLanguage() : 'en',
+                        timestamp: new Date().toISOString()
+                    }
+                };
+
+                fetch('/api/analytics/track', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                }).catch(() => {});
+            } catch (e) {
+                // Analytics failure never interrupts user experience
+            }
+        }
+
+        function startHeartbeat() {
+            if (typeof window === 'undefined') return;
+            setInterval(() => {
+                if (typeof document !== 'undefined' && document.hidden) return;
+                const durationSeconds = Math.floor((Date.now() - sessionStartTime) / 1000);
+                const user = (typeof currentUser !== 'undefined' && currentUser) ? currentUser : null;
+                fetch('/api/analytics/heartbeat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        session_id: sessionId,
+                        anonymous_id: visitorId,
+                        user_id: user?.id || null,
+                        platform: getPlatform(),
+                        duration_seconds: durationSeconds
+                    })
+                }).catch(() => {});
+            }, 45000);
+        }
+
+        if (typeof window !== 'undefined') {
+            startHeartbeat();
+            trackEvent('page_view', { page: 'home', category: 'navigation' });
+        }
+
+        return {
+            trackEvent,
+            getVisitorId: () => visitorId,
+            getSessionId: () => sessionId,
+            getPlatform
+        };
+    })();
+
+    window.trackEvent = SaleemAnalytics.trackEvent;
+
 
     function escapeHtml(value) {
         return String(value ?? '')
@@ -1328,6 +1429,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Close more drawer if open
         closeMoreDrawer();
+        if (typeof SaleemAnalytics !== 'undefined') {
+            SaleemAnalytics.trackEvent('page_view', { page: targetTab, category: 'navigation' });
+        }
     }
 
     // Sidebar nav click handlers

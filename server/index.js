@@ -44,39 +44,65 @@ app.use(helmet({
     crossOriginEmbedderPolicy: false,
 }));
 
-// CORS
-app.use(cors({
-    origin: process.env.CORS_ORIGIN || '*',
+// CORS configuration
+const allowedAdminOrigins = (process.env.ADMIN_CORS_ORIGIN || process.env.CORS_ORIGIN || '')
+    .split(',')
+    .map(s => s.trim())
+    .filter(Boolean);
+
+const defaultPermittedOrigins = [
+    'https://saleem-analytics.vercel.app',
+    'https://analytics.saleem.app',
+    'http://localhost:3000',
+    'http://localhost:3001',
+    'http://127.0.0.1:3000',
+    'http://127.0.0.1:3001'
+];
+
+const allPermittedOrigins = new Set([...allowedAdminOrigins, ...defaultPermittedOrigins]);
+
+const corsOptions = {
+    origin: function (origin, callback) {
+        if (!origin) return callback(null, true);
+        // If configured with explicit origins, check membership
+        if (allPermittedOrigins.has(origin)) {
+            return callback(null, origin);
+        }
+        // Public endpoints allow general origins
+        return callback(null, true);
+    },
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
     credentials: true,
-}));
+};
+app.use(cors(corsOptions));
 
-// Body parsing
-app.use(express.json({ limit: '5mb' }));
-app.use(express.urlencoded({ extended: true }));
-
-// General rate limiting
-const generalLimiter = rateLimit({
-    windowMs: parseInt(process.env.RATE_LIMIT_WINDOW_MS) || 15 * 60 * 1000,
-    max: parseInt(process.env.RATE_LIMIT_MAX_REQUESTS) || 200,
-    message: { error: 'Too many requests, please try again later.' },
-    standardHeaders: true,
-    legacyHeaders: false,
+// Explicit strict origin guard on /api/admin routes
+app.use('/api/admin', (req, res, next) => {
+    const origin = req.headers.origin;
+    if (origin && !allPermittedOrigins.has(origin)) {
+        return res.status(403).json({ error: 'CORS policy: Unauthorized admin origin.' });
+    }
+    next();
 });
-app.use('/api/', generalLimiter);
 
-// AI-specific rate limiting (more restrictive)
-const aiLimiter = rateLimit({
+// Body parsers
+app.use(express.json({ limit: '2mb' }));
+app.use(express.urlencoded({ extended: true, limit: '2mb' }));
+
+// Global rate limiting: 1000 requests per 15 minutes per IP
+const globalLimiter = rateLimit({
     windowMs: 15 * 60 * 1000,
-    max: parseInt(process.env.AI_RATE_LIMIT_MAX) || 30,
-    message: { error: 'AI rate limit reached. Please wait a few minutes.' },
+    max: 1000,
     standardHeaders: true,
     legacyHeaders: false,
+    message: { error: 'Too many requests, please try again later.' },
 });
-app.use('/api/ai/', aiLimiter);
+app.use(globalLimiter);
 
-// Request logging
+// Request logging (development only)
 app.use((req, res, next) => {
-    if (req.path.startsWith('/api/')) {
+    if (process.env.NODE_ENV !== 'production') {
         console.log(`[${new Date().toISOString()}] ${req.method} ${req.path}`);
     }
     next();
@@ -107,7 +133,6 @@ const publicConfigHandler = (req, res) => {
 };
 app.get('/api/config/public', publicConfigHandler);
 app.get('/config/public', publicConfigHandler);
-
 
 app.get('/api/health', async (req, res) => {
     if (req.query.diagnostics === 'postgres') {

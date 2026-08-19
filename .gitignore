@@ -14,6 +14,7 @@ data/
 .vercel
 app/build/
 *.apk
+*.zip
 .gradle/
 build/
 

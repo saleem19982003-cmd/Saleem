@@ -299,17 +299,86 @@ function initializeDatabase(dbPath) {
         CREATE INDEX IF NOT EXISTS idx_messages_conversation ON chat_messages(conversation_id);
 
         -- =============================================
-        -- ANALYTICS (privacy-conscious)
+        -- ANALYTICS & LEARNING TRACKING (privacy-conscious)
         -- =============================================
+        CREATE TABLE IF NOT EXISTS analytics_users (
+            id TEXT PRIMARY KEY,
+            auth_user_id TEXT,
+            anonymous_id TEXT,
+            display_name TEXT,
+            country TEXT DEFAULT 'Other',
+            preferred_language TEXT DEFAULT 'en',
+            platform TEXT DEFAULT 'web',
+            first_seen_at TEXT DEFAULT (datetime('now')),
+            last_seen_at TEXT DEFAULT (datetime('now')),
+            last_active_at TEXT DEFAULT (datetime('now')),
+            created_at TEXT DEFAULT (datetime('now'))
+        );
+        CREATE INDEX IF NOT EXISTS idx_analytics_users_active ON analytics_users(last_active_at);
+        CREATE INDEX IF NOT EXISTS idx_analytics_users_platform ON analytics_users(platform);
+        CREATE INDEX IF NOT EXISTS idx_analytics_users_country ON analytics_users(country);
+
+        CREATE TABLE IF NOT EXISTS analytics_sessions (
+            id TEXT PRIMARY KEY,
+            user_id TEXT,
+            anonymous_id TEXT,
+            platform TEXT DEFAULT 'web',
+            started_at TEXT DEFAULT (datetime('now')),
+            ended_at TEXT,
+            duration_seconds INTEGER DEFAULT 0,
+            last_activity_at TEXT DEFAULT (datetime('now'))
+        );
+        CREATE INDEX IF NOT EXISTS idx_analytics_sessions_start ON analytics_sessions(started_at);
+        CREATE INDEX IF NOT EXISTS idx_analytics_sessions_user ON analytics_sessions(user_id);
+        CREATE INDEX IF NOT EXISTS idx_analytics_sessions_active ON analytics_sessions(last_activity_at);
+
         CREATE TABLE IF NOT EXISTS analytics_events (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             user_id TEXT,
+            anonymous_id TEXT,
+            session_id TEXT,
             event_type TEXT NOT NULL,
+            event_category TEXT DEFAULT 'general',
+            page_or_screen TEXT,
+            lesson_id INTEGER,
+            quiz_id TEXT,
             event_data TEXT DEFAULT '{}',
             created_at TEXT DEFAULT (datetime('now'))
         );
         CREATE INDEX IF NOT EXISTS idx_analytics_type ON analytics_events(event_type);
         CREATE INDEX IF NOT EXISTS idx_analytics_date ON analytics_events(created_at);
+        CREATE INDEX IF NOT EXISTS idx_analytics_user ON analytics_events(user_id);
+
+        CREATE TABLE IF NOT EXISTS lesson_progress (
+            id TEXT PRIMARY KEY,
+            user_id TEXT NOT NULL,
+            lesson_id INTEGER NOT NULL,
+            track TEXT DEFAULT 'dialect',
+            progress_percentage INTEGER DEFAULT 0,
+            quiz_score INTEGER,
+            started_at TEXT DEFAULT (datetime('now')),
+            completed_at TEXT,
+            duration_seconds INTEGER DEFAULT 0,
+            updated_at TEXT DEFAULT (datetime('now')),
+            UNIQUE(user_id, lesson_id, track)
+        );
+        CREATE INDEX IF NOT EXISTS idx_lesson_progress_user ON lesson_progress(user_id);
+        CREATE INDEX IF NOT EXISTS idx_lesson_progress_lesson ON lesson_progress(lesson_id, track);
+
+        CREATE TABLE IF NOT EXISTS analytics_daily (
+            date TEXT PRIMARY KEY,
+            new_users INTEGER DEFAULT 0,
+            active_users INTEGER DEFAULT 0,
+            unique_visitors INTEGER DEFAULT 0,
+            total_sessions INTEGER DEFAULT 0,
+            page_views INTEGER DEFAULT 0,
+            lessons_started INTEGER DEFAULT 0,
+            lessons_completed INTEGER DEFAULT 0,
+            learning_seconds INTEGER DEFAULT 0,
+            android_sessions INTEGER DEFAULT 0,
+            web_sessions INTEGER DEFAULT 0,
+            updated_at TEXT DEFAULT (datetime('now'))
+        );
 
         -- =============================================
         -- TRANSLATION HISTORY
@@ -333,6 +402,19 @@ function initializeDatabase(dbPath) {
     ensureColumn(db, 'resources', 'trust_note', 'TEXT');
     ensureColumn(db, 'community_posts', 'is_demo_data', 'INTEGER DEFAULT 0');
     ensureColumn(db, 'reviews', 'is_demo_data', 'INTEGER DEFAULT 0');
+    ensureColumn(db, 'analytics_events', 'session_id', 'TEXT');
+    ensureColumn(db, 'analytics_events', 'anonymous_id', 'TEXT');
+    ensureColumn(db, 'analytics_events', 'event_category', 'TEXT');
+    ensureColumn(db, 'analytics_events', 'page_or_screen', 'TEXT');
+    ensureColumn(db, 'analytics_events', 'lesson_id', 'INTEGER');
+    ensureColumn(db, 'analytics_events', 'quiz_id', 'TEXT');
+
+    try {
+        db.exec(`
+            CREATE INDEX IF NOT EXISTS idx_analytics_session ON analytics_events(session_id);
+            CREATE INDEX IF NOT EXISTS idx_analytics_lesson ON analytics_events(lesson_id);
+        `);
+    } catch (e) {}
 
     return db;
 }

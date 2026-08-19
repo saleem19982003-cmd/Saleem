@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex,nofollow,noarchive">
+    <title>SALEEM Analytics Center — Platform Intelligence</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cinzel:wght@600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="/styles.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Supabase JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="brand-badge">SALEEM</div>
+            <div>
+                <div class="brand-title">Analytics</div>
+                <span class="brand-sub">Intelligence Center</span>
+            </div>
+        </div>
+
+        <ul class="sidebar-menu">
+            <li><a href="#overview" class="nav-link active" data-view="overview"><i class="fa-solid fa-chart-pie"></i> Overview</a></li>
+            <li><a href="#live" class="nav-link" data-view="live"><i class="fa-solid fa-bolt text-gold"></i> Live Activity</a></li>
+            <li><a href="#users" class="nav-link" data-view="users"><i class="fa-solid fa-users"></i> Users</a></li>
+            <li><a href="#visitors" class="nav-link" data-view="visitors"><i class="fa-solid fa-eye"></i> Visitors</a></li>
+            <li><a href="#learning" class="nav-link" data-view="learning"><i class="fa-solid fa-filter"></i> Learning Funnel</a></li>
+            <li><a href="#lessons" class="nav-link" data-view="lessons"><i class="fa-solid fa-book-open"></i> Lessons</a></li>
+            <li><a href="#quizzes" class="nav-link" data-view="quizzes"><i class="fa-solid fa-list-check"></i> Quizzes</a></li>
+            <li><a href="#countries" class="nav-link" data-view="countries"><i class="fa-solid fa-earth-africa"></i> Countries</a></li>
+            <li><a href="#languages" class="nav-link" data-view="languages"><i class="fa-solid fa-language"></i> Languages</a></li>
+            <li><a href="#platforms" class="nav-link" data-view="platforms"><i class="fa-solid fa-mobile-screen"></i> Platforms</a></li>
+            <li><a href="#retention" class="nav-link" data-view="retention"><i class="fa-solid fa-arrows-rotate"></i> Retention</a></li>
+            <li><a href="#reports" class="nav-link" data-view="reports"><i class="fa-solid fa-file-arrow-down"></i> Reports & CSV</a></li>
+            <li><a href="#system" class="nav-link" data-view="system"><i class="fa-solid fa-heart-pulse"></i> System Health</a></li>
+        </ul>
+
+        <div class="sidebar-footer">
+            <div class="admin-user-info">
+                <span class="admin-name" id="admin-display-name">Admin</span>
+                <span class="admin-email-tag" id="admin-display-email">saleem19982003@gmail.com</span>
+            </div>
+            <button class="logout-btn" id="btn-admin-logout" title="Sign Out">
+                <i class="fa-solid fa-right-from-bracket"></i>
+            </button>
+        </div>
+    </aside>
+
+    <!-- MAIN WRAPPER -->
+    <div class="main-wrapper">
+        <!-- TOP STICKY BAR -->
+        <header class="top-bar">
+            <div class="page-header">
+                <h1 id="view-title">SALEEM Analytics Center</h1>
+                <p id="view-subtitle">Real-time platform intelligence</p>
+            </div>
+
+            <div class="top-controls">
+                <div class="live-indicator">
+                    <span class="live-dot"></span>
+                    <span>LIVE</span>
+                </div>
+                <div class="badge-tz">
+                    <i class="fa-regular fa-clock"></i> Cairo Time (Africa/Cairo)
+                </div>
+                <select class="select-control" id="global-env-filter" title="Environment">
+                    <option value="production" selected>Production Data</option>
+                    <option value="all">All Environments</option>
+                    <option value="development">Development</option>
+                </select>
+                <select class="select-control" id="global-date-range" title="Date Range">
+                    <option value="24h">Last 24 Hours</option>
+                    <option value="7d" selected>Last 7 Days</option>
+                    <option value="30d">Last 30 Days</option>
+                    <option value="90d">Last 90 Days</option>
+                    <option value="all">All Time</option>
+                </select>
+                <button class="btn-icon" id="btn-manual-refresh" title="Refresh Dashboard">
+                    <i class="fa-solid fa-arrows-rotate" id="refresh-icon"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- CONTENT VIEWS -->
+        <main class="content-container">
+
+            <!-- 1. OVERVIEW VIEW (7 Rows Structure) -->
+            <section class="admin-view" id="sec-overview">
+                <!-- ROW 1: Top Metrics -->
+                <div class="stats-grid">
+                    <!-- Estimated Users (Baseline 50 + Tracked) -->
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <span>Estimated Total Users</span>
+                            <span class="stat-icon" style="background: rgba(212, 175, 55, 0.1); color: var(--gold);"><i class="fa-solid fa-users"></i></span>
+                        </div>
+                        <div class="stat-value" id="card-total-users">50</div>
+                        <div class="stat-baseline-tag">
+                            <i class="fa-solid fa-layer-group"></i> 50 Baseline + <span id="card-tracked-users">0</span> Tracked
+                        </div>
+                    </div>
+
+                    <!-- Online Now -->
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <span>Online Now</span>
+                            <span class="stat-icon" style="background: rgba(16, 185, 129, 0.1); color: var(--emerald);"><i class="fa-solid fa-satellite-dish"></i></span>
+                        </div>
+                        <div class="stat-value text-emerald" id="card-online-now">0</div>
+                        <div class="stat-delta positive">
+                            <span>Active in last 2 mins</span>
+                        </div>
+                    </div>
+
+                    <!-- Active Today -->
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <span>Active Today</span>
+                            <span class="stat-icon" style="background: rgba(6, 182, 212, 0.1); color: var(--cyan);"><i class="fa-solid fa-user-check"></i></span>
+                        </div>
+                        <div class="stat-value" id="card-active-today">0</div>
+                        <div class="stat-delta">
+                            <span id="card-sessions-today">0</span> sessions recorded today
+                        </div>
+                    </div>
+
+                    <!-- Visitors Today -->
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <span>Visitors Today</span>
+                            <span class="stat-icon" style="background: rgba(168, 85, 247, 0.1); color: var(--purple);"><i class="fa-solid fa-eye"></i></span>
+                        </div>
+                        <div class="stat-value" id="card-visitors-today">0</div>
+                        <div class="stat-delta">
+                            <span>Unique devices / browsers</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ROW 2: Large User Growth Chart -->
+                <div class="panel-card" style="margin-top: 18px;">
+                    <div class="panel-header">
+                        <div class="panel-title"><i class="fa-solid fa-chart-line text-gold"></i> User Growth Over Time</div>
+                        <span style="font-size: 11px; color: var(--text-dim);">Historical Baseline (50) + Real Tracked Registrations</span>
+                    </div>
+                    <div class="chart-wrapper" style="min-height: 280px;">
+                        <canvas id="chart-user-growth"></canvas>
+                    </div>
+                </div>
+
+                <!-- ROW 3: Learning Metrics -->
+                <div class="stats-grid" style="margin-top: 18px;">
+                    <div class="stat-card">
+                        <div class="stat-header"><span>Lessons Completed</span><span class="stat-icon" style="background: rgba(16, 185, 129, 0.1); color: var(--emerald);"><i class="fa-solid fa-award"></i></span></div>
+                        <div class="stat-value text-emerald" id="card-lessons-completed">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-header"><span>Completion Rate</span><span class="stat-icon" style="background: rgba(212, 175, 55, 0.1); color: var(--gold);"><i class="fa-solid fa-percent"></i></span></div>
+                        <div class="stat-value text-gold" id="card-completion-rate">0%</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-header"><span>Learning Time</span><span class="stat-icon" style="background: rgba(6, 182, 212, 0.1); color: var(--cyan);"><i class="fa-solid fa-clock"></i></span></div>
+                        <div class="stat-value text-cyan" id="card-total-time">0h</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-header"><span>Average Session</span><span class="stat-icon" style="background: rgba(244, 63, 94, 0.1); color: var(--coral);"><i class="fa-solid fa-stopwatch"></i></span></div>
+                        <div class="stat-value" id="card-avg-duration">0m</div>
+                    </div>
+                </div>
+
+                <!-- ROW 4: Lessons Finished Across All Users Chart -->
+                <div class="panel-card" style="margin-top: 18px;">
+                    <div class="panel-header">
+                        <div class="panel-title"><i class="fa-solid fa-graduation-cap text-emerald"></i> Lessons Finished Across All Users</div>
+                        <span style="font-size: 11px; color: var(--text-dim);">Aggregated completion trends</span>
+                    </div>
+                    <div class="chart-wrapper" style="min-height: 260px;">
+                        <canvas id="chart-lessons-finished"></canvas>
+                    </div>
+                </div>
+
+                <!-- ROW 5: Countries, Platforms, Languages Charts -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; margin-top: 18px;">
+                    <div class="panel-card">
+                        <div class="panel-header"><div class="panel-title"><i class="fa-solid fa-earth-africa text-gold"></i> Countries</div></div>
+                        <div class="chart-wrapper"><canvas id="chart-countries-dist"></canvas></div>
+                    </div>
+                    <div class="panel-card">
+                        <div class="panel-header"><div class="panel-title"><i class="fa-solid fa-mobile-screen text-cyan"></i> Platforms</div></div>
+                        <div class="chart-wrapper"><canvas id="chart-platform-dist"></canvas></div>
+                    </div>
+                    <div class="panel-card">
+                        <div class="panel-header"><div class="panel-title"><i class="fa-solid fa-language text-purple"></i> Languages</div></div>
+                        <div class="chart-wrapper"><canvas id="chart-languages-dist"></canvas></div>
+                    </div>
+                </div>
+
+                <!-- ROW 6: Most Popular Lessons -->
+                <div class="panel-card" style="margin-top: 18px;">
+                    <div class="panel-header">
+                        <div class="panel-title"><i class="fa-solid fa-trophy text-gold"></i> Most Popular Lessons</div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="admin-table">
+                            <thead>
+                                <tr><th>Lesson ID</th><th>Completions</th><th>Conversion Rate</th></tr>
+                            </thead>
+                            <tbody id="overview-popular-lessons-tbody">
+                                <tr><td colspan="3" style="text-align:center; color:var(--text-dim); padding: 20px;">No lesson completions recorded yet.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- ROW 7: Recent Activity -->
+                <div class="panel-card" style="margin-top: 18px;">
+                    <div class="panel-header">
+                        <div class="panel-title"><i class="fa-solid fa-wave-square text-gold"></i> Recent Activity Stream</div>
+                    </div>
+                    <div id="overview-activity-feed" style="max-height: 280px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px;">
+                        <div style="color: var(--text-dim); text-align: center; padding: 20px;">Waiting for live activity...</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. LIVE ACTIVITY VIEW -->
+            <section class="admin-view" id="sec-live" style="display: none;">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-header"><span>Users Online Now</span></div>
+                        <div class="stat-value text-emerald" id="live-users-count">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-header"><span>Active Web Sessions</span></div>
+                        <div class="stat-value text-cyan" id="live-web-count">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-header"><span>Active Android Sessions</span></div>
+                        <div class="stat-value text-gold" id="live-android-count">0</div>
+                    </div>
+                </div>
+
+                <div class="panel-card" style="margin-top: 18px;">
+                    <div class="panel-header">
+                        <div class="panel-title"><i class="fa-solid fa-bolt text-gold"></i> Active Sessions Right Now</div>
+                        <div class="live-indicator"><span class="live-dot"></span> <span id="live-count-badge">0 Online</span></div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Session ID</th>
+                                    <th>User / Visitor</th>
+                                    <th>Country</th>
+                                    <th>Language</th>
+                                    <th>Platform</th>
+                                    <th>Duration</th>
+                                    <th>Last Heartbeat (Cairo)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="live-sessions-tbody">
+                                <tr><td colspan="7" style="text-align:center; color:var(--text-dim); padding: 24px;">No active sessions in the last 30 minutes.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. USERS DIRECTORY VIEW -->
+            <section class="admin-view" id="sec-users" style="display: none;">
+                <div class="panel-card">
+                    <div class="panel-header" style="flex-wrap: wrap; gap: 12px;">
+                        <div class="panel-title"><i class="fa-solid fa-users text-gold"></i> Registered Users Intelligence</div>
+                        <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                            <input type="text" class="form-control" id="users-search-input" placeholder="Search name, ID..." style="width: 200px; font-size: 12px; padding: 6px 10px;">
+                            <select class="select-control" id="users-filter-country">
+                                <option value="">All Countries</option>
+                            </select>
+                            <select class="select-control" id="users-filter-lang">
+                                <option value="">All Languages</option>
+                            </select>
+                            <select class="select-control" id="users-filter-platform">
+                                <option value="">All Platforms</option>
+                                <option value="android">Android</option>
+                                <option value="web">Web</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>User</th>
+                                    <th>Country</th>
+                                    <th>Language</th>
+                                    <th>Platform</th>
+                                    <th>First Seen</th>
+                                    <th>Last Active</th>
+                                    <th>Sessions</th>
+                                    <th>Learning Time</th>
+                                    <th>Lessons Completed</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="users-list-tbody">
+                                <tr><td colspan="11" style="text-align:center; color:var(--text-dim); padding: 24px;">Loading users...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Pagination Controls -->
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 12px;">
+                        <span style="font-size: 12px; color: var(--text-dim);" id="users-page-info">Showing 1-50</span>
+                        <div style="display: flex; gap: 8px;">
+                            <button class="btn-icon" id="btn-users-prev"><i class="fa-solid fa-chevron-left"></i></button>
+                            <button class="btn-icon" id="btn-users-next"><i class="fa-solid fa-chevron-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. VISITORS VIEW -->
+            <section class="admin-view" id="sec-visitors" style="display: none;">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-header"><span>Unique Visitors</span></div>
+                        <div class="stat-value text-purple" id="vis-unique">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-header"><span>Total Visits</span></div>
+                        <div class="stat-value text-gold" id="vis-total">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-header"><span>Page Views</span></div>
+                        <div class="stat-value text-cyan" id="vis-views">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-header"><span>Avg Session Duration</span></div>
+                        <div class="stat-value text-emerald" id="vis-avg-dur">0m</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. LEARNING FUNNEL VIEW -->
+            <section class="admin-view" id="sec-learning" style="display: none;">
+                <div class="panel-card">
+                    <div class="panel-header">
+                        <div class="panel-title"><i class="fa-solid fa-filter text-gold"></i> SALEEM Learning Conversion Funnel</div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-top: 10px;">
+                        <div class="stat-card" style="text-align: center;">
+                            <span style="font-size: 12px; color: var(--text-dim);">1. Lesson Viewed</span>
+                            <div class="stat-value" id="funnel-viewed">0</div>
+                        </div>
+                        <div class="stat-card" style="text-align: center;">
+                            <span style="font-size: 12px; color: var(--text-dim);">2. Lesson Started</span>
+                            <div class="stat-value text-gold" id="funnel-started">0</div>
+                        </div>
+                        <div class="stat-card" style="text-align: center;">
+                            <span style="font-size: 12px; color: var(--text-dim);">3. Lesson Completed</span>
+                            <div class="stat-value text-emerald" id="funnel-completed">0</div>
+                        </div>
+                        <div class="stat-card" style="text-align: center;">
+                            <span style="font-size: 12px; color: var(--text-dim);">4. Quiz Completed</span>
+                            <div class="stat-value text-cyan" id="funnel-quiz">0</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6. LESSONS VIEW -->
+            <section class="admin-view" id="sec-lessons" style="display: none;">
+                <div class="charts-grid-equal">
+                    <div class="panel-card">
+                        <div class="panel-header"><div class="panel-title"><i class="fa-solid fa-trophy text-gold"></i> Most Completed Lessons</div></div>
+                        <div class="table-responsive">
+                            <table class="admin-table"><thead><tr><th>Lesson ID</th><th>Completions</th></tr></thead><tbody id="lessons-top-tbody"><tr><td colspan="2" style="text-align:center; color:var(--text-dim);">No completions yet.</td></tr></tbody></table>
+                        </div>
+                    </div>
+                    <div class="panel-card">
+                        <div class="panel-header"><div class="panel-title"><i class="fa-solid fa-triangle-exclamation text-coral"></i> Most Abandoned Lessons</div></div>
+                        <div class="table-responsive">
+                            <table class="admin-table"><thead><tr><th>Lesson ID</th><th>Starts</th><th>Completions</th><th>Drop-offs</th></tr></thead><tbody id="lessons-abandoned-tbody"><tr><td colspan="4" style="text-align:center; color:var(--text-dim);">No drop-offs recorded.</td></tr></tbody></table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 7. QUIZZES VIEW -->
+            <section class="admin-view" id="sec-quizzes" style="display: none;">
+                <div class="panel-card">
+                    <div class="panel-header"><div class="panel-title"><i class="fa-solid fa-list-check text-gold"></i> Quiz Performance Analytics</div></div>
+                    <div class="stats-grid" style="margin-top: 14px;">
+                        <div class="stat-card"><div class="stat-header"><span>Quizzes Completed</span></div><div class="stat-value text-gold" id="quiz-total-completed">0</div></div>
+                        <div class="stat-card"><div class="stat-header"><span>Average Score</span></div><div class="stat-value text-emerald" id="quiz-avg-score">0%</div></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 8. COUNTRIES VIEW -->
+            <section class="admin-view" id="sec-countries" style="display: none;">
+                <div class="panel-card">
+                    <div class="panel-header"><div class="panel-title"><i class="fa-solid fa-earth-africa text-gold"></i> Country Distribution</div></div>
+                    <div class="table-responsive">
+                        <table class="admin-table">
+                            <thead><tr><th>Country</th><th>Users</th><th>Sessions</th><th>Completions</th></tr></thead>
+                            <tbody id="countries-tbody"><tr><td colspan="4" style="text-align:center; color:var(--text-dim);">Loading countries...</td></tr></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 9. LANGUAGES VIEW -->
+            <section class="admin-view" id="sec-languages" style="display: none;">
+                <div class="panel-card">
+                    <div class="panel-header"><div class="panel-title"><i class="fa-solid fa-language text-purple"></i> Supported Language Analytics</div></div>
+                    <div class="table-responsive">
+                        <table class="admin-table">
+                            <thead><tr><th>Language</th><th>Users</th><th>Sessions</th><th>Completions</th></tr></thead>
+                            <tbody id="languages-tbody"><tr><td colspan="4" style="text-align:center; color:var(--text-dim);">Loading languages...</td></tr></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 10. PLATFORMS VIEW -->
+            <section class="admin-view" id="sec-platforms" style="display: none;">
+                <div class="panel-card">
+                    <div class="panel-header"><div class="panel-title"><i class="fa-solid fa-mobile-screen text-cyan"></i> Platform Breakdown</div></div>
+                    <div class="table-responsive">
+                        <table class="admin-table">
+                            <thead><tr><th>Platform</th><th>Sessions</th><th>Total Time</th><th>Lessons Completed</th></tr></thead>
+                            <tbody id="platforms-tbody"><tr><td colspan="4" style="text-align:center; color:var(--text-dim);">Loading platforms...</td></tr></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 11. RETENTION VIEW -->
+            <section class="admin-view" id="sec-retention" style="display: none;">
+                <div class="stats-grid">
+                    <div class="stat-card"><div class="stat-header"><span>DAU (Daily Active)</span></div><div class="stat-value text-gold" id="ret-dau">0</div></div>
+                    <div class="stat-card"><div class="stat-header"><span>WAU (Weekly Active)</span></div><div class="stat-value text-cyan" id="ret-wau">0</div></div>
+                    <div class="stat-card"><div class="stat-header"><span>MAU (Monthly Active)</span></div><div class="stat-value text-purple" id="ret-mau">0</div></div>
+                    <div class="stat-card"><div class="stat-header"><span>DAU / MAU Stickiness</span></div><div class="stat-value text-emerald" id="ret-ratio">0%</div></div>
+                </div>
+            </section>
+
+            <!-- 12. REPORTS & CSV EXPORT VIEW -->
+            <section class="admin-view" id="sec-reports" style="display: none;">
+                <div class="panel-card">
+                    <div class="panel-header"><div class="panel-title"><i class="fa-solid fa-file-csv text-gold"></i> Export Analytics & Data</div></div>
+                    <p style="font-size: 13px; color: var(--text-muted);">Download clean, anonymized CSV reports. Timestamps are exported in Africa/Cairo (UTC+2) timezone.</p>
+                    <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-top: 16px;">
+                        <button class="btn-primary" onclick="exportData('users')"><i class="fa-solid fa-download"></i> Export Users CSV</button>
+                        <button class="btn-primary" onclick="exportData('lessons')"><i class="fa-solid fa-download"></i> Export Lessons CSV</button>
+                        <button class="btn-primary" onclick="exportData('sessions')"><i class="fa-solid fa-download"></i> Export Sessions CSV</button>
+                        <button class="btn-primary" onclick="exportData('daily')"><i class="fa-solid fa-download"></i> Export Daily Analytics CSV</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 13. SYSTEM HEALTH VIEW -->
+            <section class="admin-view" id="sec-system" style="display: none;">
+                <div class="panel-card">
+                    <div class="panel-header"><div class="panel-title"><i class="fa-solid fa-heart-pulse text-emerald"></i> Analytics Pipeline Status</div></div>
+                    <div class="stats-grid" style="margin-top: 14px;">
+                        <div class="stat-card"><div class="stat-header"><span>Database Connection</span></div><div class="stat-value text-emerald" id="sys-db-status">Connected</div></div>
+                        <div class="stat-card"><div class="stat-header"><span>Realtime Pipeline</span></div><div class="stat-value text-emerald" id="sys-realtime-status">Active</div></div>
+                        <div class="stat-card"><div class="stat-header"><span>Events Today</span></div><div class="stat-value" id="sys-events-today">0</div></div>
+                        <div class="stat-card"><div class="stat-header"><span>Invalid Events Rejected</span></div><div class="stat-value text-coral" id="sys-rejected">0</div></div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- USER DETAIL DRAWER (/users/:id) -->
+    <div class="drawer-backdrop" id="user-drawer-backdrop"></div>
+    <div class="drawer" id="user-drawer">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--glass-border); padding-bottom: 14px;">
+            <h3 style="font-size: 17px; color: #fff;" id="drawer-user-name">User Intelligence</h3>
+            <button class="btn-icon" id="btn-close-drawer"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div id="drawer-user-content">
+            <!-- Populated dynamically -->
+        </div>
+    </div>
+
+    <!-- INITIAL LOGIN GATE (Visible when unauthenticated) -->
+    <div class="auth-overlay" id="admin-auth-modal">
+        <div class="auth-modal">
+            <div class="auth-header">
+                <div class="brand-badge" style="display: inline-block; margin-bottom: 10px;">SALEEM</div>
+                <h2>Analytics Center</h2>
+                <p>Private administration portal</p>
+            </div>
+
+            <div class="auth-error" id="auth-error-msg"></div>
+
+            <form id="admin-login-form" style="display: flex; flex-direction: column; gap: 14px;">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" class="form-control" id="login-email" value="saleem19982003@gmail.com" required autocomplete="email">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" class="form-control" id="login-password" placeholder="Enter administrator password" required autocomplete="current-password">
+                </div>
+                <button type="submit" class="btn-primary" id="btn-login-submit">Sign In</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="/app.js"></script>
+</body>
+</html>

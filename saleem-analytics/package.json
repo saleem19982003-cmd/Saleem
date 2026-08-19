@@ -1,0 +1,26 @@
+{
+  "name": "saleem-analytics",
+  "version": "1.0.0",
+  "description": "SALEEM Analytics Center — Private Standalone Platform Intelligence",
+  "main": "app.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "node --test tests/*.test.js"
+  },
+  "keywords": [
+    "saleem",
+    "analytics",
+    "admin",
+    "dashboard",
+    "supabase"
+  ],
+  "author": "SALEEM Team",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@supabase/supabase-js": "^2.49.1",
+    "chart.js": "^4.4.8"
+  },
+  "devDependencies": {}
+}
