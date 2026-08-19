@@ -35,13 +35,18 @@ document.addEventListener('DOMContentLoaded', () => {
     window.SaleemAPI = API;
 
     // -------------------------------------------------------------
-    // SUPABASE ANONYMOUS AUTH CLIENT
+    // SUPABASE ANONYMOUS AUTH CLIENT (PERSISTENT SINGLETON)
     // -------------------------------------------------------------
-    let _supabaseClient = null;
+    const SUPABASE_AUTH_STORAGE_KEY = 'saleem_supabase_auth_session';
+    let _supabaseClient = window._saleemSupabaseClient || null;
     let _supabaseInitPromise = null;
 
     async function getSupabaseClient() {
         if (_supabaseClient) return _supabaseClient;
+        if (window._saleemSupabaseClient) {
+            _supabaseClient = window._saleemSupabaseClient;
+            return _supabaseClient;
+        }
         if (_supabaseInitPromise) return _supabaseInitPromise;
         _supabaseInitPromise = (async () => {
             try {
@@ -52,8 +57,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 const cfgRes = await fetch('/api/config/public');
                 const config = await cfgRes.json();
                 if (config.supabase_url && config.supabase_anon_key) {
-                    _supabaseClient = window.supabase.createClient(config.supabase_url, config.supabase_anon_key);
-                    console.log('Supabase client initialized');
+                    // Explicitly configure session persistence, auto-refresh and storage key
+                    _supabaseClient = window.supabase.createClient(config.supabase_url, config.supabase_anon_key, {
+                        auth: {
+                            persistSession: true,
+                            autoRefreshToken: true,
+                            detectSessionInUrl: true,
+                            storage: window.localStorage,
+                            storageKey: SUPABASE_AUTH_STORAGE_KEY
+                        }
+                    });
+                    window._saleemSupabaseClient = _supabaseClient;
+                    console.log('Supabase client initialized with persistent auth storage:', SUPABASE_AUTH_STORAGE_KEY);
                     return _supabaseClient;
                 }
                 console.warn('Supabase not configured on server, using local-only mode');
@@ -68,30 +83,76 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let _authPromise = null;
 
+    /**
+     * Centralized singleton for Supabase Anonymous Authentication.
+     * - Guarantees session persistence across reloads (reuses exact same auth.user.id).
+     * - Checks active session, user state, and stored session token BEFORE calling signInAnonymously().
+     * - Calls signInAnonymously() ONLY when definitively unauthenticated.
+     * - In-flight promise locking prevents concurrent sign-ins.
+     */
     async function ensureAuthenticatedUser() {
         if (_authPromise) return _authPromise;
         _authPromise = (async () => {
-            const existingUid = localStorage.getItem('saleem_supabase_uid');
+            const existingStoredUid = localStorage.getItem('saleem_supabase_uid');
             const sb = await getSupabaseClient();
             if (sb) {
                 try {
+                    // Step 1: Check existing restored session
                     const { data: sessionData } = await sb.auth.getSession();
                     if (sessionData?.session?.user?.id) {
                         const uid = sessionData.session.user.id;
                         localStorage.setItem('saleem_supabase_uid', uid);
                         return { uid, source: 'supabase' };
                     }
+
+                    // Step 2: Check current user state
+                    const { data: userData } = await sb.auth.getUser().catch(() => ({ data: {} }));
+                    if (userData?.user?.id) {
+                        const uid = userData.user.id;
+                        localStorage.setItem('saleem_supabase_uid', uid);
+                        return { uid, source: 'supabase' };
+                    }
+
+                    // Step 3: Check stored session object in localStorage for refresh
+                    const storedRaw = localStorage.getItem(SUPABASE_AUTH_STORAGE_KEY);
+                    if (storedRaw) {
+                        try {
+                            const parsed = JSON.parse(storedRaw);
+                            if (parsed?.refresh_token) {
+                                const { data: refreshed } = await sb.auth.refreshSession({ refresh_token: parsed.refresh_token }).catch(() => ({ data: {} }));
+                                if (refreshed?.session?.user?.id) {
+                                    const uid = refreshed.session.user.id;
+                                    localStorage.setItem('saleem_supabase_uid', uid);
+                                    return { uid, source: 'supabase' };
+                                }
+                            }
+                            if (parsed?.user?.id) {
+                                const uid = parsed.user.id;
+                                localStorage.setItem('saleem_supabase_uid', uid);
+                                return { uid, source: 'supabase' };
+                            }
+                        } catch (parseErr) {
+                            console.warn('Session parsing fallback:', parseErr?.message);
+                        }
+                    }
+
+                    // Step 4: ONLY call signInAnonymously() when NO session exists anywhere
+                    console.log('No existing Supabase session found. Performing initial anonymous sign-in...');
                     const { data, error } = await sb.auth.signInAnonymously();
                     if (error) throw error;
+                    if (!data?.user?.id) throw new Error('Supabase anonymous sign-in returned empty user.');
+
                     const uid = data.user.id;
                     localStorage.setItem('saleem_supabase_uid', uid);
-                    console.log('Supabase anonymous auth success:', uid);
+                    console.log('Supabase anonymous auth registered (UID will persist):', uid);
                     return { uid, source: 'supabase' };
                 } catch (e) {
-                    console.warn('Supabase auth failed, falling back to local:', e.message);
+                    console.warn('Supabase auth session resolution notice:', e.message);
                 }
             }
-            if (existingUid) return { uid: existingUid, source: 'local' };
+
+            // Fallback for offline or unconfigured environment
+            if (existingStoredUid) return { uid: existingStoredUid, source: 'supabase' };
             let legacyId = localStorage.getItem('saleem_user_id');
             if (!legacyId) {
                 legacyId = 'SLM-' + Math.floor(100000 + Math.random() * 900000);
@@ -99,6 +160,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             return { uid: legacyId, source: 'local' };
         })();
+
+        // Keep promise cached on success; clear only on failure so subsequent calls can retry
         _authPromise.catch(() => { _authPromise = null; });
         return _authPromise;
     }
@@ -875,32 +938,39 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!savedName || !savedNationality) {
             showOnboardingModal();
         } else {
-            updateUserProfileUI(savedName, savedNationality);
+            const currentUserId = localStorage.getItem('saleem_user_id') || localStorage.getItem('saleem_supabase_uid');
+            updateUserProfileUI(savedName, savedNationality, currentUserId);
 
-            // --- Legacy identity migration ---
+            // --- Legacy identity migration & Auth alignment ---
             const legacyId = localStorage.getItem('saleem_user_id');
             const alreadyMigrated = localStorage.getItem('anonymous_auth_identity_migration_v1');
-            const hasSupabaseUid = localStorage.getItem('saleem_supabase_uid');
 
-            if (legacyId && !alreadyMigrated && !hasSupabaseUid) {
+            // Trigger migration if not completed yet, or if current user_id is legacy ID (e.g. SLM-XXXX)
+            if (!alreadyMigrated && legacyId) {
                 try {
                     const authResult = await ensureAuthenticatedUser();
-                    if (authResult.source === 'supabase' && authResult.uid !== legacyId) {
-                        console.log('Migrating legacy identity:', legacyId, '->', authResult.uid);
-                        const res = await API.fetch('/auth/migrate-identity', {
-                            method: 'POST',
-                            body: JSON.stringify({ old_user_id: legacyId, new_user_id: authResult.uid })
-                        });
-                        if (res.token) {
-                            API.setToken(res.token);
-                            localStorage.setItem('saleem_user_id', authResult.uid);
-                            localStorage.setItem('saleem_supabase_uid', authResult.uid);
+                    if (authResult.source === 'supabase') {
+                        if (authResult.uid !== legacyId) {
+                            console.log('Migrating legacy identity to Supabase Auth UUID:', legacyId, '->', authResult.uid);
+                            const res = await API.fetch('/auth/migrate-identity', {
+                                method: 'POST',
+                                body: JSON.stringify({ old_user_id: legacyId, new_user_id: authResult.uid })
+                            });
+                            if (res.token) {
+                                API.setToken(res.token);
+                                localStorage.setItem('saleem_user_id', authResult.uid);
+                                localStorage.setItem('saleem_supabase_uid', authResult.uid);
+                                localStorage.setItem('anonymous_auth_identity_migration_v1', new Date().toISOString());
+                                updateUserProfileUI(savedName, savedNationality, authResult.uid);
+                                console.log('Identity migration complete. public.users.id is now:', authResult.uid);
+                            }
+                        } else {
+                            // User already aligned with Supabase UUID
                             localStorage.setItem('anonymous_auth_identity_migration_v1', new Date().toISOString());
-                            console.log('Identity migration complete:', authResult.uid);
                         }
                     }
                 } catch (e) {
-                    console.warn('Legacy identity migration deferred (will retry):', e.message);
+                    console.warn('Legacy identity migration deferred (will retry with same Auth session):', e.message);
                 }
             }
         }

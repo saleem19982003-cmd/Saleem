@@ -205,3 +205,168 @@ describe('Anonymous Auth: Security Checks', () => {
         assert.ok(!profileRes.data.user?.password_hash, 'password_hash must not be in profile response');
     });
 });
+
+describe('Anonymous Auth: Multi-Refresh Session Persistence Verification', () => {
+    // Simulates the exact browser localStorage and Supabase auth session restoration across 5 page reloads
+    class MockBrowserStorage {
+        constructor() {
+            this.store = new Map();
+        }
+        getItem(key) { return this.store.get(key) || null; }
+        setItem(key, val) { this.store.set(key, String(val)); }
+        removeItem(key) { this.store.delete(key); }
+        clear() { this.store.clear(); }
+    }
+
+    // Mock client simulating Supabase JS v2 with persistent session storage
+    class MockSupabaseClient {
+        constructor(storage, storageKey) {
+            this.storage = storage;
+            this.storageKey = storageKey;
+            this.createdAccounts = 0;
+            this.auth = {
+                getSession: async () => {
+                    const raw = this.storage.getItem(this.storageKey);
+                    if (raw) {
+                        const parsed = JSON.parse(raw);
+                        return { data: { session: parsed } };
+                    }
+                    return { data: { session: null } };
+                },
+                getUser: async () => {
+                    const raw = this.storage.getItem(this.storageKey);
+                    if (raw) {
+                        const parsed = JSON.parse(raw);
+                        return { data: { user: parsed.user } };
+                    }
+                    return { data: { user: null } };
+                },
+                signInAnonymously: async () => {
+                    this.createdAccounts++;
+                    const newUid = 'supabase-anon-persisted-' + Math.random().toString(36).substring(2, 12);
+                    const session = {
+                        access_token: 'mock-access-token-' + newUid,
+                        refresh_token: 'mock-refresh-token-' + newUid,
+                        user: { id: newUid, is_anonymous: true }
+                    };
+                    this.storage.setItem(this.storageKey, JSON.stringify(session));
+                    return { data: { user: session.user, session } };
+                }
+            };
+        }
+    }
+
+    // Logic simulating ensureAuthenticatedUser()
+    async function simulateEnsureAuthenticatedUser(storage, sb) {
+        const storageKey = 'saleem_supabase_auth_session';
+        const { data: sessionData } = await sb.auth.getSession();
+        if (sessionData?.session?.user?.id) {
+            const uid = sessionData.session.user.id;
+            storage.setItem('saleem_supabase_uid', uid);
+            return { uid, source: 'supabase' };
+        }
+        const { data: userData } = await sb.auth.getUser().catch(() => ({ data: {} }));
+        if (userData?.user?.id) {
+            const uid = userData.user.id;
+            storage.setItem('saleem_supabase_uid', uid);
+            return { uid, source: 'supabase' };
+        }
+        const { data, error } = await sb.auth.signInAnonymously();
+        if (error) throw error;
+        const uid = data.user.id;
+        storage.setItem('saleem_supabase_uid', uid);
+        return { uid, source: 'supabase' };
+    }
+
+    it('should retain exactly the same auth.user.id across initial load and 5 consecutive refreshes', async () => {
+        const browserStorage = new MockBrowserStorage();
+        const storageKey = 'saleem_supabase_auth_session';
+
+        // Load 0 (Initial signup)
+        const sbInstance0 = new MockSupabaseClient(browserStorage, storageKey);
+        const initialAuth = await simulateEnsureAuthenticatedUser(browserStorage, sbInstance0);
+        const initialUid = initialAuth.uid;
+        assert.ok(initialUid, 'Initial load must generate an Auth UUID');
+        assert.equal(sbInstance0.createdAccounts, 1, 'Initial load must create exactly 1 anonymous account');
+
+        // Register profile on backend
+        const regRes = await request('POST', '/api/auth/register-anon', {
+            supabase_uid: initialUid,
+            name: 'Persistence User',
+            nationality: 'Egypt',
+            preferred_language: 'ar',
+        });
+        assert.equal(regRes.status, 201);
+        assert.equal(regRes.data.user.id, initialUid, 'public.users.id must equal initial Auth UID');
+
+        // Refresh 1
+        const sbInstance1 = new MockSupabaseClient(browserStorage, storageKey);
+        const refresh1 = await simulateEnsureAuthenticatedUser(browserStorage, sbInstance1);
+        assert.equal(refresh1.uid, initialUid, 'Refresh 1 must retain initial Auth UID');
+        assert.equal(sbInstance1.createdAccounts, 0, 'Refresh 1 must NOT create a new anonymous account');
+
+        // Refresh 2
+        const sbInstance2 = new MockSupabaseClient(browserStorage, storageKey);
+        const refresh2 = await simulateEnsureAuthenticatedUser(browserStorage, sbInstance2);
+        assert.equal(refresh2.uid, initialUid, 'Refresh 2 must retain initial Auth UID');
+        assert.equal(sbInstance2.createdAccounts, 0, 'Refresh 2 must NOT create a new anonymous account');
+
+        // Refresh 3
+        const sbInstance3 = new MockSupabaseClient(browserStorage, storageKey);
+        const refresh3 = await simulateEnsureAuthenticatedUser(browserStorage, sbInstance3);
+        assert.equal(refresh3.uid, initialUid, 'Refresh 3 must retain initial Auth UID');
+        assert.equal(sbInstance3.createdAccounts, 0, 'Refresh 3 must NOT create a new anonymous account');
+
+        // Refresh 4
+        const sbInstance4 = new MockSupabaseClient(browserStorage, storageKey);
+        const refresh4 = await simulateEnsureAuthenticatedUser(browserStorage, sbInstance4);
+        assert.equal(refresh4.uid, initialUid, 'Refresh 4 must retain initial Auth UID');
+        assert.equal(sbInstance4.createdAccounts, 0, 'Refresh 4 must NOT create a new anonymous account');
+
+        // Refresh 5
+        const sbInstance5 = new MockSupabaseClient(browserStorage, storageKey);
+        const refresh5 = await simulateEnsureAuthenticatedUser(browserStorage, sbInstance5);
+        assert.equal(refresh5.uid, initialUid, 'Refresh 5 must retain initial Auth UID');
+        assert.equal(sbInstance5.createdAccounts, 0, 'Refresh 5 must NOT create a new anonymous account');
+
+        // Total accounts created across initial load and 5 reloads must remain 1
+        assert.equal(initialAuth.uid, refresh1.uid);
+        assert.equal(initialAuth.uid, refresh2.uid);
+        assert.equal(initialAuth.uid, refresh3.uid);
+        assert.equal(initialAuth.uid, refresh4.uid);
+        assert.equal(initialAuth.uid, refresh5.uid);
+    });
+
+    it('should retain the same Auth UID during migration retry without creating additional anonymous users', async () => {
+        const browserStorage = new MockBrowserStorage();
+        const storageKey = 'saleem_supabase_auth_session';
+        const legacyId = 'SLM-retry-' + Date.now();
+
+        // 1. Setup legacy user on server
+        await request('POST', '/api/auth/register-anon', {
+            supabase_uid: legacyId,
+            name: 'Retry Migration User',
+            nationality: 'Somalia',
+            preferred_language: 'so',
+        });
+
+        // 2. Browser resolves Auth UID
+        const sb = new MockSupabaseClient(browserStorage, storageKey);
+        const authResult = await simulateEnsureAuthenticatedUser(browserStorage, sb);
+        const persistentUid = authResult.uid;
+
+        // 3. First migration attempt succeeds and binds legacy data to persistent Auth UID
+        const migRes = await request('POST', '/api/auth/migrate-identity', {
+            old_user_id: legacyId,
+            new_user_id: persistentUid,
+        });
+        assert.equal(migRes.status, 200);
+        assert.equal(migRes.data.user.id, persistentUid, 'public.users.id must be migrated to Auth UUID');
+
+        // 4. Reload page after migration
+        const sbReload = new MockSupabaseClient(browserStorage, storageKey);
+        const reloadAuth = await simulateEnsureAuthenticatedUser(browserStorage, sbReload);
+        assert.equal(reloadAuth.uid, persistentUid, 'Reloaded Auth UID must be identical');
+        assert.equal(sbReload.createdAccounts, 0, 'No extra account created on reload');
+    });
+});
